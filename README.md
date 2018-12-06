@@ -31,30 +31,30 @@ First, ```cd``` to the root of your iOS project directory.
 
 For ObjectiveC/Swift:
 ```
-tuka init AFN
-tuka generate-library  # gen-lib, gl
-tuka generate-podfile  # gen-pod, gp
-tuka add-receptor      # addr, ar
+$ tuka init AFN
+$ tuka generate-library  # gen-lib, gl
+$ tuka generate-podfile  # gen-pod, gp
+$ tuka add-receptor      # addr, ar
 ```
 
 
 For Unity:
 ```
-tuka init FMD
-tuka generate-library  # gen-lib, gl
-tuka generate-podfile  # gen-pod, gp
-tuka add-receptor      # addr, ar
+$ tuka init FMD
+$ tuka generate-library  # gen-lib, gl
+$ tuka generate-podfile  # gen-pod, gp
+$ tuka add-receptor      # addr, ar
 ```
 
 
 To automatically install everything after initiating a Tukafile:
 ```
-tuka init [AFN/FMD]
-tuka automatic         # install, auto, au
+$ tuka init [AFN/FMD]
+$ tuka automatic         # install, auto, au
 ```
 
 
 Just to update the library:
 ```
-tuka update-lib        # ul
+$ tuka update-lib        # ul
 ```
