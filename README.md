@@ -28,6 +28,7 @@ Check the version of the gem by running:
 
 First, ```cd``` to the root of your iOS project directory.
 
+
 For ObjectiveC/Swift:
 ```
 tuka init AFN
@@ -35,6 +36,7 @@ tuka generate-library  # gen-lib, gl
 tuka generate-podfile  # gen-pod, gp
 tuka add-receptor      # addr, ar
 ```
+
 
 For Unity:
 ```
@@ -44,11 +46,13 @@ tuka generate-podfile  # gen-pod, gp
 tuka add-receptor      # addr, ar
 ```
 
+
 To automatically install everything after initiating a Tukafile:
 ```
 tuka init [AFN/FMD]
 tuka automatic         # install, auto, au
 ```
+
 
 Just to update the library:
 ```
