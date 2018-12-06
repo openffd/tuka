@@ -1,0 +1,35 @@
+AllCops:
+  TargetRubyVersion: 2.5
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/EmptyLiteral:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - '*.gemspec'
+    - 'Rakefile'
+    - 'Gemfile'
+
+Style/Not:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/ModuleLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 24
