@@ -14,7 +14,7 @@ FMD=git@bitbucket.org:alphardcenter/tukafile-fmd.git
 Install the gem:
 
     $ sudo gem install tuka --source $GS
-    $ sudo gem install tuka --source $GS -n usr/local/bin  # For Jeff
+    $ sudo gem install tuka --source $GS -n /usr/local/bin  # For Jeff and Jacky
 
 To update:
 
