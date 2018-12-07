@@ -60,7 +60,7 @@ module Tuka
 
     def update_content_receptor_name(receptor_name:)
       files.each do |receptor_file|
-        text = File.read(receptor_file).gsub(Receptor.receptor_name_search_string, receptor_name.capitalize)
+        text = File.read(receptor_file).gsub(Receptor.receptor_name_search_string, receptor_name)
         File.open(receptor_file, 'w') { |file| file.puts text }
       end
     end
