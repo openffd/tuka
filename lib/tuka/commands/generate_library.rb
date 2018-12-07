@@ -61,7 +61,7 @@ module Tuka
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
 
-        puts "[✓] Library '#{generated_library.path}' will use bundle identifier: '#{tukafile.project_info.bundle_id}'"
+        puts "[✓] Library bundle identifier: '#{tukafile.project_info.bundle_id}'"
       end
 
       def update_base_url_in_generated_library
@@ -69,15 +69,15 @@ module Tuka
         cipher = tukafile.get_server_url_cipher(project.bundle_id)
         raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
 
-        puts "[✓] Library '#{generated_library.path}' will use server url:        '#{tukafile.decoded_server_url}'"
-        puts "[✓] Library '#{generated_library.path}' will use server url cipher: '#{cipher}'"
+        puts "[✓] Library server url:        '#{tukafile.decoded_server_url}'"
+        puts "[✓] Library server url cipher: '#{cipher}'"
       end
 
       def update_user_agent_in_generated_library
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_user_agent_in_files(tukafile.server.user_agent)
 
-        puts "[✓] Library '#{generated_library.path}' will use server user agent: '#{tukafile.server.user_agent}'"
+        puts "[✓] Library server user agent: '#{tukafile.server.user_agent}'"
       end
 
       def display_command_completion
