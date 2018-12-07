@@ -17,6 +17,7 @@ module Tuka
   require 'tuka/tuka_bundle/library'
   require 'tuka/tuka_bundle/receptor'
   require 'tuka/tuka_bundle/tukafile'
+  require 'tuka/frameworks'
   require 'tuka/project_bundle'
   require 'tuka/tuka_bundle'
   require 'tuka/command'

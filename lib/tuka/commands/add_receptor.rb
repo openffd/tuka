@@ -107,6 +107,17 @@ module Tuka
         puts "[✓] Push notifications is enabled" # This was checked earlier
       end
 
+      def add_user_notifications_framework
+        return unless project.type == Project.types[:Unity]
+
+        if project.has_user_notifications_framework?
+          puts "[✓] UserNotifications.framework is already in Linked Frameworks and Libraries"
+        else
+          project.add_user_notifications_framework
+          puts "[✓] Added UserNotifications.framework to Linked Frameworks and Libraries"
+        end
+      end
+
       def embed_swift_standard_libraries
         project.always_embed_swift_standard_libraries
         puts "[✓] Swift standard libraries embedded"

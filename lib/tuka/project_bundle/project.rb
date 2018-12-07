@@ -111,6 +111,24 @@ module Tuka
       !File.read(pbxproj).scan(/com\.apple\.Push = {(\s)*enabled = 1;(\s)*};/m).empty?
     end
 
+    def has_user_notifications_framework?
+      references = @project_configurator.targets.first.frameworks_build_phase.files_references
+      references.any? { |ref| ref.name == Frameworks.user_notifications_framework }
+    end
+
+    def add_user_notifications_framework
+      require 'pry'
+      binding.pry
+
+      frameworks_group = @project_configurator.groups.select { |group| group.name == Frameworks.group_name }.first
+      return if frameworks_group.nil?
+
+      reference = frameworks_group.new_file(Frameworks.user_notifications_framework_path)
+      reference.set_source_tree(Frameworks.source_tree)
+      @project_configurator.targets.first.frameworks_build_phase.add_file_reference(reference)
+      @project_configurator.save
+    end
+
     private
 
     def pbxproj_path
