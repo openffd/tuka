@@ -5,6 +5,10 @@ module CoreExtensions
   require 'base64'
 
   refine String do
+    def remove_non_word_chars
+      gsub(/(\W|\d)/, "")
+    end
+
     def ipv4?
       self =~ Resolv::IPv4::Regex
     end

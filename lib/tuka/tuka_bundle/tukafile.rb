@@ -96,9 +96,12 @@ module Tuka
     end
 
     def valid_project_info_receptor_name?
-      return true if project_info.receptor_name.nil?
+      receptor_name = project_info.receptor_name
+      return true if receptor_name.nil?
 
-      not project_info.receptor_name.empty?
+      return false if receptor_name.empty?
+
+      receptor_name.scan(/(\W|\d)/).empty?
     end
   end
 end

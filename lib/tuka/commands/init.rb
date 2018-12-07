@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class Init < Command
+      using CoreExtensions
+
       def self.usage
         'init [URL]'
       end
@@ -29,7 +31,7 @@ module Tuka
       def modify_tukafile_project_data
         tukafile.project_info.xcodeproj     = xcodeproj_basename
         tukafile.project_info.type          = project.type
-        tukafile.project_info.receptor_name = project.name
+        tukafile.project_info.receptor_name = project.name.remove_non_word_chars
       end
 
       def check_tukafile_validity
