@@ -14,14 +14,13 @@ module Tuka
       @path = path
     end
 
-    def contents
-      File.read(@path)
-    end
-
     def dependencies(excluded:)
-      contents
+      # TODO: This can be improved
+      File.read(@path)
         .scan(/^[^\s\#]*\s*pod\s+(.*)/)
         .reject { |pod| pod.first.include? excluded }
+        .reject { |pod| pod.first.include? TukaBundle.dir }
+        .reject { |pod| pod.first.include? ProjectBundle.modder_dir }
         .reduce('') { |total, pod| "#{total}\n  pod #{pod.first}" }
     end
 
