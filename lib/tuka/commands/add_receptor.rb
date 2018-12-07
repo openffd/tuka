@@ -103,6 +103,10 @@ module Tuka
         puts "\nPerforming other necessary checks..."
       end
 
+      def display_push_notifications_enabled
+        puts "[✓] Push notifications is enabled" # This was checked earlier
+      end
+
       def embed_swift_standard_libraries
         project.always_embed_swift_standard_libraries
         puts "[✓] Swift standard libraries embedded"

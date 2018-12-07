@@ -22,5 +22,10 @@ module Tuka
     def check_project_bundle_id
       raise StandardError, 'Unable to detect the project bundle identifier' if project.bundle_id.nil?
     end
+
+    def check_push_notification_capabilities
+      message = 'Push notifications is not enabled for this project, please go to Capabilities and turn it on'
+      raise StandardError, message unless project.push_notifications_enabled?
+    end
   end
 end

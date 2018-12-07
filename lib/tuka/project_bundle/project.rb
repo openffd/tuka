@@ -107,6 +107,10 @@ module Tuka
       grep_project_build_settings('INFOPLIST_FILE')
     end
 
+    def push_notifications_enabled?
+      !File.read(pbxproj).scan(/com\.apple\.Push = {(\s)*enabled = 1;(\s)*};/m).empty?
+    end
+
     private
 
     def pbxproj_path
