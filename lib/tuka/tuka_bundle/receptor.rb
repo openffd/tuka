@@ -45,7 +45,7 @@ module Tuka
 
     def update_swift_target(target_name:)
       text = File.read(h_file).gsub(Receptor.receptor_target_search_string, target_name)
-      File.open(file, 'w') { |file| file.puts text }
+      File.open(h_file, 'w') { |file| file.puts text }
     end
 
     private
