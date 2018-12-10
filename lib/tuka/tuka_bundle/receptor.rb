@@ -43,6 +43,11 @@ module Tuka
       [h_file, m_file]
     end
 
+    def update_swift_target(target_name:)
+      text = File.read(h_file).gsub(Receptor.receptor_target_search_string, target_name)
+      File.open(file, 'w') { |file| file.puts text }
+    end
+
     private
 
     def target_h_file_path
@@ -51,11 +56,6 @@ module Tuka
 
     def target_m_file_path
       File.join(@path, "#{filename}.m")
-    end
-
-    def update_swift_target(target_name:)
-      text = File.read(h_file).gsub(Receptor.receptor_target_search_string, target_name)
-      File.open(file, 'w') { |file| file.puts text }
     end
 
     def update_content_receptor_name(receptor_name:)
