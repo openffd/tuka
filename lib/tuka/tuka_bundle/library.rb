@@ -13,7 +13,7 @@ module Tuka
     def update_bundle_id_in_files(bundle_id)
       @bundle_id = bundle_id
 
-      matched_file_paths = Dir.glob("#{@path}/_lib/core/**/*.m")
+      matched_file_paths = Dir.glob("#{@path}/_lib/core/*.m")
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -45,7 +45,7 @@ module Tuka
     def update_user_agent_in_files(user_agent)
       @user_agent = user_agent
 
-      matched_file_paths = Dir.glob("#{@path}/_lib/core/client/*.m")
+      matched_file_paths = Dir.glob("#{@path}/_lib/core/*.m")
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -68,34 +68,32 @@ module Tuka
       Hash[user_agent_search_strings.zip(user_agent_replacement_strings)]
     end
 
+    # search strings
+
     def bundle_id_search_strings
-      [
-        '[self.defaultBaseURL deROTWithSeed:NSBundle.mainBundle.bundleIdentifier.asciiSeed];',
-        'NSBundle.mainBundle.bundleIdentifier.MD5;'
-      ]
+      ['NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier; //#']
     end
 
     def base_url_search_strings
-      ['return [NSString stringWithFormat:@"%@tp:%@%@.%@.%@.%@", @"ht", @"//", @"149", @"28", @"51", @"254"];']
+      ['return [NSString stringWithFormat:@""]; //#']
     end
 
     def user_agent_search_strings
-      ['DefaultUserAgent = @"123456";']
+      ['NSString *userAgent = nil; //#']
     end
 
+    # replacement strings
+
     def bundle_id_replacement_strings
-      [
-        "[self.defaultBaseURL deROTWithSeed:@\"#{@bundle_id}\".asciiSeed];",
-        "@\"#{@bundle_id}\".MD5;"
-      ]
+      ["NSString *bundleIdentifier = @\"#{@bundle_id}\"; //#"]
     end
 
     def base_url_replacement_strings
-      ["return @\"#{@cipher}\";"]
+      ["return @\"#{@cipher}\"; //#"]
     end
 
     def user_agent_replacement_strings
-      ["DefaultUserAgent = @\"#{@user_agent}\";"]
+      ["NSString *userAgent = @\"#{@user_agent}\"; //#"]
     end
   end
 end
