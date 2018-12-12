@@ -76,7 +76,6 @@ module Tuka
 
     def base_url_search_strings
       ['NSString *baseURL = nil; //#']
-      # ['return [NSString stringWithFormat:@""]; //#']
     end
 
     def user_agent_search_strings
