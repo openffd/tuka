@@ -117,9 +117,6 @@ module Tuka
     end
 
     def add_user_notifications_framework
-      require 'pry'
-      binding.pry
-
       frameworks_group = @project_configurator.groups.select { |group| group.name == Frameworks.group_name }.first
       return if frameworks_group.nil?
 
