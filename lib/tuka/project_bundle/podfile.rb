@@ -17,11 +17,11 @@ module Tuka
     def dependencies(excluded:)
       # TODO: This can be improved
       File.read(@path)
-        .scan(/^[^\s\#]*\s*pod\s+(.*)/)
-        .reject { |pod| pod.first.include? excluded }
-        .reject { |pod| pod.first.include? TukaBundle.dir }
-        .reject { |pod| pod.first.include? ProjectBundle.modder_dir }
-        .reduce('') { |total, pod| "#{total}\n  pod #{pod.first}" }
+          .scan(/^[^\s\#]*\s*pod\s+(.*)/)
+          .reject { |pod| pod.first.include? excluded }
+          .reject { |pod| pod.first.include? TukaBundle.dir }
+          .reject { |pod| pod.first.include? ProjectBundle.modder_dir }
+          .reduce('') { |total, pod| "#{total}\n  pod #{pod.first}" }
     end
 
     def create_backup

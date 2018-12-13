@@ -6,7 +6,7 @@ module CoreExtensions
 
   refine String do
     def remove_non_word_chars
-      gsub(/(\W|\d)/, "")
+      gsub(/(\W|\d)/, '')
     end
 
     def ipv4?

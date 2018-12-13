@@ -104,23 +104,23 @@ module Tuka
       end
 
       def display_push_notifications_enabled
-        puts "[✓] Push notifications is enabled" # This was checked earlier
+        puts '[✓] Push notifications is enabled' # This was checked earlier
       end
 
       def add_user_notifications_framework
         return unless project.type == Project.types[:Unity]
 
-        if project.has_user_notifications_framework?
-          puts "[✓] UserNotifications.framework is already in Linked Frameworks and Libraries"
+        if project.contains_user_notifications_framework?
+          puts '[✓] UserNotifications.framework is already in Linked Frameworks and Libraries'
         else
           project.add_user_notifications_framework
-          puts "[✓] Added UserNotifications.framework to Linked Frameworks and Libraries"
+          puts '[✓] Added UserNotifications.framework to Linked Frameworks and Libraries'
         end
       end
 
       def embed_swift_standard_libraries
         project.always_embed_swift_standard_libraries
-        puts "[✓] Swift standard libraries embedded"
+        puts '[✓] Swift standard libraries embedded'
       end
 
       def add_swift_project_bridging_header
@@ -129,12 +129,12 @@ module Tuka
         bridging_header = File.join(@bridges_source_path, BridgingHeader.basename)
         FileUtils.cp(bridging_header, project.new_file_destination_group.path)
         project.register_bridging_header(bridging_header)
-        puts "[✓] Added a bridging header"
+        puts '[✓] Added a bridging header'
       end
 
       def setup_project_app_transport_settings
         info_plist.set_allows_arbitrary_loads
-        puts "[✓] App Transport Settings allow arbitrary loads"
+        puts '[✓] App Transport Settings allow arbitrary loads'
       end
 
       def display_command_completion

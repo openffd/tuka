@@ -111,7 +111,7 @@ module Tuka
       !File.read(pbxproj).scan(/com\.apple\.Push = {(\s)*enabled = 1;(\s)*};/m).empty?
     end
 
-    def has_user_notifications_framework?
+    def contains_user_notifications_framework?
       references = @project_configurator.targets.first.frameworks_build_phase.files_references
       references.any? { |ref| ref.name == Frameworks.user_notifications_framework }
     end
