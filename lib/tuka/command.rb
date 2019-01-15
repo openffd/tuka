@@ -11,6 +11,10 @@ module Tuka
     class_option :quiet,    aliases: '-q', type: :boolean, desc: 'Enable quiet output mode'
     class_option :verbose,  aliases: '-v', type: :boolean, desc: 'Enable verbose output mode'
 
+    def merge_appledouble_files
+      system 'dot_clean .'
+    end
+
     def check_project
       raise StandardError, 'Unable to locate the xcodeproj file' if xcodeproj.nil?
     end
