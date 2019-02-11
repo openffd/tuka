@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tuka (0.1.0)
+    tuka (0.1.1)
       CFPropertyList
       colored2
       thor (~> 0.20)
