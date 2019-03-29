@@ -4,6 +4,7 @@ module Tuka
   class Command < Thor::Group
     include Thor::Actions
     include Git
+    include Bundler
     include ProjectBundle
     include TukaBundle
 
