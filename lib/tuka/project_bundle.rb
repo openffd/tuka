@@ -24,6 +24,10 @@ module Tuka
       @podfile ||= Podfile.new(target_podfile_path) if File.file? target_podfile_path
     end
 
+    def gemfile
+      @gemfile ||= Gemfile.new(target_gemfile_path) if File.file? target_gemfile_path
+    end
+
     def receptor_files
       Dir.glob('**/AppDelegate+*.[h|m]')
          .reject { |path| path.include?(TukaBundle.dir) || path.include?(ProjectBundle.modder_dir) }
@@ -40,6 +44,10 @@ module Tuka
 
     def target_podfile_path
       Podfile.basename
+    end
+
+    def target_gemfile_path
+      Gemfile.basename
     end
   end
 end
