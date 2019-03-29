@@ -62,6 +62,19 @@ module Tuka
         puts "[✓] Generated new Podfile at location: '#{target_generated_podfile_path}'"
       end
 
+      def generate_gemfile
+        generate_gemfile
+      end
+
+      def display_gemfile_generated
+        puts "[✓] Generated a new Gemfile at path: ./'#{Gemfile.basename}'"
+      end
+
+      def execute_bundle_install
+        "[✓] Running 'bundle install'"
+        bundle_install
+      end
+
       def prompt_use_generated_podfile
         return unless options[:yes] || yes?("\n[?] Use the generated Podfile? [y|n] ".yellow)
 
