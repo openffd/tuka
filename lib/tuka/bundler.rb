@@ -6,5 +6,9 @@ module Tuka
       require_relative 'templates/gemfile/gemfile_generator'
       GemfileGenerator.new.generate
     end
+
+    def bundle_install
+      system 'bundle', 'install'
+    end
   end
 end
