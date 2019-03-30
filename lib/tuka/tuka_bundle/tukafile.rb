@@ -13,7 +13,7 @@ module Tuka
 
     attr_reader :path
 
-    DAY_RANGE = (21...84).freeze # 2 weeks to 3 months range
+    DAYS_RANGE = (21...84).freeze # 2 weeks to 3 months range
 
     def self.basename
       'Tukafile'
@@ -33,7 +33,7 @@ module Tuka
       return "#{Tukafile.basename} `server.url_type' is invalid."             unless valid_server_url_type?
       return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
       return "#{Tukafile.basename} `server.user_agent' is invalid."           if server.user_agent.nil?
-      return "#{Tukafile.basename} `server.inactive_days' range: (#{DAY_RANGE})." unless valid_server_inactive_days?
+      return "#{Tukafile.basename} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
       return "#{Tukafile.basename} `project_info.xcodeproj' is invalid."      unless valid_project_info_xcodeproj?
       return "#{Tukafile.basename} `project_info.type' is invalid."           unless valid_project_info_type?
       return "#{Tukafile.basename} `project_info.bundle_id' is invalid."      unless valid_project_info_bundle_id?
@@ -83,8 +83,8 @@ module Tuka
     end
 
     def valid_server_inactive_days?
-      days = server.inactive_days || Tukafile.inactive_days_range.begin
-      Tukafile.inactive_days_range.cover? days
+      days = server.inactive_days || DAYS_RANGE.begin
+      DAYS_RANGE.cover? days
     end
 
     def valid_project_info_xcodeproj?
