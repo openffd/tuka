@@ -49,7 +49,7 @@ module Tuka
       end
 
       def open_tukafile
-        system 'open', tukafile.path
+        system 'xed', tukafile.path
       end
 
       def display_command_completion
