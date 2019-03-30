@@ -14,7 +14,7 @@ module Tuka
       argument :url
 
       def display_tuka_setup
-        puts "\nStarting Tuka installation for #{project.name} (#{project.type_pretty})".blue
+        puts "\nInitializing Tuka for #{project.name} (#{project.type_pretty})".blue
       end
 
       def download_tukafile
