@@ -32,6 +32,7 @@ module Tuka
       return "#{Tukafile.basename} `library' is invalid."                     unless valid_library?
       return "#{Tukafile.basename} `server.url_type' is invalid."             unless valid_server_url_type?
       return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
+      return "#{Tukafile.basename} `server.path' is invalid."                 unless valid_server_path?
       return "#{Tukafile.basename} `server.user_agent' is invalid."           if server.user_agent.nil?
       return "#{Tukafile.basename} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
       return "#{Tukafile.basename} `project_info.xcodeproj' is invalid."      unless valid_project_info_xcodeproj?
@@ -80,6 +81,12 @@ module Tuka
       when Tukafile.server_url_types[:URL]
         server.url.url?
       end
+    end
+
+    def valid_server_path?
+      return false if server.path.nil?
+
+      server.path =~ /^[a-zA-Z]{1}[a-zA-Z0-9]*$/
     end
 
     def valid_server_inactive_days?
