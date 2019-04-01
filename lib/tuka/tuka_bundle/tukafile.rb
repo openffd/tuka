@@ -14,6 +14,7 @@ module Tuka
     attr_reader :path
 
     DAYS_RANGE = (14...84).freeze # 2 weeks to 3 months range
+    PROTOCOLS = [:http, :https].freeze
 
     def self.basename
       'Tukafile'
@@ -31,6 +32,7 @@ module Tuka
     def error
       return "#{Tukafile.basename} `library' is invalid."                     unless valid_library?
       return "#{Tukafile.basename} `server.url_type' is invalid."             unless valid_server_url_type?
+      return "#{Tukafile.basename} `server.protocol' is invalid."             unless valid_server_protocol?
       return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
       return "#{Tukafile.basename} `server.path' is invalid."                 unless valid_server_path?
       return "#{Tukafile.basename} `server.user_agent' is invalid."           if server.user_agent.nil?
@@ -66,6 +68,12 @@ module Tuka
       require 'digest/sha1'
       string = library.name + library.url
       Digest::SHA1.hexdigest(string) == library.digest
+    end
+
+    def valid_server_protocol?
+      return true if server.protocol.nil?
+
+      PROTOCOLS.include? server.protocol.to_sym
     end
 
     def valid_server_url_type?
