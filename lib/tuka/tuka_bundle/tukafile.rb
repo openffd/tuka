@@ -13,7 +13,7 @@ module Tuka
 
     attr_reader :path
 
-    DAYS_RANGE = (21...84).freeze # 2 weeks to 3 months range
+    DAYS_RANGE = (14...84).freeze # 2 weeks to 3 months range
 
     def self.basename
       'Tukafile'
