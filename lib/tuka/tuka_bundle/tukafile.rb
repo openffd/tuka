@@ -86,7 +86,7 @@ module Tuka
     def valid_server_path?
       return false if server.path.nil?
 
-      server.path =~ /^[a-zA-Z]{1}[a-zA-Z0-9]*$/
+      server.path =~ /\A[a-zA-Z0-9]+\z/
     end
 
     def valid_server_inactive_days?
