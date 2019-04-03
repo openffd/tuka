@@ -2,7 +2,7 @@
 
 module Tuka
   class CLI < Thor
-    desc 'version', 'Prints the version'
+    desc 'version', 'Show the Tuka version information'
     def version
       puts "v#{VERSION}"
     end
