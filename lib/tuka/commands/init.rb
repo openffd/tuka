@@ -10,7 +10,7 @@ module Tuka
       end
 
       namespace :init
-      desc 'Initializes Tuka on an iOS project by downloading a Tukafile from the given git repository URL'
+      desc 'Downloads a pre-configured Tukafile from the given URL'
       argument :url
 
       def display_tuka_setup

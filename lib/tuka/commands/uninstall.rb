@@ -8,7 +8,7 @@ module Tuka
       end
 
       namespace :uninstall
-      desc 'Removes or reverts any iOS project files or settings related to Tuka'
+      desc 'Removes Tuka related files and settings from an iOS project'
 
       def display
         puts "\nTBI SOON!"

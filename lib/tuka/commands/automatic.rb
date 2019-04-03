@@ -8,7 +8,7 @@ module Tuka
       end
 
       namespace :automatic
-      desc 'Auto-completes the Tuka installation if a Tukafile was previously initialized for the iOS project'
+      desc 'Automagically completes installation to an iOS project'
 
       def generate_library
         cmd = GenerateLibrary.new

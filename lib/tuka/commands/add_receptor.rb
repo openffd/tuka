@@ -8,7 +8,7 @@ module Tuka
       end
 
       namespace :add_receptor
-      desc 'Completes the Tuka installation by attaching the Receptor files to the iOS project'
+      desc 'Adds generated receptor files to an iOS project'
 
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init.usage}'" if tukafile.nil?

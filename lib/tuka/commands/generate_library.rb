@@ -12,7 +12,7 @@ module Tuka
       end
 
       namespace :generate_library
-      desc "Generates an iOS library based on a Tukafile's specifications"
+      desc "Generates and builds an iOS library from a Tukafile"
 
       def check_tukafile_existence
         raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init.usage}'" if tukafile.nil?
