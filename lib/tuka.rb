@@ -25,5 +25,6 @@ module Tuka
   require 'tuka/command'
   require 'tuka/commands'
   require 'tuka/cli'
+  require 'tuka/cli_help_patch'
   require 'tuka/version'
 end

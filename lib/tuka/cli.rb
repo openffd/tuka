@@ -7,11 +7,6 @@ module Tuka
       puts "v#{VERSION}"
     end
 
-    desc 'powerup!', "Let's power up!"
-    def powerup!
-      puts "\n(╯°□°）╯︵ ┻━┻"
-    end
-
     generate_library = Commands::GenerateLibrary
     generate_podfile = Commands::GeneratePodfile
 
@@ -21,6 +16,11 @@ module Tuka
     register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor.usage,  Commands::AddReceptor.desc
     register Commands::Automatic,   'automatic',        Commands::Automatic.usage,    Commands::Automatic.desc
     register Commands::Uninstall,   'uninstall',        Commands::Uninstall.usage,    Commands::Uninstall.desc
+
+    desc 'powerup!', "Let's power up!"
+    def powerup!
+      puts "\n(╯°□°）╯︵ ┻━┻"
+    end
 
     map %w[generate-lib update-lib gen-lib genlib gl ul] => :generate_library
     map %w[generate-pod update-pod gen-pod genpod gp up] => :generate_podfile
