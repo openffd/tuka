@@ -8,7 +8,7 @@ module Tuka
       end
 
       namespace :generate_podfile
-      desc "Generates a Podfile with all the required dependencies from a Tukafile"
+      desc "Generates a Podfile with the specified dependencies/hooks"
       class_option :yes, aliases: '-y', type: :boolean, desc: 'Auto-selects `yes` option for all prompts'
 
       def check_tukafile_existence
