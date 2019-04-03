@@ -16,7 +16,7 @@ module Tuka
 
     desc 'powerup!', "Let's power up!"
     def powerup!
-      puts "\n(╯°□°）╯︵ ┻━┻"
+      system "echo \"LET'S POWERUP!\" | lolcat -F 1 -a -d 12 -s 11; echo '(╯°□°）╯︵ ┻━┻' | lolcat -F 1 -a -d 12 -s 11"
     end
 
     desc 'version', 'Show the Tuka version information'
