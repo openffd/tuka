@@ -35,7 +35,7 @@ module Tuka
     private
 
     def required_dependencies
-      ['SVProgressHUD', 'MJRefresh']
+      %w[SVProgressHUD MJRefresh]
     end
   end
 end
