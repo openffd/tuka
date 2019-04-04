@@ -103,7 +103,7 @@ module Tuka
     end
 
     def valid_server_inactive_days?
-      days = server.inactive_days || DAYS_RANGE.begin
+      days = server.inactive_days.to_i || DAYS_RANGE.begin
       DAYS_RANGE.cover? days
     end
 
