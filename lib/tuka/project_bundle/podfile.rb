@@ -32,6 +32,8 @@ module Tuka
       system 'pod', 'install'
     end
 
+    private
+
     def required_dependencies
       ['SVProgressHUD', 'MJRefresh']
     end
