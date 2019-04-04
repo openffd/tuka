@@ -13,6 +13,7 @@ module Tuka
 
     attr_reader :path
 
+    USER_AGENT_RANGE = (1...9).freeze
     DAYS_RANGE = (14...84).freeze # 2 weeks to 3 months range
     PROTOCOLS = [:http, :https].freeze
 
@@ -35,7 +36,7 @@ module Tuka
       return "#{Tukafile.basename} `server.protocol' is invalid."             unless valid_server_protocol?
       return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
       return "#{Tukafile.basename} `server.path' is invalid."                 unless valid_server_path?
-      return "#{Tukafile.basename} `server.user_agent' is invalid."           if server.user_agent.nil?
+      return "#{Tukafile.basename} `server.user_agent' is invalid."           unless valid_user_agent?
       return "#{Tukafile.basename} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
       return "#{Tukafile.basename} `project_info.xcodeproj' is invalid."      unless valid_project_info_xcodeproj?
       return "#{Tukafile.basename} `project_info.type' is invalid."           unless valid_project_info_type?
@@ -95,6 +96,10 @@ module Tuka
       return false if server.path.nil?
 
       server.path =~ /\A[a-zA-Z0-9]+\z/
+    end
+
+    def valid_user_agent
+      USER_AGENT_RANGE.cover? server.user_agent.to_i
     end
 
     def valid_server_inactive_days?
