@@ -6,6 +6,7 @@ target '<%= @target %>' do
   use_frameworks!
   <%= @pods %>
   pod '<%= @library %>', :path => '<%= @library_path %>'
+  pod 'SVProgressHUD', :git => 'https://github.com/yjnsrc/SVProgressHUD.git'
 end
 
 post_install do |installer|
