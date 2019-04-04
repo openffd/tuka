@@ -36,7 +36,7 @@ module Tuka
       return "#{Tukafile.basename} `server.protocol' is invalid."             unless valid_server_protocol?
       return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
       return "#{Tukafile.basename} `server.path' is invalid."                 unless valid_server_path?
-      return "#{Tukafile.basename} `server.user_agent' is invalid."           unless valid_user_agent?
+      return "#{Tukafile.basename} `server.user_agent' is invalid."           unless valid_server_user_agent?
       return "#{Tukafile.basename} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
       return "#{Tukafile.basename} `project_info.xcodeproj' is invalid."      unless valid_project_info_xcodeproj?
       return "#{Tukafile.basename} `project_info.type' is invalid."           unless valid_project_info_type?
@@ -98,7 +98,7 @@ module Tuka
       server.path =~ /\A[a-zA-Z0-9]+\z/
     end
 
-    def valid_user_agent
+    def valid_server_user_agent?
       USER_AGENT_RANGE.cover? server.user_agent.to_i
     end
 
