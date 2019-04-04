@@ -18,7 +18,7 @@ module Tuka
       # TODO: This can be improved
       File.read(@path)
           .scan(/^[^\s\#]*\s*pod\s+(.*)/)
-          .reject { |pod| pod.first.include? excluded }
+          .reject { |pod| required_dependencies.include? pod.first }
           .reject { |pod| pod.first.include? TukaBundle.dir }
           .reject { |pod| pod.first.include? ProjectBundle.modder_dir }
           .reduce('') { |total, pod| "#{total}\n  pod #{pod.first}" }
@@ -30,6 +30,10 @@ module Tuka
 
     def install
       system 'pod', 'install'
+    end
+
+    def required_dependencies
+      ['SVProgressHUD', 'MJRefresh']
     end
   end
 end
