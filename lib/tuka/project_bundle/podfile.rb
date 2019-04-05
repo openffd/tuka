@@ -18,7 +18,7 @@ module Tuka
       # TODO: This can be improved
       File.read(@path)
           .scan(/^[^\s\#]*\s*pod\s+(.*)/)
-          .reject { |pod| required_dependencies.include? pod.first }
+          .reject { |pod| required_dependencies.append(excluded).include? pod.first }
           .reject { |pod| pod.first.include? TukaBundle.dir }
           .reject { |pod| pod.first.include? ProjectBundle.modder_dir }
           .reduce('') { |total, pod| "#{total}\n  pod #{pod.first}" }
