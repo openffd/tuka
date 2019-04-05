@@ -3,7 +3,11 @@
 module Tuka
   module TukaBundle
     def self.dir
-      '_tuka'
+      '.tuka'
+    end
+
+    def self.previous_dir_names
+      ['_tuka']
     end
 
     def self.tukafile
