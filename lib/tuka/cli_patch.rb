@@ -19,7 +19,8 @@ module Tuka
         shell.say "\nCommands:", :yellow
 
         shell.print_table(list, indent: 2, truncate: true)
-        shell.say "\nRun 'tuka -h [COMMAND]' for more information on a command.", :yellow
+        shell.say "\nHelp:", :yellow
+        shell.say "  Run 'tuka -h [COMMAND]' for more information on a command."
       end
     end
   end
