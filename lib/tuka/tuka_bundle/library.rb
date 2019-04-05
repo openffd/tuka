@@ -14,21 +14,6 @@ module Tuka
       @path = path
     end
 
-    def update_bundle_id_in_files(bundle_id)
-      @bundle_id = bundle_id
-
-      require 'pry'
-      binding.pry
-
-      matched_file_paths = Dir.glob("#{@path}/_lib/core/*.m")
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        bundle_id_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
-      end
-      true
-    end
-
     def target_bridges_path
       File.join(@path, '_bridges')
     end
@@ -37,10 +22,22 @@ module Tuka
       File.join(@path, '_receptors')
     end
 
+    def update_bundle_id_in_files(bundle_id)
+      @bundle_id = bundle_id
+
+      matched_file_paths = Dir.glob(glob_pattern)
+      return false if matched_file_paths.empty?
+
+      matched_file_paths.each do |path|
+        bundle_id_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
+      end
+      true
+    end
+
     def update_base_url_in_files(cipher)
       @cipher = cipher
 
-      matched_file_paths = Dir.glob("#{@path}/_lib/core/*.m")
+      matched_file_paths = Dir.glob(glob_pattern)
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -52,7 +49,7 @@ module Tuka
     def update_user_agent_in_files(user_agent)
       @user_agent = user_agent
 
-      matched_file_paths = Dir.glob("#{@path}/_lib/core/*.m")
+      matched_file_paths = Dir.glob(glob_pattern)
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -62,6 +59,10 @@ module Tuka
     end
 
     private
+
+    def glob_pattern
+      File.join(@path, Library.cargo_dir, 'lib', 'core', '*.m')
+    end
 
     def bundle_id_search_pairs
       Hash[bundle_id_search_strings.zip(bundle_id_replacement_strings)]
