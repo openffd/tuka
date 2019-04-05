@@ -71,7 +71,7 @@ module Tuka
       end
 
       def execute_bundle_install
-        "[✓] Running 'bundle install'"
+        puts "[✓] Running 'bundle install'"
         bundle_install
       end
 
