@@ -6,9 +6,6 @@ module Tuka
   class Podfile
     attr_reader :path
 
-    POSSIBLE_DIRS = [TukaBundle.dir, ProjectBundle.modder_dir].freeze
-    REQUIRED_DEPENDENCIES = %w[SVProgressHUD MJRefresh].freeze
-
     def self.basename
       'Podfile'
     end
@@ -36,7 +33,15 @@ module Tuka
     private
 
     def strings_to_exclude
-      REQUIRED_DEPENDENCIES + POSSIBLE_DIRS
+      required_dependencies + possible_dirs
+    end
+
+    def required_dependencies
+      %w[SVProgressHUD MJRefresh]
+    end
+
+    def possible_dirs
+      [TukaBundle.dir, ProjectBundle.modder_dir]
     end
   end
 end
