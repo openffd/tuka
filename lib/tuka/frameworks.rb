@@ -15,7 +15,7 @@ module Tuka
     end
 
     def self.user_notifications_framework_path
-      'System/Library/Frameworks/UserNotifications.framework'
+      'System/Library/Frameworks/' + user_notifications_framework
     end
   end
 end
