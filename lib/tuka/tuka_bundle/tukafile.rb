@@ -120,7 +120,7 @@ module Tuka
     def valid_project_info_bundle_id?
       return true if project_info.bundle_id.nil?
 
-      project_info.bundle_id =~ /(com|ios)\.[A-Za-z0-9]+\.[A-Za-z0-9]+/
+      project_info.bundle_id =~ /^(com|ios)\.[A-Za-z0-9]+\.[A-Za-z0-9]+$/
     end
 
     def valid_project_info_receptor_name?
