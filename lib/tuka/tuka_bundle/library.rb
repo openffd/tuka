@@ -6,12 +6,19 @@ module Tuka
 
     attr_reader :path
 
+    def self.cargo_dir
+      '.github'
+    end
+
     def initialize(path)
       @path = path
     end
 
     def update_bundle_id_in_files(bundle_id)
       @bundle_id = bundle_id
+
+      require 'pry'
+      binding.pry
 
       matched_file_paths = Dir.glob("#{@path}/_lib/core/*.m")
       return false if matched_file_paths.empty?
