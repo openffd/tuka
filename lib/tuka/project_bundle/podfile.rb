@@ -6,6 +6,9 @@ module Tuka
   class Podfile
     attr_reader :path
 
+    POSSIBLE_DIRS = [TukaBundle.dir, ProjectBundle.modder_dir].freeze
+    REQUIRED_DEPENDENCIES = %w[SVProgressHUD MJRefresh].freeze
+
     def self.basename
       'Podfile'
     end
@@ -18,9 +21,7 @@ module Tuka
       # TODO: This can be improved
       File.read(@path)
           .scan(/^[^\s\#]*\s*pod\s+(.*)/)
-          .reject { |pod| required_dependencies.append(excluded).include? pod.first }
-          .reject { |pod| pod.first.include? TukaBundle.dir }
-          .reject { |pod| pod.first.include? ProjectBundle.modder_dir }
+          .reject { |pod| strings_to_exclude.append(excluded).any? { |str| pod.first.include? str } }
           .reduce('') { |total, pod| "#{total}\n  pod #{pod.first}" }
     end
 
@@ -34,8 +35,8 @@ module Tuka
 
     private
 
-    def required_dependencies
-      %w[SVProgressHUD MJRefresh]
+    def strings_to_exclude
+      REQUIRED_DEPENDENCIES + POSSIBLE_DIRS
     end
   end
 end
