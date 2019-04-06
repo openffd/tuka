@@ -15,11 +15,11 @@ module Tuka
     end
 
     def target_bridges_path
-      File.join(@path, '_bridges')
+      File.join(@path, Library.cargo_dir, 'bridges')
     end
 
     def target_receptors_path
-      File.join(@path, '_receptors')
+      File.join(@path, Library.cargo_dir, 'receptors')
     end
 
     def update_bundle_id_in_files(bundle_id)
