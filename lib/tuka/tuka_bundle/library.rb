@@ -65,6 +65,10 @@ module Tuka
       File.join(@cargo_path, 'lib', 'core', '*.m')
     end
 
+    def bundle_id_parts
+      @bundle_id.split /\./
+    end
+
     def bundle_id_search_pairs
       Hash[bundle_id_search_strings.zip(bundle_id_replacement_strings)]
     end
@@ -80,7 +84,10 @@ module Tuka
     # search strings
 
     def bundle_id_search_strings
-      ['NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier; //#']
+      ['[NSString stringWithFormat:@"%@", NSBundle.mainBundle.bundleIdentifier]',
+       'NSString *tagFirstPart = nil',
+       'NSString *tagSecondPart = nil',
+       'NSString *tagThirdPart = nil']
     end
 
     def base_url_search_strings
@@ -94,7 +101,10 @@ module Tuka
     # replacement strings
 
     def bundle_id_replacement_strings
-      ["NSString *bundleIdentifier = @\"#{@bundle_id}\"; //#"]
+      ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
+       "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
+       "NSString *tagSecondPart = @\"#{bundle_id_parts[1]}\"",
+       "NSString *tagThirdPart = @\"#{bundle_id_parts[2]}\""]
     end
 
     def base_url_replacement_strings
