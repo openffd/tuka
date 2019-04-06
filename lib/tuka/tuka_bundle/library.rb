@@ -12,14 +12,15 @@ module Tuka
 
     def initialize(path)
       @path = path
+      @cargo_path = File.join(@path, Library.cargo_dir)
     end
 
     def target_bridges_path
-      File.join(@path, Library.cargo_dir, 'bridges')
+      File.join(@cargo_path, 'bridges')
     end
 
     def target_receptors_path
-      File.join(@path, Library.cargo_dir, 'receptors')
+      File.join(@cargo_path, 'receptors')
     end
 
     def update_bundle_id_in_files(bundle_id)
@@ -61,7 +62,7 @@ module Tuka
     private
 
     def glob_pattern
-      File.join(@path, Library.cargo_dir, 'lib', 'core', '*.m')
+      File.join(@cargo_path, 'lib', 'core', '*.m')
     end
 
     def bundle_id_search_pairs
