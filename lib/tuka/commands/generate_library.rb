@@ -65,8 +65,8 @@ module Tuka
       end
 
       def update_base_url_in_generated_library
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         cipher = tukafile.get_server_url_cipher(project.bundle_id)
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
 
         puts "[✓] Library server url:        '#{tukafile.decoded_server_url}'"
