@@ -26,7 +26,7 @@ module Tuka
     def update_bundle_id_in_files(bundle_id)
       @bundle_id = bundle_id
 
-      matched_file_paths = Dir.glob(glob_pattern)
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -38,7 +38,7 @@ module Tuka
     def update_base_url_in_files(cipher)
       @cipher = cipher
 
-      matched_file_paths = Dir.glob(glob_pattern)
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -50,7 +50,7 @@ module Tuka
     def update_user_agent_in_files(user_agent)
       @user_agent = user_agent
 
-      matched_file_paths = Dir.glob(glob_pattern)
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
@@ -59,9 +59,19 @@ module Tuka
       true
     end
 
+    def remove_three_part_tags
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
+      return false if matched_file_paths.empty?
+
+      matched_file_paths.each do |path|
+        File.open(path, 'r+').gsub_content(/- \(NSString \*\)tagFirstPart {.*tagThirdPart;\s}/m, '')
+      end
+      true
+    end
+
     private
 
-    def glob_pattern
+    def config_file_glob_pattern
       File.join(@cargo_path, 'lib', 'core', '*.m')
     end
 
