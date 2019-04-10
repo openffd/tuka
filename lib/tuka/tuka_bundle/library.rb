@@ -64,7 +64,7 @@ module Tuka
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
-        File.open(path, 'r+').gsub_content(/- \(NSString \*\)tagFirstPart {.*tagThirdPart;\s}/m, '')
+        File.open(path, 'r+').gsub_content(/\s- \(NSString \*\)tagFirstPart {.*tagThirdPart;\s}\s/m, '')
       end
       true
     end
@@ -91,8 +91,6 @@ module Tuka
       Hash[user_agent_search_strings.zip(user_agent_replacement_strings)]
     end
 
-    # search strings
-
     def bundle_id_search_strings
       ['[NSString stringWithFormat:@"%@", NSBundle.mainBundle.bundleIdentifier]',
        'NSString *tagFirstPart = nil',
@@ -107,8 +105,6 @@ module Tuka
     def user_agent_search_strings
       ['NSString *userAgent = nil; //#']
     end
-
-    # replacement strings
 
     def bundle_id_replacement_strings
       ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
