@@ -6,8 +6,8 @@ module Tuka
       '.gitignore'
     end
 
-    def git_clone(url, dir = Dir.pwd)
-      system "git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{dir}/tmp/#{Library.cargo_dir} #{dir} && rm -rf #{dir}/tmp"
+    def git_clone(url, dir = Dir.pwd, cargo_dir = Library.cargo_dir)
+      system "git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{dir}/tmp/#{cargo_dir} #{dir} && rm -rf #{dir}/tmp"
     end
 
     def gitignore(pattern)
