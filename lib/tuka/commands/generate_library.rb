@@ -56,7 +56,10 @@ module Tuka
       end
 
       def update_bundle_id_in_generated_library
-        (generated_library.remove_three_part_tags; return) if tukafile.project_info.bundle_id.nil?
+        if tukafile.project_info.bundle_id.nil?
+          generated_library.remove_three_part_tags
+          return
+        end
 
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)

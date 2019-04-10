@@ -76,7 +76,7 @@ module Tuka
     end
 
     def bundle_id_parts
-      @bundle_id.split /\./, 3
+      @bundle_id.split(/\./, 3)
     end
 
     def bundle_id_search_pairs
