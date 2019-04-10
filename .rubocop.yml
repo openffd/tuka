@@ -28,6 +28,9 @@ Metrics/LineLength:
 Metrics/ModuleLength:
   Max: 120
 
+Metrics/ClassLength:
+  Max: 120
+
 Metrics/BlockLength:
   Max: 120
 
