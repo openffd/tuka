@@ -126,8 +126,6 @@ module Tuka
       ['NSString *filter = @"index"']
     end
 
-    #
-
     def bundle_id_replacement_strings
       ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
        "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",

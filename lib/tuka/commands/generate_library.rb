@@ -55,32 +55,41 @@ module Tuka
         puts "[✓] Tukafile server url: '#{tukafile.server.url}'\n\n" if tukafile.server.url_type == base64
       end
 
-      def update_bundle_id_in_generated_library
+      def update_generated_library_bundle_id
         if tukafile.project_info.bundle_id.nil?
           generated_library.remove_three_part_tags
           return
         end
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
 
-        puts "[✓] Library bundle identifier: '#{tukafile.project_info.bundle_id}'"
+        puts "[✓] Set bundle identifier: '#{tukafile.project_info.bundle_id}'"
       end
 
-      def update_base_url_in_generated_library
+      def update_generated_library_base_url
         cipher = tukafile.get_server_url_cipher(project.bundle_id)
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
 
-        puts "[✓] Library server url:        '#{tukafile.decoded_server_url}'"
-        puts "[✓] Library server url cipher: '#{cipher}'"
+        puts "[✓] Set server url:        '#{tukafile.decoded_server_url}'"
+        puts "[✓] Set server url cipher: '#{cipher}'"
       end
 
-      def update_user_agent_in_generated_library
+      def update_generated_library_url_path
+        return if tukafile.server.url_path.nil?
+
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        raise StandardError, message unless generated_library.update_url_path_in_files(tukafile.server.url_path)
+
+        puts "[✓] Set server url_path:   '#{tukafile.server.url_path}'"
+      end
+
+      def update_generated_library_user_agent
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_user_agent_in_files(tukafile.server.user_agent)
 
-        puts "[✓] Library server user agent: '#{tukafile.server.user_agent}'"
+        puts "[✓] Set server user agent: '#{tukafile.server.user_agent}'"
       end
 
       def display_command_completion
