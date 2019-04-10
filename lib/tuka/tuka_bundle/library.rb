@@ -81,6 +81,18 @@ module Tuka
       true
     end
 
+    def update_protocol_in_files(protocol)
+      @protocol = protocol
+
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
+      return false if matched_file_paths.empty?
+
+      matched_file_paths.each do |path|
+        protocol_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
+      end
+      true
+    end
+
     private
 
     def config_file_glob_pattern
@@ -107,6 +119,10 @@ module Tuka
       Hash[url_path_search_strings.zip(url_path_replacement_strings)]
     end
 
+    def protocol_search_pairs
+      Hash[protocol_search_strings.zip(protocol_replacement_strings)]
+    end
+
     def bundle_id_search_strings
       ['[NSString stringWithFormat:@"%@", NSBundle.mainBundle.bundleIdentifier]',
        'NSString *tagFirstPart = nil',
@@ -126,6 +142,10 @@ module Tuka
       ['NSString *filter = @"index"']
     end
 
+    def protocol_search_strings
+      ['NSString *extension = NSString.defaultProtocolExtension']
+    end
+
     def bundle_id_replacement_strings
       ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
        "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
@@ -143,6 +163,10 @@ module Tuka
 
     def url_path_replacement_strings
       ["NSString *filter = @\"#{@url_path}\""]
+    end
+
+    def protocol_replacement_strings
+      ['NSString *extension = @""']
     end
   end
 end
