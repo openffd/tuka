@@ -11,7 +11,7 @@ module Tuka
       desc 'Removes Tuka related files and settings from an iOS project'
 
       def display
-        puts "\nTBI SOON!"
+        puts "\nTo be implemented soon."
       end
     end
   end
