@@ -82,6 +82,8 @@ module Tuka
     end
 
     def update_protocol_in_files(protocol)
+      return if protocol == 'https'
+
       @protocol = protocol
 
       matched_file_paths = Dir.glob(config_file_glob_pattern)
