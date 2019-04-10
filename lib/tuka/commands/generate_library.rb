@@ -92,6 +92,15 @@ module Tuka
         puts "[✓] Set server user agent: '#{tukafile.server.user_agent}'"
       end
 
+      def update_generated_library_protocol
+        return if tukafile.server.protocol.nil?
+
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        raise StandardError, message unless generated_library.update_protocol_in_files(tukafile.server.protocol)
+
+        puts "[✓] Set server protocol:   '#{tukafile.server.protocol}'"
+      end
+
       def display_command_completion
         puts "\nEnd" unless options[:quiet]
       end

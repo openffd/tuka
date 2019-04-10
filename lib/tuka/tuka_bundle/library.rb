@@ -82,7 +82,7 @@ module Tuka
     end
 
     def update_protocol_in_files(protocol)
-      return if protocol == 'https'
+      return true if protocol == 'https'
 
       @protocol = protocol
 
