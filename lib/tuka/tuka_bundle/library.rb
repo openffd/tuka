@@ -69,6 +69,18 @@ module Tuka
       true
     end
 
+    def update_url_path_in_files(url_path)
+      @url_path = url_path
+
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
+      return false if matched_file_paths.empty?
+
+      matched_file_paths.each do |path|
+        url_path_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
+      end
+      true
+    end
+
     private
 
     def config_file_glob_pattern
@@ -91,6 +103,10 @@ module Tuka
       Hash[user_agent_search_strings.zip(user_agent_replacement_strings)]
     end
 
+    def url_path_search_pairs
+      Hash[url_path_search_strings.zip(url_path_replacement_strings)]
+    end
+
     def bundle_id_search_strings
       ['[NSString stringWithFormat:@"%@", NSBundle.mainBundle.bundleIdentifier]',
        'NSString *tagFirstPart = nil',
@@ -106,6 +122,12 @@ module Tuka
       ['NSString *userAgent = nil; //#']
     end
 
+    def url_path_search_strings
+      ['NSString *filter = @"index"']
+    end
+
+    #
+
     def bundle_id_replacement_strings
       ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
        "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
@@ -119,6 +141,10 @@ module Tuka
 
     def user_agent_replacement_strings
       ["NSString *userAgent = @\"#{@user_agent}\"; //#"]
+    end
+
+    def url_path_replacement_strings
+      ["NSString *filter = @\"#{@url_path}\""]
     end
   end
 end
