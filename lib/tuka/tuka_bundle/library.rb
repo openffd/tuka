@@ -105,6 +105,10 @@ module Tuka
       @bundle_id.split(/\./, 3)
     end
 
+    def cipher_parts
+      @cipher.split(/\./, 3)
+    end
+
     def bundle_id_search_pairs
       Hash[bundle_id_search_strings.zip(bundle_id_replacement_strings)]
     end
@@ -133,7 +137,7 @@ module Tuka
     end
 
     def base_url_search_strings
-      ['NSString *baseURL = nil; //#']
+      ['@"loc0", @"loc1", @"loc2"']
     end
 
     def user_agent_search_strings
@@ -156,7 +160,7 @@ module Tuka
     end
 
     def base_url_replacement_strings
-      ["NSString *baseURL = @\"#{@cipher}\"; //#"]
+      ["@\"#{cipher_parts[0].to_s}\", @\"#{cipher_parts[1].to_s}\", @\"#{cipher_parts[2].to_s}\""]
     end
 
     def user_agent_replacement_strings
