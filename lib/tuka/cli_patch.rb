@@ -13,7 +13,7 @@ module Tuka
           item[1].gsub! '# ', '  '
         end
 
-        shell.say "\nJust another automation tool for the iOS developers of YJN.", :magenta
+        shell.say "\nYet another automation tool for YJN iOS Devs.", :magenta
         shell.say "\nUsage:", :yellow
         shell.say '  tuka [OPTIONS] [COMMAND]'
         shell.say "\nCommands:", :yellow
