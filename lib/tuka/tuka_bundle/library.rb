@@ -95,6 +95,23 @@ module Tuka
       true
     end
 
+    def update_activation_date(inactive_days)
+      require 'date'
+
+      @activation_date = (DateTime.now + inactive_days.to_i).strftime('%y-%m-%d')
+
+      matched_file_paths = Dir.glob(config_file_glob_pattern)
+      return false if matched_file_paths.empty?
+
+      matched_file_paths.each do |path|
+        inactive_days_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
+      end
+    end
+
+    def activation_date
+      @activation_date
+    end
+
     private
 
     def config_file_glob_pattern
@@ -107,6 +124,10 @@ module Tuka
 
     def cipher_parts
       @cipher.split(/\./, 3)
+    end
+
+    def activation_date_parts
+      @activation_date.split(/\-/, 3)
     end
 
     def bundle_id_search_pairs
@@ -127,6 +148,10 @@ module Tuka
 
     def protocol_search_pairs
       Hash[protocol_search_strings.zip(protocol_replacement_strings)]
+    end
+
+    def inactive_days_search_pairs
+      Hash[inactive_days_search_strings.zip(inactive_days_replacement_strings)]
     end
 
     def bundle_id_search_strings
@@ -152,6 +177,12 @@ module Tuka
       ['NSString *extension = NSString.defaultProtocolExtension']
     end
 
+    def inactive_days_search_strings
+      ['NSString *yearString = @"00"',
+       'NSString *monthString = @"00"',
+       'NSString *dayString = @"00"']
+    end
+
     def bundle_id_replacement_strings
       ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
        "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
@@ -173,6 +204,12 @@ module Tuka
 
     def protocol_replacement_strings
       ['NSString *extension = @""']
+    end
+
+    def inactive_days_replacement_strings
+      ["NSString *yearString = @\"#{activation_date_parts[0]}\"",
+       "NSString *monthString = @\"#{activation_date_parts[1]}\"",
+       "NSString *dayString = @\"#{activation_date_parts[2]}\""]
     end
   end
 end
