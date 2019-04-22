@@ -31,7 +31,7 @@ module Tuka
     end
 
     def error
-      return "#{Tukafile.basename} `library' is invalid."                     unless valid_library?
+      return "#{Tukafile.basename} `library.digest' was tampered."            unless valid_library?
       return "#{Tukafile.basename} `server.url_type' is invalid."             unless valid_server_url_type?
       return "#{Tukafile.basename} `server.protocol' is invalid."             unless valid_server_protocol?
       return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
