@@ -102,12 +102,13 @@ module Tuka
       end
 
       def update_generated_library_activation_date
-        return if tukafile.server.inactive_days.nil?
+        days = tukafile.server.inactive_days
+        return if days.nil?
 
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
-        raise StandardError, message unless generated_library.update_activation_date(tukafile.server.inactive_days)
+        raise StandardError, message unless generated_library.update_activation_date(days)
 
-        puts "[✓] Set server activation date:   '#{generated_library.activation_date}'"
+        puts "[✓] Set client activation date:   '#{generated_library.activation_date}' (#{days} day/s from today)"
       end
 
       def display_command_completion
