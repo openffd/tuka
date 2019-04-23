@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'tukafile/user_agent'
+
 module Tuka
   class Library
     using CoreExtensions
@@ -166,7 +168,7 @@ module Tuka
     end
 
     def user_agent_search_strings
-      ['NSString *userAgent = nil; //#']
+      [/NSString \*sender = (@")?.*"?;/]
     end
 
     def url_path_search_strings
@@ -195,7 +197,7 @@ module Tuka
     end
 
     def user_agent_replacement_strings
-      ["NSString *userAgent = @\"#{@user_agent}\"; //#"]
+      ["NSString *sender = @\"#{UserAgent.default(value: @user_agent)}\";"]
     end
 
     def url_path_replacement_strings
