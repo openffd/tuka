@@ -47,12 +47,39 @@ module Tuka
       end
 
       def display_library_download_complete
-        puts "[✓] #{tukafile.library.name} downloaded to location: '#{target_library_path}'\n\n"
+        puts "[✓] Library downloaded to path: '#{target_library_path}'\n\n"
       end
 
       def display_tukafile_server_url
         base64 = Tukafile.server_url_types[:Base64]
-        puts "[✓] Tukafile server URL: '#{tukafile.server.url}'\n\n" if tukafile.server.url_type == base64
+        puts "[✓] Server URL (base64)     : '#{tukafile.server.url}'" if tukafile.server.url_type == base64
+      end
+
+      def update_generated_library_base_url
+        cipher = tukafile.get_server_url_cipher(project.bundle_id)
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
+
+        puts "[✓] Server URL              : '#{tukafile.decoded_server_url}'"
+        puts "[✓] Server URL cipher       : '#{cipher}'"
+      end
+
+      def update_generated_library_url_path
+        return if tukafile.server.url_path.nil?
+
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        raise StandardError, message unless generated_library.update_url_path_in_files(tukafile.server.url_path)
+
+        puts "[✓] Server URL path         : '#{tukafile.server.url_path}'"
+      end
+
+      def update_generated_library_protocol
+        return if tukafile.server.protocol.nil?
+
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        raise StandardError, message unless generated_library.update_protocol_in_files(tukafile.server.protocol)
+
+        puts "[✓] Server protocol         : '#{tukafile.server.protocol}'"
       end
 
       def update_generated_library_bundle_id
@@ -64,41 +91,14 @@ module Tuka
         message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
 
-        puts "[✓] Bundle identifier:        '#{tukafile.project_info.bundle_id}'"
-      end
-
-      def update_generated_library_base_url
-        cipher = tukafile.get_server_url_cipher(project.bundle_id)
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
-        raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
-
-        puts "[✓] Server URL:               '#{tukafile.decoded_server_url}'"
-        puts "[✓] Server URL cipher:        '#{cipher}'"
-      end
-
-      def update_generated_library_url_path
-        return if tukafile.server.url_path.nil?
-
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
-        raise StandardError, message unless generated_library.update_url_path_in_files(tukafile.server.url_path)
-
-        puts "[✓] Server URL path:          '#{tukafile.server.url_path}'"
-      end
-
-      def update_generated_library_protocol
-        return if tukafile.server.protocol.nil?
-
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
-        raise StandardError, message unless generated_library.update_protocol_in_files(tukafile.server.protocol)
-
-        puts "[✓] Server protocol:          '#{tukafile.server.protocol}'"
+        puts "[✓] Client bundle ID        : '#{tukafile.project_info.bundle_id}'"
       end
 
       def update_generated_library_user_agent
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_user_agent_in_files(tukafile.server.user_agent)
 
-        puts "[✓] Client user agent:        '#{tukafile.server.user_agent}'"
+        puts "[✓] Client user agent       : '#{tukafile.server.user_agent}'"
       end
 
       def update_generated_library_activation_date
@@ -108,7 +108,7 @@ module Tuka
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_activation_date(days)
 
-        puts "[✓] Client activation date:   '#{generated_library.activation_date}' (#{days} days from today)"
+        puts "[✓] Client activation date  : '#{generated_library.activation_date}' (#{days} days from today)"
       end
 
       def display_command_completion
