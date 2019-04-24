@@ -110,9 +110,7 @@ module Tuka
       end
     end
 
-    def activation_date
-      @activation_date
-    end
+    attr_reader :activation_date
 
     private
 
@@ -193,7 +191,7 @@ module Tuka
     end
 
     def base_url_replacement_strings
-      ["@\"#{cipher_parts[0].to_s}\", @\"#{cipher_parts[1].to_s}\", @\"#{cipher_parts[2].to_s}\""]
+      ["@\"#{cipher_parts[0]}\", @\"#{cipher_parts[1]}\", @\"#{cipher_parts[2]}\""]
     end
 
     def user_agent_replacement_strings
