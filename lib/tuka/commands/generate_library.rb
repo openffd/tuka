@@ -111,6 +111,10 @@ module Tuka
         puts "[✓] Client activation date  => '#{generated_library.activation_date}' (#{days} days from today)"
       end
 
+      def update_generated_library_request_headers
+
+      end
+
       def display_command_completion
         puts "\nEnd" unless options[:quiet]
       end

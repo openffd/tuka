@@ -19,7 +19,7 @@ module Tuka
     }.freeze
 
     def generate_request_headers(count = 0)
-      ALL_HEADERS.to_a.sample(count).map { |key, val| Hash(val => send(key)) }.inject :merge
+      ALL_HEADERS.to_a.sample(count).map { |key, val| Hash(val => send(key)) }.inject(:merge)
     end
 
     private
@@ -41,7 +41,7 @@ module Tuka
     end
 
     def age
-      (0..24).to_a.sample
+      (4..24).to_a.sample
     end
 
     def cache_control

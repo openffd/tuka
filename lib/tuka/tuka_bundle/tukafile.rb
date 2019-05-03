@@ -16,6 +16,7 @@ module Tuka
     USER_AGENT_RANGE = (1...9).freeze
     DAYS_RANGE = (14...84).freeze # 2 weeks to 3 months range
     PROTOCOLS = %i[http https].freeze
+    HEADERS_COUNT_RANGE = (0...5).freeze
 
     def self.basename
       'Tukafile'
@@ -42,6 +43,7 @@ module Tuka
       return "#{Tukafile.basename} `project_info.type' is invalid."           unless valid_project_info_type?
       return "#{Tukafile.basename} `project_info.bundle_id' is invalid."      unless valid_project_info_bundle_id?
       return "#{Tukafile.basename} `project_info.receptor_name' is invalid."  unless valid_project_info_receptor_name?
+      return "#{Tukafile.basename} `project_info.headers' is invalid."        unless valid_project_info_headers?
     end
 
     def valid?
@@ -130,6 +132,15 @@ module Tuka
       return false if receptor_name.empty?
 
       receptor_name.scan(/(\W|\d)/).empty?
+    end
+
+    def valid_project_info_headers?
+      require 'pry'
+      binding.pry
+
+      return true if project_info.headers.nil?
+
+      HEADERS_COUNT_RANGE.cover? project_info.headers
     end
   end
 end
