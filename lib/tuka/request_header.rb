@@ -18,11 +18,16 @@ module Tuka
       :tk                               => 'TK',
     }.freeze
 
-    def generate_request_headers(count = 0)
-      ALL_HEADERS.to_a.sample(count).map { |key, val| Hash(val => send(key)) }.inject(:merge)
+    def request_headers_for_swift(count = 0)
+      headers = generate_request_headers(count)
+      headers.reduce('') { |str, (k, v)| str + "request.addValue(\"#{v}\", forHTTPHeaderField: \"#{k}\")\n\t\t" }.strip
     end
 
     private
+
+    def generate_request_headers(count = 0)
+      ALL_HEADERS.to_a.sample(count).map { |key, val| Hash(val => send(key)) }.inject(:merge)
+    end
 
     def accept_charset
       ['iso-8859-1', 'utf-8', '*'].sample

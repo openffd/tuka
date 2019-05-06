@@ -135,9 +135,6 @@ module Tuka
     end
 
     def valid_project_info_headers?
-      require 'pry'
-      binding.pry
-
       return true if project_info.headers.nil?
 
       HEADERS_COUNT_RANGE.cover? project_info.headers

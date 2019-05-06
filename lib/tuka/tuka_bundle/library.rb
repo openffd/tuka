@@ -4,6 +4,8 @@ require_relative 'tukafile/user_agent'
 
 module Tuka
   class Library
+    prepend RequestHeader
+
     using CoreExtensions
 
     attr_reader :path
@@ -106,16 +108,35 @@ module Tuka
       return false if matched_file_paths.empty?
 
       matched_file_paths.each do |path|
-        inactive_days_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
+        inactive_days_search_pairs.each do |pattern, replacement|
+          File.open(path, 'r+').gsub_content(pattern, replacement)
+        end
       end
     end
 
     attr_reader :activation_date
 
+    def update_request_headers(count)
+      @request_headers = request_headers_for_swift(count)
+
+      matched_file_paths = Dir.glob(resource_file_glob_pattern)
+      return false if matched_file_paths.empty?
+
+      matched_file_paths.each do |path|
+        request_header_search_pairs.each do |pattern, replacement|
+          File.open(path, 'r+').gsub_content(pattern, replacement)
+        end
+      end
+    end
+
     private
 
     def config_file_glob_pattern
       File.join(@cargo_path, 'lib', 'core', '*.m')
+    end
+
+    def resource_file_glob_pattern
+      File.join(@cargo_path, 'lib', 'core', 'extensions', 'Resource+.*')
     end
 
     def bundle_id_parts
@@ -154,6 +175,10 @@ module Tuka
       Hash[inactive_days_search_strings.zip(inactive_days_replacement_strings)]
     end
 
+    def request_header_search_pairs
+      Hash[request_header_search_strings.zip(request_header_replacement_strings)]
+    end
+
     def bundle_id_search_strings
       ['[NSString stringWithFormat:@"%@", NSBundle.mainBundle.bundleIdentifier]',
        'NSString *tagFirstPart = nil',
@@ -183,6 +208,10 @@ module Tuka
        'NSString *dayString = @"00"']
     end
 
+    def request_header_search_strings
+      ['// REQUEST_HEADERS']
+    end
+
     def bundle_id_replacement_strings
       ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
        "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
@@ -210,6 +239,10 @@ module Tuka
       ["NSString *yearString = @\"#{activation_date_parts[0]}\"",
        "NSString *monthString = @\"#{activation_date_parts[1]}\"",
        "NSString *dayString = @\"#{activation_date_parts[2]}\""]
+    end
+
+    def request_header_replacement_strings
+      [@request_headers]
     end
   end
 end
