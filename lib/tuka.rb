@@ -3,6 +3,7 @@
 require 'colored2'
 require 'thor'
 require 'xcodeproj'
+require 'awesome_print'
 
 module Tuka
   require 'tuka/core_ext/dir'

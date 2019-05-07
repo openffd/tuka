@@ -118,7 +118,8 @@ module Tuka
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_request_headers(header_count)
 
-        puts "[✓] Client request headers  => #{generated_library.request_headers}"
+        puts '[✓] Client request headers  => '
+        ap generated_library.request_headers, :indent => -2
       end
 
       def display_command_completion
