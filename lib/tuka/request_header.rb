@@ -11,19 +11,19 @@ module Tuka
     end
 
     ALL_HEADERS = {
-      accept_charset:                   'Accept-Charset',
+      accept_charset: 'Accept-Charset',
       access_control_allow_credentials: 'Access-Control-Allow-Credentials',
-      accept_encoding:                  'Accept-Encoding',
-      accept_language:                  'Accept-Language',
-      age:                              'Age',
-      cache_control:                    'Cache-Control',
-      clear_site_data:                  'Clear-Site-Data',
-      connection:                       'Connection',
-      dnt:                              'DNT',
-      expect:                           'Expect',
-      retry_after:                      'Retry-After',
-      te:                               'TE',
-      tk:                               'TK'
+      accept_encoding: 'Accept-Encoding',
+      accept_language: 'Accept-Language',
+      age: 'Age',
+      cache_control: 'Cache-Control',
+      clear_site_data: 'Clear-Site-Data',
+      connection: 'Connection',
+      dnt: 'DNT',
+      expect: 'Expect',
+      retry_after: 'Retry-After',
+      te: 'TE',
+      tk: 'TK'
     }.freeze
 
     def generate_request_headers(count = 0)
