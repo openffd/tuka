@@ -5,7 +5,7 @@ module Tuka
     DEFAULT = 'Mozilla/5.0 (iPhone; CPU iPhone OS X_X like Mac OS X) AppleWebKit/605.1.6 (KHTML, like Gecko)'\
     'Mobile/15E148'
 
-    def self.default
+    def self.default_original
       DEFAULT
     end
 
