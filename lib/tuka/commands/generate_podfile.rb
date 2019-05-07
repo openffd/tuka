@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class GeneratePodfile < Command
+      include Bundler
+
       def self.usage
         'generate-podfile'
       end
@@ -62,16 +64,16 @@ module Tuka
         puts "[✓] Generated new Podfile at location: '#{target_generated_podfile_path}'"
       end
 
-      def generate_gemfile
+      def create_new_gemfile
         generate_gemfile
       end
 
       def display_gemfile_generated
-        puts "[✓] Generated a new Gemfile at path: ./'#{Gemfile.basename}'"
+        puts "[✓] Generated a new Gemfile at path: './#{Gemfile.basename}'"
       end
 
       def execute_bundle_install
-        puts "[✓] Running 'bundle install'"
+        puts "[✓] Running 'bundle install'..."
         bundle_install
       end
 
@@ -90,7 +92,7 @@ module Tuka
 
         puts "\n" if options[:yes]
         puts "[✓] Running 'pod install'"
-        podfile.install
+        podfile.install_via_bundler
       end
 
       def display_command_completion

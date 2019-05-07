@@ -30,6 +30,10 @@ module Tuka
       system 'pod', 'install'
     end
 
+    def install_via_bundler
+      system 'bundle', 'exec', 'pod', 'install'
+    end
+
     private
 
     def strings_to_exclude
