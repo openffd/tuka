@@ -43,7 +43,7 @@ module Tuka
       def display_current_pods
         return if podfile.nil?
 
-        @pods = podfile.dependencies(excluded: tukafile.library.name)
+        @pods = podfile.dependencies(excluded: tukafile.library.name).gsub('  pod', '  ')
         puts "[✓] Other dependencies found in the current Podfile:#{@pods}"
       end
 
