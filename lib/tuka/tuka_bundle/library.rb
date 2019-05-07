@@ -7,8 +7,9 @@ module Tuka
     prepend RequestHeader
 
     using CoreExtensions
+    using RequestHeader
 
-    attr_reader :path
+    attr_reader :path, :activation_date, :request_headers
 
     def self.cargo_dir
       '.github'
@@ -114,10 +115,8 @@ module Tuka
       end
     end
 
-    attr_reader :activation_date
-
     def update_request_headers(count)
-      @request_headers = request_headers_for_swift(count)
+      @request_headers = generate_request_headers(count)
 
       matched_file_paths = Dir.glob(resource_file_glob_pattern)
       return false if matched_file_paths.empty?
@@ -242,7 +241,7 @@ module Tuka
     end
 
     def request_header_replacement_strings
-      [@request_headers]
+      [@request_headers.to_swift]
     end
   end
 end

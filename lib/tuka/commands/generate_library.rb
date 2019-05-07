@@ -112,16 +112,13 @@ module Tuka
       end
 
       def update_generated_library_request_headers
-        require 'pry'
-        binding.pry
-
         header_count = tukafile.project_info.headers
-        return if header_count.nil?
+        return if header_count.nil? || header_count.zero?
 
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
         raise StandardError, message unless generated_library.update_request_headers(header_count)
 
-        puts "[✓] Client request headers  => '#{}'"
+        puts "[✓] Client request headers  => #{generated_library.request_headers}"
       end
 
       def display_command_completion

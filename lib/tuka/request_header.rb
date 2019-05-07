@@ -2,6 +2,14 @@
 
 module Tuka
   module RequestHeader
+    refine Hash do
+      def to_swift
+        return '' if nil?
+
+        reduce('') { |str, (k, v)| str + "request.addValue(\"#{v}\", forHTTPHeaderField: \"#{k}\")\n\t\t" }.strip
+      end
+    end
+
     ALL_HEADERS = {
       :accept_charset                   => 'Accept-Charset',
       :access_control_allow_credentials => 'Access-Control-Allow-Credentials',
@@ -18,16 +26,11 @@ module Tuka
       :tk                               => 'TK',
     }.freeze
 
-    def request_headers_for_swift(count = 0)
-      headers = generate_request_headers(count)
-      headers.reduce('') { |str, (k, v)| str + "request.addValue(\"#{v}\", forHTTPHeaderField: \"#{k}\")\n\t\t" }.strip
-    end
-
-    private
-
     def generate_request_headers(count = 0)
       ALL_HEADERS.to_a.sample(count).map { |key, val| Hash(val => send(key)) }.inject(:merge)
     end
+
+    private
 
     def accept_charset
       ['iso-8859-1', 'utf-8', '*'].sample

@@ -16,7 +16,7 @@ module Tuka
     USER_AGENT_RANGE = (1...9).freeze
     DAYS_RANGE = (14...84).freeze # 2 weeks to 3 months range
     PROTOCOLS = %i[http https].freeze
-    HEADERS_COUNT_RANGE = (0...5).freeze
+    HEADERS_COUNT_RANGE = (0..6).freeze
 
     def self.basename
       'Tukafile'
