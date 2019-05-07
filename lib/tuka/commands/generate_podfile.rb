@@ -61,7 +61,7 @@ module Tuka
       end
 
       def display_podfile_generated
-        puts "[✓] Generated new Podfile at location: '#{target_generated_podfile_path}'"
+        puts "[✓] Generated new Podfile at path: '#{target_generated_podfile_path}'"
       end
 
       def create_new_gemfile
