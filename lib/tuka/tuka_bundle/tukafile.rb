@@ -17,6 +17,7 @@ module Tuka
     DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
+    SWIFT_VERSIONS = %w['4.1', '4.2', '5.0'].freeze
 
     def self.basename
       'Tukafile'
@@ -44,6 +45,7 @@ module Tuka
       return "#{Tukafile.basename} `project_info.bundle_id' is invalid."      unless valid_project_info_bundle_id?
       return "#{Tukafile.basename} `project_info.receptor_name' is invalid."  unless valid_project_info_receptor_name?
       return "#{Tukafile.basename} `project_info.headers' is invalid."        unless valid_project_info_headers?
+      return "#{Tukafile.basename} `project_info.swift_version' is invalid."  unless valid_project_info_swift_version?
     end
 
     def valid?
@@ -138,6 +140,12 @@ module Tuka
       return true if project_info.headers.nil?
 
       HEADERS_COUNT_RANGE.cover? project_info.headers
+    end
+
+    def valid_project_info_swift_version
+      return true if project_info.swift_version.nil?
+
+      SWIFT_VERSIONS.include? project_info.swift_version.to_s
     end
   end
 end
