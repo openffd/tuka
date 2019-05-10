@@ -43,8 +43,8 @@ module Tuka
       def display_current_pods
         return if podfile.nil?
 
-        @pods = podfile.dependencies(excluded: tukafile.library.name).gsub('  pod', '  ')
-        puts "[✓] Other dependencies found in the current Podfile:#{@pods}"
+        @pods = podfile.dependencies(excluded: tukafile.library.name)
+        puts "[✓] Other dependencies found in the current Podfile:#{@pods.gsub('  pod', '  ')}"
       end
 
       def remove_previously_generated_podfile
@@ -57,7 +57,8 @@ module Tuka
       def generate_podfile
         require 'tuka/templates/podfile/podfile_generator'
         path = target_generated_podfile_path
-        PodfileGenerator.new(@target, @pods, @library, @library_path, path).generate
+        swift_version = tukafile.project_info.swift_version
+        PodfileGenerator.new(@target, @pods, @library, @library_path, path, swift_version).generate
       end
 
       def display_podfile_generated

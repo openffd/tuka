@@ -17,7 +17,7 @@ module Tuka
     DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
-    SWIFT_VERSIONS = %w['4.1', '4.2', '5.0'].freeze
+    SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
 
     def self.basename
       'Tukafile'
@@ -142,7 +142,7 @@ module Tuka
       HEADERS_COUNT_RANGE.cover? project_info.headers
     end
 
-    def valid_project_info_swift_version
+    def valid_project_info_swift_version?
       return true if project_info.swift_version.nil?
 
       SWIFT_VERSIONS.include? project_info.swift_version.to_s
