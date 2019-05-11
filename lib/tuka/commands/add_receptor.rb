@@ -24,14 +24,17 @@ module Tuka
       end
 
       def check_library_receptor_existence
+        require 'pry'
+        binding.pry
+
         message = "Missing receptor directory/files from the generated #{tukafile.library.name} library. "
         @receptor_source_path = File.join(generated_library.target_receptors_path, tukafile.project_info.type)
         raise StandardError, message + GenerateLibrary.usage_help if Dir.glob("#{@receptor_source_path}/*").count != 2
       end
 
       def check_library_bridges_existence
-        message = "Missing bridge files from the generated #{tukafile.library.name} library"
-        @bridges_source_path = File.join(generated_library.target_bridges_path, tukafile.project_info.type)
+        message = "Missing bridge files from the generated #{tukafile.library.name} library. "
+        @bridges_source_path = File.join(generated_library.target_bridges_path)
         raise StandardError, message + GenerateLibrary.usage_help if Dir.glob("#{@bridges_source_path}/*").empty?
       end
 
