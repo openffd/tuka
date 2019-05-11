@@ -2,6 +2,6 @@
 
 module BridgingHeader
   def self.basename
-    'Bridging-Header.h'
+    'BridgingHeader.h'
   end
 end
