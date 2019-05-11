@@ -4,6 +4,8 @@ module Tuka
   require 'erb'
 
   class PodfileGenerator
+    DEFAULT_SWIFT_VERSION = '4.2'
+
     def self.template
       'podfile_template.erb'
     end
@@ -14,7 +16,7 @@ module Tuka
       @library        = library
       @library_path   = library_path
       @path           = path
-      @swift_version  = swift_version
+      @swift_version  = swift_version || DEFAULT_SWIFT_VERSION
     end
 
     def generate
