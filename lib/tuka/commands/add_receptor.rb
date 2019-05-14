@@ -24,9 +24,6 @@ module Tuka
       end
 
       def check_library_receptor_existence
-        require 'pry'
-        binding.pry
-
         message = "Missing receptor directory/files from the generated #{tukafile.library.name} library. "
         @receptor_source_path = File.join(generated_library.target_receptors_path, tukafile.project_info.type)
         raise StandardError, message + GenerateLibrary.usage_help if Dir.glob("#{@receptor_source_path}/*").count != 2
@@ -96,6 +93,9 @@ module Tuka
       end
 
       def add_receptor_files_to_project
+        require 'pry'
+        binding.pry
+
         FileUtils.cp_r("#{receptor.path}/.", project.new_file_destination_group.path)
         project.register_new_receptor_h_file(receptor.h_file)
         project.register_new_receptor_m_file(receptor.m_file)

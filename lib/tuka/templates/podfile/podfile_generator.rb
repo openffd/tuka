@@ -10,13 +10,16 @@ module Tuka
       'podfile_template.erb'
     end
 
-    def initialize(target, pods, library, library_path, path, swift_version)
+    def initialize(target, pods, library, library_path, path)
       @target         = target
       @pods           = pods
       @library        = library
       @library_path   = library_path
       @path           = path
-      @swift_version  = swift_version || DEFAULT_SWIFT_VERSION
+    end
+
+    def swift_version=(version)
+      @swift_version = version || DEFAULT_SWIFT_VERSION
     end
 
     def generate

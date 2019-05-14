@@ -57,8 +57,9 @@ module Tuka
       def generate_podfile
         require 'tuka/templates/podfile/podfile_generator'
         path = target_generated_podfile_path
-        swift_version = tukafile.project_info.swift_version
-        PodfileGenerator.new(@target, @pods, @library, @library_path, path, swift_version).generate
+        podfile_generator = PodfileGenerator.new(@target, @pods, @library, @library_path, path)
+        podfile_generator.swift_version = tukafile.project_info.swift_version
+        podfile_generator.generate
       end
 
       def display_podfile_generated
