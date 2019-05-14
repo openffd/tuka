@@ -27,7 +27,7 @@ module Tuka
     }.freeze
 
     def generate_request_headers(count = 0)
-      ALL_HEADERS.to_a.sample(count).map { |k, v| Hash(v => send(k)) }.inject(:merge).sort_by { |k, v| k }.to_h
+      ALL_HEADERS.to_a.sample(count).map { |k, v| Hash(v => send(k)) }.inject(:merge).sort_by { |k, _| k }.to_h
     end
 
     private
