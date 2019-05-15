@@ -29,4 +29,5 @@ module Tuka
   require 'tuka/cli'
   require 'tuka/cli_patch'
   require 'tuka/version'
+  require 'tuka/xcodeproj/overrides'
 end

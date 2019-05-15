@@ -93,12 +93,8 @@ module Tuka
       end
 
       def add_receptor_files_to_project
-        require 'pry'
-        binding.pry
-
         FileUtils.cp_r("#{receptor.path}/.", project.new_file_destination_group.path)
-        project.register_new_receptor_h_file(receptor.h_file)
-        project.register_new_receptor_m_file(receptor.m_file)
+        project.add_new_receptor_files(h_file: receptor.h_file, m_file: receptor.m_file)
         puts "[✓] Receptor files added to #{project.name} at path: '#{project.new_file_destination_group.path}/'"
       end
 

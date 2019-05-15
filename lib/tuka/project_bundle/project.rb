@@ -2,6 +2,8 @@
 
 module Tuka
   class Project
+    attr_accessor :project_configurator
+
     def self.pbxproj
       'project.pbxproj'
     end
@@ -80,14 +82,11 @@ module Tuka
       @project_configurator.save
     end
 
-    def register_new_receptor_h_file(h_file)
-      new_file_destination_group.new_file(File.basename(h_file))
-      @project_configurator.save
-    end
+    def add_new_receptor_files(h_file:, m_file:)
+      new_file_destination_group.add_new_file(File.basename(h_file))
+      m_file_ref = new_file_destination_group.add_new_file(File.basename(m_file))
 
-    def register_new_receptor_m_file(m_file)
-      m_file_reference = new_file_destination_group.new_file(File.basename(m_file))
-      @project_configurator.targets.first.add_file_references([m_file_reference])
+      @project_configurator.targets.first.add_file_references([m_file_ref]) unless m_file_ref
       @project_configurator.save
     end
 
@@ -133,7 +132,7 @@ module Tuka
     end
 
     def receptor_search_string
-      'class_getInstanceMethod(self, @selector(_application:didFinishLaunchingWithOptions:))'
+      '(_, class_getInstanceMethod(AppDelegate.class, @selector(::)))'
     end
 
     def type_search_strings
