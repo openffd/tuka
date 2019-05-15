@@ -119,7 +119,7 @@ module Tuka
         raise StandardError, message unless generated_library.update_request_headers(header_count)
 
         puts '[✓] Client request headers  => '
-        ap generated_library.request_headers, :indent => -2
+        ap generated_library.request_headers, indent: -2
       end
 
       def display_command_completion
