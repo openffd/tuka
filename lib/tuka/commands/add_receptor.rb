@@ -136,7 +136,7 @@ module Tuka
 
       def setup_project_app_transport_settings
         info_plist.set_allows_arbitrary_loads
-        puts '[✓] App Transport Settings allow arbitrary loads'
+        puts '[✓] App Transport Settings set to allow arbitrary loads'
       end
 
       def display_command_completion
