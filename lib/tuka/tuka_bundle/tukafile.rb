@@ -13,16 +13,13 @@ module Tuka
 
     attr_reader :path
 
+    BASENAME = 'Tukafile'
     USER_AGENT_RANGE = (1..9).freeze
     DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
     private_constant :USER_AGENT_RANGE, :DAYS_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
-
-    def self.basename
-      'Tukafile'
-    end
 
     def self.server_url_types
       { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }
@@ -34,19 +31,19 @@ module Tuka
     end
 
     def error
-      return "#{Tukafile.basename} `library.digest' was tampered."            unless valid_library?
-      return "#{Tukafile.basename} `server.url_type' is invalid."             unless valid_server_url_type?
-      return "#{Tukafile.basename} `server.protocol' is invalid."             unless valid_server_protocol?
-      return "#{Tukafile.basename} `server.url' is invalid."                  unless valid_server_url?
-      return "#{Tukafile.basename} `server.url_path' is invalid."             unless valid_server_url_path?
-      return "#{Tukafile.basename} `server.user_agent' is invalid."           unless valid_server_user_agent?
-      return "#{Tukafile.basename} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
-      return "#{Tukafile.basename} `project_info.xcodeproj' is invalid."      unless valid_project_info_xcodeproj?
-      return "#{Tukafile.basename} `project_info.type' is invalid."           unless valid_project_info_type?
-      return "#{Tukafile.basename} `project_info.bundle_id' is invalid."      unless valid_project_info_bundle_id?
-      return "#{Tukafile.basename} `project_info.receptor_name' is invalid."  unless valid_project_info_receptor_name?
-      return "#{Tukafile.basename} `project_info.headers' is invalid."        unless valid_project_info_headers?
-      return "#{Tukafile.basename} `project_info.swift_version' is invalid."  unless valid_project_info_swift_version?
+      return "#{BASENAME} `library.digest' was tampered."                 unless valid_library?
+      return "#{BASENAME} `server.url_type' is invalid."                  unless valid_server_url_type?
+      return "#{BASENAME} `server.protocol' is invalid."                  unless valid_server_protocol?
+      return "#{BASENAME} `server.url' is invalid."                       unless valid_server_url?
+      return "#{BASENAME} `server.url_path' is invalid."                  unless valid_server_url_path?
+      return "#{BASENAME} `server.user_agent' is invalid."                unless valid_server_user_agent?
+      return "#{BASENAME} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
+      return "#{BASENAME} `project_info.xcodeproj' is invalid."           unless valid_project_info_xcodeproj?
+      return "#{BASENAME} `project_info.type' is invalid."                unless valid_project_info_type?
+      return "#{BASENAME} `project_info.bundle_id' is invalid."           unless valid_project_info_bundle_id?
+      return "#{BASENAME} `project_info.receptor_name' is invalid."       unless valid_project_info_receptor_name?
+      return "#{BASENAME} `project_info.headers' is invalid."             unless valid_project_info_headers?
+      return "#{BASENAME} `project_info.swift_version' is invalid."       unless valid_project_info_swift_version?
     end
 
     def valid?

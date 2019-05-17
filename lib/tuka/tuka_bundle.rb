@@ -61,7 +61,7 @@ module Tuka
     private
 
     def target_tukafile_path
-      @target_tukafile_path ||= File.join(TukaBundle.dir, Tukafile.basename) if tuka_bundle_dir
+      @target_tukafile_path ||= File.join(TukaBundle.dir, Tukafile::BASENAME) if tuka_bundle_dir
     end
   end
 end

@@ -31,7 +31,7 @@ module Tuka
       end
 
       def display_tukafile_is_valid
-        puts "[✓] #{Tukafile.basename} validation: No errors found"
+        puts "[✓] #{Tukafile::BASENAME} validation: No errors found"
       end
 
       def remove_existing_library
