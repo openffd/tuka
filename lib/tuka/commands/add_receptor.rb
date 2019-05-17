@@ -125,7 +125,7 @@ module Tuka
       def add_swift_project_bridging_header
         return unless project.type == Project.types[:Swift] && project.bridging_header.nil?
 
-        bridging_header = File.join(@bridges_source_path, BridgingHeader.basename)
+        bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
         FileUtils.cp(bridging_header, project.new_file_destination_group.path)
         project.register_bridging_header(bridging_header)
         puts '[✓] Added a bridging header'
