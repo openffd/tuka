@@ -6,6 +6,8 @@ require 'xcodeproj'
 require 'awesome_print'
 
 module Tuka
+  require 'tuka/xcodeproj/overrides'
+  require 'tuka/xcodeproj/build_settings'
   require 'tuka/core_ext/dir'
   require 'tuka/core_ext/file'
   require 'tuka/core_ext/open_struct'
@@ -29,5 +31,4 @@ module Tuka
   require 'tuka/cli'
   require 'tuka/cli_patch'
   require 'tuka/version'
-  require 'tuka/xcodeproj/overrides'
 end

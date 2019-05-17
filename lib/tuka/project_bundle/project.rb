@@ -2,6 +2,8 @@
 
 module Tuka
   class Project
+    include Xcodeproj::BuildSettings
+
     attr_accessor :project_configurator
 
     def self.pbxproj
@@ -38,7 +40,7 @@ module Tuka
     end
 
     def bundle_id
-      grep_project_build_settings('PRODUCT_BUNDLE_IDENTIFIER')
+      grep_project_build_settings(PRODUCT_BUNDLE_IDENTIFIER)
     end
 
     def type_pretty
@@ -57,7 +59,7 @@ module Tuka
 
     def always_embed_swift_standard_libraries
       @project_configurator.targets.first.build_configurations.each do |configuration|
-        configuration.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'YES'
+        configuration.build_settings[ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES] = 'YES'
       end
       @project_configurator.save
     end
@@ -91,19 +93,19 @@ module Tuka
     end
 
     def bridging_header
-      @project_configurator.targets.first.build_configurations.first.build_settings['SWIFT_OBJC_BRIDGING_HEADER']
+      @project_configurator.targets.first.build_configurations.first.build_settings[SWIFT_OBJC_BRIDGING_HEADER]
     end
 
     def register_bridging_header(bridging_header)
       reference = new_file_destination_group.new_file(File.basename(bridging_header))
       @project_configurator.targets.first.build_configurations.each do |config|
-        config.build_settings['SWIFT_OBJC_BRIDGING_HEADER'] = reference.full_path.to_s
+        config.build_settings[SWIFT_OBJC_BRIDGING_HEADER] = reference.full_path.to_s
       end
       @project_configurator.save
     end
 
     def info_plist_path
-      grep_project_build_settings('INFOPLIST_FILE')
+      grep_project_build_settings(INFOPLIST_FILE)
     end
 
     def push_notifications_enabled?
