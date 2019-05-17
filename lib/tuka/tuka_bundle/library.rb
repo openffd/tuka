@@ -5,19 +5,16 @@ require_relative 'tukafile/user_agent'
 module Tuka
   class Library
     prepend RequestHeader
-
     using CoreExtensions
     using RequestHeader
 
     attr_reader :path, :activation_date, :request_headers
 
-    def self.cargo_dir
-      '.github'
-    end
+    CARGO_DIR = '.github'
 
     def initialize(path)
       @path = path
-      @cargo_path = File.join(@path, Library.cargo_dir)
+      @cargo_path = File.join(@path, Library::CARGO_DIR)
     end
 
     def target_bridges_path
