@@ -6,9 +6,8 @@ module Tuka
 
     attr_accessor :project_configurator
 
-    def self.pbxproj
-      'project.pbxproj'
-    end
+    PBXPROJ_BASENAME = 'project.pbxproj'
+    private_constant :PBXPROJ_BASENAME
 
     def self.types
       { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }
@@ -130,7 +129,7 @@ module Tuka
     private
 
     def pbxproj_path
-      File.join(@xcodeproj, Project.pbxproj)
+      File.join(@xcodeproj, PBXPROJ_BASENAME)
     end
 
     def receptor_search_string
