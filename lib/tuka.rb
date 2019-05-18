@@ -20,6 +20,7 @@ module Tuka
   require 'tuka/project_bundle/project'
   require 'tuka/project_bundle/gemfile'
   require 'tuka/tuka_bundle/bridging_header'
+  require 'tuka/tuka_bundle/library/searchables'
   require 'tuka/tuka_bundle/library'
   require 'tuka/tuka_bundle/receptor'
   require 'tuka/tuka_bundle/tukafile'
