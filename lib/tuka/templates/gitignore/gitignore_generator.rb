@@ -13,7 +13,7 @@ module Tuka
     end
 
     def generate
-      File.open(Git.gitignore_basename, 'w+') do |file|
+      File.open(GITIGNORE_BASENAME, 'w+') do |file|
         text = ERB.new(template).result(binding)
         file.write(text)
       end

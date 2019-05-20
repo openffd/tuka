@@ -43,7 +43,8 @@ module Tuka
       def download_library
         url = tukafile.library.url
         puts "\nDownloading #{tukafile.library.name} from #{url}"
-        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, target_library_path)
+        message = 'Failed to download from given repository URL'
+        raise StandardError, message unless git_clone(url, target_library_path, Library::CARGO_DIR)
       end
 
       def display_library_download_complete
