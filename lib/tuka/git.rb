@@ -10,9 +10,6 @@ module Tuka
         "#{dir}/tmp/#{cargo_dir}"
       }.call
 
-      require 'pry'
-      binding.pry
-
       system "rm -rf #{dir}/tmp"
       system "git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{extra_mv_cmd} #{dir} && rm -rf #{dir}/tmp"
     end
