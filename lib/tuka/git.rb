@@ -5,9 +5,16 @@ module Tuka
     GITIGNORE_BASENAME = '.gitignore'
 
     def git_clone(url, dir = Dir.pwd, cargo_dir = nil)
+      extra_mv_cmd = lambda {
+        return nil if cargo_dir.nil?
+        "#{dir}/tmp/#{cargo_dir}"
+      }.call
+
       require 'pry'
       binding.pry
-      system "git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{dir}/tmp/#{cargo_dir} #{dir} && rm -rf #{dir}/tmp"
+
+      system "rm -rf #{dir}/tmp"
+      system "git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{extra_mv_cmd} #{dir} && rm -rf #{dir}/tmp"
     end
 
     def gitignore(pattern)
