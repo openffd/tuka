@@ -15,7 +15,7 @@ module Tuka
       desc 'Generates and builds an iOS library from a Tukafile'
 
       def check_tukafile_existence
-        raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init.usage}'" if tukafile.nil?
+        raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
 
       def check_tukafile_validity
