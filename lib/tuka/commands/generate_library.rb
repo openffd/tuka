@@ -3,12 +3,10 @@
 module Tuka
   module Commands
     class GenerateLibrary < Command
-      def self.usage
-        'generate-library'
-      end
+      USAGE = 'generate-library'
 
-      def self.usage_help
-        "Run 'tuka #{GenerateLibrary.usage}'"
+      def self::USAGE_help
+        "Run 'tuka #{GenerateLibrary::USAGE}'"
       end
 
       namespace :generate_library
@@ -58,7 +56,7 @@ module Tuka
 
       def update_generated_library_base_url
         cipher = tukafile.get_server_url_cipher(project.bundle_id)
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
 
         puts "[✓] Server URL              => '#{tukafile.decoded_server_url}'"
@@ -68,7 +66,7 @@ module Tuka
       def update_generated_library_url_path
         return if tukafile.server.url_path.nil?
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_url_path_in_files(tukafile.server.url_path)
 
         puts "[✓] Server URL path         => '#{tukafile.server.url_path}'"
@@ -77,7 +75,7 @@ module Tuka
       def update_generated_library_protocol
         return if tukafile.server.protocol.nil?
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_protocol_in_files(tukafile.server.protocol)
 
         puts "[✓] Server protocol         => '#{tukafile.server.protocol}'"
@@ -89,14 +87,14 @@ module Tuka
           return
         end
 
-        message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
 
         puts "[✓] Client bundle ID        => '#{tukafile.project_info.bundle_id}'"
       end
 
       def update_generated_library_user_agent
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_user_agent_in_files(tukafile.server.user_agent)
 
         puts "[✓] Client user agent       => '#{tukafile.server.user_agent}'"
@@ -106,7 +104,7 @@ module Tuka
         days = tukafile.server.inactive_days
         return if days.nil?
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_activation_date(days)
 
         puts "[✓] Client activation date  => '#{generated_library.activation_date}' (#{days} days from today)"
@@ -116,7 +114,7 @@ module Tuka
         header_count = tukafile.project_info.headers
         return if header_count.nil? || header_count.zero?
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary.usage}'"
+        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_request_headers(header_count)
 
         puts '[✓] Client request headers  => '
