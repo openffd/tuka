@@ -8,7 +8,7 @@ module Tuka
 
     register Commands::Init,        'init',             Commands::Init::USAGE,         Commands::Init.desc
     register Commands::Automatic,   'automatic',        Commands::Automatic.usage,    Commands::Automatic.desc
-    register generate_library,      'generate_library', generate_library.usage,       generate_library.desc
+    register generate_library,      'generate_library', generate_library::USAGE,        generate_library.desc
     register generate_library,      'update_library',   'update-library',             update_library_desc
     register generate_podfile,      'generate_podfile', generate_podfile.usage,       generate_podfile.desc
     register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor::USAGE,   Commands::AddReceptor.desc
