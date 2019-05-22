@@ -3,9 +3,7 @@
 module Tuka
   module Commands
     class Automatic < Command
-      def self.usage
-        'automatic'
-      end
+      USAGE = 'automatic'
 
       namespace :automatic
       desc 'Automagically completes installation to an iOS project'
