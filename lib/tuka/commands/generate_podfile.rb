@@ -5,9 +5,7 @@ module Tuka
     class GeneratePodfile < Command
       include Bundler
 
-      def self.usage
-        'generate-podfile'
-      end
+      USAGE = 'generate-podfile'
 
       namespace :generate_podfile
       desc 'Generates a Podfile with the specified dependencies/hooks'
