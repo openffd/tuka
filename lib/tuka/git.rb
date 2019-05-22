@@ -10,8 +10,8 @@ module Tuka
         "#{dir}/tmp/#{cargo_dir}"
       }.call
 
-      system "rm -rf #{dir}/tmp"
-      system "git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{extra_mv_cmd} #{dir} && rm -rf #{dir}/tmp"
+      rm_tmp_cmd = "rm -rf #{dir}/tmp"
+      system "#{rm_tmp_cmd}; git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{extra_mv_cmd} #{dir} && #{rm_tmp_cmd}"
     end
 
     def gitignore(pattern)
