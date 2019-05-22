@@ -26,7 +26,7 @@ module Tuka
       end
 
       def download_tukafile
-        puts "\nDownloading Tukafile from #{url}"
+        puts "\nSourcing Tukafile from #{url}"
         raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
       end
 
