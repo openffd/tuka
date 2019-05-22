@@ -3,9 +3,7 @@
 module Tuka
   module Commands
     class Uninstall < Command
-      def self.usage
-        'uninstall'
-      end
+      USAGE = 'uninstall'
 
       namespace :uninstall
       desc 'Removes Tuka related files and settings from an iOS project'

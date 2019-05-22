@@ -12,7 +12,7 @@ module Tuka
     register generate_library,      'update_library',   'update-library',               update_library_desc
     register generate_podfile,      'generate_podfile', generate_podfile::USAGE,        generate_podfile.desc
     register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor::USAGE,   Commands::AddReceptor.desc
-    register Commands::Uninstall,   'uninstall',        Commands::Uninstall.usage,    Commands::Uninstall.desc
+    register Commands::Uninstall,   'uninstall',        Commands::Uninstall::USAGE,     Commands::Uninstall.desc
 
     desc 'powerup!', "Let's power up!"
     def powerup!
