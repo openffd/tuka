@@ -11,7 +11,7 @@ module Tuka
     register generate_library,      'generate_library', generate_library.usage,       generate_library.desc
     register generate_library,      'update_library',   'update-library',             update_library_desc
     register generate_podfile,      'generate_podfile', generate_podfile.usage,       generate_podfile.desc
-    register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor.usage,  Commands::AddReceptor.desc
+    register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor::USAGE,   Commands::AddReceptor.desc
     register Commands::Uninstall,   'uninstall',        Commands::Uninstall.usage,    Commands::Uninstall.desc
 
     desc 'powerup!', "Let's power up!"

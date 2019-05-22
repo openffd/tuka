@@ -3,9 +3,7 @@
 module Tuka
   module Commands
     class AddReceptor < Command
-      def self.usage
-        'add-receptor'
-      end
+      USAGE = 'add-receptor'
 
       namespace :add_receptor
       desc 'Adds generated receptor files to an iOS project'
