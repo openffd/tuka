@@ -14,7 +14,7 @@ module Tuka
       argument :url
       class_option :curl,   :aliases => ['-c'], :desc => 'Use cURL to instantiate the Tukafile'
       class_option :git,    :aliases => ['-g'], :desc => 'Download the Tukafile from a remote Git repository'
-      class_option :local,  :aliases => ['-l'], :desc => 'Copy a Tukafile from the local file system'
+      # class_option :local,  :aliases => ['-l'], :desc => 'Copy a Tukafile from the local file system'
 
       def check_class_options
         specific_options = [options[:curl], options[:git], options[:local]]
