@@ -7,6 +7,7 @@ module Tuka
     def git_clone(url, dir = Dir.pwd, cargo_dir = nil)
       extra_mv_cmd = lambda {
         return nil if cargo_dir.nil?
+
         "#{dir}/tmp/#{cargo_dir}"
       }.call
 
