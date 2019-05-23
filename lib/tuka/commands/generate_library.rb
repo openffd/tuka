@@ -5,7 +5,7 @@ module Tuka
     class GenerateLibrary < Command
       USAGE = 'generate-library'
 
-      def self::USAGE_help
+      def self.usage_help
         "Run 'tuka #{GenerateLibrary::USAGE}'"
       end
 
