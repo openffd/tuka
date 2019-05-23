@@ -15,8 +15,8 @@ module Tuka
       # class_option :local,  :aliases => ['-l'], :desc => 'Copy a Tukafile from the local file system'
 
       def check_class_options
-        specific_options = [options[:curl], options[:git], options[:local]]
-        raise StandardError, 'Invalid combination of options for this command' if specific_options.compact.count > 1
+        @specific_options = [options[:curl], options[:git], options[:local]].compact
+        raise StandardError, 'Invalid combination of options for this command' if specific_options.count > 1
       end
 
       def display_tuka_setup
@@ -25,7 +25,13 @@ module Tuka
 
       def download_tukafile
         puts "\nSourcing Tukafile from #{url}"
-        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+        if @specific_options.empty? || @specific_options[:curl]
+          raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+        elsif @specific_options[:git]
+          # TODO: Implement sourcing Tukafile using cURL
+        elsif @specific_options[:local]
+          # TODO: Implement sourcing Tukafile from local file system
+        end
       end
 
       def check_downloaded_tukafile
