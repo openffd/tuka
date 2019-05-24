@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+require 'awesome_print'
 require 'colored2'
+require 'curb'
 require 'thor'
 require 'xcodeproj'
-require 'awesome_print'
 
 module Tuka
   require 'tuka/xcodeproj/overrides'
