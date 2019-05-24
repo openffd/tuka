@@ -10,9 +10,10 @@ module Tuka
       namespace :init
       desc 'Downloads a pre-configured Tukafile from the given URL'
       argument :url
-      class_option :curl,   aliases: ['-c'], desc: 'Use cURL to instantiate the Tukafile'
-      class_option :git,    aliases: ['-g'], desc: 'Download the Tukafile from a remote Git repository'
-      # class_option :local,  aliases: ['-l'], desc: 'Copy a Tukafile from the local file system'
+      class_option :curl,       aliases: ['-c'], desc: 'Use cURL to instantiate the Tukafile'
+      class_option :git,        aliases: ['-g'], desc: 'Download the Tukafile from a remote Git repository'
+      class_option :nextcloud,  aliases: ['-n'], desc: 'Source Tukafile from a Nextcloud file server'
+      # class_option :local,      aliases: ['-l'], desc: 'Copy a Tukafile from the local file system'
 
       def check_class_options
         @specific_options = [options[:curl], options[:git], options[:local]].compact
@@ -26,9 +27,9 @@ module Tuka
       def download_tukafile
         puts "\nSourcing Tukafile from #{url}"
         if @specific_options.empty? || @specific_options[:curl]
-          raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+          # curl = Curl::Easy.new(url)
         elsif @specific_options[:git]
-          # TODO: Implement sourcing Tukafile using cURL
+          raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
         elsif @specific_options[:local]
           # TODO: Implement sourcing Tukafile from local file system
         end
