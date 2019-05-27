@@ -4,13 +4,15 @@ module Tuka
   class CLI < Thor
     generate_library = Commands::GenerateLibrary
     generate_podfile = Commands::GeneratePodfile
-    update_library_desc = 'Updates a previously generated library from a Tukafile'
+    update_library_desc = 'Updates a previously generated library according to new Tukafile configuration'
+    update_podfile_desc = 'Updates a previously generated podfile according to new Tukafile configuration'
 
     register Commands::Init,        'init',             Commands::Init::USAGE,          Commands::Init.desc
     register Commands::Automatic,   'automatic',        Commands::Automatic::USAGE,     Commands::Automatic.desc
     register generate_library,      'generate_library', generate_library::USAGE,        generate_library.desc
     register generate_library,      'update_library',   'update-library',               update_library_desc
     register generate_podfile,      'generate_podfile', generate_podfile::USAGE,        generate_podfile.desc
+    register generate_podfile,      'update_podfile',   'update-podfile',               update_podfile_desc
     register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor::USAGE,   Commands::AddReceptor.desc
     register Commands::Uninstall,   'uninstall',        Commands::Uninstall::USAGE,     Commands::Uninstall.desc
 
