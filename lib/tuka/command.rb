@@ -7,6 +7,7 @@ module Tuka
     include Bundler
     include ProjectBundle
     include TukaBundle
+    include Curl::Shortcuts
 
     class_option :help,     aliases: '-h', type: :boolean, desc: 'Display usage information'
     class_option :quiet,    aliases: '-q', type: :boolean, desc: 'Enable quiet output mode'

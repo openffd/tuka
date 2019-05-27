@@ -26,17 +26,11 @@ module Tuka
       def download_tukafile
         puts "\nSourcing Tukafile from #{url}"
         if specific_options.empty? || options[:curl]
-          # curl = Curl::Easy.new(url)
+          curl(url)
         elsif options[:git]
           raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
         elsif options[:nextcloud]
-          curl = Curl::Easy.new(url)
-          curl.http_auth_types = :basic
-          curl.username = 'username'
-          curl.password = 'password123!'
-          curl.on_complete  { |curl| puts 'Complete' }
-          curl.on_success   { |curl| puts 'Success' }
-          curl.perform
+          curl_with_auth(url)
         elsif options[:local]
           # TODO: Implement sourcing Tukafile from local file system
         end
