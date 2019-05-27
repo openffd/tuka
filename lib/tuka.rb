@@ -16,6 +16,7 @@ module Tuka
   require 'tuka/git'
   require 'tuka/bundler'
   require 'tuka/request_header'
+  require 'tuka/curl'
   require 'tuka/project_bundle/info_plist'
   require 'tuka/project_bundle/podfile'
   require 'tuka/project_bundle/project'
