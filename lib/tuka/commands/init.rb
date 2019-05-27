@@ -26,7 +26,7 @@ module Tuka
 
       def download_tukafile
         print_newline
-        puts 'Sourcing Tukafile from: ' + url
+        puts 'Sourcing Tukafile from URL: ' + url.yellow
         if specific_options.empty? || options[:curl]
           curl(url)
         elsif options[:git]
@@ -56,6 +56,7 @@ module Tuka
 
       def dump_new_tukafile
         tukafile.dump
+
         print_newline
         puts '[✓] Pre-configured Tukafile values to reflect project path and type'
       end
