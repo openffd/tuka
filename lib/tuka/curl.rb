@@ -3,6 +3,8 @@
 module Curl
   def self.basic_curl
     curl = Curl::Easy.new
+    curl.connect_timeout = 4
+    curl.timeout = 4
     curl.on_complete  { |_| puts 'Complete' }
     curl.on_success   { |_| puts 'Success' }
     curl.on_failure   { |_, code| puts 'Curl Error: ' + code }
