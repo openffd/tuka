@@ -20,11 +20,13 @@ module Tuka
       end
 
       def display_tuka_setup
-        puts "\nInitializing Tuka for #{project.name} (#{project.type_pretty})".blue
+        print_newline
+        puts "Initializing Tuka for #{project.name} (#{project.type_pretty})".blue
       end
 
       def download_tukafile
-        puts "\nSourcing Tukafile from #{url}"
+        print_newline
+        puts "Sourcing Tukafile from #{url}"
         if specific_options.empty? || options[:curl]
           curl(url)
         elsif options[:git]
@@ -54,7 +56,8 @@ module Tuka
 
       def dump_new_tukafile
         tukafile.dump
-        puts "\n[✓] Modified Tukafile values to reflect project path and type"
+        print_newline
+        puts '[✓] Modified Tukafile values to reflect project path and type'
       end
 
       def add_tuka_bundle_to_gitignore
@@ -67,7 +70,8 @@ module Tuka
       end
 
       def display_command_completion
-        puts "\nEnd"
+        print_newline
+        puts 'End'
       end
 
       private
