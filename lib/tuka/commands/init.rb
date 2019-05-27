@@ -26,7 +26,7 @@ module Tuka
 
       def download_tukafile
         print_newline
-        puts "Sourcing Tukafile from #{url}"
+        puts 'Sourcing Tukafile from: ' + url
         if specific_options.empty? || options[:curl]
           curl(url)
         elsif options[:git]
@@ -39,7 +39,7 @@ module Tuka
       end
 
       def check_downloaded_tukafile
-        raise StandardError, 'Unable to locate the Tukafile from the downloaded repository' if tukafile.nil?
+        raise StandardError, 'Unable to locate a Tukafile from the downloaded resource' if tukafile.nil?
 
         puts "[✓] Tukafile downloaded to location: '#{tukafile.path}'"
       end
@@ -57,7 +57,7 @@ module Tuka
       def dump_new_tukafile
         tukafile.dump
         print_newline
-        puts '[✓] Modified Tukafile values to reflect project path and type'
+        puts '[✓] Pre-configured Tukafile values to reflect project path and type'
       end
 
       def add_tuka_bundle_to_gitignore
