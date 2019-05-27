@@ -34,11 +34,13 @@ module Tuka
       end
 
       def display_generate_podfile
-        puts "\nAdding Receptor files to #{project.name} (#{project.type_pretty})".blue
+        print_newline
+        puts "Adding Receptor files to #{project.name} (#{project.type_pretty})".blue
       end
 
       def display_project_state_checking
-        puts "\nChecking current project status..."
+        print_newline
+        puts 'Checking current project status...'
       end
 
       def display_tukafile_is_valid
@@ -65,7 +67,8 @@ module Tuka
       end
 
       def display_receptor_files_preparation
-        puts "\nCreating and preparing the Receptor files..."
+        print_newline
+        puts 'Creating and preparing the Receptor files...'
       end
 
       def display_receptor_files_generated
@@ -97,7 +100,8 @@ module Tuka
       end
 
       def display_other_project_status_checking
-        puts "\nPerforming other necessary checks..."
+        print_newline
+        puts 'Performing other necessary checks...'
       end
 
       def display_push_notifications_enabled
@@ -138,7 +142,8 @@ module Tuka
       end
 
       def display_command_completion
-        puts "\nEnd" unless options[:quiet]
+        print_newline
+        puts 'End' unless options[:quiet]
       end
     end
   end

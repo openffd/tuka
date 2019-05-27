@@ -27,7 +27,8 @@ module Tuka
       end
 
       def display_command_completion
-        puts "\nEnd"
+        print_newline
+        puts 'End'
       end
     end
   end

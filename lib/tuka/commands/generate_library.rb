@@ -21,11 +21,13 @@ module Tuka
       end
 
       def display_library_download
-        puts "\nGenerating '#{tukafile.library.name}' library for #{project.name} (#{project.type_pretty})".blue
+        print_newline
+        puts "Generating '#{tukafile.library.name}' library for #{project.name} (#{project.type_pretty})".blue
       end
 
       def display_bundle_id
-        puts "\n[✓] Detected #{project.name} bundle identifier: '#{project.bundle_id}'"
+        print_newline
+        puts "[✓] Detected #{project.name} bundle identifier: '#{project.bundle_id}'"
       end
 
       def display_tukafile_is_valid
@@ -40,13 +42,15 @@ module Tuka
 
       def download_library
         url = tukafile.library.url
-        puts "\nDownloading #{tukafile.library.name} from #{url}"
+        print_newline
+        puts "Downloading #{tukafile.library.name} from #{url}"
         message = 'Failed to download from given repository URL'
         raise StandardError, message unless git_clone(url, target_library_path, Library::CARGO_DIR)
       end
 
       def display_library_download_complete
-        puts "[✓] Library downloaded to path: '#{target_library_path}'\n\n"
+        puts "[✓] Library downloaded to path: '#{target_library_path}'"
+        2.times do print_newline end
       end
 
       def display_tukafile_server_url
@@ -122,7 +126,8 @@ module Tuka
       end
 
       def display_command_completion
-        puts "\nEnd" unless options[:quiet]
+        print_newline
+        puts 'End' unless options[:quiet]
       end
     end
   end

@@ -9,7 +9,8 @@ module Tuka
       desc 'Removes Tuka related files and settings from an iOS project'
 
       def display
-        puts "\nTo be implemented soon."
+        print_newline
+        puts 'To be implemented soon.'
       end
     end
   end
