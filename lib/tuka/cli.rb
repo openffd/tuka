@@ -17,10 +17,10 @@ module Tuka
     register Commands::Init,        'init',             Commands::Init::USAGE,          Commands::Init.desc
     register Commands::Automatic,   'automatic',        Commands::Automatic::USAGE,     Commands::Automatic.desc
     register generate_library,      'generate_library', generate_library::USAGE,        generate_library.desc
-    register generate_library,      'update_library',   update_library_usage,           update_library_desc
     register generate_podfile,      'generate_podfile', generate_podfile::USAGE,        generate_podfile.desc
-    register generate_podfile,      'update_podfile',   update_podfile_usage,           update_podfile_desc
     register Commands::AddReceptor, 'add_receptor',     Commands::AddReceptor::USAGE,   Commands::AddReceptor.desc
+    register generate_library,      'update_library',   update_library_usage,           update_library_desc
+    register generate_podfile,      'update_podfile',   update_podfile_usage,           update_podfile_desc
     register Commands::AddReceptor, 'update_receptor',  update_receptor_usage,          update_receptor_desc
     register Commands::Uninstall,   'uninstall',        Commands::Uninstall::USAGE,     Commands::Uninstall.desc
 
