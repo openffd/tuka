@@ -13,13 +13,13 @@ module Curl
 
   module Shortcuts
     def curl(url)
-      curl = Curl.basic_curl
+      curl = Curl.basic_curl.dup
       curl.url = url
       curl.perform
     end
 
     def curl_with_auth(url)
-      curl = Curl.basic_curl
+      curl = Curl.basic_curl.dup
       curl.url              = url
       curl.http_auth_types  = :basic
       curl.username         = 'username'
