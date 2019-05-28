@@ -19,7 +19,7 @@ module Tuka
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
-    private_constant :USER_AGENT_RANGE, :DAYS_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
+    private_constant :USER_AGENT_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
 
     def self.server_url_types
       { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }
