@@ -35,26 +35,10 @@ module Tuka
     end
 
     def error
-      private_methods.grep(/valid_*/).sort.each do |validation|
-        return  if send(validation)
-      end
+      error_messages = Messages::Tukafile.constants.sort
+      private_methods.grep(/valid_*/).sort.each_with_index { |m, i| return error_messages[i] unless send(m) }
 
-      require 'pry'
-      binding.pry
-
-      return "#{BASENAME} `library.digest' was tampered."                 unless valid_library?
-      return "#{BASENAME} `server.url_type' is invalid."                  unless valid_server_url_type?
-      return "#{BASENAME} `server.protocol' is invalid."                  unless valid_server_protocol?
-      return "#{BASENAME} `server.url' is invalid."                       unless valid_server_url?
-      return "#{BASENAME} `server.url_path' is invalid."                  unless valid_server_url_path?
-      return "#{BASENAME} `server.user_agent' is invalid."                unless valid_server_user_agent?
-      return "#{BASENAME} `server.inactive_days' range: (#{DAYS_RANGE})." unless valid_server_inactive_days?
-      return "#{BASENAME} `project_info.xcodeproj' is invalid."           unless valid_project_info_xcodeproj?
-      return "#{BASENAME} `project_info.type' is invalid."                unless valid_project_info_type?
-      return "#{BASENAME} `project_info.bundle_id' is invalid."           unless valid_project_info_bundle_id?
-      return "#{BASENAME} `project_info.receptor_name' is invalid."       unless valid_project_info_receptor_name?
-      return "#{BASENAME} `project_info.headers' is invalid."             unless valid_project_info_headers?
-      return "#{BASENAME} `project_info.swift_version' is invalid."       unless valid_project_info_swift_version?
+      nil
     end
 
     def valid?
