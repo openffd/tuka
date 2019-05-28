@@ -9,10 +9,10 @@ module Curl
     curl = Curl::Easy.new
     curl.connect_timeout = 4
     curl.timeout = 4
-    curl.should_display_msg = false
-    curl.on_complete  {|curl| puts '[✓] Curl completed with status: ' + curl.status.yellow if should_display_msg }
-    curl.on_success   {|curl| puts '[✓] Curl was successful' if should_display_msg }
-    curl.on_failure   {|_, code| puts 'Curl Error: ' + code if should_display_msg }
+    curl.should_show_msg = false
+    curl.on_complete  { |easy| puts '[✓] Curl completed with status: ' + easy.status.yellow if easy.should_show_msg }
+    curl.on_success   { |easy| puts '[✓] Curl was successful' if easy.should_show_msg }
+    curl.on_failure   { |easy, code| puts 'Curl Error: ' + code if easy.should_show_msg }
     curl
   end
 
