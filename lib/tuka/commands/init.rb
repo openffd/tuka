@@ -34,6 +34,7 @@ module Tuka
 
         curl = curl_instance(url: url)
         curl.perform
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless curl.response_code.to_s =~ /20+/
       end
 
       def source_tukafile_from_git
@@ -47,6 +48,7 @@ module Tuka
 
         curl = curl_instance_with_auth(url: url)
         curl.perform
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless curl.response_code.to_s =~ /20+/
       end
 
       def source_tukafile_from_local
