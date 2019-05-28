@@ -17,20 +17,31 @@ module Curl
   end
 
   module Shortcuts
-    def curl_instance(url:)
+    require 'ostruct'
+
+    def perform_curl(url:)
       curl = Curl.basic_curl.dup
       curl.url = url
       curl.perform
-      curl.response_code
+
+      response = OpenStruct.new
+      response.code = curl.response_code
+      response.body = curl.body_str
+      response
     end
 
-    def curl_instance_with_auth(url:)
+    def perform_curl_with_auth(url:)
       curl = Curl.basic_curl.dup
       curl.url              = url
       curl.http_auth_types  = :basic
       curl.username         = 'username'
       curl.password         = 'password123!'
-      curl.response_code
+      curl.perform
+
+      response = OpenStruct.new
+      response.code = curl.response_code
+      response.body = curl.body_str
+      response
     end
   end
 end

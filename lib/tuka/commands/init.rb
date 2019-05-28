@@ -32,9 +32,8 @@ module Tuka
       def source_tukafile_from_curl
         return unless specific_options.empty? || options[:curl]
 
-        curl = curl_instance(url: url)
-        curl.perform
-        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless curl.response_code.to_s =~ /20+/
+        response = perform_curl(url: url)
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
       end
 
       def source_tukafile_from_git
@@ -46,9 +45,8 @@ module Tuka
       def source_tukafile_from_nextcloud
         return unless options[:nextcloud]
 
-        curl = curl_instance_with_auth(url: url)
-        curl.perform
-        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless curl.response_code.to_s =~ /20+/
+        response = perform_curl_with_auth(url: url)
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
       end
 
       def source_tukafile_from_local
