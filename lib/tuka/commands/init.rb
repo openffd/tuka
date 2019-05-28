@@ -79,7 +79,7 @@ module Tuka
       end
 
       def add_tuka_bundle_to_gitignore
-        gitignore("#{TukaBundle.dir}/")
+        gitignore_add("#{TukaBundle.dir}/")
         puts "[✓] Added directory '#{TukaBundle.dir}/' to .gitignore"
       end
 

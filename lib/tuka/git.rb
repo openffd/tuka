@@ -15,7 +15,7 @@ module Tuka
       system "#{rm_tmp_cmd}; git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{extra_mv_cmd} #{dir} && #{rm_tmp_cmd}"
     end
 
-    def gitignore(pattern)
+    def gitignore_add(pattern)
       require_relative 'templates/gitignore/gitignore_generator'
       GitignoreGenerator.new(pattern).generate unless File.file? GITIGNORE_BASENAME
       text = File.read(GITIGNORE_BASENAME)

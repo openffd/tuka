@@ -2,7 +2,7 @@
 
 module Curl
   class Easy
-    attr_accessor :should_display_msg
+    attr_accessor :should_show_msg
   end
 
   def self.basic_curl
