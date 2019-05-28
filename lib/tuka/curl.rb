@@ -5,8 +5,8 @@ module Curl
     curl = Curl::Easy.new
     curl.connect_timeout = 4
     curl.timeout = 4
-    curl.on_complete  { |_| puts 'Complete' }
-    curl.on_success   { |_| puts 'Success' }
+    curl.on_complete  { |curl| puts '[✓] Curl completed with status: ' + curl.status }
+    curl.on_success   { |_| puts '[✓] Curl successful' }
     curl.on_failure   { |_, code| puts 'Curl Error: ' + code }
     curl
   end
@@ -16,6 +16,7 @@ module Curl
       curl = Curl.basic_curl.dup
       curl.url = url
       curl.perform
+      curl
     end
 
     def curl_with_auth(url)
@@ -25,6 +26,7 @@ module Curl
       curl.username         = 'username'
       curl.password         = 'password123!'
       curl.perform
+      curl
     end
   end
 end
