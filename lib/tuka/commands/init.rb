@@ -29,19 +29,30 @@ module Tuka
         puts 'Sourcing Tukafile from URL: ' + url.yellow
       end
 
-      def download_tukafile
-        if specific_options.empty? || options[:curl]
-          curl = curl(url)
+      def source_tukafile_from_curl
+        return unless specific_options.empty? || options[:curl]
 
-        elsif options[:git]
-          raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+        curl = curl_instance(url: url)
+        curl.perform
+      end
 
-        elsif options[:nextcloud]
-          curl = curl_with_auth(url)
+      def source_tukafile_from_git
+        return unless options[:git]
 
-        elsif options[:local]
-          # TODO: Implement sourcing Tukafile from local file system
-        end
+        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+      end
+
+      def source_tukafile_from_nextcloud
+        return unless options[:nextcloud]
+
+        curl = curl_instance_with_auth(url: url)
+        curl.perform
+      end
+
+      def source_tukafile_from_local
+        return unless options[:local]
+
+        # TODO: Implement sourcing Tukafile from local file system
       end
 
       def check_downloaded_tukafile
