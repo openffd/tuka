@@ -4,10 +4,7 @@ module Tuka
   module Commands
     class GenerateLibrary < Command
       USAGE = 'generate-library'
-
-      def self.usage_help
-        "Run 'tuka #{GenerateLibrary::USAGE}'"
-      end
+      USAGE_HELP = "Run 'tuka #{GenerateLibrary::USAGE}'"
 
       namespace :generate_library
       desc 'Generates and builds an iOS library from a Tukafile'

@@ -18,19 +18,19 @@ module Tuka
 
       def check_library_existence
         message = "Unable to locate a generated #{tukafile.library.name} library. "
-        raise StandardError, message + GenerateLibrary.usage_help if generated_library.nil?
+        raise StandardError, message + GenerateLibrary::USAGE_HELP if generated_library.nil?
       end
 
       def check_library_receptor_existence
         message = "Missing receptor directory/files from the generated #{tukafile.library.name} library. "
         @receptor_source_path = File.join(generated_library.target_receptors_path, tukafile.project_info.type)
-        raise StandardError, message + GenerateLibrary.usage_help if Dir.glob("#{@receptor_source_path}/*").count != 2
+        raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@receptor_source_path}/*").count != 2
       end
 
       def check_library_bridges_existence
         message = "Missing bridge files from the generated #{tukafile.library.name} library. "
         @bridges_source_path = File.join(generated_library.target_bridges_path)
-        raise StandardError, message + GenerateLibrary.usage_help if Dir.glob("#{@bridges_source_path}/*").empty?
+        raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@bridges_source_path}/*").empty?
       end
 
       def display_generate_podfile
@@ -63,7 +63,7 @@ module Tuka
         FileUtils.cp_r("#{@receptor_source_path}/.", receptor.path)
 
         message = 'Unable to instantiate the receptor files. '
-        raise StandardError, message + GenerateLibrary.usage_help if receptor.h_file.nil? && receptor.m_file.nil?
+        raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor.h_file.nil? && receptor.m_file.nil?
       end
 
       def display_receptor_files_preparation

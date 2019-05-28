@@ -28,7 +28,7 @@ module Tuka
         print_newline
         puts 'Sourcing Tukafile from URL: ' + url.yellow
         if specific_options.empty? || options[:curl]
-          curl(url)
+          puts curl(url)
         elsif options[:git]
           raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
         elsif options[:nextcloud]
