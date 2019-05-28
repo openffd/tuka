@@ -7,7 +7,7 @@ require 'thor'
 require 'xcodeproj'
 
 module Tuka
-  require 'tuka/messages/tukafile'
+  require 'tuka/messages/tukafile_errors'
   require 'tuka/xcodeproj/overrides'
   require 'tuka/xcodeproj/build_settings'
   require 'tuka/core_ext/dir'
