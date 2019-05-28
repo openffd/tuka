@@ -17,6 +17,7 @@ module Tuka
 
     def gitignore_add(pattern)
       require_relative 'templates/gitignore/gitignore_generator'
+
       GitignoreGenerator.new(pattern).generate unless File.file? GITIGNORE_BASENAME
       text = File.read(GITIGNORE_BASENAME)
       return if text.include? pattern
