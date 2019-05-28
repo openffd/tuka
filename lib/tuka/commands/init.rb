@@ -34,6 +34,8 @@ module Tuka
 
         response = perform_curl(url: url)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
+
+        touch(filename: Tukafile::BASENAME, content: response.body)
       end
 
       def source_tukafile_from_git
@@ -47,6 +49,8 @@ module Tuka
 
         response = perform_curl_with_auth(url: url)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
+
+        touch(filename: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
       end
 
       def source_tukafile_from_local
@@ -65,6 +69,8 @@ module Tuka
         tukafile.project_info.xcodeproj     = xcodeproj_basename
         tukafile.project_info.type          = project.type
         tukafile.project_info.receptor_name = project.name.remove_non_word_chars
+
+        # TODO: Show pre-configured values
       end
 
       def check_tukafile_validity
