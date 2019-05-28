@@ -3,8 +3,6 @@
 module Tuka
   module Commands
     class Init < Command
-      using CoreExtensions
-
       USAGE = 'init [URL]'
 
       namespace :init
