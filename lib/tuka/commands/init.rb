@@ -21,7 +21,7 @@ module Tuka
 
       def display_tuka_setup
         print_newline
-        puts "Initializing Tuka for #{project.name} (#{project.type_pretty})".blue
+        puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".blue
       end
 
       def display_tukafile_sourcing
@@ -80,7 +80,7 @@ module Tuka
 
       def add_tuka_bundle_to_gitignore
         gitignore("#{TukaBundle.dir}/")
-        puts "[✓] Directory '#{TukaBundle.dir}/' is included in .gitignore"
+        puts "[✓] Added directory '#{TukaBundle.dir}/' to .gitignore"
       end
 
       def open_tukafile
