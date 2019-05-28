@@ -24,15 +24,21 @@ module Tuka
         puts "Initializing Tuka for #{project.name} (#{project.type_pretty})".blue
       end
 
-      def download_tukafile
+      def display_tukafile_sourcing
         print_newline
         puts 'Sourcing Tukafile from URL: ' + url.yellow
+      end
+
+      def download_tukafile
         if specific_options.empty? || options[:curl]
-          puts curl(url)
+          curl = curl(url)
+
         elsif options[:git]
           raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+
         elsif options[:nextcloud]
-          curl_with_auth(url)
+          curl = curl_with_auth(url)
+
         elsif options[:local]
           # TODO: Implement sourcing Tukafile from local file system
         end
@@ -58,7 +64,7 @@ module Tuka
         tukafile.dump
 
         print_newline
-        puts '[✓] Pre-configured Tukafile values to reflect project path and type'
+        puts '[✓] Pre-configured Tukafile fields to reflect project path and type'
       end
 
       def add_tuka_bundle_to_gitignore
