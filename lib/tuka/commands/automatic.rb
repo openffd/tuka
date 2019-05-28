@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class Automatic < Command
+      using CoreExtensions
+
       USAGE = 'automatic'
 
       namespace :automatic

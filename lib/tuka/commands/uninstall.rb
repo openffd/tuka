@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class Uninstall < Command
+      using CoreExtensions
+
       USAGE = 'uninstall'
 
       namespace :uninstall

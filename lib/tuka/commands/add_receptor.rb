@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class AddReceptor < Command
+      using CoreExtensions
+
       USAGE = 'add-receptor'
 
       namespace :add_receptor

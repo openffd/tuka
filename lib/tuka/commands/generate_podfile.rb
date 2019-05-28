@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class GeneratePodfile < Command
+      using CoreExtensions
+
       include Bundler
 
       USAGE = 'generate-podfile'

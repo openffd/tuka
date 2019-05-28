@@ -3,6 +3,8 @@
 module Tuka
   module Commands
     class GenerateLibrary < Command
+      using CoreExtensions
+
       USAGE = 'generate-library'
       USAGE_HELP = "Run 'tuka #{GenerateLibrary::USAGE}'"
 

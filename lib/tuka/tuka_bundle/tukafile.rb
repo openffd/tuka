@@ -35,6 +35,13 @@ module Tuka
     end
 
     def error
+      private_methods.grep(/valid_*/).sort.each do |validation|
+        return  if send(validation)
+      end
+
+      require 'pry'
+      binding.pry
+
       return "#{BASENAME} `library.digest' was tampered."                 unless valid_library?
       return "#{BASENAME} `server.url_type' is invalid."                  unless valid_server_url_type?
       return "#{BASENAME} `server.protocol' is invalid."                  unless valid_server_protocol?
