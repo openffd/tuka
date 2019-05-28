@@ -27,9 +27,9 @@ module Tuka
 
     def initialize(path)
       @path = path
-      @struct = begin
-        JSON.parse(IO.read(@path), object_class: OpenStruct)
-      rescue Exception => e
+      begin
+        @struct = JSON.parse(IO.read(@path), object_class: OpenStruct)
+      rescue JSON::ParserError => _
         raise StandardError, 'Sourced Tukafile has invalid content'
       end
     end
