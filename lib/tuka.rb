@@ -7,7 +7,6 @@ require 'thor'
 require 'xcodeproj'
 
 module Tuka
-  require 'tuka/messages/tukafile_errors'
   require 'tuka/xcodeproj/overrides'
   require 'tuka/xcodeproj/build_settings'
   require 'tuka/core_ext/dir'
@@ -28,6 +27,7 @@ module Tuka
   require 'tuka/tuka_bundle/library'
   require 'tuka/tuka_bundle/receptor'
   require 'tuka/tuka_bundle/tukafile'
+  require 'tuka/messages/tukafile_errors'
   require 'tuka/frameworks'
   require 'tuka/project_bundle'
   require 'tuka/tuka_bundle'

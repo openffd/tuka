@@ -3,8 +3,8 @@
 module Tuka
   module Messages
     module TukafileErrors
-      filename    = Tukafile::BASENAME
-      days_range  = Tukafile::DAYS_RANGE
+      filename    = Tuka::Tukafile::BASENAME
+      days_range  = Tuka::Tukafile::DAYS_RANGE
 
       INVALID_LIBRARY                     = filename + " `library.digest' was tampered"
       INVALID_PROJECT_INFO_BUNDLE_ID      = filename + " `project_info.bundle_id' is invalid"
