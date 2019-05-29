@@ -137,10 +137,7 @@ module Tuka
         path = project.bridging_header
         return unless path.nil? || !File.file?(path)
 
-        bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
-        FileUtils.cp(bridging_header, project.new_file_destination_group.path)
-        project.register_bridging_header(bridging_header)
-        puts '[✓] Added a bridging header'
+        add_bridge
       end
 
       def setup_project_app_transport_settings
@@ -151,6 +148,15 @@ module Tuka
       def display_command_completion
         print_newline
         puts 'End' unless options[:quiet]
+      end
+
+      private
+
+      def add_bridge
+        bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
+        FileUtils.cp(bridging_header, project.new_file_destination_group.path)
+        project.register_bridging_header(bridging_header)
+        puts '[✓] Added a bridging header'
       end
     end
   end
