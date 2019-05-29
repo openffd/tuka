@@ -90,10 +90,7 @@ module Tuka
           return
         end
 
-        message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-        raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
-
-        puts "[✓] Client bundle ID        => '#{tukafile.project_info.bundle_id}'"
+        bundle_id_update
       end
 
       def update_generated_library_user_agent
@@ -127,6 +124,15 @@ module Tuka
       def display_command_completion
         print_newline
         puts 'End' unless options[:quiet]
+      end
+
+      private
+
+      def bundle_id_update
+        message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
+        raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
+
+        puts "[✓] Client bundle ID        => '#{tukafile.project_info.bundle_id}'"
       end
     end
   end
