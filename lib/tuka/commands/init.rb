@@ -89,17 +89,16 @@ module Tuka
       end
 
       def display_modified_tukafile_fields
-        puts '    project_info: {'.yellow
-        puts "      xcodeproj => '#{xcodeproj_basename}'".yellow
+        puts "    project_info: {\n      xcodeproj => '#{xcodeproj_basename}'".yellow
         puts "      type      => '#{project.type}'".yellow
         puts "      receptor  => '#{project.name.remove_non_word_chars}'".yellow
         puts '    }'.yellow
-        print_newline
       end
 
       def add_tuka_bundle_to_gitignore
         gitignore_add("#{TukaBundle.dir}/")
 
+        print_newline
         puts "[✓] Added directory '#{TukaBundle.dir}/' to .gitignore"
       end
 
