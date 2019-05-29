@@ -37,7 +37,7 @@ module Tuka
     map %w[generate-lib update-lib gen-lib genlib gl ul] => :generate_library
     map %w[generate-pod update-pod gen-pod genpod gp up] => :generate_podfile
     map %w[add-recep update-receptor add-r addr updr ar ur] => :add_receptor
-    map %w[install auto au a] => :automatic
+    map %w[automatic install auto au a] => :automatic
     map %w[rm u] => :uninstall
     map %w[pow] => :powerup!
     map %w[--version -v] => :version
