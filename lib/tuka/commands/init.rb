@@ -65,12 +65,16 @@ module Tuka
         puts "[✓] Tukafile downloaded to path: '#{tukafile.path.yellow}'"
       end
 
-      def modify_tukafile_project_data
-        tukafile.project_info.xcodeproj     = xcodeproj_basename
-        tukafile.project_info.type          = project.type
-        tukafile.project_info.receptor_name = project.name.remove_non_word_chars
+      def edit_tukafile_project_info_xcodeproj
+        tukafile.project_info.xcodeproj = xcodeproj_basename
+      end
 
-        # TODO: Show pre-configured values
+      def edit_tukafile_project_info_type
+        tukafile.project_info.type = project.type
+      end
+
+      def edit_tukafile_project_info_receptor
+        tukafile.project_info.receptor_name = project.name.remove_non_word_chars
       end
 
       def check_tukafile_validity
@@ -84,8 +88,18 @@ module Tuka
         puts '[✓] Pre-configured Tukafile fields to reflect project path and type'
       end
 
+      def display_modified_tukafile_fields
+        puts "    project_info: {".yellow
+        puts "      xcodeproj => '#{xcodeproj_basename}'".yellow
+        puts "      type      => '#{project.type}'".yellow
+        puts "      receptor  => '#{project.name.remove_non_word_chars}'".yellow
+        puts "    }".yellow
+        print_newline
+      end
+
       def add_tuka_bundle_to_gitignore
         gitignore_add("#{TukaBundle.dir}/")
+
         puts "[✓] Added directory '#{TukaBundle.dir}/' to .gitignore"
       end
 
