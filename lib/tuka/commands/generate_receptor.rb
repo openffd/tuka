@@ -2,12 +2,12 @@
 
 module Tuka
   module Commands
-    class AddReceptor < Command
+    class GenerateReceptor < Command
       using CoreExtensions
 
-      USAGE = 'add-receptor'
+      USAGE = 'generate-receptor'
 
-      namespace :add_receptor
+      namespace :generate_receptor
       desc 'Adds generated receptor files to an iOS project'
 
       def check_tukafile_existence

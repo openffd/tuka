@@ -5,7 +5,7 @@ module Tuka
     require_relative 'commands/init'
     require_relative 'commands/generate_library'
     require_relative 'commands/generate_podfile'
-    require_relative 'commands/add_receptor'
+    require_relative 'commands/generate_receptor'
     require_relative 'commands/automatic'
     require_relative 'commands/uninstall'
   end

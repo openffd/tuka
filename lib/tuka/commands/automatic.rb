@@ -23,7 +23,7 @@ module Tuka
       end
 
       def add_receptor
-        cmd = AddReceptor.new
+        cmd = GenerateReceptor.new
         cmd.options = { quiet: true }
         cmd.invoke_all
       end
