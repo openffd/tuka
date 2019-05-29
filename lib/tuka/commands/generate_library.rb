@@ -49,7 +49,7 @@ module Tuka
 
       def display_library_download_complete
         puts "[✓] Library downloaded to path: '#{target_library_path}'"
-        2.times { print_newline }
+        print_newline
       end
 
       def display_tukafile_server_url
