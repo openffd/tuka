@@ -63,7 +63,9 @@ module Tuka
       def instantiate_receptor_files
         Dir.mkdir File.join(tuka_bundle_dir, Receptor.dir)
         FileUtils.cp_r("#{@receptor_source_path}/.", receptor.path)
+      end
 
+      def check_instantiated_receptor_files
         message = 'Unable to instantiate the receptor files. '
         raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor.h_file.nil? && receptor.m_file.nil?
       end
