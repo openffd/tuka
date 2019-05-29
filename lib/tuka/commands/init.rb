@@ -62,7 +62,7 @@ module Tuka
       def check_downloaded_tukafile
         raise StandardError, 'Unable to locate a Tukafile from the downloaded resource' if tukafile.nil?
 
-        puts "[✓] Tukafile downloaded to path: '#{tukafile.path.yellow}'"
+        puts '[✓] Tukafile downloaded to path: ' + File.join(Dir.pwd, tukafile.path).yellow
       end
 
       def edit_tukafile_project_info_xcodeproj
