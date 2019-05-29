@@ -5,7 +5,7 @@ module Tuka
     class Init < Command
       using CoreExtensions
 
-      USAGE = 'init [URL]'
+      USAGE = 'init [URL] [OPTIONS]'
 
       namespace :init
       desc 'Downloads a pre-configured Tukafile from the given URL'
