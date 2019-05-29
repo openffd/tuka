@@ -100,6 +100,9 @@ module Tuka
       def add_receptor_files_to_project
         FileUtils.cp_r("#{receptor.path}/.", project.new_file_destination_group.path)
         project.add_new_receptor_files(h_file: receptor.h_file, m_file: receptor.m_file)
+      end
+
+      def display_adding_receptor_files_to_project
         puts "[✓] Receptor files added to #{project.name} at path: '#{project.new_file_destination_group.path}/'"
       end
 
