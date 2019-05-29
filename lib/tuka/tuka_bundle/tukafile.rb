@@ -35,8 +35,8 @@ module Tuka
     end
 
     def error
-      error_messages = Messages::TukafileErrors.constants.sort
-      private_methods.grep(/valid_*/).sort.each_with_index { |m, i| return error_messages[i] unless send(m) }
+      messages = Messages::TukafileErrors.constants(false).sort.map &Messages::TukafileErrors.method(:const_get)
+      private_methods.grep(/valid_*/).sort.each_with_index { |m, i| return messages[i] unless send(m) }
 
       nil
     end
