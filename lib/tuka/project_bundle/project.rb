@@ -120,10 +120,7 @@ module Tuka
       frameworks_group = @project_configurator.groups.select { |group| group.name == Frameworks.group_name }.first
       return if frameworks_group.nil?
 
-      reference = frameworks_group.new_file(Frameworks.user_notifications_framework_path)
-      reference.set_source_tree(Frameworks.source_tree)
-      @project_configurator.targets.first.frameworks_build_phase.add_file_reference(reference)
-      @project_configurator.save
+      add_user_notification_framework_to_group(frameworks_group)
     end
 
     private
@@ -145,6 +142,13 @@ module Tuka
       return nil if grep_result.empty?
 
       grep_result.partition("\n").first.partition('= ').last
+    end
+
+    def add_user_notification_framework_to_group(group)
+      reference = group.new_file(Frameworks.user_notifications_framework_path)
+      reference.set_source_tree(Frameworks.source_tree)
+      @project_configurator.targets.first.frameworks_build_phase.add_file_reference(reference)
+      @project_configurator.save
     end
   end
 end
