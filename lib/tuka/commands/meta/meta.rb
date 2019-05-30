@@ -43,5 +43,12 @@ module Tuka
       namespace :automatic
       desc 'Automagically completes installation to an iOS project'
     end
+
+    class Uninstall < Command
+      USAGE = 'uninstall'
+
+      namespace :uninstall
+      desc 'Removes Tuka related files and settings from an iOS project'
+    end
   end
 end
