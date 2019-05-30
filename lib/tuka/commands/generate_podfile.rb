@@ -7,12 +7,6 @@ module Tuka
 
       include Bundler
 
-      USAGE = 'generate-podfile'
-
-      namespace :generate_podfile
-      desc 'Generates a Podfile with the specified dependencies/hooks'
-      class_option :yes, aliases: '-y', type: :boolean, desc: 'Auto-selects `yes` option for all prompts'
-
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
       end

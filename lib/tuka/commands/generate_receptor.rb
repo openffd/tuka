@@ -5,11 +5,6 @@ module Tuka
     class GenerateReceptor < Command
       using CoreExtensions
 
-      USAGE = 'generate-receptor'
-
-      namespace :generate_receptor
-      desc 'Adds generated receptor files to an iOS project'
-
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
       end

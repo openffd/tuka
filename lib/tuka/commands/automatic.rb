@@ -5,11 +5,6 @@ module Tuka
     class Automatic < Command
       using CoreExtensions
 
-      USAGE = 'install'
-
-      namespace :automatic
-      desc 'Automagically completes installation to an iOS project'
-
       def generate_library
         cmd = GenerateLibrary.new
         cmd.options = { quiet: true }

@@ -1,0 +1,47 @@
+# frozen_string_literal: true
+
+module Tuka
+  module Commands
+    class Init < Command
+      USAGE = 'init [URL] [OPTIONS]'
+
+      namespace :init
+      desc 'Downloads a pre-configured Tukafile from the given URL'
+      argument :url
+      class_option :curl,       aliases: ['-c'], desc: 'Use cURL to instantiate the Tukafile'
+      class_option :git,        aliases: ['-g'], desc: 'Download the Tukafile from a remote Git repository'
+      class_option :nextcloud,  aliases: ['-n'], desc: 'Source Tukafile from a Nextcloud file server'
+      # class_option :local,      aliases: ['-l'], desc: 'Copy a Tukafile from the local file system'
+    end
+
+    class GenerateLibrary < Command
+      USAGE = 'generate-library'
+      USAGE_HELP = "Run 'tuka #{GenerateLibrary::USAGE}'"
+
+      namespace :generate_library
+      desc 'Generates and builds an iOS library from a Tukafile'
+    end
+
+    class GeneratePodfile < Command
+      USAGE = 'generate-podfile'
+
+      namespace :generate_podfile
+      desc 'Generates a Podfile with the specified dependencies/hooks'
+      class_option :yes, aliases: '-y', type: :boolean, desc: 'Auto-selects `yes` option for all prompts'
+    end
+
+    class GenerateReceptor < Command
+      USAGE = 'generate-receptor'
+
+      namespace :generate_receptor
+      desc 'Adds generated receptor files to an iOS project'
+    end
+
+    class Automatic < Command
+      USAGE = 'install'
+
+      namespace :automatic
+      desc 'Automagically completes installation to an iOS project'
+    end
+  end
+end

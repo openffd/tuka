@@ -8,5 +8,6 @@ module Tuka
     require_relative 'commands/generate_receptor'
     require_relative 'commands/automatic'
     require_relative 'commands/uninstall'
+    require_relative 'commands/meta/meta.rb'
   end
 end

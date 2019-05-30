@@ -13,7 +13,7 @@ module Tuka
     update_podfile_desc   = 'Updates previously generated podfile according to new Tukafile configuration'
 
     update_receptor_usage = 'update-receptor'
-    update_receptor_desc  = 'Updates previously generated receptor files according to new Tukafile configuration'
+    update_receptor_desc  = 'Updates previously generated receptors according to new Tukafile configuration'
 
     register Commands::Init,      'init',               Commands::Init::USAGE,          Commands::Init.desc
     register Commands::Automatic, 'automatic',          Commands::Automatic::USAGE,     Commands::Automatic.desc
