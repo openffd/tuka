@@ -58,7 +58,7 @@ module Tuka
 
     def always_embed_swift_standard_libraries
       @project_configurator.targets.first.build_configurations.each do |configuration|
-        configuration.build_settings[ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES] = '$(inherited)'
+        configuration.build_settings[ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES] = INHERITED_FLAG
       end
       @project_configurator.save
     end
