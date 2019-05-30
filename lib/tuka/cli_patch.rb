@@ -4,7 +4,7 @@ module Tuka
   class CLI
     class << self
       def help(shell, subcommand = false)
-        shell.say "\nYet another automation tool for YJN iOS Devs.", :magenta
+        shell.say "\nYet another automation tool for YJN iOS Devs.", :blue
         shell.say "\nUsage:", :yellow
         shell.say '  tuka [COMMAND] [ARGS] [OPTIONS]'
         shell.say "\nCommands:", :yellow

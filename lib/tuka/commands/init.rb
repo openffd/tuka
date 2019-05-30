@@ -21,7 +21,7 @@ module Tuka
 
       def display_tuka_setup
         print_newline
-        puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".blue
+        puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_tukafile_sourcing

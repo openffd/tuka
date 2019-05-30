@@ -21,7 +21,7 @@ module Tuka
 
       def display_library_download
         print_newline
-        puts "Generating '#{tukafile.library.name}' library for #{project.name} (#{project.type_pretty})".blue
+        puts "Generating '#{tukafile.library.name}' library for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_bundle_id

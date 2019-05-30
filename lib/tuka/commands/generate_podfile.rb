@@ -23,7 +23,7 @@ module Tuka
 
       def display_generate_podfile
         print_newline
-        puts "Generating a #{Podfile.basename} for #{project.name} (#{project.type_pretty})".blue
+        puts "Generating a #{Podfile.basename} for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_tukafile_is_valid

@@ -37,7 +37,7 @@ module Tuka
 
       def display_generate_podfile
         print_newline
-        puts "Adding Receptor files to #{project.name} (#{project.type_pretty})".blue
+        puts "Adding Receptor files to #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_project_state_checking
