@@ -37,10 +37,10 @@ module Tuka
       desc 'Adds generated receptor files to an iOS project'
     end
 
-    class Automatic < Command
+    class Install < Command
       USAGE = 'install'
 
-      namespace :automatic
+      namespace :install
       desc 'Automagically completes installation to an iOS project'
     end
 

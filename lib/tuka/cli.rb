@@ -7,16 +7,14 @@ module Tuka
     generate_receptor   = Commands::GenerateReceptor
 
     update_library_usage  = 'update-library'
-    update_library_desc   = 'Updates previously generated library according to new Tukafile configuration'
-
+    update_library_desc   = 'Updates previously generated library as per new Tukafile configuration'
     update_podfile_usage  = 'update-podfile'
-    update_podfile_desc   = 'Updates previously generated podfile according to new Tukafile configuration'
-
+    update_podfile_desc   = 'Updates previously generated podfile as per new Tukafile configuration'
     update_receptor_usage = 'update-receptor'
-    update_receptor_desc  = 'Updates previously generated receptors according to new Tukafile configuration'
+    update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
     register Commands::Init,      'init',               Commands::Init::USAGE,          Commands::Init.desc
-    register Commands::Automatic, 'automatic',          Commands::Automatic::USAGE,     Commands::Automatic.desc
+    register Commands::Install,   'install',            Commands::Install::USAGE,       Commands::Install.desc
     register generate_library,    'generate_library',   generate_library::USAGE,        generate_library.desc
     register generate_podfile,    'generate_podfile',   generate_podfile::USAGE,        generate_podfile.desc
     register generate_receptor,   'generate_receptor',  generate_receptor::USAGE,       generate_receptor.desc
@@ -32,13 +30,13 @@ module Tuka
 
     desc 'version', 'Show the Tuka version information'
     def version
-      puts "v#{VERSION}"
+      puts 'v' + VERSION
     end
 
     map %w[generate-lib update-lib gen-lib genlib gl ul] => :generate_library
     map %w[generate-pod update-pod gen-pod genpod gp up] => :generate_podfile
     map %w[generate-rcp update-rcp gen-rcp genrcp gr ur] => :generate_receptor
-    map %w[automatic install auto au a] => :automatic
+    map %w[install i] => :install
     map %w[rm u] => :uninstall
     map %w[pow] => :powerup!
     map %w[--version -v] => :version

@@ -2,7 +2,7 @@
 
 module Tuka
   module Commands
-    class Automatic < Command
+    class Install < Command
       using CoreExtensions
 
       def generate_library
@@ -17,7 +17,7 @@ module Tuka
         cmd.invoke_all
       end
 
-      def add_receptor
+      def generate_receptor
         cmd = GenerateReceptor.new
         cmd.options = { quiet: true }
         cmd.invoke_all
