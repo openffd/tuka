@@ -4,13 +4,13 @@ module Tuka
   class CLI
     class << self
       def help(shell, subcommand = false)
-        shell.say "\nYet another automation tool for YJN iOS Devs.", :blue
+        shell.say "\nYet another automation tool for Yeojinet iOS Developers", :blue
         shell.say "\nUsage:", :yellow
-        shell.say '  tuka [COMMAND] [ARGS] [OPTIONS]'
+        shell.say '  tuka COMMAND [ARG] [OPTIONS]'
         shell.say "\nCommands:", :yellow
         shell.print_table(cmd_list(subcommand), indent: 2, truncate: true)
         shell.say "\nHelp:", :yellow
-        shell.say "  Run 'tuka -h [COMMAND]' for more information on a command."
+        shell.say "  Run 'tuka -h <command>' for more information on a command."
       end
 
       def cmd_list(subcommand)

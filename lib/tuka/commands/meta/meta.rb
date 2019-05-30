@@ -3,7 +3,7 @@
 module Tuka
   module Commands
     class Init < Command
-      USAGE = 'init [URL] [OPTIONS]'
+      USAGE = 'init URL [OPTIONS]'
 
       namespace :init
       desc 'Downloads a pre-configured Tukafile from the given URL'
