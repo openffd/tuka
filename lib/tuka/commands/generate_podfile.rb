@@ -5,8 +5,6 @@ module Tuka
     class GeneratePodfile < Command
       using CoreExtensions
 
-      include Bundler
-
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
