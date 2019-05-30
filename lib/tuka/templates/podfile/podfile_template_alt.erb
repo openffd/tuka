@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+platform :ios, '9.0'
+
+inhibit_all_warnings!
+
+proc = Proc.new do |t|
+  t.build_configurations.each do |c|
+    c.build_settings[:SWIFT_VERSION.to_s] = '<%= @swift_version %>'
+  end
+end
+
+target '<%= @target %>' do
+  use_frameworks!
+  <%= @pods %>
+  pod '<%= @library %>', path: '<%= @library_path %>'
+  pod 'SVProgressHUD', git: 'https://github.com/yjnsrc/SVProgressHUD.git'
+end
+
+post_install do |i|
+  proc.call i.pods_project.targets.detect { |t| t.name.eql? '<%= @library %>' }
+end
