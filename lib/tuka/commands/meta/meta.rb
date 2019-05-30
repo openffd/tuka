@@ -34,14 +34,14 @@ module Tuka
       USAGE = 'generate-receptor'
 
       namespace :generate_receptor
-      desc 'Adds generated receptor files to an iOS project'
+      desc 'Generates receptor files to be added to an iOS project'
     end
 
     class Install < Command
       USAGE = 'install'
 
       namespace :install
-      desc 'Automagically completes installation to an iOS project'
+      desc 'Automagically installs all Tuka components to an iOS project'
     end
 
     class Uninstall < Command
