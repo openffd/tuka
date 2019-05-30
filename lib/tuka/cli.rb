@@ -2,6 +2,8 @@
 
 module Tuka
   class CLI < Thor
+    using CoreExtensions
+
     generate_library    = Commands::GenerateLibrary
     generate_podfile    = Commands::GeneratePodfile
     generate_receptor   = Commands::GenerateReceptor
@@ -28,6 +30,13 @@ module Tuka
       system "echo \"LET'S POWERUP!\" | lolcat -F 1 -a -d 12 -s 11; echo '(╯°□°）╯︵ ┻━┻' | lolcat -F 1 -a -d 12 -s 11"
     end
 
+    desc 'merge-files', 'Merge double files'
+    def merge_files
+      merge_appledouble_files
+
+      puts "\n" + 'Double files merged.'
+    end
+
     desc 'version', 'Show the Tuka version information'
     def version
       puts 'v' + VERSION
@@ -39,6 +48,7 @@ module Tuka
     map %w[install i] => :install
     map %w[rm u] => :uninstall
     map %w[pow] => :powerup!
+    map %w[mf] => :merge_files
     map %w[--version -v] => :version
   end
 end
