@@ -2,6 +2,13 @@
 
 module Tuka
   module Commands
+    class AddGitignore < Command
+      USAGE = 'add-gitignore'
+
+      namespace :add_gitignore
+      desc 'Adds a pre-configured Gitignore file to an iOS project'
+    end
+
     class Init < Command
       USAGE = 'init URL [OPTIONS]'
 

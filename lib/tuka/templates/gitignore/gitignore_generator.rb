@@ -11,7 +11,7 @@ module Tuka
     end
 
     def generate
-      File.open(GITIGNORE_BASENAME, 'w+') do |file|
+      File.open(Git::GITIGNORE_BASENAME, 'w+') do |file|
         text = ERB.new(template).result(binding)
         file.write(text)
       end

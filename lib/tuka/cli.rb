@@ -4,6 +4,7 @@ module Tuka
   class CLI < Thor
     using CoreExtensions
 
+    add_gitignore       = Commands::AddGitignore
     generate_library    = Commands::GenerateLibrary
     generate_podfile    = Commands::GeneratePodfile
     generate_receptor   = Commands::GenerateReceptor
@@ -15,6 +16,7 @@ module Tuka
     update_receptor_usage = 'update-receptor'
     update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
+    register add_gitignore,       'add_gitignore',      add_gitignore::USAGE,           add_gitignore.desc
     register Commands::Init,      'init',               Commands::Init::USAGE,          Commands::Init.desc
     register Commands::Install,   'install',            Commands::Install::USAGE,       Commands::Install.desc
     register generate_library,    'generate_library',   generate_library::USAGE,        generate_library.desc
@@ -42,6 +44,7 @@ module Tuka
       puts 'v' + VERSION
     end
 
+    map %w[gitignore add-gi addg ag] => :add_gitignore
     map %w[generate-lib update-lib gen-lib genlib gl ul] => :generate_library
     map %w[generate-pod update-pod gen-pod genpod gp up] => :generate_podfile
     map %w[generate-rcp update-rcp gen-rcp genrcp gr ur] => :generate_receptor

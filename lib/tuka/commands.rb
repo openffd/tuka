@@ -2,6 +2,7 @@
 
 module Tuka
   module Commands
+    require_relative 'commands/add_gitignore'
     require_relative 'commands/init'
     require_relative 'commands/generate_library'
     require_relative 'commands/generate_podfile'

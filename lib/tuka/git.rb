@@ -15,12 +15,12 @@ module Tuka
       system "#{rm_tmp_cmd}; git clone #{url} #{dir}/tmp && mv #{dir}/tmp/* #{extra_mv_cmd} #{dir} && #{rm_tmp_cmd}"
     end
 
-    def gitignore_add(pattern)
+    def gitignore_add(pattern = nil)
       require_relative 'templates/gitignore/gitignore_generator'
 
-      GitignoreGenerator.new(pattern).generate unless File.file? GITIGNORE_BASENAME
+      GitignoreGenerator.new(pattern.to_s).generate unless File.file? GITIGNORE_BASENAME
       text = File.read(GITIGNORE_BASENAME)
-      return if text.include? pattern
+      return if pattern.nil? || text.include?(pattern.to_s)
 
       File.open(GITIGNORE_BASENAME, 'w+') { |file| file.write("#{pattern}\n#{text}") }
     end
