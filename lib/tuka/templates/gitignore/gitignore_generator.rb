@@ -4,9 +4,7 @@ module Tuka
   require 'erb'
 
   class GitignoreGenerator
-    def self.template
-      'gitignore_template.erb'
-    end
+    TEMPLATE = 'gitignore_template.erb'
 
     def initialize(pattern)
       @pattern = pattern
@@ -26,7 +24,7 @@ module Tuka
     end
 
     def template_path
-      File.join(File.expand_path(__dir__), GitignoreGenerator.template)
+      File.join(File.expand_path(__dir__), TEMPLATE)
     end
   end
 end
