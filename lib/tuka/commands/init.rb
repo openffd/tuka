@@ -28,6 +28,12 @@ module Tuka
         touch(filename: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
       end
 
+      def source_tukafile_from_bitbucket_snippets
+        return unless options[:bitbucket]
+
+        # TODO: Implement sourcing Tukafile from a team-private BitBucket snippet
+      end
+
       def source_tukafile_from_git
         return unless options[:git]
 
@@ -104,7 +110,7 @@ module Tuka
       private
 
       def specific_options
-        [options[:curl], options[:git], options[:local], options[:nextcloud]].compact
+        [options[:bitbucket], options[:curl], options[:git], options[:local], options[:nextcloud]].compact
       end
     end
   end

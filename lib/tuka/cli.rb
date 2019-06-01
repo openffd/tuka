@@ -4,10 +4,10 @@ module Tuka
   class CLI < Thor
     using CoreExtensions
 
-    add_gitignore       = Commands::AddGitignore
-    generate_library    = Commands::GenerateLibrary
-    generate_podfile    = Commands::GeneratePodfile
-    generate_receptor   = Commands::GenerateReceptor
+    add_gitignore     = Commands::AddGitignore
+    generate_library  = Commands::GenerateLibrary
+    generate_podfile  = Commands::GeneratePodfile
+    generate_receptor = Commands::GenerateReceptor
 
     update_library_usage  = 'update-library'
     update_library_desc   = 'Updates previously generated library as per new Tukafile configuration'
@@ -31,7 +31,8 @@ module Tuka
     def merge_files
       merge_appledouble_files
 
-      puts "\n" + 'Double files merged.'
+      print_newline
+      puts 'Double files merged.'
     end
 
     desc 'powerup!', "Let's power up!"
