@@ -16,7 +16,6 @@ module Tuka
     update_receptor_usage = 'update-receptor'
     update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
-    register add_gitignore,       'add_gitignore',      add_gitignore::USAGE,           add_gitignore.desc
     register Commands::Init,      'init',               Commands::Init::USAGE,          Commands::Init.desc
     register Commands::Install,   'install',            Commands::Install::USAGE,       Commands::Install.desc
     register generate_library,    'generate_library',   generate_library::USAGE,        generate_library.desc
@@ -26,17 +25,18 @@ module Tuka
     register generate_podfile,    'update_podfile',     update_podfile_usage,           update_podfile_desc
     register generate_receptor,   'update_receptor',    update_receptor_usage,          update_receptor_desc
     register Commands::Uninstall, 'uninstall',          Commands::Uninstall::USAGE,     Commands::Uninstall.desc
-
-    desc 'powerup!', "Let's power up!"
-    def powerup!
-      system "echo \"LET'S POWERUP!\" | lolcat -F 1 -a -d 12 -s 11; echo '(╯°□°）╯︵ ┻━┻' | lolcat -F 1 -a -d 12 -s 11"
-    end
+    register add_gitignore,       'add_gitignore',      add_gitignore::USAGE,           add_gitignore.desc
 
     desc 'merge-files', 'Merge double files'
     def merge_files
       merge_appledouble_files
 
       puts "\n" + 'Double files merged.'
+    end
+
+    desc 'powerup!', "Let's power up!"
+    def powerup!
+      system "echo \"LET'S POWERUP!\" | lolcat -F 1 -a -d 12 -s 11; echo '(╯°□°）╯︵ ┻━┻' | lolcat -F 1 -a -d 12 -s 11"
     end
 
     desc 'version', 'Show the Tuka version information'
