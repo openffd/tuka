@@ -6,7 +6,7 @@ module Tuka
       using CoreExtensions
 
       def check_class_options
-        raise StandardError, 'Invalid combination of options for this command' if specific_options.count > 1
+        raise StandardError, 'Invalid combination of options for this command' if source_options.count > 1
       end
 
       def display_tuka_setup
@@ -20,7 +20,7 @@ module Tuka
       end
 
       def source_tukafile_from_curl
-        return unless specific_options.empty? || options[:curl]
+        return unless source_options.empty? || options[:curl]
 
         response = perform_curl(url: url)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
@@ -43,7 +43,7 @@ module Tuka
       def source_tukafile_from_nextcloud
         return unless options[:nextcloud]
 
-        response = perform_curl_with_auth(url: url)
+        response = perform_authenticated_curl(url: url) # username: 'username', password: 'password123!'
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
 
         touch(filename: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
@@ -109,8 +109,8 @@ module Tuka
 
       private
 
-      def specific_options
-        [options[:bitbucket], options[:curl], options[:git], options[:local], options[:nextcloud]].compact
+      def source_options
+        options.keys.map(&:to_sym).reject { |opt| [:help, :quiet, :verbose].include? opt }
       end
     end
   end
