@@ -15,6 +15,10 @@ module Tuka
     class_option :quiet,    aliases: '-q', type: :boolean, desc: 'Enable quiet output mode'
     class_option :verbose,  aliases: '-v', type: :boolean, desc: 'Enable verbose output mode'
 
+    def check_shell
+      raise StandardError, 'Current shell is not bash' unless %x[echo $SHELL].include? 'bash'
+    end
+
     def clear_appledouble_files
       merge_appledouble_files
     end
