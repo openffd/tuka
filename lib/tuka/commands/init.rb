@@ -110,7 +110,7 @@ module Tuka
       private
 
       def source_options
-        options.keys.map(&:to_sym).reject { |opt| [:help, :quiet, :verbose].include? opt }
+        options.keys.map(&:to_sym).reject { |opt| %i[help quiet verbose].include? opt }
       end
     end
   end
