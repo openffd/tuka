@@ -16,7 +16,7 @@ module Tuka
     class_option :verbose,  aliases: '-v', type: :boolean, desc: 'Enable verbose output mode'
 
     def check_shell
-      raise StandardError, 'Current shell is not bash' unless %x[echo $SHELL].include? 'bash'
+      raise StandardError, 'Current shell is not bash' unless `echo $SHELL`.include? 'bash'
     end
 
     def clear_appledouble_files
