@@ -49,6 +49,7 @@ module Tuka
     map %w[generate-pod update-pod gen-pod genpod gp up] => :generate_podfile
     map %w[generate-rcp update-rcp gen-rcp genrcp gr ur] => :generate_receptor
     map %w[install i] => :install
+    map %w[setcreds creds setc sc] => :set_credentials
     map %w[rm u] => :uninstall
     map %w[pow] => :powerup!
     map %w[mf] => :merge_files
