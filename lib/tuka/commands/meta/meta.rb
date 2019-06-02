@@ -53,6 +53,13 @@ module Tuka
       desc 'Automagically installs all Tuka components to an iOS project'
     end
 
+    class SetCredentials < Command
+      USAGE = 'set-credentials'
+
+      namespace :set_credentials
+      desc 'Lets you setup credentials for services needed by Tuka (e.g. Bitbucket)'
+    end
+
     class Uninstall < Command
       USAGE = 'uninstall'
 
