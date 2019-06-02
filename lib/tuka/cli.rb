@@ -2,12 +2,9 @@
 
 module Tuka
   class CLI < Thor
-    using CoreExtensions
+    _ = Commands
 
-    add_gitignore     = Commands::AddGitignore
-    generate_library  = Commands::GenerateLibrary
-    generate_podfile  = Commands::GeneratePodfile
-    generate_receptor = Commands::GenerateReceptor
+    using CoreExtensions
 
     update_library_usage  = 'update-library'
     update_library_desc   = 'Updates previously generated library as per new Tukafile configuration'
@@ -16,18 +13,20 @@ module Tuka
     update_receptor_usage = 'update-receptor'
     update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
-    register Commands::Init,      'init',               Commands::Init::USAGE,          Commands::Init.desc
-    register Commands::Install,   'install',            Commands::Install::USAGE,       Commands::Install.desc
-    register generate_library,    'generate_library',   generate_library::USAGE,        generate_library.desc
-    register generate_podfile,    'generate_podfile',   generate_podfile::USAGE,        generate_podfile.desc
-    register generate_receptor,   'generate_receptor',  generate_receptor::USAGE,       generate_receptor.desc
-    register generate_library,    'update_library',     update_library_usage,           update_library_desc
-    register generate_podfile,    'update_podfile',     update_podfile_usage,           update_podfile_desc
-    register generate_receptor,   'update_receptor',    update_receptor_usage,          update_receptor_desc
-    register Commands::Uninstall, 'uninstall',          Commands::Uninstall::USAGE,     Commands::Uninstall.desc
-    register add_gitignore,       'add_gitignore',      add_gitignore::USAGE,           add_gitignore.desc
+    # TODO: Meta this in the future
+    register _::Init,             'init',               _::Init::USAGE,             _::Init.desc
+    register _::Install,          'install',            _::Install::USAGE,          _::Install.desc
+    register _::GenerateLibrary,  'generate_library',   _::GenerateLibrary::USAGE,  _::GenerateLibrary.desc
+    register _::GeneratePodfile,  'generate_podfile',   _::GeneratePodfile::USAGE,  _::GeneratePodfile.desc
+    register _::GenerateReceptor, 'generate_receptor',  _::GenerateReceptor::USAGE, _::GenerateReceptor.desc
+    register _::GenerateLibrary,  'update_library',     update_library_usage,       update_library_desc
+    register _::GeneratePodfile,  'update_podfile',     update_podfile_usage,       update_podfile_desc
+    register _::GenerateReceptor, 'update_receptor',    update_receptor_usage,      update_receptor_desc
+    register _::SetCredentials,   'set_credentials',    _::SetCredentials::USAGE,   _::SetCredentials.desc
+    register _::Uninstall,        'uninstall',          _::Uninstall::USAGE,        _::Uninstall.desc
+    register _::AddGitignore,     'add_gitignore',      _::AddGitignore::USAGE,     _::AddGitignore.desc
 
-    desc 'merge-files', 'Merge double files'
+    desc 'merge-files', 'Merges double files'
     def merge_files
       merge_appledouble_files
 
