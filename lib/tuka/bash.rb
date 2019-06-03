@@ -13,7 +13,9 @@ module Tuka
     ENV_BITBUCKET_PASSWORD = ENV['BITBUCKET_PASSWORD']
 
     def bash_profile
-      begin File.open(File.expand_path(BASH_PROFILE_PATH)) rescue nil end
+      File.open(File.expand_path(BASH_PROFILE_PATH))
+    rescue StandardError
+      nil
     end
 
     def bash_profile_setup?
@@ -27,11 +29,15 @@ module Tuka
     end
 
     def bashrc
-      begin File.open(File.expand_path(BASHRC_PATH)) rescue nil end
+      File.open(File.expand_path(BASHRC_PATH))
+    rescue StandardError
+      nil
     end
 
     def tukarc
-      begin File.open(File.expand_path(TUKARC_PATH)) rescue nil end
+      File.open(File.expand_path(TUKARC_PATH))
+    rescue StandardError
+      nil
     end
 
     class TukarcMissingError < StandardError
@@ -57,6 +63,7 @@ module Tuka
       raise TukarcNotLoadedError if ENV_BITBUCKET_USERNAME.nil? && ENV_BITBUCKET_PASSWORD.nil
       raise TukarcIncompleteVarsError if ENV_BITBUCKET_USERNAME.to_s.strip.empty?
       raise TukarcIncompleteVarsError if ENV_BITBUCKET_PASSWORD.to_s.strip.empty?
+
       true
     end
   end
