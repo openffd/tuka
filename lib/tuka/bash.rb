@@ -7,7 +7,7 @@ module Tuka
     TUKARC_PATH       = '~/.tukarc'
 
     LOAD_TUKARC_CMD       = "[ -r #{TUKARC_PATH} ] && . #{TUKARC_PATH}"
-    LOAD_TUKARC_CMD_REGEX = /\n\[ -r ~\/.tukarc \] && . ~\/.tukarc\n/
+    LOAD_TUKARC_CMD_REGEX = /\n\[ -r ~\/.tukarc \] && . ~\/.tukarc\n/.freeze
 
     ENV_BITBUCKET_USERNAME = ENV['BITBUCKET_USERNAME']
     ENV_BITBUCKET_PASSWORD = ENV['BITBUCKET_PASSWORD']
