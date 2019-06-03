@@ -39,8 +39,8 @@ module Tuka
     end
 
     def bash_profile_setup?
-      raise BashProfileMissingError.new if bash_profile.nil?
-      raise BashProfileTukarcNotSourcedError.new unless bash_profile.read =~ LOAD_TUKARC_CMD_REGEX
+      raise BashProfileMissingError if bash_profile.nil?
+      raise BashProfileTukarcNotSourcedError unless bash_profile.read =~ LOAD_TUKARC_CMD_REGEX
 
       true
     end

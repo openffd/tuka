@@ -27,10 +27,10 @@ module Tuka
     end
 
     def tukarc_setup?
-      raise TukarcMissingError.new if tukarc.nil?
-      raise TukarcNotLoadedError.new if ENV_BITBUCKET_USERNAME.nil? && ENV_BITBUCKET_PASSWORD.nil?
-      raise TukarcIncompleteVarsError.new if ENV_BITBUCKET_USERNAME.to_s.strip.empty?
-      raise TukarcIncompleteVarsError.new if ENV_BITBUCKET_PASSWORD.to_s.strip.empty?
+      raise TukarcMissingError if tukarc.nil?
+      raise TukarcNotLoadedError if ENV_BITBUCKET_USERNAME.nil? && ENV_BITBUCKET_PASSWORD.nil?
+      raise TukarcIncompleteVarsError if ENV_BITBUCKET_USERNAME.to_s.strip.empty?
+      raise TukarcIncompleteVarsError if ENV_BITBUCKET_PASSWORD.to_s.strip.empty?
 
       true
     end
