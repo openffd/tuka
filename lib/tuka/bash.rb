@@ -9,7 +9,7 @@ module Tuka
     TUKARC_PATH       = '~/.tukarc'
 
     LOAD_TUKARC_CMD       = "[ -r #{TUKARC_PATH} ] && . #{TUKARC_PATH}"
-    LOAD_TUKARC_CMD_REGEX = %r{/\n\[ -r ~\/.tukarc \] && . ~\/.tukarc\n/}.freeze
+    LOAD_TUKARC_CMD_REGEX = %r{\n\[ -r ~/.tukarc \] && . ~/.tukarc\n}.freeze
 
     ENV_BITBUCKET_USERNAME = ENV['BITBUCKET_USERNAME']
     ENV_BITBUCKET_PASSWORD = ENV['BITBUCKET_PASSWORD']
@@ -21,9 +21,15 @@ module Tuka
     end
 
     class BashProfileMissingError < StandardError
+      def initialize(msg = 'Unable to detect a bash_profile in the home directory.')
+        super(msg)
+      end
     end
 
     class BashProfileTukarcNotSourcedError < StandardError
+      def initialize(msg = 'The bash')
+        super(msg)
+      end
     end
 
     def bash_profile
@@ -33,8 +39,8 @@ module Tuka
     end
 
     def bash_profile_setup?
-      raise BashProfileMissingError if bash_profile.nil?
-      raise BashProfileTukarcNotSourcedError unless bash_profile.read =~ LOAD_TUKARC_CMD_REGEX
+      raise BashProfileMissingError.new if bash_profile.nil?
+      raise BashProfileTukarcNotSourcedError.new unless bash_profile.read =~ LOAD_TUKARC_CMD_REGEX
 
       true
     end
