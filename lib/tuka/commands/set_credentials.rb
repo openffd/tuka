@@ -13,12 +13,12 @@ module Tuka
       end
 
       def check_prior_setup
-        lambda {
+        if tukarc_setup?
           print_newline
           puts "The required credentials are already set. There's no need for a setup. Exiting..."
           exit
-        }.call if tukarc_setup?
-      rescue
+        end
+      rescue StandardError
       end
 
       def check_bash_profile
