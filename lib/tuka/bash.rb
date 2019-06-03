@@ -53,7 +53,7 @@ module Tuka
     end
 
     class TukarcIncompleteVarsError < StandardError
-      def initialize(msg = '')
+      def initialize(msg = 'One or more `.tukarc` environment vars were not set correctly.')
         super
       end
     end
