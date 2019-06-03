@@ -52,9 +52,5 @@ module Tuka
     def add_line_sourcing_tukarc_to_bash_profile
       append_to_file(File.expand_path(BASH_PROFILE_PATH), string: "\n#{LOAD_TUKARC_CMD}")
     end
-
-    def source_bash_profile
-      system '.', BASH_PROFILE_PATH
-    end
   end
 end
