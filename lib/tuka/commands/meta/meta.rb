@@ -53,7 +53,7 @@ module Tuka
       desc 'Automagically installs all Tuka components to an iOS project'
     end
 
-    class SetCredentials < Command
+    class SetCredentials < Thor::Group
       USAGE = 'set-credentials'
 
       namespace :set_credentials
