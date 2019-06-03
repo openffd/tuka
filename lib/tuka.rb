@@ -15,6 +15,7 @@ module Tuka
   require 'tuka/core_ext/string'
   require 'tuka/core_ext/kernel'
   require 'tuka/bash'
+  require 'tuka/tukarc'
   require 'tuka/git'
   require 'tuka/bundler'
   require 'tuka/request_header'
