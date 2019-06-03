@@ -7,18 +7,15 @@ module Tuka
 
       using CoreExtensions
 
-      def display_credentials_setup
-        print_newline
-        puts 'Initializing Service Credentials Setup for Tuka...'.magenta
-      end
-
       def check_prior_setup
         if tukarc_setup?
           print_newline
-          puts "The required credentials are already set. There's no need for a setup. Exiting..."
+          puts "The required credentials are already set. Setup is unnecessary. Exiting..."
           exit
         end
       rescue StandardError
+        print_newline
+        puts 'Initializing Service Credentials Setup for Tuka...'.magenta
       end
 
       def check_bash_profile
