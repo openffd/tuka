@@ -9,7 +9,7 @@ module Tuka
 
       def display_credentials_setup
         print_newline
-        puts 'Service Credentials Setup for Tuka'.magenta
+        puts 'Initializing Service Credentials Setup for Tuka...'.magenta
       end
 
       def check_prior_setup
