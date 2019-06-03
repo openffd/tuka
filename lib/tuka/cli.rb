@@ -2,7 +2,7 @@
 
 module Tuka
   class CLI < Thor
-    _ = Commands
+    C = Commands
 
     using CoreExtensions
 
@@ -14,17 +14,17 @@ module Tuka
     update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
     # TODO: Meta this in the future
-    register _::Init,             'init',               _::Init::USAGE,             _::Init.desc
-    register _::Install,          'install',            _::Install::USAGE,          _::Install.desc
-    register _::GenerateLibrary,  'generate_library',   _::GenerateLibrary::USAGE,  _::GenerateLibrary.desc
-    register _::GeneratePodfile,  'generate_podfile',   _::GeneratePodfile::USAGE,  _::GeneratePodfile.desc
-    register _::GenerateReceptor, 'generate_receptor',  _::GenerateReceptor::USAGE, _::GenerateReceptor.desc
-    register _::GenerateLibrary,  'update_library',     update_library_usage,       update_library_desc
-    register _::GeneratePodfile,  'update_podfile',     update_podfile_usage,       update_podfile_desc
-    register _::GenerateReceptor, 'update_receptor',    update_receptor_usage,      update_receptor_desc
-    register _::SetCredentials,   'set_credentials',    _::SetCredentials::USAGE,   _::SetCredentials.desc
-    register _::Uninstall,        'uninstall',          _::Uninstall::USAGE,        _::Uninstall.desc
-    register _::AddGitignore,     'add_gitignore',      _::AddGitignore::USAGE,     _::AddGitignore.desc
+    register C::Init,             'init',               C::Init::USAGE,             C::Init.desc
+    register C::Install,          'install',            C::Install::USAGE,          C::Install.desc
+    register C::GenerateLibrary,  'generate_library',   C::GenerateLibrary::USAGE,  C::GenerateLibrary.desc
+    register C::GeneratePodfile,  'generate_podfile',   C::GeneratePodfile::USAGE,  C::GeneratePodfile.desc
+    register C::GenerateReceptor, 'generate_receptor',  C::GenerateReceptor::USAGE, C::GenerateReceptor.desc
+    register C::GenerateLibrary,  'update_library',     update_library_usage,       update_library_desc
+    register C::GeneratePodfile,  'update_podfile',     update_podfile_usage,       update_podfile_desc
+    register C::GenerateReceptor, 'update_receptor',    update_receptor_usage,      update_receptor_desc
+    register C::SetCredentials,   'set_credentials',    C::SetCredentials::USAGE,   C::SetCredentials.desc
+    register C::Uninstall,        'uninstall',          C::Uninstall::USAGE,        C::Uninstall.desc
+    register C::AddGitignore,     'add_gitignore',      C::AddGitignore::USAGE,     C::AddGitignore.desc
 
     desc 'merge-files', 'Merges double files'
     def merge_files
