@@ -23,7 +23,7 @@ module Tuka
         puts 'Opening the gitignore...'
 
         sleep 0.5
-        system 'xed', GITIGNORE_BASENAME
+        xed(GITIGNORE_BASENAME)
       end
 
       def display_command_completion

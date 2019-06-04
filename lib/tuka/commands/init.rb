@@ -100,7 +100,7 @@ module Tuka
 
       def open_tukafile
         # TODO: $stdin.get before opening the Tukafile
-        system 'xed', tukafile.path
+        xed(tukafile.path)
       end
 
       def display_command_completion
