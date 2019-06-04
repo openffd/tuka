@@ -46,19 +46,19 @@ module Tuka
     def rescue_tukarc_missing
       puts '[✓] Created `~/.tukarc`'
       TukarcGenerator.new.generate
-      open(File.expand_path(TUKARC_PATH))
+      open_file(File.expand_path(TUKARC_PATH))
     end
 
     def rescue_tukarc_not_loaded
       puts 'The environment vars are not sourced yet.'
       puts 'Check if the values in `~/.tukarc` are correct, then run `source ~/.bash_profile`.'
-      open(File.expand_path(TUKARC_PATH))
+      open_file(File.expand_path(TUKARC_PATH))
     end
 
     def rescue_tukarc_incomplete_vars
       puts 'Some environment vars are not set yet.'
       puts 'Modify `~/.tukarc`, save, then run `source ~/.bash_profile`.'
-      open(File.expand_path(TUKARC_PATH))
+      open_file(File.expand_path(TUKARC_PATH))
     end
   end
 end

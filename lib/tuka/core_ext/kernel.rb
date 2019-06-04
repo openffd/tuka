@@ -11,7 +11,7 @@ module CoreExtensions
       File.open(path, 'a') { |file| file.puts string }
     end
 
-    def open(path)
+    def open_file(path)
       system 'open', path
     end
 
