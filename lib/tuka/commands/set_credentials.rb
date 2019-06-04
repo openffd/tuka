@@ -10,19 +10,19 @@ module Tuka
       def check_prior_setup
         if tukarc_setup?
           print_newline
-          puts "The required credentials are already set. Setup is unnecessary. Exiting..."
+          puts 'The required credentials are already set. Setup is unnecessary. Exiting...'
           exit
         end
       rescue StandardError
         print_newline
-        puts 'Initializing Service Credentials Setup for Tuka...'.magenta
+        puts 'Initializing Credentials Setup for Tuka...'.magenta
       end
 
       def check_bash_profile
         print_newline
-        puts '[✓] Checked `~/.bash_profile`: OK' if bash_profile_setup?
+        puts '[✓] Checked ~/.bash_profile configuration => OK' if bash_profile_setup?
       rescue BashProfileTukarcNotSourcedError
-        puts '[✓] Detected `~/.bash_profile`; Added lines to source the `~/.tukarc` file.'
+        puts '[✓] Detected ~/.bash_profile exists, added lines to source ~/.tukarc'
         add_line_sourcing_tukarc_to_bash_profile
       rescue BashProfileMissingError
         puts '[✓] Created `~/.bash_profile`'
@@ -30,8 +30,35 @@ module Tuka
       end
 
       def create_tukarc
-        puts 'Unable to locate a `.tukarc` file in the home directory. Creating one...' if tukarc.nil?
+        print_newline
+        tukarc_setup?
+      rescue TukarcMissingError
+        rescue_tukarc_missing
+      rescue TukarcIncompleteVarsError
+        rescue_tukarc_incomplete_vars
+      rescue TukarcNotLoadedError
+        rescue_tukarc_not_loaded
       end
+    end
+
+    private
+
+    def rescue_tukarc_missing
+      puts '[✓] Created `~/.tukarc`'
+      TukarcGenerator.new.generate
+      system 'open', File.expand_path(TUKARC_PATH)
+    end
+
+    def rescue_tukarc_not_loaded
+      puts 'The environment vars are not sourced yet.'
+      puts 'Check if the values in `~/.tukarc` are correct, then run `source ~/.bash_profile`.'
+      system 'open', File.expand_path(TUKARC_PATH)
+    end
+
+    def rescue_tukarc_incomplete_vars
+      puts 'Some environment vars are not set yet.'
+      puts 'Modify `~/.tukarc`, save, then run `source ~/.bash_profile`.'
+      system 'open', File.expand_path(TUKARC_PATH)
     end
   end
 end
