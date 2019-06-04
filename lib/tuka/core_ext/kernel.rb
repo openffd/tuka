@@ -11,6 +11,14 @@ module CoreExtensions
       File.open(path, 'a') { |file| file.puts string }
     end
 
+    def open(path)
+      system 'open', path
+    end
+
+    def xed(path)
+      system 'xed', path
+    end
+
     def print_newline
       puts "\n"
     end
