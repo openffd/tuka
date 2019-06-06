@@ -23,7 +23,7 @@ module Tuka
         print_newline
         puts '[✓] Checked ~/.bash_profile configuration => OK' if bash_profile_setup?
       rescue BashProfileTukarcNotSourcedError
-        puts '[✓] Detected ~/.bash_profile exists, added lines to source ~/.tukarc'
+        puts '[✓] Detected ~/.bash_profile exists, added lines for sourcing ~/.tukarc'
         add_line_sourcing_tukarc_to_bash_profile
       rescue BashProfileMissingError
         puts '[✓] Created ~/.bash_profile'
@@ -52,14 +52,23 @@ module Tuka
       end
 
       def rescue_tukarc_not_loaded
-        puts 'The environment vars are not sourced yet.'
-        puts "Check if the values in ~/.tukarc are correct, then run `#{SOURCE_BASH_PROFILE_CMD}`."
-        open_file(File.expand_path(TUKARC_PATH))
+        puts 'The environment vars are not sourced yet!'
+        puts "Check if the values in ~/.tukarc are correct..."
+        prompt_open_tukarc
       end
 
       def rescue_tukarc_incomplete_vars
         puts 'Some environment vars are not set yet.'
-        puts "Modify ~/.tukarc, save, then run `#{SOURCE_BASH_PROFILE_CMD}`."
+        puts "Check if the values in ~/.tukarc are correct..."
+        prompt_open_tukarc
+      end
+
+      def prompt_open_tukarc
+        print_newline
+        ask '[ Press any key to open ~/.tukarc ]'.yellow
+        clear_prev_line
+        print 'Opening ~/.tukarc...'
+        sleep 0.5
         open_file(File.expand_path(TUKARC_PATH))
       end
     end
