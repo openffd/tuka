@@ -15,6 +15,10 @@ module CoreExtensions
       system 'clear'
     end
 
+    def clear_prev_line
+      print "\r\e[A\e[K"
+    end
+
     def open_file(path)
       system 'open', path
     end
