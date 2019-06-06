@@ -11,6 +11,10 @@ module CoreExtensions
       File.open(path, 'a') { |file| file.puts string }
     end
 
+    def clear
+      system 'clear'
+    end
+
     def open_file(path)
       system 'open', path
     end
