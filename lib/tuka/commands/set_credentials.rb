@@ -4,6 +4,7 @@ module Tuka
   module Commands
     class SetCredentials < Thor::Group
       include Bash
+      include Thor::Actions
 
       using CoreExtensions
 
@@ -25,7 +26,7 @@ module Tuka
         puts '[✓] Detected ~/.bash_profile exists, added lines to source ~/.tukarc'
         add_line_sourcing_tukarc_to_bash_profile
       rescue BashProfileMissingError
-        puts '[✓] Created `~/.bash_profile`'
+        puts '[✓] Created ~/.bash_profile'
         create_bash_profile
       end
 
@@ -38,6 +39,8 @@ module Tuka
         rescue_tukarc_incomplete_vars
       rescue TukarcNotLoadedError
         rescue_tukarc_not_loaded
+      ensure
+        # TODO: bash_relogin
       end
 
       private
@@ -50,13 +53,13 @@ module Tuka
 
       def rescue_tukarc_not_loaded
         puts 'The environment vars are not sourced yet.'
-        puts 'Check if the values in `~/.tukarc` are correct, then run `source ~/.bash_profile`.'
+        puts "Check if the values in ~/.tukarc are correct, then run `#{SOURCE_BASH_PROFILE_CMD}`."
         open_file(File.expand_path(TUKARC_PATH))
       end
 
       def rescue_tukarc_incomplete_vars
         puts 'Some environment vars are not set yet.'
-        puts 'Modify ~/.tukarc, save, then run `source ~/.bash_profile`.'
+        puts "Modify ~/.tukarc, save, then run `#{SOURCE_BASH_PROFILE_CMD}`."
         open_file(File.expand_path(TUKARC_PATH))
       end
     end
