@@ -8,6 +8,8 @@ module Tuka
     BASHRC_PATH       = '~/.bashrc'
     TUKARC_PATH       = '~/.tukarc'
 
+    SOURCE_BASH_PROFILE_CMD = "source #{BASH_PROFILE_PATH}".yellow
+
     LOAD_TUKARC_CMD       = "[ -r #{TUKARC_PATH} ] && . #{TUKARC_PATH}"
     LOAD_TUKARC_CMD_REGEX = %r{\n\[ -r ~/.tukarc \] && . ~/.tukarc\n}.freeze
 
@@ -51,6 +53,10 @@ module Tuka
 
     def add_line_sourcing_tukarc_to_bash_profile
       append_to_file(File.expand_path(BASH_PROFILE_PATH), string: "\n#{LOAD_TUKARC_CMD}")
+    end
+
+    def bash_relogin
+      system 'exec', 'bash', '-l'
     end
   end
 end
