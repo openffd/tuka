@@ -10,12 +10,12 @@ module Tuka
       end
 
       def display_tuka_setup
-        print_newline
+        puts
         puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_tukafile_sourcing
-        print_newline
+        puts
         puts 'Sourcing Tukafile from URL: ' + url.yellow
       end
 
@@ -80,7 +80,7 @@ module Tuka
       def dump_new_tukafile
         tukafile.dump
 
-        print_newline
+        puts
         puts '[✓] Pre-configured Tukafile fields to reflect project path and type'
       end
 
@@ -94,7 +94,7 @@ module Tuka
       def add_tuka_bundle_to_gitignore
         gitignore_add("#{TukaBundle.dir}/")
 
-        print_newline
+        puts
         puts "[✓] Added directory '#{TukaBundle.dir}/' to .gitignore"
       end
 
@@ -104,7 +104,7 @@ module Tuka
       end
 
       def display_command_completion
-        print_newline
+        puts
         puts 'End'
       end
 
