@@ -8,6 +8,10 @@ module Tuka
 
       using CoreExtensions
 
+      def clear_terminal
+        clear
+      end
+
       def check_prior_setup
         if tukarc_setup?
           print_newline
@@ -17,6 +21,7 @@ module Tuka
       rescue StandardError
         print_newline
         puts 'Initializing Credentials Setup for Tuka...'.magenta
+        sleep 1
       end
 
       def check_bash_profile
@@ -43,6 +48,11 @@ module Tuka
         # TODO: bash_relogin
       end
 
+      def display_command_completion
+        print_newline
+        puts 'End'
+      end
+
       private
 
       def rescue_tukarc_missing
@@ -52,20 +62,20 @@ module Tuka
       end
 
       def rescue_tukarc_not_loaded
-        puts 'The environment vars are not sourced yet!'
+        puts 'The required environment vars are not sourced yet!'
         puts 'Check if the values in ~/.tukarc are correct...'
         prompt_open_tukarc
       end
 
       def rescue_tukarc_incomplete_vars
-        puts 'Some environment vars are not set yet.'
+        puts 'Some required environment vars are not set yet.'
         puts 'Check if the values in ~/.tukarc are correct...'
         prompt_open_tukarc
       end
 
       def prompt_open_tukarc
         print_newline
-        ask '[ Press any key to open ~/.tukarc ]'.yellow
+        ask '  [ Press Return(⏎ ) key to open ~/.tukarc ]'.yellow
         clear_prev_line
         print 'Opening ~/.tukarc...'
         sleep 0.5
