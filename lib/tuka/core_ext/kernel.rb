@@ -19,6 +19,16 @@ module CoreExtensions
       print "\r\e[A\e[K"
     end
 
+    def blinking_message(msg, blink_count: 10)
+      blink_count.times do
+        print "\r#{msg}"
+        sleep 0.5
+        print "\r#{' ' * msg.size}"
+        sleep 0.5
+      end
+      print msg
+    end
+
     def open_file(path)
       system 'open', path
     end
