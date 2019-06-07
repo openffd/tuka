@@ -4,6 +4,7 @@ require 'awesome_print'
 require 'colored2'
 require 'curb'
 require 'thor'
+require 'whirly'
 require 'xcodeproj'
 
 module Tuka
