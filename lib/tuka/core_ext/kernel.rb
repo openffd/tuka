@@ -37,10 +37,6 @@ module CoreExtensions
       system 'xed', path
     end
 
-    def print_newline
-      puts "\n"
-    end
-
     def merge_appledouble_files
       system 'dot_clean', '.'
     end

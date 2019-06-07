@@ -14,12 +14,12 @@ module Tuka
 
       def check_prior_setup
         if tukarc_setup?
-          print_newline
+          puts
           puts 'The required credentials are already set. Setup is unnecessary. Exiting...'
           exit
         end
       rescue StandardError
-        print_newline
+        puts
         Whirly.configure spinner: 'vertical_bars', position: 'below', color: false
         Whirly.start do
           Whirly.status = 'Initializing Credentials Setup for Tuka...'.magenta
@@ -29,7 +29,7 @@ module Tuka
       end
 
       def check_bash_profile
-        print_newline
+        puts
         puts '[✓] Checked ~/.bash_profile configuration => OK' if bash_profile_setup?
       rescue BashProfileTukarcNotSourcedError
         puts '[✓] Detected ~/.bash_profile exists, added lines for sourcing ~/.tukarc'
@@ -40,7 +40,7 @@ module Tuka
       end
 
       def create_tukarc
-        print_newline
+        puts
         tukarc_setup?
       rescue TukarcMissingError
         rescue_tukarc_missing
@@ -53,7 +53,7 @@ module Tuka
       end
 
       def display_command_completion
-        print_newline
+        puts
         puts 'End'
       end
 
@@ -80,7 +80,7 @@ module Tuka
       end
 
       def prompt_open_tukarc
-        print_newline
+        puts
         ask '[ Press ENTER key to open ~/.tukarc ]'.yellow
         clear_prev_line
         print 'Opening ~/.tukarc...'

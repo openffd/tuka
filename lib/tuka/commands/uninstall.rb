@@ -6,7 +6,7 @@ module Tuka
       using CoreExtensions
 
       def display
-        print_newline
+        puts
         puts 'To be implemented soon.'
       end
     end
