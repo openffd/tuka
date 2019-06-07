@@ -29,6 +29,7 @@ module Tuka
   require 'tuka/tuka_bundle/library'
   require 'tuka/tuka_bundle/receptor'
   require 'tuka/tuka_bundle/tukafile'
+  require 'tuka/messages/set_credentials.rb'
   require 'tuka/messages/tukafile_errors'
   require 'tuka/frameworks'
   require 'tuka/project_bundle'
