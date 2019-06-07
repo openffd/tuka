@@ -7,7 +7,7 @@ module Tuka
     TEMPLATE = 'tukarc_template.erb'
 
     def generate
-      File.open(Bash::TUKARC_PATH, 'w+') do |file|
+      File.open(File.expand_path(Bash::TUKARC_PATH), 'w+') do |file|
         text = ERB.new(template).result(binding)
         file.write(text)
       end
