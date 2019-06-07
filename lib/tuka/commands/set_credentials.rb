@@ -20,8 +20,12 @@ module Tuka
         end
       rescue StandardError
         print_newline
-        puts 'Initializing Credentials Setup for Tuka...'.magenta
-        sleep 1
+        Whirly.configure spinner: 'vertical_bars', position: 'below', color: false
+        Whirly.start do
+          Whirly.status = 'Initializing Credentials Setup for Tuka...'.magenta
+          sleep 1.5
+        end
+        puts
       end
 
       def check_bash_profile
@@ -77,7 +81,7 @@ module Tuka
 
       def prompt_open_tukarc
         print_newline
-        ask '  [ Press Return(⏎ ) key to open ~/.tukarc ]'.yellow
+        ask '[ Press ENTER key to open ~/.tukarc ]'.yellow
         clear_prev_line
         print 'Opening ~/.tukarc...'
         sleep 0.5
