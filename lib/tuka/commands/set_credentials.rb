@@ -8,10 +8,6 @@ module Tuka
 
       using CoreExtensions
 
-      def clear_terminal
-        clear
-      end
-
       def check_prior_setup
         if tukarc_setup?
           puts
@@ -19,6 +15,7 @@ module Tuka
           exit
         end
       rescue StandardError
+        clear
         Whirly.configure spinner: 'vertical_bars', position: 'below', color: false
         Whirly.start do
           Whirly.status = 'Initializing Credentials Setup for Tuka...'.magenta
@@ -43,13 +40,10 @@ module Tuka
         tukarc_setup?
       rescue TukarcMissingError
         rescue_tukarc_missing
-        prompt_bash_relogin
       rescue TukarcIncompleteVarsError
         rescue_tukarc_incomplete_vars
-        prompt_bash_relogin
       rescue TukarcNotLoadedError
         rescue_tukarc_not_loaded
-        prompt_bash_relogin
       end
 
       def display_command_completion
@@ -64,7 +58,8 @@ module Tuka
 
         puts '[✓] Created ~/.tukarc'
         TukarcGenerator.new.generate
-        open_file(File.expand_path(TUKARC_PATH))
+        prompt_open_tukarc
+        prompt_bash_relogin
       end
 
       def rescue_tukarc_not_loaded
@@ -72,6 +67,7 @@ module Tuka
         puts
         puts 'Check if the values in ~/.tukarc are correct.'
         prompt_open_tukarc
+        prompt_bash_relogin
       end
 
       def rescue_tukarc_incomplete_vars
@@ -79,6 +75,7 @@ module Tuka
         puts
         puts 'Check if the values in ~/.tukarc are correct.'
         prompt_open_tukarc
+        prompt_bash_relogin
       end
 
       def prompt_open_tukarc
