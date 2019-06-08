@@ -56,7 +56,7 @@ module Tuka
     end
 
     def bash_relogin
-      system 'exec', 'bash', '-l'
+      system 'bash', '-l'
     end
   end
 end
