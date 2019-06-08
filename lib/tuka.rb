@@ -7,14 +7,20 @@ require 'thor'
 require 'whirly'
 require 'xcodeproj'
 
+Kernel.module_eval do
+  def require_matched(dir_pattern)
+    Dir[dir_pattern]
+      .map { |f| f.gsub(/.*(?=tuka\/)/, '') }
+      .each { |f| require f }
+  end
+end
+
 module Tuka
+  gem_lib_tuka = File.join(__dir__, 'tuka')
+
   require 'tuka/xcodeproj/overrides'
   require 'tuka/xcodeproj/build_settings'
-  require 'tuka/core_ext/dir'
-  require 'tuka/core_ext/file'
-  require 'tuka/core_ext/open_struct'
-  require 'tuka/core_ext/string'
-  require 'tuka/core_ext/kernel'
+  require_matched File.join(gem_lib_tuka, 'core_ext', '*')
   require 'tuka/bash/bash_profile'
   require 'tuka/bash/tukarc'
   require 'tuka/git'
@@ -30,8 +36,7 @@ module Tuka
   require 'tuka/tuka_bundle/library'
   require 'tuka/tuka_bundle/receptor'
   require 'tuka/tuka_bundle/tukafile'
-  require 'tuka/messages/set_credentials.rb'
-  require 'tuka/messages/tukafile_errors'
+  require_matched File.join(gem_lib_tuka, 'messages', '*')
   require 'tuka/frameworks'
   require 'tuka/project_bundle'
   require 'tuka/tuka_bundle'
@@ -40,4 +45,5 @@ module Tuka
   require 'tuka/cli'
   require 'tuka/cli_patch'
   require 'tuka/version'
+  require_matched File.join(gem_lib_tuka, 'templates', '*', '*.rb')
 end
