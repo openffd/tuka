@@ -54,8 +54,6 @@ module Tuka
       private
 
       def rescue_tukarc_missing
-        require 'tuka/templates/tukarc/tukarc_generator'
-
         puts '[✓] Created ~/.tukarc'
         TukarcGenerator.new.generate
         prompt_open_tukarc
