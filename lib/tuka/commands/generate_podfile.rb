@@ -14,12 +14,12 @@ module Tuka
       end
 
       def display_generate_podfile
-        print_newline
+        puts
         puts "Generating a #{Podfile.basename} for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_tukafile_is_valid
-        print_newline
+        puts
         puts "[✓] #{Tukafile::BASENAME} validation: No errors found"
       end
 
@@ -45,7 +45,7 @@ module Tuka
         return unless target_generated_podfile_path && File.file?(target_generated_podfile_path)
 
         system 'rm', target_generated_podfile_path
-        print_newline
+        puts
         puts '[✓] Deleted previously generated Podfile'
       end
 
@@ -87,13 +87,13 @@ module Tuka
 
         return unless options[:yes] || yes?("\n[?] Run `pod install`? [y|n] ".yellow)
 
-        print_newline if options[:yes]
+        puts if options[:yes]
         puts "[✓] Running 'pod install'"
         podfile.install_via_bundler
       end
 
       def display_command_completion
-        print_newline
+        puts
         puts 'End' unless options[:quiet]
       end
     end

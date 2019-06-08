@@ -10,7 +10,7 @@ module Tuka
       end
 
       def display_addition_of_gitignore
-        print_newline
+        puts
         puts "Generating a Gitignore file for #{project.name} (#{project.type_pretty})".magenta
       end
 
@@ -19,7 +19,7 @@ module Tuka
       end
 
       def show_gitignore
-        print_newline
+        puts
         puts 'Opening the gitignore...'
 
         sleep 0.5
@@ -27,7 +27,7 @@ module Tuka
       end
 
       def display_command_completion
-        print_newline
+        puts
         puts 'End' unless options[:quiet]
       end
     end
