@@ -23,8 +23,11 @@ module CoreExtensions
       self =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
     end
 
-    def rot_cipher(seed)
-      charset = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    def cipher_charset
+      ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    end
+
+    def rot_cipher(seed, charset = cipher_charset)
       chars.map do |char|
         if charset.include? char
           charset[(charset.find_index(char) + seed % charset.count) % charset.count]
