@@ -99,8 +99,14 @@ module Tuka
       end
 
       def open_tukafile
-        # TODO: $stdin.get before opening the Tukafile
+        puts
+        ask '[ Press ENTER to open the Tukafile ]'.yellow
+        clear_prev_line
+        puts 'Opening the Tukafile...'
+        sleep 0.5
         xed(tukafile.path)
+        puts
+        puts 'You can go ahead and modify the Tukafile fields as necessary.'
       end
 
       def display_command_completion
