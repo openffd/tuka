@@ -31,11 +31,8 @@ module Tuka
   require 'tuka/project_bundle/podfile'
   require 'tuka/project_bundle/project'
   require 'tuka/project_bundle/gemfile'
-  require 'tuka/tuka_bundle/bridging_header'
-  require 'tuka/tuka_bundle/library/searchables'
-  require 'tuka/tuka_bundle/library'
-  require 'tuka/tuka_bundle/receptor'
-  require 'tuka/tuka_bundle/tukafile'
+  require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*', '*.rb')
+  require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'messages', '*')
   require 'tuka/frameworks'
   require 'tuka/project_bundle'

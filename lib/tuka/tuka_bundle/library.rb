@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'tukafile/user_agent'
-
 module Tuka
   class Library
     prepend RequestHeader
