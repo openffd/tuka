@@ -10,7 +10,7 @@ require 'xcodeproj'
 Kernel.module_eval do
   def require_matched(dir_pattern)
     Dir[dir_pattern]
-      .map { |f| f.gsub(/.*(?=tuka\/)/, '') }
+      .map { |f| f.gsub(%r{.*(?=tuka/)}, '') }
       .each { |f| require f }
   end
 end
