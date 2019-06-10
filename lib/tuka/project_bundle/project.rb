@@ -30,12 +30,6 @@ module Tuka
       @pbxproj ||= pbxproj_path if File.file? pbxproj_path
     end
 
-    def app_delegate_paths
-      @app_delegate_paths ||= @project_configurator.files.map(&:path).select do |path|
-        PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get)).include? path
-      end
-    end
-
     def type
       if app_delegate_paths.include?(PBXProj::SEARCHABLE_UNITY)
         Project.types[:Unity]
@@ -135,6 +129,12 @@ module Tuka
 
     def pbxproj_path
       File.join(@xcodeproj, PBXProj::BASENAME)
+    end
+
+    def app_delegate_paths
+      @app_delegate_paths ||= @project_configurator.files.map(&:path).select do |path|
+        PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get)).include? path
+      end
     end
 
     def receptor_search_string
