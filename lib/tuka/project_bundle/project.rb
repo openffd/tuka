@@ -69,15 +69,7 @@ module Tuka
       file_references = @project_configurator.files.select { |file| file.path =~ /AppDelegate\+/ }
       return if file_references.empty?
 
-      grouped_file_references = file_references.group_by { |ref| File.basename(ref.path, '.*') }
-      groups_for_deletion = grouped_file_references.values.select do |group|
-        m_file = group.select { |ref| File.extname(ref.path) == '.m' }.first
-        return false if m_file.nil?
-
-        File.read(m_file.full_path.to_s).include? receptor_search_string
-      end
-
-      groups_for_deletion.flatten.each do |ref|
+      groups_for_deletion(file_references).flatten.each do |ref|
         system 'rm', ref.full_path.to_s
         ref.remove_from_project
       end
@@ -143,6 +135,19 @@ module Tuka
 
     def type_search_strings
       { ObjC: PBXProj::SEARCHABLE_OBJC, Swift: PBXProj::SEARCHABLE_SWIFT, Unity: PBXProj::SEARCHABLE_UNITY }
+    end
+
+    def groups_for_deletion(refs)
+      grouped_file_refs(refs).values.select do |group|
+        m_file = group.select { |ref| File.extname(ref.path) == '.m' }.first
+        return false if m_file.nil?
+
+        File.read(m_file.full_path.to_s).include? receptor_search_string
+      end
+    end
+
+    def grouped_file_refs(refs)
+      refs.group_by { |ref| File.basename(ref.path, '.*') }
     end
 
     def grep_project_build_settings(pattern)
