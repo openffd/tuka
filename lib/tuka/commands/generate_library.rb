@@ -47,7 +47,7 @@ module Tuka
       end
 
       def display_tukafile_server_url
-        base64 = Tukafile.server_url_types[:Base64]
+        base64 = Tukafile::SERVER_URL_TYPES[:Base64]
         puts "[✓] Server URL (base64)     => '#{tukafile.server.url}'" if tukafile.server.url_type == base64
       end
 

@@ -21,9 +21,7 @@ module Tuka
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
     private_constant :USER_AGENT_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
 
-    def self.server_url_types
-      { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }
-    end
+    SERVER_URL_TYPES = { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }.freeze
 
     def initialize(path)
       @path = path
@@ -55,7 +53,7 @@ module Tuka
     end
 
     def decoded_server_url
-      return Base64.decode64(server.url) if server.url_type == Tukafile.server_url_types[:Base64]
+      return Base64.decode64(server.url) if server.url_type == SERVER_URL_TYPES[:Base64]
 
       server.url
     end
@@ -75,16 +73,16 @@ module Tuka
     end
 
     def valid_server_url_type?
-      Tukafile.server_url_types.value? server.url_type
+      SERVER_URL_TYPES.value? server.url_type
     end
 
     def valid_server_url?
       case server.url_type
-      when Tukafile.server_url_types[:Base64]
+      when SERVER_URL_TYPES[:Base64]
         server.url.base64?
-      when Tukafile.server_url_types[:IPv4]
+      when SERVER_URL_TYPES[:IPv4]
         server.url.ipv4?
-      when Tukafile.server_url_types[:URL]
+      when SERVER_URL_TYPES[:URL]
         server.url.url?
       end
     end
