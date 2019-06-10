@@ -4,6 +4,7 @@ module Tuka
   module Commands
     class GenerateLibrary < Command
       using CoreExtensions
+      using System
 
       def check_tukafile_existence
         raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init::USAGE}'" if tukafile.nil?
@@ -30,7 +31,7 @@ module Tuka
       def remove_existing_library
         message = "[✓] Deleted previous instance of the library located at: '#{target_library_path}'"
         puts message if File.exist? target_library_path
-        system 'rm', '-rf', target_library_path
+        rm_rf(target_library_path)
       end
 
       def download_library

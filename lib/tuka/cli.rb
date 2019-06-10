@@ -30,7 +30,7 @@ module Tuka
     def merge_files
       merge_appledouble_files
 
-      print_newline
+      puts
       puts 'Double files merged.'
     end
 
