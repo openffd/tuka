@@ -4,6 +4,7 @@ module Tuka
   module Commands
     class GeneratePodfile < Command
       using CoreExtensions
+      using System
 
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
@@ -44,7 +45,7 @@ module Tuka
       def remove_previously_generated_podfile
         return unless target_generated_podfile_path && File.file?(target_generated_podfile_path)
 
-        system 'rm', target_generated_podfile_path
+        rm(target_generated_podfile_path)
         puts
         puts '[✓] Deleted previously generated Podfile'
       end

@@ -11,6 +11,8 @@ module Tuka
   class Project
     include Xcodeproj::BuildSettings
 
+    using System
+
     attr_accessor :project_configurator
 
     def self.types
@@ -70,7 +72,7 @@ module Tuka
       return if file_references.empty?
 
       groups_for_deletion(file_references).flatten.each do |ref|
-        system 'rm', ref.full_path.to_s
+        rm(ref.full_path.to_s)
         ref.remove_from_project
       end
 

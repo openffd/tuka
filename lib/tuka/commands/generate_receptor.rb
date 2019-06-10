@@ -4,6 +4,7 @@ module Tuka
   module Commands
     class GenerateReceptor < Command
       using CoreExtensions
+      using System
 
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
@@ -51,7 +52,7 @@ module Tuka
       def delete_previous_receptor
         return if receptor.nil?
 
-        system 'rm', '-rf', receptor.path
+        rm_rf(receptor.path)
         puts "[✓] Deleted previous receptor files found in '#{tuka_bundle_dir}'"
       end
 
