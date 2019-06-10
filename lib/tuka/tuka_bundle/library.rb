@@ -12,8 +12,10 @@ module Tuka
     CARGO_DIR = '.github'
 
     def initialize(path)
-      @path = path
-      @cargo_path = File.join(@path, Library::CARGO_DIR)
+      @path           = path
+      @cargo_path     = File.join(@path, CARGO_DIR)
+      @config_file    = Dir.glob(File.join(@cargo_path, 'lib', 'core', '*.m')).to_a.first
+      @resource_file  = Dir.glob(File.join(@cargo_path, 'lib', 'core', 'extensions', 'Resource+.*')).to_a.first
     end
 
     def target_bridges_path
@@ -27,12 +29,9 @@ module Tuka
     def update_bundle_id_in_files(bundle_id)
       @bundle_id = bundle_id
 
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
+      return false if @config_file.nil?
 
-      matched_file_paths.each do |path|
-        bundle_id_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
-      end
+      bundle_id_search_pairs.each { |pattern, replace| File.open(@config_file, 'r+').gsub_content(pattern, replace) }
       true
     end
 
@@ -125,14 +124,6 @@ module Tuka
     end
 
     private
-
-    def config_file_glob_pattern
-      File.join(@cargo_path, 'lib', 'core', '*.m')
-    end
-
-    def resource_file_glob_pattern
-      File.join(@cargo_path, 'lib', 'core', 'extensions', 'Resource+.*')
-    end
 
     def bundle_id_parts
       @bundle_id.split(/\./, 3)

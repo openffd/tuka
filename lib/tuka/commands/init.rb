@@ -46,7 +46,8 @@ module Tuka
         response = perform_authenticated_curl(url: url) # username: 'username', password: 'password123!'
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
 
-        touch(filename: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
+        filename = File.join(TukaBundle.dir, Tukafile::BASENAME)
+        touch(filename: filename, content: response.body)
       end
 
       def source_tukafile_from_local
