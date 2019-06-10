@@ -77,13 +77,11 @@ module Tuka
       def prompt_use_generated_podfile
         return unless options[:yes] || yes?("\n[?] Use the generated Podfile? [y|n] ".yellow)
 
-        unless podfile.nil?
-          podfile.create_backup
-          puts '[✓] Renamed the old Podfile to Podfile.bak'
-        end
+        backup_podfile
 
         FileUtils.cp(target_generated_podfile_path, Podfile.basename)
-        puts "[✓] The generated Podfile has been copied to the current directory and is ready to be used\n"
+        puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
+        puts
 
         return unless options[:yes] || yes?("\n[?] Run `pod install`? [y|n] ".yellow)
 
@@ -95,6 +93,15 @@ module Tuka
       def display_command_completion
         puts
         puts 'End' unless options[:quiet]
+      end
+
+      private
+
+      def backup_podfile
+        return if podfile.nil?
+
+        podfile.create_backup
+        puts '[✓] Renamed the old Podfile to Podfile.bak'
       end
     end
   end
