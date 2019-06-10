@@ -3,6 +3,7 @@
 require 'awesome_print'
 require 'colored2'
 require 'curb'
+require 'date'
 require 'thor'
 require 'whirly'
 require 'xcodeproj'

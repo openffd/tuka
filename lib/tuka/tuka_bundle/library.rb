@@ -7,77 +7,56 @@ module Tuka
     using CoreExtensions
     using RequestHeader
 
-    attr_reader :path, :activation_date, :request_headers
+    attr_reader :path, :target_bridges_path, :target_receptors_path, :activation_date, :request_headers
 
     CARGO_DIR = '.github'
 
     def initialize(path)
-      @path           = path
-      @cargo_path     = File.join(@path, CARGO_DIR)
-      @config_file    = Dir.glob(File.join(@cargo_path, 'lib', 'core', '*.m')).to_a.first
-      @resource_file  = Dir.glob(File.join(@cargo_path, 'lib', 'core', 'extensions', 'Resource+.*')).to_a.first
+      @path = path
+      @cargo_path = File.join(@path, CARGO_DIR)
+      @target_bridges_path = File.join(@cargo_path, 'bridges')
+      @target_receptors_path = File.join(@cargo_path, 'receptors')
+
+      setup_config_file
+      setup_resource_file
     end
 
-    def target_bridges_path
-      File.join(@cargo_path, 'bridges')
+    def setup_config_file
+      @config_file = Dir.glob(File.join(@cargo_path, 'lib', 'core', '*.m')).to_a.first
+      raise StandardError, 'Unable to locate the library config file' if @config_file.nil?
     end
 
-    def target_receptors_path
-      File.join(@cargo_path, 'receptors')
+    def setup_resource_file
+      @resource_file = Dir.glob(File.join(@cargo_path, 'lib', 'core', 'extensions', 'Resource+.*')).to_a.first
+      raise StandardError, 'Unable to locate the library resource file' if @resource_file.nil?
     end
 
     def update_bundle_id_in_files(bundle_id)
       @bundle_id = bundle_id
-
-      return false if @config_file.nil?
-
-      bundle_id_search_pairs.each { |pattern, replace| File.open(@config_file, 'r+').gsub_content(pattern, replace) }
+      bundle_id_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
     end
 
     def update_base_url_in_files(cipher)
       @cipher = cipher
-
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        base_url_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
-      end
+      base_url_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
     end
 
     def update_user_agent_in_files(user_agent)
       @user_agent = user_agent
-
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        user_agent_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
-      end
+      user_agent_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
     end
 
     def remove_three_part_tags
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        File.open(path, 'r+').gsub_content(/\s- \(NSString \*\)tagFirstPart {.*tagThirdPart;\s}\s/m, '')
-      end
+      File.open(@config_file, 'r+').gsub_content(/\s- \(NSString \*\)tagFirstPart {.*tagThirdPart;\s}\s/m, '')
       true
     end
 
     def update_url_path_in_files(url_path)
       @url_path = url_path
-
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        url_path_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
-      end
+      url_path_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
     end
 
@@ -85,42 +64,20 @@ module Tuka
       return true if protocol == 'https'
 
       @protocol = protocol
-
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        protocol_search_pairs.each { |pattern, replacement| File.open(path, 'r+').gsub_content(pattern, replacement) }
-      end
+      protocol_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
     end
 
     def update_activation_date(inactive_days)
-      require 'date'
-
       @activation_date = (DateTime.now + inactive_days.to_i).strftime('%y-%m-%d')
-
-      matched_file_paths = Dir.glob(config_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        inactive_days_search_pairs.each do |pattern, replacement|
-          File.open(path, 'r+').gsub_content(pattern, replacement)
-        end
-      end
+      inactive_days_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
+      true
     end
 
     def update_request_headers(count)
       @request_headers = generate_request_headers(count)
-
-      matched_file_paths = Dir.glob(resource_file_glob_pattern)
-      return false if matched_file_paths.empty?
-
-      matched_file_paths.each do |path|
-        request_header_search_pairs.each do |pattern, replacement|
-          File.open(path, 'r+').gsub_content(pattern, replacement)
-        end
-      end
+      request_header_search_pairs.each { |pattern, str| File.open(@resource_file, 'r+').gsub_content(pattern, str) }
+      true
     end
 
     private
