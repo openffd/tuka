@@ -75,19 +75,17 @@ module Tuka
       end
 
       def prompt_use_generated_podfile
-        return unless options[:yes] || yes?("\n[?] Use the generated Podfile? [y|n] ".yellow)
+        yes_option = options[:yes]
+
+        return unless yes_option || yes?("\n[?] Use the generated Podfile? [y|n] ".yellow)
 
         backup_podfile
+        copy_podfile_to_current_dir
 
-        FileUtils.cp(target_generated_podfile_path, Podfile.basename)
-        puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
-        puts
+        return unless yes_option || yes?("\n[?] Run `pod install`? [y|n] ".yellow)
 
-        return unless options[:yes] || yes?("\n[?] Run `pod install`? [y|n] ".yellow)
-
-        puts if options[:yes]
-        puts "[✓] Running 'pod install'"
-        podfile.install_via_bundler
+        puts if yes_option
+        run_bundle_pod_install
       end
 
       def display_command_completion
@@ -102,6 +100,17 @@ module Tuka
 
         podfile.create_backup
         puts '[✓] Renamed the old Podfile to Podfile.bak'
+      end
+
+      def copy_podfile_to_current_dir
+        FileUtils.cp(target_generated_podfile_path, Podfile.basename)
+        puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
+        puts
+      end
+
+      def run_bundle_pod_install
+        puts "[✓] Running 'pod install'"
+        podfile.install_via_bundler
       end
     end
   end
