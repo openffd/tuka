@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 module Tuka
+  module PBXProj
+    BASENAME = 'project.pbxproj'
+    SEARCHABLE_OBJC   = 'AppDelegate.h'
+    SEARCHABLE_SWIFT  = 'AppDelegate.swift'
+    SEARCHABLE_UNITY  = 'UnityAppController.h'
+  end
+
   class Project
     include Xcodeproj::BuildSettings
 
     attr_accessor :project_configurator
-
-    PBXPROJ_BASENAME = 'project.pbxproj'
-    private_constant :PBXPROJ_BASENAME
 
     def self.types
       { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }
@@ -26,16 +30,20 @@ module Tuka
       @pbxproj ||= pbxproj_path if File.file? pbxproj_path
     end
 
+    def app_delegate_paths
+      @app_delegate_paths ||= @project_configurator.files.map(&:path).select do |path|
+        PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get)).include? path
+      end
+    end
+
     def type
-      # TODO: Reimplement this using @project_configurator files selection
-      return nil if pbxproj.nil?
-
-      text = File.read(pbxproj)
-      return Project.types[:Unity]  if text.include? type_search_strings[:Unity]
-      return Project.types[:ObjC]   if text.include? type_search_strings[:ObjC]
-      return Project.types[:Swift]  if text.include? type_search_strings[:Swift]
-
-      nil
+      if app_delegate_paths.include?(PBXProj::SEARCHABLE_UNITY)
+        Project.types[:Unity]
+      elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_OBJC)
+        Project.types[:ObjC]
+      elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_SWIFT)
+        Project.types[:Swift]
+      end
     end
 
     def bundle_id
@@ -126,7 +134,7 @@ module Tuka
     private
 
     def pbxproj_path
-      File.join(@xcodeproj, PBXPROJ_BASENAME)
+      File.join(@xcodeproj, PBXProj::BASENAME)
     end
 
     def receptor_search_string
@@ -134,7 +142,7 @@ module Tuka
     end
 
     def type_search_strings
-      { ObjC: 'AppDelegate.h', Swift: 'AppDelegate.swift', Unity: 'UnityAppController.h' }
+      { ObjC: PBXProj::SEARCHABLE_OBJC, Swift: PBXProj::SEARCHABLE_SWIFT, Unity: PBXProj::SEARCHABLE_UNITY }
     end
 
     def grep_project_build_settings(pattern)
