@@ -46,11 +46,6 @@ module Tuka
         rescue_tukarc_not_loaded
       end
 
-      def display_command_completion
-        puts
-        puts 'End'
-      end
-
       private
 
       def rescue_tukarc_missing
@@ -84,7 +79,8 @@ module Tuka
         sleep 0.5
         open_file(File.expand_path(TUKARC_PATH))
         puts
-        puts 'Set the required environment variables in the ~/.tukarc file. Save and close.'
+        puts 'Set the required environment variables in the ~/.tukarc file.'
+        puts 'Make sure everything is correct, save the file, and close it. Then press ENTER.'
       end
 
       def prompt_bash_relogin
@@ -93,6 +89,8 @@ module Tuka
         clear_prev_line
         puts 'Loading ~/.tukarc environment vars...'
         sleep 0.5
+        puts
+        puts 'End'
         bash_relogin
       end
     end
