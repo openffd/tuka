@@ -1,9 +1,24 @@
-# required
-export BITBUCKET_USERNAME=''
-export BITBUCKET_PASSWORD=''
+### Required
+BITBUCKET_USERNAME='fdelacruz.mail@gmail.com'
+BITBUCKET_PASSWORD='password123!'
 
-# ignore these for the meantime
-# export NEXTCLOUD_USERNAME=''
-# export NEXTCLOUD_PASSWORD=''
-# export GITLAB_USERNAME=''
-# export GITLAB_PASSWORD=''
+
+### Optional
+NEXTCLOUD_USERNAME=''
+NEXTCLOUD_PASSWORD=''
+GITLAB_USERNAME=''
+GITLAB_PASSWORD=''
+
+
+### Scripting
+set -e
+shopt -s extglob
+isvalid () { if [[ -z "${!1}" || "${!1}" =~ ^\ +$ ]]; then return 1; else return 0; fi  }
+if isvalid BITBUCKET_USERNAME && isvalid BITBUCKET_PASSWORD; then
+  export BITBUCKET_USERNAME;
+  export BITBUCKET_PASSWORD;
+else
+  echo -e "\n[×] One of the required credentials you entered is invalid! Check the ~/.tukarc file";
+  echo -e "\nRun 'tuka sc' to set this up again.";
+fi
+echo -e "\nEnd"

@@ -89,8 +89,6 @@ module Tuka
         clear_prev_line
         puts 'Loading ~/.tukarc environment vars...'
         sleep 0.5
-        puts
-        puts 'End'
         bash_relogin
       end
     end
