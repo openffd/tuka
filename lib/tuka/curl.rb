@@ -20,6 +20,11 @@ module Curl
     require 'ostruct'
 
     Response = OpenStruct
+    Response.class_eval do
+      def successful?
+        code.to_s =~ /20+/
+      end
+    end
 
     def perform_curl(url:)
       curl = Curl.basic_curl.dup
