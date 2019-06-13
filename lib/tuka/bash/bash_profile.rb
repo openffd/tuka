@@ -48,7 +48,7 @@ module Tuka
     end
 
     def create_bash_profile
-      touch(filename: File.expand_path(BASH_PROFILE_PATH), content: LOAD_TUKARC_CMD)
+      touch(path: File.expand_path(BASH_PROFILE_PATH), content: LOAD_TUKARC_CMD)
     end
 
     def add_line_sourcing_tukarc_to_bash_profile

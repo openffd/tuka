@@ -2,9 +2,8 @@
 
 module CoreExtensions
   refine Kernel do
-    # TODO: Change filename to path
-    def touch(filename:, content:)
-      File.open(filename, 'w+') { |file| file.puts content }
+    def touch(path:, content:)
+      File.open(path, 'w+') { |file| file.puts content }
     end
 
     def append_to_file(path, string:)
