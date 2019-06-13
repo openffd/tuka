@@ -37,7 +37,7 @@ module Tuka
         check_bitbucket_credentials
 
         response = perform_authenticated_curl(url: url, username: Bitbucket::USERNAME, password: Bitbucket::PASSWORD)
-        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.successful?
       end
 
       def source_tukafile_from_git
@@ -52,7 +52,7 @@ module Tuka
         check_nextcloud_credentials
 
         response = perform_authenticated_curl(url: url, username: Nextcloud::USERNAME, password: Nextcloud::PASSWORD)
-        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.successful?
 
         path = File.join(TukaBundle.dir, Tukafile::BASENAME)
         touch(path: path, content: response.body)
