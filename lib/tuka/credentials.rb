@@ -7,7 +7,7 @@ module Tuka
       PASSWORD = ENV['BITBUCKET_PASSWORD'].to_s
     end
 
-    module NextCloud
+    module Nextcloud
       USERNAME = ENV['NEXTCLOUD_USERNAME'].to_s
       PASSWORD = ENV['NEXTCLOUD_PASSWORD'].to_s
     end
@@ -30,8 +30,8 @@ module Tuka
     end
 
     def check_nextcloud_credentials
-      raise StandardError, NilError.new if NextCloud::USERNAME.empty? || NextCloud::PASSWORD.empty?
-      raise StandardError, InvalidError.new if NextCloud::USERNAME.strip.empty? || NextCloud::PASSWORD.strip.empty?
+      raise StandardError, NilError.new if Nextcloud::USERNAME.empty? || Nextcloud::PASSWORD.empty?
+      raise StandardError, InvalidError.new if Nextcloud::USERNAME.strip.empty? || Nextcloud::PASSWORD.strip.empty?
     end
   end
 end

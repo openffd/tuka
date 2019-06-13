@@ -51,7 +51,7 @@ module Tuka
 
         check_nextcloud_credentials
 
-        response = perform_authenticated_curl(url: url) # username: 'username', password: 'password123!'
+        response = perform_authenticated_curl(url: url, username: Nextcloud::USERNAME, password: Nextcloud::PASSWORD)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
 
         path = File.join(TukaBundle.dir, Tukafile::BASENAME)
