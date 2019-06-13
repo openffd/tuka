@@ -24,6 +24,7 @@ module Tuka
   require_matched File.join(gem_lib_tuka, 'core_ext', '*')
   require 'tuka/bash/bash_profile'
   require 'tuka/bash/tukarc'
+  require 'tuka/credentials'
   require 'tuka/git'
   require 'tuka/bundler'
   require 'tuka/request_header'
