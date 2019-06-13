@@ -2,8 +2,15 @@
 
 module Tuka
   module Credentials
-    BITBUCKET_USERNAME = ENV['BITBUCKET_USERNAME'].to_s
-    BITBUCKET_PASSWORD = ENV['BITBUCKET_PASSWORD'].to_s
+    module Bitbucket
+      USERNAME = ENV['BITBUCKET_USERNAME'].to_s
+      PASSWORD = ENV['BITBUCKET_PASSWORD'].to_s
+    end
+
+    module NextCloud
+      USERNAME = ENV['NEXTCLOUD_USERNAME'].to_s
+      PASSWORD = ENV['NEXTCLOUD_PASSWORD'].to_s
+    end
 
     class NilError < StandardError
       def initialize(msg = 'One or more required credentials are not set.')
@@ -17,9 +24,14 @@ module Tuka
       end
     end
 
-    def check_credentials
-      raise StandardError, NilError.new if BITBUCKET_USERNAME.empty? || BITBUCKET_PASSWORD.empty?
-      raise StandardError, InvalidError.new if BITBUCKET_USERNAME.strip.empty? || BITBUCKET_PASSWORD.strip.empty?
+    def check_bitbucket_credentials
+      raise StandardError, NilError.new if Bitbucket::USERNAME.empty? || Bitbucket::PASSWORD.empty?
+      raise StandardError, InvalidError.new if Bitbucket::USERNAME.strip.empty? || Bitbucket::PASSWORD.strip.empty?
+    end
+
+    def check_nextcloud_credentials
+      raise StandardError, NilError.new if NextCloud::USERNAME.empty? || NextCloud::PASSWORD.empty?
+      raise StandardError, InvalidError.new if NextCloud::USERNAME.strip.empty? || NextCloud::PASSWORD.strip.empty?
     end
   end
 end
