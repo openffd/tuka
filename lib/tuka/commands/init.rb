@@ -4,6 +4,7 @@ module Tuka
   module Commands
     class Init < Command
       include Credentials
+      include Bash
 
       using CoreExtensions
 
@@ -33,9 +34,10 @@ module Tuka
       def source_tukafile_from_bitbucket_snippets
         return unless options[:bitbucket]
 
-        check_credentials
+        check_bitbucket_credentials
 
-        # TODO: Implement sourcing Tukafile from a team-private BitBucket snippet
+        response = perform_authenticated_curl(url: url, username: Bitbucket::USERNAME, password: Bitbucket::PASSWORD)
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
       end
 
       def source_tukafile_from_git
@@ -47,7 +49,7 @@ module Tuka
       def source_tukafile_from_nextcloud
         return unless options[:nextcloud]
 
-        check_credentials
+        check_nextcloud_credentials
 
         response = perform_authenticated_curl(url: url) # username: 'username', password: 'password123!'
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
