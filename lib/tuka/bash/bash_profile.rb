@@ -13,9 +13,6 @@ module Tuka
     LOAD_TUKARC_CMD       = "[ -r #{TUKARC_PATH} ] && . #{TUKARC_PATH}"
     LOAD_TUKARC_CMD_REGEX = %r{\n\[ -r ~/.tukarc \] && . ~/.tukarc\n}.freeze
 
-    ENV_BITBUCKET_USERNAME = ENV['BITBUCKET_USERNAME']
-    ENV_BITBUCKET_PASSWORD = ENV['BITBUCKET_PASSWORD']
-
     def bashrc
       File.open(File.expand_path(BASHRC_PATH))
     rescue StandardError
