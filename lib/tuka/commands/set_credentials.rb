@@ -16,7 +16,7 @@ module Tuka
           puts
 
           if yes? '[ Edit ~/.tukarc? (Y|n) ]:'.yellow
-            prompt_open_tukarc
+            open_tukarc_with_instructions
             prompt_bash_relogin
           else
             puts
@@ -90,12 +90,16 @@ module Tuka
         puts
         ask '[ Press ENTER to open ~/.tukarc ]'.yellow
         clear_prev_line
+        open_tukarc_with_instructions
+      end
+
+      def open_tukarc_with_instructions
         puts 'Opening ~/.tukarc...'
         sleep 0.5
         open_file(File.expand_path(TUKARC_PATH))
         puts
         puts 'Set the required environment variables in the ~/.tukarc file.'
-        puts 'Make sure everything is correct, save the file, and close it. Then press ENTER.'
+        puts 'Make sure everything is correct, then save the file.'
       end
 
       def prompt_bash_relogin
