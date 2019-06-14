@@ -12,16 +12,11 @@ module Tuka
         if tukarc_setup?
           puts
           puts 'The required credentials are already set. Setup is unnecessary.'
-          puts 'You can edit ~/.tukarc if you want to change the credentials.'
+          puts
+          puts 'You can edit ~/.tukarc if you intend to change the credentials.'
           puts
 
-          if yes? '[ Edit ~/.tukarc? (Y|n) ]:'.yellow
-            open_tukarc_with_instructions
-            prompt_bash_relogin
-          else
-            puts
-            puts 'Exiting...'
-          end
+          prompt_edit_tukafile_or_display_exit_text
 
           exit
         end
@@ -61,6 +56,17 @@ module Tuka
           sleep 1.5
         end
         puts
+      end
+
+      def prompt_edit_tukafile_or_display_exit_text
+        if yes? '[ Edit ~/.tukarc? (y|n) ]:'.yellow
+          clear_prev_line
+          open_tukarc_with_instructions
+          prompt_bash_relogin
+        else
+          puts
+          puts 'Exiting...'
+        end
       end
 
       def rescue_tukarc_missing
