@@ -16,8 +16,8 @@ module Tuka
       desc 'Downloads a pre-configured Tukafile from the given URL'
       argument :url
 
-      class_option :bitbucket,  aliases: ['-b'], desc: 'Source the Tukafile from a private Bitbucket repository'
-      class_option :curl,       aliases: ['-c'], desc: 'Use cURL to instantiate the Tukafile'
+      class_option :bitbucket,  aliases: ['-b'], desc: 'Source the Tukafile from a private Bitbucket snippet/raw file'
+      class_option :curl,       aliases: ['-c'], desc: 'Use unauthenticated cURL to instantiate the Tukafile'
       class_option :git,        aliases: ['-g'], desc: 'Download the Tukafile from a remote Git repository'
       class_option :nextcloud,  aliases: ['-n'], desc: 'Source Tukafile from a Nextcloud file server'
       # class_option :local,      aliases: ['-l'], desc: 'Copy a Tukafile from the local file system'
