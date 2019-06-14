@@ -11,7 +11,18 @@ module Tuka
       def check_prior_setup
         if tukarc_setup?
           puts
-          puts 'The required credentials are already set. Setup is unnecessary. Exiting...'
+          puts 'The required credentials are already set. Setup is unnecessary.'
+          puts 'You can edit ~/.tukarc if you want to change the credentials.'
+          puts
+
+          if yes? '[ Edit ~/.tukarc? (Y|n) ]:'.yellow
+            prompt_open_tukarc
+            prompt_bash_relogin
+          else
+            puts
+            puts 'Exiting...'
+          end
+
           exit
         end
       rescue StandardError
