@@ -22,22 +22,22 @@ module Tuka
         puts 'Sourcing Tukafile from URL: ' + url.yellow
       end
 
-      def source_tukafile_from_curl
-        return unless source_options.empty? || options[:curl]
-
-        response = perform_curl(url: url)
-        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
-
-        touch(path: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
-      end
-
       def source_tukafile_from_bitbucket_snippets
-        return unless options[:bitbucket]
+        return unless source_options.empty? || options[:bitbucket]
 
         check_bitbucket_credentials
 
         response = perform_authenticated_curl(url: url, username: Bitbucket::USERNAME, password: Bitbucket::PASSWORD)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.successful?
+      end
+
+      def source_tukafile_from_curl
+        return unless options[:curl]
+
+        response = perform_curl(url: url)
+        raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
+
+        touch(path: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
       end
 
       def source_tukafile_from_git
