@@ -26,7 +26,7 @@ module Tuka
     end
 
     class BashProfileTukarcNotSourcedError < StandardError
-      def initialize(msg = 'The bash')
+      def initialize(msg = 'The ~/.tukarc file is not sourced in ~/.bash_profile.')
         super(msg)
       end
     end
