@@ -26,13 +26,7 @@ module Tuka
           exit
         end
       rescue StandardError
-        clear
-        Whirly.configure spinner: 'vertical_bars', position: 'below', color: false
-        Whirly.start do
-          Whirly.status = 'Initializing Credentials Setup for Tuka...'.magenta
-          sleep 1.5
-        end
-        puts
+        show_command_start
       end
 
       def check_bash_profile
@@ -58,6 +52,16 @@ module Tuka
       end
 
       private
+
+      def show_command_start
+        clear
+        Whirly.configure spinner: 'vertical_bars', position: 'below', color: false
+        Whirly.start do
+          Whirly.status = 'Initializing Credentials Setup for Tuka...'.magenta
+          sleep 1.5
+        end
+        puts
+      end
 
       def rescue_tukarc_missing
         puts '[✓] Created ~/.tukarc'
