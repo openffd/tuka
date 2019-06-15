@@ -47,7 +47,7 @@ module Tuka
     end
 
     def target_library_path
-      @target_library_path ||= File.join(TukaBundle.dir, tukafile.library.name) if tukafile.valid?
+      @target_library_path ||= File.join(TukaBundle.dir, tukafile.library.name)
     end
 
     def target_generated_podfile_path
