@@ -42,7 +42,7 @@ module Tuka
       end
 
       def display_tukafile_is_valid
-        puts "[✓] #{Tukafile::BASENAME} validation: No errors found"
+        puts "[✓] #{Tukafile::BASENAME} validation: " + '0 errors found'.yellow
       end
 
       def display_tukafile_receptor

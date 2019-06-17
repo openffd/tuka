@@ -21,7 +21,7 @@ module Tuka
 
       def display_tukafile_is_valid
         puts
-        puts "[✓] #{Tukafile::BASENAME} validation: No errors found"
+        puts "[✓] #{Tukafile::BASENAME} validation: " + '0 errors found'.yellow
       end
 
       def display_pod_target
