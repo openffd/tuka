@@ -3,10 +3,7 @@
 module Tuka
   class Receptor
     DIR_NAME = 'receptor'
-
-    def self.receptor_name_search_string
-      'Receptor'
-    end
+    FILE_NAME_SEARCH_STRING = 'Receptor'
 
     def self.receptor_target_search_string
       'XCODETARGET'
@@ -58,7 +55,7 @@ module Tuka
 
     def update_content_receptor_name(receptor_name:)
       files.each do |receptor_file|
-        text = File.read(receptor_file).gsub(Receptor.receptor_name_search_string, receptor_name)
+        text = File.read(receptor_file).gsub(FILE_NAME_SEARCH_STRING, receptor_name)
         File.open(receptor_file, 'w') { |file| file.puts text }
       end
     end
