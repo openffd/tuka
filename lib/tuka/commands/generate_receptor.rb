@@ -60,7 +60,7 @@ module Tuka
       end
 
       def instantiate_receptor_files
-        Dir.mkdir File.join(tuka_bundle_dir, Receptor::DIR_NAME)
+        Dir.mkdir File.join(tuka_bundle_dir, Receptor::DIRNAME)
         FileUtils.cp_r("#{@receptor_source_path}/.", receptor.path)
       end
 

@@ -49,7 +49,7 @@ module Tuka
     end
 
     def target_receptor_path
-      @target_receptor_path ||= File.join(TukaBundle.dir, Receptor::DIR_NAME) if tuka_bundle_dir
+      @target_receptor_path ||= File.join(TukaBundle.dir, Receptor::DIRNAME) if tuka_bundle_dir
     end
 
     private
