@@ -4,9 +4,7 @@ module Tuka
   module ProjectBundle
     using CoreExtensions
 
-    def self.modder_dir
-      '_atemp'
-    end
+    MODDER_DIR = '_atemp'
 
     def xcodeproj
       @xcodeproj ||= Dir.xcodeprojs.first
@@ -30,7 +28,7 @@ module Tuka
 
     def receptor_files
       Dir.glob('**/AppDelegate+*.[h|m]')
-         .reject { |path| path.include?(TukaBundle.dir) || path.include?(ProjectBundle.modder_dir) }
+         .reject { |path| path.include?(TukaBundle.dir) || path.include?(MODDER_DIR) }
     end
 
     def info_plist
