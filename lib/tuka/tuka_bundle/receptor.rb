@@ -2,9 +2,7 @@
 
 module Tuka
   class Receptor
-    def self.dir
-      'receptor'
-    end
+    DIR_NAME = 'receptor'
 
     def self.receptor_name_search_string
       'Receptor'

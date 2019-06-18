@@ -14,6 +14,10 @@ module Tuka
         raise StandardError, tukafile.error unless tukafile.valid?
       end
 
+      def check_appdelegate_existence
+
+      end
+
       def check_library_existence
         message = "Unable to locate a generated #{tukafile.library.name} library. "
         raise StandardError, message + GenerateLibrary::USAGE_HELP if generated_library.nil?
@@ -57,7 +61,7 @@ module Tuka
       end
 
       def instantiate_receptor_files
-        Dir.mkdir File.join(tuka_bundle_dir, Receptor.dir)
+        Dir.mkdir File.join(tuka_bundle_dir, Receptor::DIR_NAME)
         FileUtils.cp_r("#{@receptor_source_path}/.", receptor.path)
       end
 
