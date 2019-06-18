@@ -15,7 +15,6 @@ module Tuka
       end
 
       def check_appdelegate_existence
-
       end
 
       def check_library_existence

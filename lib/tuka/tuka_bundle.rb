@@ -8,10 +8,6 @@ module Tuka
       '.tuka'
     end
 
-    def self.tukafile
-      'Tukafile'
-    end
-
     def tuka_bundle_dir
       @tuka_bundle_dir ||= Dir[TukaBundle.dir].first
     end
