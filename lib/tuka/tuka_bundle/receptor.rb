@@ -4,10 +4,8 @@ module Tuka
   class Receptor
     DIR_NAME = 'receptor'
     FILE_NAME_SEARCH_STRING = 'Receptor'
-
-    def self.receptor_target_search_string
-      'XCODETARGET'
-    end
+    TARGET_SEARCH_STRING = 'XCODETARGET'
+    private_constant :FILE_NAME_SEARCH_STRING, :TARGET_SEARCH_STRING
 
     attr_reader :path, :category_name
 
@@ -39,7 +37,7 @@ module Tuka
     end
 
     def update_swift_target(target_name:)
-      text = File.read(h_file).gsub(Receptor.receptor_target_search_string, target_name)
+      text = File.read(h_file).gsub(TARGET_SEARCH_STRING, target_name)
       File.open(h_file, 'w') { |file| file.puts text }
     end
 
