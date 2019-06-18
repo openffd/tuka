@@ -2,12 +2,10 @@
 
 module Tuka
   module TukaBundle
+    PREVIOUS_DIRNAMES = ['_tuka'].freeze
+
     def self.dir
       '.tuka'
-    end
-
-    def self.previous_dir_names
-      ['_tuka']
     end
 
     def self.tukafile
