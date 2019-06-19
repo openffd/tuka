@@ -27,7 +27,13 @@ module Tuka
     register C::AddGitignore,     'add_gitignore',      C::AddGitignore::USAGE,     C::AddGitignore.desc
 
     desc 'merge-files', 'Merges double files'
+    method_option :help, type: :string, aliases: ['-h']
     def merge_files
+      if options[:help]
+        invoke :help, [__method__]
+        return
+      end
+
       merge_appledouble_files
 
       puts
@@ -35,12 +41,24 @@ module Tuka
     end
 
     desc 'powerup!', "Let's power up!"
+    method_option :help, type: :string, aliases: ['-h']
     def powerup!
+      if options[:help]
+        invoke :help, [__method__]
+        return
+      end
+
       system "echo \"LET'S POWERUP!\" | lolcat -F 1 -a -d 12 -s 11; echo '(╯°□°）╯︵ ┻━┻' | lolcat -F 1 -a -d 12 -s 11"
     end
 
     desc 'version', 'Show the Tuka version information'
+    method_option :help, type: :string, aliases: ['-h']
     def version
+      if options[:help]
+        invoke :help, [__method__]
+        return
+      end
+
       puts 'v' + VERSION
     end
 

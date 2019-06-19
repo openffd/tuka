@@ -25,7 +25,7 @@ module Tuka
       def source_tukafile_from_bitbucket_snippets
         return unless source_options.empty? || options[:bitbucket]
 
-        #TODO: Try to authenticate using the given credentials and raise an error if unable
+        # TODO: Try to authenticate using the given credentials and raise an error if unable
         check_bitbucket_credentials
 
         response = perform_authenticated_curl(url: url, username: Bitbucket::USERNAME, password: Bitbucket::PASSWORD)
