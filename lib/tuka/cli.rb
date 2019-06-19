@@ -27,7 +27,7 @@ module Tuka
     register C::AddGitignore,     'add_gitignore',      C::AddGitignore::USAGE,     C::AddGitignore.desc
 
     desc 'merge-files', 'Merges double files'
-    method_option :help, type: :string, aliases: ['-h']
+    method_option :help, type: :boolean, aliases: ['-h']
     def merge_files
       if options[:help]
         invoke :help, [__method__]
@@ -41,7 +41,7 @@ module Tuka
     end
 
     desc 'powerup!', "Let's power up!"
-    method_option :help, type: :string, aliases: ['-h']
+    method_option :help, type: :boolean, aliases: ['-h']
     def powerup!
       if options[:help]
         invoke :help, [__method__]
@@ -52,7 +52,7 @@ module Tuka
     end
 
     desc 'version', 'Show the Tuka version information'
-    method_option :help, type: :string, aliases: ['-h']
+    method_option :help, type: :boolean, aliases: ['-h']
     def version
       if options[:help]
         invoke :help, [__method__]
