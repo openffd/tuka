@@ -29,10 +29,7 @@ module Tuka
     desc 'merge-files', 'Merges double files'
     method_option :help, type: :boolean, aliases: ['-h']
     def merge_files
-      if options[:help]
-        invoke :help, [__method__]
-        return
-      end
+      help_option_dance.call(options, __method__)
 
       merge_appledouble_files
 
@@ -43,10 +40,7 @@ module Tuka
     desc 'powerup!', "Let's power up!"
     method_option :help, type: :boolean, aliases: ['-h']
     def powerup!
-      if options[:help]
-        invoke :help, [__method__]
-        return
-      end
+      help_option_dance.call(options, __method__)
 
       system "echo \"LET'S POWERUP!\" | lolcat -F 1 -a -d 12 -s 11; echo '(╯°□°）╯︵ ┻━┻' | lolcat -F 1 -a -d 12 -s 11"
     end
@@ -54,12 +48,20 @@ module Tuka
     desc 'version', 'Show the Tuka version information'
     method_option :help, type: :boolean, aliases: ['-h']
     def version
-      if options[:help]
-        invoke :help, [__method__]
-        return
-      end
+      help_option_dance.call(options, __method__)
 
       puts 'v' + VERSION
+    end
+
+    no_commands do
+      def help_option_dance
+        proc do |options, cmd|
+          if options[:help]
+            invoke :help, [cmd]
+            exit
+          end
+        end
+      end
     end
 
     map %w[gitignore add-gi addg ag] => :add_gitignore
