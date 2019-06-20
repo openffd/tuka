@@ -6,6 +6,15 @@ module Tuka
       using CoreExtensions
       using System
 
+      no_commands do
+        def bundle_id_update
+          message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
+          raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
+
+          puts "[✓] Client bundle ID        => '#{tukafile.project_info.bundle_id}'"
+        end
+      end
+
       def check_tukafile_existence
         raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
@@ -120,15 +129,6 @@ module Tuka
       def display_command_completion
         puts
         puts 'End' unless options[:quiet]
-      end
-
-      private
-
-      def bundle_id_update
-        message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-        raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
-
-        puts "[✓] Client bundle ID        => '#{tukafile.project_info.bundle_id}'"
       end
     end
   end
