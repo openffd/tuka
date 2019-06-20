@@ -13,13 +13,13 @@ module Tuka
       USAGE = 'init URL [OPTIONS]'
 
       namespace :init
-      desc 'Downloads a pre-configured Tukafile from the given URL'
+      desc 'Instantiates a pre-configured Tukafile from the given URL'
       argument :url
 
-      class_option :bitbucket,  aliases: ['-b'], desc: 'Source the Tukafile from a private Bitbucket snippet/raw file'
+      class_option :bitbucket,  aliases: ['-b'], desc: 'Sources the Tukafile from a private Bitbucket snippet/raw file'
       class_option :curl,       aliases: ['-c'], desc: 'Uses unauthenticated cURL to instantiate the Tukafile'
       class_option :git_clone,  aliases: ['-g'], desc: 'Clones a remote Git repository and extracts the Tukafile'
-      class_option :nextcloud,  aliases: ['-n'], desc: 'Sources the Tukafile from a Nextcloud file server'
+      class_option :nextcloud,  aliases: ['-n'], desc: 'Sources the Tukafile from a private Nextcloud file server'
       # class_option :local,      aliases: ['-l'], desc: 'Copy a Tukafile from the local file system'
     end
 

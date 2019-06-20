@@ -10,7 +10,7 @@ module Tuka
         shell.say "\nCommands:", :yellow
         shell.print_table(cmd_list(subcommand), indent: 2, truncate: true)
         shell.say "\nHelp:", :yellow
-        shell.say "  Run 'tuka COMMAND -h' for more information on a command."
+        shell.say "  Run 'tuka COMMAND -h' for more information on a command, e.g. 'tuka init -h'"
       end
 
       def cmd_list(subcommand)
