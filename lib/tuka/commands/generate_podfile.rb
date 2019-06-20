@@ -6,6 +6,26 @@ module Tuka
       using CoreExtensions
       using System
 
+      no_commands do
+        def backup_podfile
+          return if podfile.nil?
+
+          podfile.create_backup
+          puts '[✓] Renamed the old Podfile to Podfile.bak'
+        end
+
+        def copy_podfile_to_current_dir
+          FileUtils.cp(target_generated_podfile_path, Podfile.basename)
+          puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
+          puts
+        end
+
+        def run_bundle_pod_install
+          puts "[✓] Running 'pod install'"
+          podfile.install_via_bundler
+        end
+      end
+
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
@@ -93,26 +113,6 @@ module Tuka
       def display_command_completion
         puts
         puts 'End' unless options[:quiet]
-      end
-
-      private
-
-      def backup_podfile
-        return if podfile.nil?
-
-        podfile.create_backup
-        puts '[✓] Renamed the old Podfile to Podfile.bak'
-      end
-
-      def copy_podfile_to_current_dir
-        FileUtils.cp(target_generated_podfile_path, Podfile.basename)
-        puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
-        puts
-      end
-
-      def run_bundle_pod_install
-        puts "[✓] Running 'pod install'"
-        podfile.install_via_bundler
       end
     end
   end
