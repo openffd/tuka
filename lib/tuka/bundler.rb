@@ -7,7 +7,7 @@ module Tuka
     end
 
     def bundle_install
-      system 'bundle', 'install', '--quiet'
+      system 'bundle', 'install'
     end
   end
 end
