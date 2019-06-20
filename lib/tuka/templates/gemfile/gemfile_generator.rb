@@ -4,9 +4,7 @@ module Tuka
   require 'erb'
 
   class GemfileGenerator
-    def self.template
-      'gemfile_template.erb'
-    end
+    TEMPLATE = 'gemfile_template.erb'
 
     def generate
       File.open(Gemfile::BASENAME, 'w+') do |file|
@@ -22,7 +20,7 @@ module Tuka
     end
 
     def template_path
-      File.join(File.expand_path(__dir__), GemfileGenerator.template)
+      File.join(File.expand_path(__dir__), TEMPLATE)
     end
   end
 end
