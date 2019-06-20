@@ -29,7 +29,7 @@ module Tuka
       end
 
       def source_tukafile_from_git_clone
-        return unless source_options.empty? || options[:gitclone]
+        return unless source_options.empty? || options[:git_clone]
 
         raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
       end
