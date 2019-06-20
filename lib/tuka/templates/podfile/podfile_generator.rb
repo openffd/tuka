@@ -4,7 +4,7 @@ module Tuka
   require 'erb'
 
   class PodfileGenerator
-    TEMPLATE = 'podfile_template.erb'
+    TEMPLATES = Dir[File.join(__dir__, '*.erb')]
     DEFAULT_SWIFT_VERSION = '4.2'
 
     def initialize(target, pods, library, library_path, path)
@@ -33,7 +33,7 @@ module Tuka
     end
 
     def template_path
-      File.join(File.expand_path(__dir__), TEMPLATE)
+      TEMPLATES.sample
     end
   end
 end
