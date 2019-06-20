@@ -8,10 +8,11 @@ module Tuka
 
       no_commands do
         def bundle_id_update
+          bundle_id = tukafile.project_info.bundle_id
           message = "Make sure Tukafile project_info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-          raise StandardError, message unless generated_library.update_bundle_id_in_files(tukafile.project_info.bundle_id)
+          raise StandardError, message unless generated_library.update_bundle_id_in_files(bundle_id)
 
-          puts "[✓] Client bundle ID        => '#{tukafile.project_info.bundle_id}'"
+          puts "[✓] Client bundle ID        => #{bundle_id.yellow}"
         end
       end
 
@@ -53,7 +54,7 @@ module Tuka
 
       def display_library_download_complete
         # puts "[] Library downloaded to path: '#{target_library_path}'"
-        puts "[✓] Successfully instantiated the library"
+        puts '[✓] Successfully instantiated the library'
         puts
       end
 
@@ -72,21 +73,23 @@ module Tuka
       end
 
       def update_generated_library_url_path
-        return if tukafile.server.url_path.nil?
+        url_path = tukafile.server.url_path
+        return if url_path.nil?
 
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-        raise StandardError, message unless generated_library.update_url_path_in_files(tukafile.server.url_path)
+        raise StandardError, message unless generated_library.update_url_path_in_files(url_path)
 
-        puts "[✓] Server URL path         => #{tukafile.server.url_path.yellow}"
+        puts "[✓] Server URL path         => #{url_path.yellow}"
       end
 
       def update_generated_library_protocol
-        return if tukafile.server.protocol.nil?
+        protocol = tukafile.server.protocol
+        return if protocol.nil?
 
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-        raise StandardError, message unless generated_library.update_protocol_in_files(tukafile.server.protocol)
+        raise StandardError, message unless generated_library.update_protocol_in_files(protocol)
 
-        puts "[✓] Server protocol         => #{tukafile.server.protocol.yellow}"
+        puts "[✓] Server protocol         => #{protocol.yellow}"
       end
 
       def update_generated_library_bundle_id
