@@ -42,6 +42,9 @@ module Tuka
 
         response = perform_authenticated_curl(url: url, username: Bitbucket::USERNAME, password: Bitbucket::PASSWORD)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.successful?
+
+        path = File.join(TukaBundle.dir, Tukafile::BASENAME)
+        touch(path: path, content: response.body)
       end
 
       def source_tukafile_from_curl
