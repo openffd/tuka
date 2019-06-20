@@ -20,12 +20,12 @@ module Tuka
 
       def display_tuka_setup
         puts
-        puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".magenta
+        puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".magenta.bold
       end
 
       def display_tukafile_sourcing
         puts
-        puts 'Sourcing Tukafile from URL: ' + url.yellow
+        puts 'Sourcing Tukafile from this URL: ' + url.yellow
       end
 
       def source_tukafile_from_bitbucket_snippets
@@ -74,7 +74,8 @@ module Tuka
       def check_downloaded_tukafile
         raise StandardError, 'Unable to locate a Tukafile from the downloaded resource' if tukafile.nil?
 
-        puts '[✓] Tukafile downloaded to path: ' + File.join(Dir.pwd, tukafile.path).yellow
+        # puts '[] Tukafile downloaded to path: ' + File.join(Dir.pwd, tukafile.path).yellow
+        puts '[✓] Tukafile successfully instantiated'
       end
 
       def edit_tukafile_project_info_xcodeproj
@@ -101,17 +102,16 @@ module Tuka
       end
 
       def display_modified_tukafile_fields
-        puts "    project_info: {\n      xcodeproj => '#{xcodeproj_basename}'".yellow
-        puts "      type      => '#{project.type}'".yellow
-        puts "      receptor  => '#{project.name.remove_non_word_chars}'".yellow
-        puts '    }'.yellow
+        puts "      - xcodeproj: #{xcodeproj_basename.yellow}"
+        puts "      - type     : #{project.type.yellow}"
+        puts "      - receptor : #{project.name.remove_non_word_chars.yellow}"
       end
 
       def add_tuka_bundle_to_gitignore
         gitignore_add("#{TukaBundle.dir}/")
 
         puts
-        puts "[✓] Added directory '#{TukaBundle.dir}/' to .gitignore"
+        puts "[✓] Excluded '#{TukaBundle.dir}/' from version control"
       end
 
       def open_tukafile

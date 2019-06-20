@@ -70,8 +70,10 @@ module Tuka
       end
 
       def execute_bundle_install
+        puts
         puts "[✓] Running 'bundle install'..."
         bundle_install
+        puts
       end
 
       def prompt_use_generated_podfile
