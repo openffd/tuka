@@ -100,7 +100,7 @@ module Tuka
     end
 
     def info_plist_path
-      grep_project_build_settings(INFOPLIST_FILE)
+      @info_plist_path ||= grep_project_build_settings(INFOPLIST_FILE)
     end
 
     def push_notifications_enabled?
