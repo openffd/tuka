@@ -9,7 +9,7 @@ module Tuka
     end
 
     def generate
-      File.open(Gemfile.basename, 'w+') do |file|
+      File.open(Gemfile::BASENAME, 'w+') do |file|
         text = ERB.new(template).result(binding)
         file.write(text)
       end

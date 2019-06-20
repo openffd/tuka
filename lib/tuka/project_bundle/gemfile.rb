@@ -2,11 +2,9 @@
 
 module Tuka
   class Gemfile
-    attr_reader :path
+    BASENAME = 'Gemfile'
 
-    def self.basename
-      'Gemfile'
-    end
+    attr_reader :path
 
     def initialize(path)
       @path = path

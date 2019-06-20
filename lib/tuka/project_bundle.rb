@@ -45,7 +45,7 @@ module Tuka
     end
 
     def target_gemfile_path
-      Gemfile.basename
+      Gemfile::BASENAME
     end
   end
 end

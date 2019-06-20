@@ -86,7 +86,7 @@ module Tuka
       end
 
       def display_gemfile_generated
-        puts "[✓] Generated a new Gemfile at path: './#{Gemfile.basename}'"
+        puts "[✓] Generated a new Gemfile at path: './#{Gemfile::BASENAME}'"
       end
 
       def execute_bundle_install
