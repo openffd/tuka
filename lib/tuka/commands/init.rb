@@ -8,6 +8,12 @@ module Tuka
 
       using CoreExtensions
 
+      no_commands do
+        def source_options
+          options.keys.map(&:to_sym).reject { |opt| %i[help quiet verbose].include? opt }
+        end
+      end
+
       def check_class_options
         raise StandardError, 'Invalid combination of options for this command' if source_options.count > 1
       end
@@ -122,12 +128,6 @@ module Tuka
       def display_command_completion
         puts
         puts 'End'
-      end
-
-      private
-
-      def source_options
-        options.keys.map(&:to_sym).reject { |opt| %i[help quiet verbose].include? opt }
       end
     end
   end
