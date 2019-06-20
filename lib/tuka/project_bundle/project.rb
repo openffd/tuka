@@ -43,7 +43,7 @@ module Tuka
     end
 
     def bundle_id
-      grep_project_build_settings(PRODUCT_BUNDLE_IDENTIFIER)
+      @bundle_id ||= grep_project_build_settings(PRODUCT_BUNDLE_IDENTIFIER)
     end
 
     def type_pretty
