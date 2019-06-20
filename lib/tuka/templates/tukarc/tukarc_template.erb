@@ -1,18 +1,62 @@
-### Required
+shopt -s extglob
+isv () { if [[ -z "${!1}" || "${!1}" =~ ^\ +$ ]]; then return 1; else return 0; fi  }
+
+
+# required
 BITBUCKET_USERNAME=''
 BITBUCKET_PASSWORD=''
 
 
-### Optional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# optional
 NEXTCLOUD_USERNAME=''
 NEXTCLOUD_PASSWORD=''
 GITLAB_USERNAME=''
 GITLAB_PASSWORD=''
-
-
-### Scripting
-shopt -s extglob
-isvalid () { if [[ -z "${!1}" || "${!1}" =~ ^\ +$ ]]; then return 1; else return 0; fi  }
 if isvalid BITBUCKET_USERNAME && isvalid BITBUCKET_PASSWORD; then
   export BITBUCKET_USERNAME;
   export BITBUCKET_PASSWORD;
