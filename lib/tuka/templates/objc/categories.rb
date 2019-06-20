@@ -2,9 +2,8 @@
 
 module Tuka
   module ObjC
-    def category_files
-      require 'pry'
-      binding.pry
+    def category_files(type:)
+      Dir[File.join(__dir__, '**', type.to_s, '*.*')]
     end
 
     class Category
