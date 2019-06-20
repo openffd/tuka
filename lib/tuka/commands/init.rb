@@ -28,8 +28,14 @@ module Tuka
         puts 'Sourcing Tukafile from this URL: ' + url.yellow
       end
 
+      def source_tukafile_from_git_clone
+        return unless source_options.empty? || options[:gitclone]
+
+        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+      end
+
       def source_tukafile_from_bitbucket_snippets
-        return unless source_options.empty? || options[:bitbucket]
+        return unless options[:bitbucket]
 
         # TODO: Try to authenticate using the given credentials and raise an error if unable
         check_bitbucket_credentials
@@ -45,12 +51,6 @@ module Tuka
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
 
         touch(path: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
-      end
-
-      def source_tukafile_from_git
-        return unless options[:gitclone]
-
-        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
       end
 
       def source_tukafile_from_nextcloud
