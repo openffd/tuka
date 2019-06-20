@@ -48,7 +48,7 @@ module Tuka
       end
 
       def source_tukafile_from_git
-        return unless options[:git]
+        return unless options[:gitclone]
 
         raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
       end
@@ -97,7 +97,7 @@ module Tuka
         tukafile.dump
 
         puts
-        puts '[✓] Pre-configured Tukafile fields to reflect project path and type'
+        puts '[✓] Pre-configured Tukafile fields to reflect the correct project path and type'
       end
 
       def display_modified_tukafile_fields
@@ -116,7 +116,7 @@ module Tuka
 
       def open_tukafile
         puts
-        ask '[ Press ENTER to open the Tukafile ]'.yellow
+        ask '[ Press ENTER to show the Tukafile ]'.yellow
         clear_prev_line
         puts 'Opening the Tukafile...'
         sleep 0.5
