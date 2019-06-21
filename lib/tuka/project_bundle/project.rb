@@ -25,7 +25,15 @@ module Tuka
     end
 
     def name
-      File.basename(@xcodeproj, '.*')
+      @project_name ||= File.basename(@xcodeproj, '.*')
+    end
+
+    # TODO: Put the category prefix into the Tukafile upon pre-configuration
+    def category_prefix
+      @prefix ||= begin
+        str = @project_name
+        str[0] + str[1, str.size - 2].chars.sample + str[-1]
+      end
     end
 
     def pbxproj
