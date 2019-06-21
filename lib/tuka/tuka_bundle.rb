@@ -45,7 +45,7 @@ module Tuka
     end
 
     def target_generated_podfile_path
-      @target_generated_podfile_path ||= File.join(TukaBundle.dir, Podfile.basename) if tuka_bundle_dir
+      @target_generated_podfile_path ||= File.join(TukaBundle.dir, Podfile::BASENAME) if tuka_bundle_dir
     end
 
     def target_receptor_path

@@ -41,7 +41,7 @@ module Tuka
     private
 
     def target_podfile_path
-      Podfile.basename
+      Podfile::BASENAME
     end
 
     def target_gemfile_path

@@ -6,9 +6,7 @@ module Tuka
   class Podfile
     attr_reader :path
 
-    def self.basename
-      'Podfile'
-    end
+    BASENAME = 'Podfile'
 
     def initialize(path)
       @path = path
@@ -31,6 +29,7 @@ module Tuka
     end
 
     def install_via_bundler
+      # TODO: You can move this to bundler.rb
       system 'bundle', 'exec', 'pod', 'install'
     end
 

@@ -15,7 +15,7 @@ module Tuka
         end
 
         def copy_podfile_to_current_dir
-          FileUtils.cp(target_generated_podfile_path, Podfile.basename)
+          FileUtils.cp(target_generated_podfile_path, Podfile::BASENAME)
           puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
           puts
         end
@@ -36,7 +36,7 @@ module Tuka
 
       def display_generate_podfile
         puts
-        puts "Generating a #{Podfile.basename} for #{project.name} (#{project.type_pretty})".magenta
+        puts "Generating a #{Podfile::BASENAME} for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_tukafile_is_valid
@@ -52,7 +52,7 @@ module Tuka
       def display_add_library_pod
         @library = tukafile.library.name
         @library_path = generated_library.path
-        puts "[✓] #{@library} at path '#{@library_path}' will be added to the new #{Podfile.basename}"
+        puts "[✓] #{@library} at path '#{@library_path}' will be added to the new #{Podfile::BASENAME}"
       end
 
       def display_current_pods
