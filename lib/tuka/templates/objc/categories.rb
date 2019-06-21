@@ -7,6 +7,8 @@ module Tuka
     end
 
     class Category
+      DEFAULT_PREFIX = 'MXBZ'
+
       def initialize(header:, implementation:)
         @header = header
         @implementation = implementation
