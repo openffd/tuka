@@ -31,7 +31,7 @@ module Tuka
       def source_tukafile_from_git_clone
         return unless source_options.empty? || options[:git_clone]
 
-        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle.dir)
+        raise StandardError, 'Failed to download from given repository URL' unless git_clone(url, TukaBundle::DIR)
       end
 
       def source_tukafile_from_bitbucket_snippets
@@ -43,7 +43,7 @@ module Tuka
         response = perform_authenticated_curl(url: url, username: Bitbucket::USERNAME, password: Bitbucket::PASSWORD)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.successful?
 
-        path = File.join(TukaBundle.dir, Tukafile::BASENAME)
+        path = File.join(TukaBundle::DIR, Tukafile::BASENAME)
         touch(path: path, content: response.body)
       end
 
@@ -53,7 +53,7 @@ module Tuka
         response = perform_curl(url: url)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.code.to_s =~ /20+/
 
-        touch(path: File.join(TukaBundle.dir, Tukafile::BASENAME), content: response.body)
+        touch(path: File.join(TukaBundle::DIR, Tukafile::BASENAME), content: response.body)
       end
 
       def source_tukafile_from_nextcloud
@@ -64,7 +64,7 @@ module Tuka
         response = perform_authenticated_curl(url: url, username: Nextcloud::USERNAME, password: Nextcloud::PASSWORD)
         raise StandardError, 'Failed to retrieve Tukafile from given URL' unless response.successful?
 
-        path = File.join(TukaBundle.dir, Tukafile::BASENAME)
+        path = File.join(TukaBundle::DIR, Tukafile::BASENAME)
         touch(path: path, content: response.body)
       end
 
@@ -111,10 +111,10 @@ module Tuka
       end
 
       def add_tuka_bundle_to_gitignore
-        gitignore_add("#{TukaBundle.dir}/")
+        gitignore_add("#{TukaBundle::DIR}/")
 
         puts
-        puts "[✓] Excluded '#{TukaBundle.dir}/' from version control"
+        puts "[✓] Excluded '#{TukaBundle::DIR}/' from version control"
       end
 
       def open_tukafile

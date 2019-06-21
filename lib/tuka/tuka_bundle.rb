@@ -4,12 +4,10 @@ module Tuka
   module TukaBundle
     PREVIOUS_DIRNAMES = ['_tuka'].freeze
 
-    def self.dir
-      '.tuka'
-    end
+    DIR = '.tuka'
 
     def tuka_bundle_dir
-      @tuka_bundle_dir ||= Dir[TukaBundle.dir].first
+      @tuka_bundle_dir ||= Dir[DIR].first
     end
 
     def tukafile
@@ -41,21 +39,21 @@ module Tuka
     end
 
     def target_library_path
-      @target_library_path ||= File.join(TukaBundle.dir, tukafile.library.name)
+      @target_library_path ||= File.join(DIR, tukafile.library.name)
     end
 
     def target_generated_podfile_path
-      @target_generated_podfile_path ||= File.join(TukaBundle.dir, Podfile::BASENAME) if tuka_bundle_dir
+      @target_generated_podfile_path ||= File.join(DIR, Podfile::BASENAME) if tuka_bundle_dir
     end
 
     def target_receptor_path
-      @target_receptor_path ||= File.join(TukaBundle.dir, Receptor::DIRNAME) if tuka_bundle_dir
+      @target_receptor_path ||= File.join(DIR, Receptor::DIRNAME) if tuka_bundle_dir
     end
 
     private
 
     def target_tukafile_path
-      @target_tukafile_path ||= File.join(TukaBundle.dir, Tukafile::BASENAME) if tuka_bundle_dir
+      @target_tukafile_path ||= File.join(DIR, Tukafile::BASENAME) if tuka_bundle_dir
     end
   end
 end

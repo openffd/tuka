@@ -47,7 +47,7 @@ module Tuka
     end
 
     def possible_dirs
-      [TukaBundle.dir, ProjectBundle::MODDER_DIR] + TukaBundle::PREVIOUS_DIRNAMES
+      [TukaBundle::DIR, ProjectBundle::MODDER_DIR] + TukaBundle::PREVIOUS_DIRNAMES
     end
   end
 end
