@@ -4,8 +4,11 @@ module Tuka
   require 'fileutils'
 
   class Podfile
+    include Bundler
+
     attr_reader :path
 
+    COMMAND = 'pod'
     BASENAME = 'Podfile'
 
     def initialize(path)
@@ -21,16 +24,16 @@ module Tuka
     end
 
     def create_backup
+      # TODO: Save other backups to have a complete backup history
       FileUtils.cp(@path, "#{@path}.bak")
     end
 
     def install
-      system 'pod', 'install'
+      system COMMAND, 'install'
     end
 
     def install_via_bundler
-      # TODO: You can move this to bundler.rb
-      system 'bundle', 'exec', 'pod', 'install'
+      bundle_exec(COMMAND, 'install')
     end
 
     private
