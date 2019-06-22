@@ -7,6 +7,7 @@ module Tuka
     using System
     using CoreExtensions::StringPrefix
 
+    attr_reader :name, :category_prefix
     attr_accessor :project_configurator
 
     def self.types
@@ -16,18 +17,13 @@ module Tuka
     def initialize(xcodeproj)
       @xcodeproj = xcodeproj
       @project_configurator = Xcodeproj::Project.open(xcodeproj)
-    end
-
-    def name
-      @name ||= File.basename(@xcodeproj, '.*')
-    end
-
-    def category_prefix
-      @category_prefix ||= name.remove_non_letter_chars.generate_prefix
+      @name = File.basename(@xcodeproj, '.*')
+      @category_prefix = name.remove_non_letter_chars.generate_prefix
+      @pbxproj_path = File.join(@xcodeproj, PBXProj::BASENAME)
     end
 
     def pbxproj
-      @pbxproj ||= pbxproj_path if File.file? pbxproj_path
+      @pbxproj ||= @pbxproj_path if File.file? @pbxproj_path
     end
 
     def type
@@ -39,8 +35,6 @@ module Tuka
     end
 
     def type_pretty
-      return nil if type.nil?
-
       Project.types.key(type).to_s
     end
 
@@ -121,10 +115,6 @@ module Tuka
       elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_SWIFT)
         Project.types[:Swift]
       end
-    end
-
-    def pbxproj_path
-      File.join(@xcodeproj, PBXProj::BASENAME)
     end
 
     def app_delegate_paths
