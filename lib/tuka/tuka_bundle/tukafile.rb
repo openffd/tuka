@@ -109,7 +109,7 @@ module Tuka
     end
 
     def valid_project_info_type?
-      Project.types.value? project_info.type
+      Project::TYPES.value? project_info.type
     end
 
     def valid_project_info_bundle_id?

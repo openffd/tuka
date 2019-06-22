@@ -10,9 +10,7 @@ module Tuka
     attr_reader :name, :category_prefix
     attr_accessor :project_configurator
 
-    def self.types
-      { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }
-    end
+    TYPES = { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }.freeze
 
     def initialize(xcodeproj)
       @xcodeproj = xcodeproj
@@ -35,11 +33,11 @@ module Tuka
     end
 
     def type_pretty
-      Project.types.key(type).to_s
+      TYPES.key(type).to_s
     end
 
     def new_file_destination_group
-      type_key = Project.types.key(type)
+      type_key = TYPES.key(type)
       reference = @project_configurator.files.select { |file| file.path =~ /#{type_search_strings[type_key]}/ }.first
       return nil if reference.nil?
 
@@ -109,11 +107,11 @@ module Tuka
 
     def detect_type
       if app_delegate_paths.include?(PBXProj::SEARCHABLE_UNITY)
-        Project.types[:Unity]
+        TYPES[:Unity]
       elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_OBJC)
-        Project.types[:ObjC]
+        TYPES[:ObjC]
       elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_SWIFT)
-        Project.types[:Swift]
+        TYPES[:Swift]
       end
     end
 
