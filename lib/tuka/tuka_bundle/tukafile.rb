@@ -134,7 +134,10 @@ module Tuka
     end
 
     def valid_project_info_prefix
+      prefix = project_info.prefix
+      return true if prefix.nil?
 
+      prefix == prefix[/[a-zA-Z]+/]
     end
 
     def valid_project_info_swift_version?
