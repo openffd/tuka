@@ -29,7 +29,7 @@ module Tuka
   require 'tuka/bundler'
   require 'tuka/request_header'
   require 'tuka/curl'
-  require_matched File.join(gem_lib_tuka, 'project_bundle', '*', '*.rb')
+  require_matched File.join(gem_lib_tuka, 'project_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*', '*.rb')
   require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'messages', '*')
