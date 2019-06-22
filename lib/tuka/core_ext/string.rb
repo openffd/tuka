@@ -40,8 +40,11 @@ module CoreExtensions
 
   module StringPrefix
     refine String do
+      def remove_non_letter_chars
+        gsub(/[^a-z]*/i, '')
+      end
+
       def generate_prefix
-        # TODO: Remove non-letter chars
         return upcase if size <= 3
 
         trail_size = [1].concat([2] * 10, [3] * 10).sample
