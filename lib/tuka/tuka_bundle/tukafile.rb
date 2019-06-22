@@ -28,7 +28,7 @@ module Tuka
       begin
         @struct = JSON.parse(IO.read(@path), object_class: OpenStruct)
       rescue JSON::ParserError => _
-        raise StandardError, 'Sourced Tukafile has invalid content'
+        raise StandardError, 'Downloaded Tukafile has content with invalid format'
       end
     end
 
@@ -131,6 +131,10 @@ module Tuka
       return true if project_info.headers.nil?
 
       HEADERS_COUNT_RANGE.cover? project_info.headers
+    end
+
+    def valid_project_info_prefix
+
     end
 
     def valid_project_info_swift_version?

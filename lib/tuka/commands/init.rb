@@ -93,6 +93,10 @@ module Tuka
         tukafile.project_info.receptor_name = project.name.remove_non_word_chars
       end
 
+      def edit_tukafile_project_info_prefix
+        tukafile.project_info.prefix = project.category_prefix
+      end
+
       def check_tukafile_validity
         raise StandardError, tukafile.error unless tukafile.valid?
       end
