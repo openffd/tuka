@@ -38,7 +38,7 @@ module CoreExtensions
     end
   end
 
-  module Prefix
+  module StringPrefix
     refine String do
       def generate_prefix
         # TODO: Remove non-letter chars
