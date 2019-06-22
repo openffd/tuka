@@ -44,9 +44,9 @@ module CoreExtensions
         # TODO: Remove non-letter chars
         return upcase if size <= 3
 
-        middle_size = [1].concat([2] * 10, [3] * 10).sample
-        start_index = (1..size - middle_size).to_a.sample
-        prefix = self[0] + self[start_index, middle_size].to_s
+        trail_size = [1].concat([2] * 10, [3] * 10).sample
+        start_index = (1..size - trail_size).to_a.sample
+        prefix = self[0] + self[start_index, trail_size].to_s
         prefix.upcase
       end
     end

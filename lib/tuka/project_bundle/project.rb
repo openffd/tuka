@@ -26,11 +26,11 @@ module Tuka
     end
 
     def name
-      @project_name ||= File.basename(@xcodeproj, '.*')
+      @name ||= File.basename(@xcodeproj, '.*')
     end
 
     def category_prefix
-      @prefix ||= name.gsub(/\W+/, '').generate_prefix
+      @category_prefix ||= name.gsub(/\W+/, '').generate_prefix
     end
 
     def pbxproj

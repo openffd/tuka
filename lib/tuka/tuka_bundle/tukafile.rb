@@ -133,7 +133,7 @@ module Tuka
       HEADERS_COUNT_RANGE.cover? project_info.headers
     end
 
-    def valid_project_info_prefix
+    def valid_project_info_prefix?
       prefix = project_info.prefix
       return true if prefix.nil?
 
