@@ -23,7 +23,7 @@ module Tuka
     end
 
     def category_prefix
-      @category_prefix ||= name.gsub(/\W+/, '').generate_prefix
+      @category_prefix ||= name.remove_non_letter_chars.generate_prefix
     end
 
     def pbxproj
