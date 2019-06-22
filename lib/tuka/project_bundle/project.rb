@@ -38,13 +38,7 @@ module Tuka
     end
 
     def type
-      if app_delegate_paths.include?(PBXProj::SEARCHABLE_UNITY)
-        Project.types[:Unity]
-      elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_OBJC)
-        Project.types[:ObjC]
-      elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_SWIFT)
-        Project.types[:Swift]
-      end
+      @type ||= detect_type
     end
 
     def bundle_id
@@ -125,6 +119,16 @@ module Tuka
     end
 
     private
+
+    def detect_type
+      if app_delegate_paths.include?(PBXProj::SEARCHABLE_UNITY)
+        Project.types[:Unity]
+      elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_OBJC)
+        Project.types[:ObjC]
+      elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_SWIFT)
+        Project.types[:Swift]
+      end
+    end
 
     def pbxproj_path
       File.join(@xcodeproj, PBXProj::BASENAME)
