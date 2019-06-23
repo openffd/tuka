@@ -16,7 +16,7 @@ module Tuka
       @xcodeproj = xcodeproj
       @project_configurator = Xcodeproj::Project.open(xcodeproj)
       @name = File.basename(@xcodeproj, '.*')
-      @category_prefix = name.remove_non_letter_chars.generate_prefix
+      @category_prefix = name.remove_non_letter_chars.generate_prefix.upcase
       @pbxproj_path = File.join(@xcodeproj, PBXProj::BASENAME)
     end
 
