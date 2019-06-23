@@ -29,13 +29,13 @@ module Tuka
   require 'tuka/bundler'
   require 'tuka/request_header'
   require 'tuka/curl'
+  require 'tuka/xcodebuild'
   require_matched File.join(gem_lib_tuka, 'project_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*', '*.rb')
   require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'messages', '*')
   require 'tuka/frameworks'
   require 'tuka/modder'
-  require 'tuka/xcodebuild'
   require 'tuka/project_bundle'
   require 'tuka/tuka_bundle'
   require 'tuka/command'

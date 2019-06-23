@@ -3,6 +3,7 @@
 module Tuka
   class Project
     include Xcodeproj::BuildSettings
+    include Xcodebuild
 
     using System
     using CoreExtensions::StringPrefix
@@ -29,7 +30,7 @@ module Tuka
     end
 
     def bundle_id
-      @bundle_id ||= grep_project_build_settings(PRODUCT_BUNDLE_IDENTIFIER)
+      @bundle_id ||= get_project_build_setting(PRODUCT_BUNDLE_IDENTIFIER)
     end
 
     def type_pretty
@@ -84,7 +85,7 @@ module Tuka
     end
 
     def info_plist_path
-      @info_plist_path ||= grep_project_build_settings(INFOPLIST_FILE)
+      @info_plist_path ||= get_project_build_setting(INFOPLIST_FILE)
     end
 
     def push_notifications_enabled?
@@ -140,13 +141,6 @@ module Tuka
 
     def grouped_file_refs(refs)
       refs.group_by { |ref| File.basename(ref.path, '.*') }
-    end
-
-    def grep_project_build_settings(pattern)
-      grep_result = `xcodebuild -project "#{@xcodeproj}" -showBuildSettings -dry-run | grep #{pattern}`
-      return nil if grep_result.empty?
-
-      grep_result.partition("\n").first.partition('= ').last
     end
 
     def add_user_notification_framework_to_group(group)
