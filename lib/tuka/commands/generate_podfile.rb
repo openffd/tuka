@@ -39,8 +39,12 @@ module Tuka
         puts "Generating a #{Podfile::BASENAME} for #{project.name} (#{project.type_pretty})".magenta
       end
 
-      def display_tukafile_is_valid
+      def display_xcode_info
         puts
+        puts "[✓] Detected installed Xcode version: #{xcode_info.yellow}"
+      end
+
+      def display_tukafile_is_valid
         puts "[✓] #{Tukafile::BASENAME} validation: " + '0 errors found'.yellow
       end
 

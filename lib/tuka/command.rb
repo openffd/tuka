@@ -8,6 +8,7 @@ module Tuka
     include ProjectBundle
     include TukaBundle
     include Curl::Shortcuts
+    include Xcodebuild
 
     using CoreExtensions
 

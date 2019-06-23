@@ -23,8 +23,12 @@ module Tuka
         puts "Initializing a Tukafile for #{project.name} (#{project.type_pretty})".magenta.bold
       end
 
-      def display_tukafile_sourcing
+      def display_xcode_info
         puts
+        puts "[✓] Detected installed Xcode version: #{xcode_info.yellow}"
+      end
+
+      def display_tukafile_sourcing
         puts 'Sourcing Tukafile from this URL: ' + url.yellow
       end
 

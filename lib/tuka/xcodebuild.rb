@@ -4,8 +4,8 @@ module Tuka
   module Xcodebuild
     COMMAND = 'xcodebuild'
 
-    def get_xcversion
-      system COMMAND, '-version', '2>', 'dev/null'
+    def xcode_info
+      @xcode_info ||= `#{COMMAND} -version 2> /dev/null`.chomp.sub(/\n/, ', ')
     end
   end
 end

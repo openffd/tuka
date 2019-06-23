@@ -29,8 +29,12 @@ module Tuka
         puts "Generating '#{tukafile.library.name}' library for #{project.name} (#{project.type_pretty})".magenta
       end
 
-      def display_bundle_id
+      def display_xcode_info
         puts
+        puts "[✓] Detected installed Xcode version: #{xcode_info.yellow}"
+      end
+
+      def display_bundle_id
         puts "[✓] Detected #{project.name} bundle identifier: #{project.bundle_id.yellow}"
       end
 

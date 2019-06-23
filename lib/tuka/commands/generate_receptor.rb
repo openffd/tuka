@@ -34,7 +34,7 @@ module Tuka
         raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@bridges_source_path}/*").empty?
       end
 
-      def display_generate_podfile
+      def display_generate_receptor
         puts
         puts "Generating Receptor files for #{project.name} (#{project.type_pretty})".magenta
       end
@@ -42,6 +42,10 @@ module Tuka
       def display_project_state_checking
         puts
         puts 'Checking current project status...'
+      end
+
+      def display_xcode_info
+        puts "[✓] Detected installed Xcode version: #{xcode_info.yellow}"
       end
 
       def display_tukafile_is_valid
