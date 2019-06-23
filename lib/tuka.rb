@@ -34,6 +34,7 @@ module Tuka
   require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'messages', '*')
   require 'tuka/frameworks'
+  require 'tuka/modder'
   require 'tuka/project_bundle'
   require 'tuka/tuka_bundle'
   require 'tuka/command'
