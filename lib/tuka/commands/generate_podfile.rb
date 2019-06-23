@@ -21,7 +21,6 @@ module Tuka
         end
 
         def run_bundle_pod_install
-          puts "[✓] Running 'pod install'"
           podfile.install_via_bundler
         end
       end
@@ -50,20 +49,19 @@ module Tuka
 
       def display_pod_target
         @target = project.name
-        puts "[✓] Pod target name detected: '#{@target}'"
+        puts "[✓] Pod target name detected: #{@target.yellow}"
       end
 
       def display_add_library_pod
         @library = tukafile.library.name
-        @library_path = generated_library.path
-        puts "[✓] #{@library} at path '#{@library_path}' will be added to the new #{Podfile::BASENAME}"
+        puts "[✓] Added the generated #{@library} to the new #{Podfile::BASENAME}"
       end
 
       def display_current_pods
         return if podfile.nil?
 
         @pods = podfile.dependencies(excluded: tukafile.library.name)
-        puts "[✓] Other dependencies found in the current Podfile:#{@pods.gsub('  pod', '  ')}"
+        puts "[✓] Other dependencies found in the current Podfile:#{@pods.gsub('  pod', '  ').yellow}"
       end
 
       def remove_previously_generated_podfile
@@ -76,26 +74,23 @@ module Tuka
 
       def generate_podfile
         path = target_generated_podfile_path
-        podfile_generator = PodfileGenerator.new(@target, @pods, @library, @library_path, path)
+        podfile_generator = PodfileGenerator.new(@target, @pods, @library, generated_library.path, path)
         podfile_generator.swift_version = tukafile.project_info.swift_version
         podfile_generator.generate
       end
 
       def display_podfile_generated
-        puts "[✓] Generated new Podfile at path: '#{target_generated_podfile_path}'"
+        puts "[✓] Generated new Podfile at path: #{target_generated_podfile_path.yellow}"
       end
 
       def create_new_gemfile
         generate_gemfile
-      end
-
-      def display_gemfile_generated
-        puts "[✓] Generated a new Gemfile at path: './#{Gemfile::BASENAME}'"
+        puts '[✓] Generated a new Gemfile'
       end
 
       def execute_bundle_install
         puts
-        puts "[✓] Running 'bundle install'..."
+        puts "[✓] Running bundle install"
         bundle_install
         puts
       end

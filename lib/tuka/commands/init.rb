@@ -8,6 +8,8 @@ module Tuka
 
       using CoreExtensions
 
+      # TODO: Change all text color for prompts to be cyan
+
       no_commands do
         def source_options
           options.keys.map(&:to_sym).reject { |opt| %i[help quiet verbose].include? opt }
@@ -116,6 +118,9 @@ module Tuka
         puts "      - xcodeproj: #{xcodeproj_basename.yellow}"
         puts "      - type     : #{project.type.yellow}"
         puts "      - receptor : #{project.name.remove_non_word_chars.yellow}"
+      end
+
+      def display_tukafile_prefix
         puts "      - prefix   : #{project.category_prefix.yellow}"
       end
 
