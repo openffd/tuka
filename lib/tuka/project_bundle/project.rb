@@ -143,7 +143,7 @@ module Tuka
     end
 
     def grep_project_build_settings(pattern)
-      grep_result = `xcodebuild -project "#{@xcodeproj}" -showBuildSettings | grep #{pattern}`
+      grep_result = `xcodebuild -project "#{@xcodeproj}" -showBuildSettings -dry-run | grep #{pattern}`
       return nil if grep_result.empty?
 
       grep_result.partition("\n").first.partition('= ').last
