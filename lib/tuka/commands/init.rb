@@ -116,14 +116,14 @@ module Tuka
         puts "      - xcodeproj: #{xcodeproj_basename.yellow}"
         puts "      - type     : #{project.type.yellow}"
         puts "      - receptor : #{project.name.remove_non_word_chars.yellow}"
-        puts "      - prefix   : #{project.category_prefix}"
+        puts "      - prefix   : #{project.category_prefix.yellow}"
       end
 
       def add_tuka_bundle_to_gitignore
         gitignore_add("#{TukaBundle::DIR}/")
 
         puts
-        puts "[✓] Excluded '#{TukaBundle::DIR}/' from version control"
+        puts "[✓] Excluded from version control: #{(TukaBundle::DIR + '/').yellow}"
       end
 
       def open_tukafile
