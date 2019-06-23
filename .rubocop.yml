@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6.2
 
 Style/Documentation:
   Enabled: false
@@ -7,17 +7,11 @@ Style/Documentation:
 Style/EmptyMethod:
   EnforcedStyle: expanded
 
-Style/EmptyLiteral:
-  Enabled: false
-
 Style/FrozenStringLiteralComment:
   Exclude:
     - '*.gemspec'
     - 'Rakefile'
     - 'Gemfile'
-
-Style/Not:
-  Enabled: false
 
 Metrics/LineLength:
   Max: 120
