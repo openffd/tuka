@@ -36,7 +36,7 @@ module Tuka
 
       def display_generate_podfile
         puts
-        puts "Adding Receptor files to #{project.name} (#{project.type_pretty})".magenta
+        puts "Generating Receptor files for #{project.name} (#{project.type_pretty})".magenta
       end
 
       def display_project_state_checking
