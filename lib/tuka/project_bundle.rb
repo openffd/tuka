@@ -28,7 +28,7 @@ module Tuka
 
     def receptor_files
       Dir.glob('**/AppDelegate+*.[h|m]')
-         .reject { |path| path.include?(TukaBundle::DIR) || path.include?(MODDER_DIR) }
+         .reject { |path| path.include?(TukaBundle::DIR) || path.include?(Modder::Bundle::DIR) }
     end
 
     def info_plist
