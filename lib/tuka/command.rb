@@ -25,7 +25,7 @@ module Tuka
     end
 
     def check_project
-      raise StandardError, 'Unable to locate the xcodeproj file' if xcodeproj.nil
+      raise StandardError, 'Unable to locate the xcodeproj file' if xcodeproj.nil?
     end
 
     def check_project_type
@@ -42,9 +42,6 @@ module Tuka
     end
 
     def check_appdelegate_existence
-      require 'pry'
-      binding.pry
-
     end
   end
 end
