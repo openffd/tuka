@@ -11,7 +11,7 @@ module Tuka
           return if podfile.nil?
 
           podfile.create_backup
-          puts '[✓] Renamed the old Podfile to Podfile.bak'
+          puts '[✓] Renamed the old Podfile to ' + 'Podfile.bak'.yellow
         end
 
         def copy_podfile_to_current_dir
@@ -106,6 +106,7 @@ module Tuka
         return unless yes_option || yes?("\n[?] Run `pod install`? [y|n] ".yellow)
 
         puts if yes_option
+        puts '[✓] Installing dependencies from the current Podfile'
         run_bundle_pod_install
       end
 
