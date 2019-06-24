@@ -50,14 +50,14 @@ module Tuka
       end
 
       def display_tukafile_receptor
-        puts "[✓] Detected Tukafile receptor name: '#{tukafile.project_info.receptor_name}'"
+        puts "[✓] Detected Tukafile receptor name: #{tukafile.project_info.receptor_name.yellow}"
       end
 
       def delete_previous_receptor
         return if receptor.nil?
 
         rm_rf(receptor.path)
-        puts "[✓] Deleted previous receptor files found in '#{tuka_bundle_dir}'"
+        puts '[✓] Deleted previous receptor files'
       end
 
       def instantiate_receptor_files
@@ -73,10 +73,7 @@ module Tuka
       def display_receptor_files_preparation
         puts
         puts 'Creating and preparing the Receptor files...'
-      end
-
-      def display_receptor_files_generated
-        puts "[✓] Receptor files initialized at path: '#{receptor.path}'"
+        puts '[✓] Receptor files initialized'
       end
 
       def update_receptor_target_for_swift
@@ -90,7 +87,7 @@ module Tuka
         return if tukafile.project_info.receptor_name.nil?
 
         receptor.category_name = tukafile.project_info.receptor_name
-        puts "[✓] Receptor files renamed to: '#{receptor.filename}.*'"
+        puts '[✓] Receptor files renamed to: ' + "#{receptor.filename}.*".yellow
       end
 
       def delete_previous_receptor_files
@@ -103,7 +100,8 @@ module Tuka
       end
 
       def display_adding_receptor_files_to_project
-        puts "[✓] Receptor files added to #{project.name} at path: '#{project.new_file_destination_group.path}/'"
+        path = project.new_file_destination_group.path
+        puts "[✓] Receptor files added to #{project.name} at path: " + "#{path}/".yellow
       end
 
       def display_other_project_status_checking
@@ -128,7 +126,7 @@ module Tuka
 
       def embed_swift_standard_libraries
         project.always_embed_swift_standard_libraries
-        puts '[✓] Swift standard libraries embedded'
+        puts '[✓] Embedded Swift standard libraries'
       end
 
       def add_swift_project_bridging_header
