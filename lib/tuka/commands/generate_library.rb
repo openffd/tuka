@@ -62,6 +62,10 @@ module Tuka
         puts
       end
 
+      def display_library_modifications
+        puts "Initializing library configurations..."
+      end
+
       def display_tukafile_server_url
         base64 = Tukafile::SERVER_URL_TYPES[:Base64]
         puts "[✓] Server URL (base64)     => #{tukafile.server.url.yellow}" if tukafile.server.url_type == base64
