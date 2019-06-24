@@ -22,6 +22,9 @@ module Tuka
     private_constant :USER_AGENT_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
 
     SERVER_URL_TYPES = { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }.freeze
+    SERVER_URL_TYPES.values.each do |url_type|
+      String.define_method(url_type + '?') { |type| eql? type }
+    end
 
     def initialize(path)
       @path = path
