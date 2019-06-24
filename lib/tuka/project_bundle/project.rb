@@ -13,6 +13,12 @@ module Tuka
 
     TYPES = { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }.freeze
 
+    TYPES.values.each do |type|
+      define_method((type + '?').to_sym) do
+        @type == type
+      end
+    end
+
     def initialize(xcodeproj)
       @xcodeproj = xcodeproj
       @project_configurator = Xcodeproj::Project.open(xcodeproj)
@@ -20,6 +26,10 @@ module Tuka
       @category_prefix = name.remove_non_letter_chars.generate_prefix.upcase
       @pbxproj_path = File.join(@xcodeproj, PBXProj::BASENAME)
     end
+
+    # def app_delegate
+    #   @app_delegate ||= @project_configurator
+    # end
 
     def pbxproj
       @pbxproj ||= @pbxproj_path if File.file? @pbxproj_path

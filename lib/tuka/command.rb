@@ -25,7 +25,7 @@ module Tuka
     end
 
     def check_project
-      raise StandardError, 'Unable to locate the xcodeproj file' if xcodeproj.nil?
+      raise StandardError, 'Unable to locate the xcodeproj file' if xcodeproj.nil
     end
 
     def check_project_type
@@ -39,6 +39,12 @@ module Tuka
     def check_push_notification_capabilities
       message = 'Push notifications is not enabled for this project, please go to Capabilities and turn it on'
       raise StandardError, message unless project.push_notifications_enabled?
+    end
+
+    def check_appdelegate_existence
+      require 'pry'
+      binding.pry
+
     end
   end
 end
