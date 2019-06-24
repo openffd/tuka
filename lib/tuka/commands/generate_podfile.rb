@@ -90,7 +90,7 @@ module Tuka
 
       def execute_bundle_install
         puts
-        puts "[✓] Running bundle install"
+        puts '[✓] Running bundle install'
         bundle_install
         puts
       end
