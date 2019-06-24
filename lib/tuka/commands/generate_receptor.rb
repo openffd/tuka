@@ -80,7 +80,7 @@ module Tuka
       end
 
       def update_receptor_target_for_swift
-        return unless project.type == Project::TYPES[:Swift]
+        return unless project.swift?
 
         receptor.update_swift_target(target_name: project.name)
         puts '[✓] Set correct Swift project target for receptor files'
@@ -116,7 +116,7 @@ module Tuka
       end
 
       def add_user_notifications_framework
-        return unless project.type == Project::TYPES[:Unity]
+        return unless project.unity?
 
         if project.contains_user_notifications_framework?
           puts '[✓] UserNotifications.framework is already in Linked Frameworks and Libraries'
@@ -132,7 +132,7 @@ module Tuka
       end
 
       def add_swift_project_bridging_header
-        return unless project.type == Project::TYPES[:Swift]
+        return unless project.swift?
 
         path = project.bridging_header
         return unless path.nil? || !File.file?(path)
