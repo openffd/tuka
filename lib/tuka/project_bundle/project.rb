@@ -12,7 +12,6 @@ module Tuka
     attr_accessor :project_configurator
 
     TYPES = { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }.freeze
-
     TYPES.values.each do |type|
       define_method((type + '?').to_sym) do
         @type == type
@@ -127,8 +126,15 @@ module Tuka
     end
 
     def app_delegate_paths
-      @app_delegate_paths ||= @project_configurator.files.map(&:path).select do |path|
-        PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get)).include? path
+      @app_delegate_paths ||= begin
+        @project_configurator
+          .files
+          .select { |file|
+            basename = File.basename(file.real_path)
+            PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get)).include? basename
+          }
+          .select { |path| File.file? path }
+          .map { |path| File.basename(path) }
       end
     end
 
