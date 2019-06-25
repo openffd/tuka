@@ -23,10 +23,8 @@ module Tuka
 
     SERVER_URL_TYPES = { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }.freeze
     SERVER_URL_TYPES.values.each do |type|
-      String.define_method((type + '?').to_sym) do
-        puts "XXX"
-        puts self + ' == ' + type
-        self == type
+      String.define_method("#{type}?") do
+        eql? type
       end
     end
 

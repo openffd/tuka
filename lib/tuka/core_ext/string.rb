@@ -49,8 +49,7 @@ module CoreExtensions
 
         trail_size = [1].concat([2] * 10, [3] * 10).sample
         start_index = (1..size - trail_size).to_a.sample
-        prefix = self[0] + self[start_index, trail_size].to_s
-        prefix
+        self[0] + self[start_index, trail_size].to_s
       end
     end
   end
