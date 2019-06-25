@@ -9,16 +9,16 @@ module CoreExtensions
       gsub(/(\W|\d)/, '')
     end
 
-    def ipv4?
+    def valid_ipv4?
       self =~ Resolv::IPv4::Regex
     end
 
-    def base64?
+    def valid_base64?
       decoded = Base64.decode64(self)
       Base64.encode64(decoded).include? self
     end
 
-    def url?
+    def valid_url?
       prepend('http://') unless start_with? 'http://'
       self =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
     end

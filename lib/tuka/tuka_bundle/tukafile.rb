@@ -22,8 +22,12 @@ module Tuka
     private_constant :USER_AGENT_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
 
     SERVER_URL_TYPES = { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }.freeze
-    SERVER_URL_TYPES.values.each do |url_type|
-      String.define_method(url_type + '?') { |type| eql? type }
+    SERVER_URL_TYPES.values.each do |type|
+      String.define_method((type + '?').to_sym) do
+        puts "XXX"
+        puts self + ' == ' + type
+        self == type
+      end
     end
 
     def initialize(path)
@@ -56,7 +60,7 @@ module Tuka
     end
 
     def decoded_server_url
-      return Base64.decode64(server.url) if server.url_type == SERVER_URL_TYPES[:Base64]
+      return Base64.decode64(server.url) if server.url_type.base64?
 
       server.url
     end
@@ -82,11 +86,11 @@ module Tuka
     def valid_server_url?
       case server.url_type
       when SERVER_URL_TYPES[:Base64]
-        server.url.base64?
+        server.url.valid_base64?
       when SERVER_URL_TYPES[:IPv4]
-        server.url.ipv4?
+        server.url.valid_ipv4?
       when SERVER_URL_TYPES[:URL]
-        server.url.url?
+        server.url.valid_url?
       end
     end
 
