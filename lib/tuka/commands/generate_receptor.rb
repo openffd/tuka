@@ -6,6 +6,15 @@ module Tuka
       using CoreExtensions
       using System
 
+      no_commands do
+        def add_bridge
+          bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
+          FileUtils.cp(bridging_header, project.new_file_destination_group.path)
+          project.register_bridging_header(bridging_header)
+          puts '[✓] Added a bridging header'
+        end
+      end
+
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
@@ -146,15 +155,6 @@ module Tuka
       def display_command_completion
         puts
         puts 'End' unless options[:quiet]
-      end
-
-      private
-
-      def add_bridge
-        bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
-        FileUtils.cp(bridging_header, project.new_file_destination_group.path)
-        project.register_bridging_header(bridging_header)
-        puts '[✓] Added a bridging header'
       end
     end
   end
