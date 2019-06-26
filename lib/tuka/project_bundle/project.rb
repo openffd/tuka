@@ -122,19 +122,24 @@ module Tuka
         TYPES[:ObjC]
       elsif app_delegate_paths.include?(PBXProj::SEARCHABLE_SWIFT)
         TYPES[:Swift]
+      else
+        raise StandardError, 'Unable to detect a valid AppDelegate file'
+      end
+    end
+
+    def possible_app_delegate_files
+      searchables = PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get))
+      @project_configurator.files.select do |file|
+        searchables.include? File.basename(file.real_path)
       end
     end
 
     def app_delegate_paths
       @app_delegate_paths ||= begin
-        @project_configurator
-          .files
-          .select { |file|
-            basename = File.basename(file.real_path)
-            PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get)).include? basename
-          }
-          .select { |path| File.file? path }
-          .map { |path| File.basename(path) }
+        possible_app_delegate_files
+          .map(&:real_path)
+          .select(&File.method(:file?))
+          .map(&File.method(:basename))
       end
     end
 
