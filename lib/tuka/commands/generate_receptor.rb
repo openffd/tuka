@@ -110,7 +110,7 @@ module Tuka
       end
 
       def display_push_notifications_enabled
-        puts '[✓] Push notifications is enabled' # This was checked earlier
+        puts '[✓] Push notifications: ' + 'enabled'.yellow # This was checked earlier
       end
 
       def add_user_notifications_framework
