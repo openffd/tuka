@@ -77,7 +77,7 @@ module Tuka
       new_file_destination_group.add_new_file(File.basename(h_file))
       m_file_ref = new_file_destination_group.add_new_file(File.basename(m_file))
 
-      @project_configurator.targets.first.add_file_references([m_file_ref]) unless m_file_ref
+      @project_configurator.targets.first.add_file_references([m_file_ref]) if m_file_ref
       @project_configurator.save
     end
 
