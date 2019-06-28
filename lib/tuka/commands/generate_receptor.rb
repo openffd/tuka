@@ -7,11 +7,10 @@ module Tuka
       using System
 
       no_commands do
-        def add_bridge
+        def add_bridging_header
           bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
           FileUtils.cp(bridging_header, project.new_file_destination_group.path)
           project.register_bridging_header(bridging_header)
-          puts '[✓] Added a bridging header'
         end
       end
 
@@ -79,6 +78,10 @@ module Tuka
         raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor.h_file.nil? && receptor.m_file.nil?
       end
 
+      def inject_random_categories
+
+      end
+
       def display_receptor_files_preparation
         puts
         puts 'Creating and preparing the Receptor files...'
@@ -144,7 +147,8 @@ module Tuka
         path = project.bridging_header
         return if File.file? path.to_s
 
-        add_bridge
+        add_bridging_header
+        puts '[✓] Added a bridging header'
       end
 
       def setup_project_app_transport_settings
