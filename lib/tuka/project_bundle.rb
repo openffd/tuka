@@ -26,11 +26,6 @@ module Tuka
       @gemfile ||= Gemfile.new(target_gemfile_path) if File.file? target_gemfile_path
     end
 
-    def receptor_files
-      Dir.glob('**/AppDelegate+*.[h|m]')
-         .reject { |path| path.include?(TukaBundle::DIR) || path.include?(Modder::Bundle::DIR) }
-    end
-
     def info_plist
       @info_plist ||= begin
         path = project.info_plist_path unless project.nil?
