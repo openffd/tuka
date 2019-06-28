@@ -62,20 +62,20 @@ module Tuka
       end
 
       def delete_previous_receptor
-        return if receptor.nil?
+        return if receptor_bundle.nil?
 
-        rm_rf(receptor.path)
-        puts '[✓] Deleted previous receptor files'
+        rm_rf(receptor_bundle.path)
+        puts '[✓] Deleted previously generated receptor files'
       end
 
       def instantiate_receptor_files
         Dir.mkdir File.join(tuka_bundle_dir, ReceptorBundle::DIR)
-        FileUtils.cp_r("#{@receptor_source_path}/.", receptor.path)
+        FileUtils.cp_r("#{@receptor_source_path}/.", receptor_bundle.path)
       end
 
       def check_instantiated_receptor_files
         message = 'Unable to instantiate the receptor files. '
-        raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor.h_file.nil? && receptor.m_file.nil?
+        raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor_bundle.files.length < 2
       end
 
       def inject_random_categories
@@ -91,15 +91,15 @@ module Tuka
       def update_receptor_target_for_swift
         return unless project.swift?
 
-        receptor.update_swift_target(target_name: project.name)
+        receptor_bundle.update_swift_target(target_name: project.name)
         puts '[✓] Set correct Swift project target for receptor files'
       end
 
       def update_receptor_name
         return if tukafile.project_info.receptor_name.nil?
 
-        receptor.category_name = tukafile.project_info.receptor_name
-        puts '[✓] Receptor files renamed to: ' + "#{receptor.filename}.*".yellow
+        receptor_bundle.category_name = tukafile.project_info.receptor_name
+        puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
       end
 
       def delete_previous_receptor_files
@@ -107,8 +107,8 @@ module Tuka
       end
 
       def add_receptor_files_to_project
-        FileUtils.cp_r("#{receptor.path}/.", project.new_file_destination_group.path)
-        project.add_new_receptor_files(h_file: receptor.h_file, m_file: receptor.m_file)
+        FileUtils.cp_r("#{receptor_bundle.path}/.", project.new_file_destination_group.path)
+        project.add_new_receptor_files(h_file: receptor_bundle.h_file, m_file: receptor_bundle.m_file)
       end
 
       def display_adding_receptor_files_to_project
