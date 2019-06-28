@@ -14,7 +14,7 @@ module Tuka
     end
 
     def generated_library
-      @generated_library ||= Library.new(target_library_path) if File.exist? target_library_path.to_s
+      @generated_library ||= Library.new(generated_library_path) if File.exist? generated_library_path.to_s
     end
 
     def generated_podfile
@@ -25,8 +25,8 @@ module Tuka
       @receptor_bundle ||= ReceptorBundle.new(target_receptor_path) if File.exist? target_receptor_path.to_s
     end
 
-    def target_library_path
-      @target_library_path ||= File.join(DIR, tukafile.library.name)
+    def generated_library_path
+      @generated_library_path ||= File.join(DIR, tukafile.library.name)
     end
 
     def target_generated_podfile_path

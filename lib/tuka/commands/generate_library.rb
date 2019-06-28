@@ -43,9 +43,9 @@ module Tuka
       end
 
       def remove_existing_library
-        message = "[✓] Deleted previous instance of the library located at: #{target_library_path.yellow}"
-        puts message if File.exist? target_library_path
-        rm_rf(target_library_path)
+        message = "[✓] Deleted previous instance of the library located at: #{generated_library_path.yellow}"
+        puts message if File.exist? generated_library_path
+        rm_rf(generated_library_path)
       end
 
       def download_library
@@ -53,11 +53,10 @@ module Tuka
         puts
         puts "Downloading #{tukafile.library.name} from #{url.yellow}..."
         message = 'Failed to download from given repository URL'
-        raise StandardError, message unless git_clone(url, target_library_path, Library::CARGO_DIR)
+        raise StandardError, message unless git_clone(url, generated_library_path, Library::CARGO_DIR)
       end
 
       def display_library_download_complete
-        # puts "[] Library downloaded to path: '#{target_library_path}'"
         puts '[✓] Successfully instantiated the library'
         puts
       end
