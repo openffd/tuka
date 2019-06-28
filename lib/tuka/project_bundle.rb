@@ -10,10 +10,6 @@ module Tuka
       @xcodeproj ||= Dir.xcodeprojs.first
     end
 
-    def xcodeproj_basename
-      File.basename(xcodeproj)
-    end
-
     def project
       @project ||= Project.new(xcodeproj) if xcodeproj
     end
