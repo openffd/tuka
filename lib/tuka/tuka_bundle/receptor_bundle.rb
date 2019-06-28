@@ -2,7 +2,7 @@
 
 module Tuka
   class ReceptorBundle
-    DIRNAME = 'receptor'
+    DIR = 'receptor'
     FILE_NAME_SEARCH_STRING = 'Receptor'
     TARGET_SEARCH_STRING = 'XCODETARGET'
     private_constant :FILE_NAME_SEARCH_STRING, :TARGET_SEARCH_STRING
