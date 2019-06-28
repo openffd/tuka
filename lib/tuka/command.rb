@@ -40,8 +40,5 @@ module Tuka
       message = 'Push notifications is not enabled for this project, please go to Capabilities and turn it on'
       raise StandardError, message unless project.push_notifications_enabled?
     end
-
-    def check_appdelegate_existence
-    end
   end
 end
