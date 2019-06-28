@@ -1,4 +1,5 @@
 # Tuka
+![picture](img/tuka.jpg)
 
 A supposedly better implementation of the Modder gem.
 
