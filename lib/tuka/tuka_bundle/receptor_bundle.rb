@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Tuka
-  class Receptor
+  class ReceptorBundle
     DIRNAME = 'receptor'
     FILE_NAME_SEARCH_STRING = 'Receptor'
     TARGET_SEARCH_STRING = 'XCODETARGET'
