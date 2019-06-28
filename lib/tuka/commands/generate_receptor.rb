@@ -142,7 +142,7 @@ module Tuka
         return unless project.swift?
 
         path = project.bridging_header
-        return unless path.nil? || !File.file?(path)
+        return if File.file? path.to_s
 
         add_bridge
       end
