@@ -88,7 +88,7 @@ module Tuka
       end
 
       def edit_tukafile_project_info_xcodeproj
-        tukafile.project_info.xcodeproj = xcodeproj_basename
+        tukafile.project_info.xcodeproj = File.basename(xcodeproj)
       end
 
       def edit_tukafile_project_info_type
@@ -115,7 +115,7 @@ module Tuka
       end
 
       def display_modified_tukafile_fields
-        puts "      - xcodeproj: #{xcodeproj_basename.yellow}"
+        puts "      - xcodeproj: #{File.basename(xcodeproj).yellow}"
         puts "      - type     : #{project.type.yellow}"
         puts "      - receptor : #{project.name.remove_non_word_chars.yellow}"
       end
