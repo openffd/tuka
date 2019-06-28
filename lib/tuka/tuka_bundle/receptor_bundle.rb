@@ -3,9 +3,9 @@
 module Tuka
   class ReceptorBundle
     DIR = 'receptor'
-    FILE_NAME_SEARCH_STRING = 'Receptor'
-    TARGET_SEARCH_STRING = 'XCODETARGET'
-    private_constant :FILE_NAME_SEARCH_STRING, :TARGET_SEARCH_STRING
+    SEARCH_STRING_FILE_NAME = 'Receptor'
+    SEARCH_STRING_TARGET = 'XCODETARGET'
+    private_constant :SEARCH_STRING_FILE_NAME, :SEARCH_STRING_TARGET
 
     attr_reader :path, :category_name
 
@@ -37,7 +37,7 @@ module Tuka
     end
 
     def update_swift_target(target_name:)
-      text = File.read(h_file).gsub(TARGET_SEARCH_STRING, target_name)
+      text = File.read(h_file).gsub(SEARCH_STRING_TARGET, target_name)
       File.open(h_file, 'w') { |file| file.puts text }
     end
 
@@ -53,7 +53,7 @@ module Tuka
 
     def update_content_receptor_name(receptor_name:)
       files.each do |receptor_file|
-        text = File.read(receptor_file).gsub(FILE_NAME_SEARCH_STRING, receptor_name)
+        text = File.read(receptor_file).gsub(SEARCH_STRING_FILE_NAME, receptor_name)
         File.open(receptor_file, 'w') { |file| file.puts text }
       end
     end
