@@ -97,7 +97,6 @@ module Tuka
 
       def prompt_use_generated_podfile
         yes_option = options[:yes]
-
         return unless yes_option || yes?("\n[?] Use the generated Podfile? [y|n] ".yellow)
 
         backup_podfile
