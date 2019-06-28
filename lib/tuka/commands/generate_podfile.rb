@@ -15,7 +15,7 @@ module Tuka
         end
 
         def copy_podfile_to_current_dir
-          FileUtils.cp(target_generated_podfile_path, Podfile::BASENAME)
+          FileUtils.cp(generated_podfile_path, Podfile::BASENAME)
           puts '[✓] The generated Podfile has been copied to the current directory and is ready to be used'
           puts
         end
@@ -65,22 +65,22 @@ module Tuka
       end
 
       def remove_previously_generated_podfile
-        return unless target_generated_podfile_path && File.file?(target_generated_podfile_path)
+        return unless File.file? generated_podfile_path.to_s
 
-        rm(target_generated_podfile_path)
+        rm(generated_podfile_path)
         puts
         puts '[✓] Deleted previously generated Podfile'
       end
 
       def generate_podfile
-        path = target_generated_podfile_path
+        path = generated_podfile_path
         podfile_generator = PodfileGenerator.new(@target, @pods, @library, generated_library.path, path)
         podfile_generator.swift_version = tukafile.project_info.swift_version
         podfile_generator.generate
       end
 
       def display_podfile_generated
-        puts "[✓] Generated new Podfile at path: #{target_generated_podfile_path.yellow}"
+        puts "[✓] Generated new Podfile at path: #{generated_podfile_path.yellow}"
       end
 
       def create_new_gemfile

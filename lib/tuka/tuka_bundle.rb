@@ -18,7 +18,7 @@ module Tuka
     end
 
     def generated_podfile
-      @generated_podfile ||= Podfile.new(target_generated_podfile_path) if File.file? target_generated_podfile_path.to_s
+      @generated_podfile ||= Podfile.new(generated_podfile_path) if File.file? generated_podfile_path.to_s
     end
 
     def receptor_bundle
@@ -29,8 +29,8 @@ module Tuka
       @generated_library_path ||= File.join(DIR, tukafile.library.name)
     end
 
-    def target_generated_podfile_path
-      @target_generated_podfile_path ||= File.join(DIR, Podfile::BASENAME) if tuka_bundle_dir
+    def generated_podfile_path
+      @generated_podfile_path ||= File.join(DIR, Podfile::BASENAME) if tuka_bundle_dir
     end
 
     def target_receptor_path
