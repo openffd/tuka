@@ -5,12 +5,15 @@ module Tuka
     DIR = '.tuka'
     PREVIOUS_DIRNAMES = ['_tuka'].freeze
 
+    extend self
+    attr_reader :generated_library_path, :generated_podfile_path
+
     def tuka_bundle_dir
       @tuka_bundle_dir ||= Dir[DIR].first
     end
 
     def tukafile
-      @tukafile ||= Tukafile.new(target_tukafile_path) if File.file? target_tukafile_path.to_s
+      @tukafile ||= Tukafile.new(generated_tukafile_path) if File.file? generated_tukafile_path.to_s
     end
 
     def generated_library
@@ -22,8 +25,10 @@ module Tuka
     end
 
     def receptor_bundle
-      @receptor_bundle ||= ReceptorBundle.new(target_receptor_path) if File.exist? target_receptor_path.to_s
+      @receptor_bundle ||= ReceptorBundle.new(generated_receptor_path) if File.exist? generated_receptor_path.to_s
     end
+
+    private
 
     def generated_library_path
       @generated_library_path ||= File.join(DIR, tukafile.library.name)
@@ -33,14 +38,12 @@ module Tuka
       @generated_podfile_path ||= File.join(DIR, Podfile::BASENAME) if tuka_bundle_dir
     end
 
-    def target_receptor_path
-      @target_receptor_path ||= File.join(DIR, ReceptorBundle::DIR) if tuka_bundle_dir
+    def generated_receptor_path
+      @generated_receptor_path ||= File.join(DIR, ReceptorBundle::DIR) if tuka_bundle_dir
     end
 
-    private
-
-    def target_tukafile_path
-      @target_tukafile_path ||= File.join(DIR, Tukafile::BASENAME) if tuka_bundle_dir
+    def generated_tukafile_path
+      @generated_tukafile_path ||= File.join(DIR, Tukafile::BASENAME) if tuka_bundle_dir
     end
   end
 end
