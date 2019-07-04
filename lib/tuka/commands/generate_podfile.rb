@@ -23,6 +23,10 @@ module Tuka
         def run_bundle_pod_install
           podfile.install_via_bundler
         end
+
+        def dependencies
+          @dependencies ||= podfile.dependencies(excluded: tukafile.library.name)
+        end
       end
 
       def check_tukafile_existence
@@ -48,20 +52,17 @@ module Tuka
       end
 
       def display_pod_target
-        @target = project.name
-        puts "[✓] Pod target name detected: #{@target.yellow}"
+        puts "[✓] Pod target name detected: #{project.name.yellow}"
       end
 
       def display_add_library_pod
-        @library = tukafile.library.name
-        puts "[✓] Added the generated #{@library} to the new #{Podfile::BASENAME}"
+        puts "[✓] Added the generated #{tukafile.library.name} to the new #{Podfile::BASENAME}"
       end
 
       def display_current_pods
         return if podfile.nil?
 
-        @pods = podfile.dependencies(excluded: tukafile.library.name)
-        puts "[✓] Other dependencies found in the current Podfile:#{@pods.gsub('  pod', '  ').yellow}"
+        puts "[✓] Other dependencies found in the current Podfile:#{dependencies.gsub('  pod', '  ').yellow}"
       end
 
       def remove_previously_generated_podfile
@@ -73,8 +74,15 @@ module Tuka
       end
 
       def generate_podfile
-        path = generated_podfile_path
-        podfile_generator = PodfileGenerator.new(@target, @pods, @library, generated_library.path, path)
+        require 'pry'
+        binding.pry
+
+        podfile_generator = PodfileGenerator.new(
+          path: generated_podfile_path,
+          target: project.name,
+          dependencies: dependencies,
+          library: tukafile.library.name
+        )
         podfile_generator.swift_version = tukafile.project_info.swift_version
         podfile_generator.generate
       end
