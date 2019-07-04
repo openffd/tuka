@@ -7,12 +7,11 @@ module Tuka
     TEMPLATES = Dir[File.join(__dir__, '*.erb')]
     DEFAULT_SWIFT_VERSION = '4.2'
 
-    def initialize(target, pods, library, library_path, path)
-      @target         = target
-      @pods           = pods
-      @library        = library
-      @library_path   = library_path
-      @path           = path
+    def initialize(path:, target:, dependencies:, library:)
+      @path         = path
+      @target       = target
+      @dependencies = dependencies
+      @library      = library
     end
 
     def swift_version=(version)
