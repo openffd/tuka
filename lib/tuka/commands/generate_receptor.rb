@@ -78,10 +78,6 @@ module Tuka
         raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor_bundle.files.length < 2
       end
 
-      def inject_random_categories
-
-      end
-
       def display_receptor_files_preparation
         puts
         puts 'Creating and preparing the Receptor files...'
@@ -100,6 +96,9 @@ module Tuka
 
         receptor_bundle.category_name = tukafile.project_info.receptor_name
         puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
+      end
+
+      def inject_random_categories
       end
 
       def delete_previous_receptor_files
