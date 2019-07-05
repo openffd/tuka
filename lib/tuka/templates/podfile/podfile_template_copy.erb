@@ -1,0 +1,24 @@
+# frozen_string_literal: true
+
+platform :ios, '9.0'
+
+inhibit_all_warnings!
+
+def lib; :<%= @library %> end
+
+proc = Proc.new do |t|
+  t.build_configurations.each do |c|
+    c.build_settings[:SWIFT_VERSION.to_s] = '<%= @swift_version %>'
+  end
+end
+
+target '<%= @target %>' do
+  use_frameworks!
+  <%= @dependencies %>
+  pod lib.to_s, path: "<%= TukaBundle::DIR %>/#{lib.to_s}"
+  pod 'SVProgressHUD', git: 'https://github.com/yjnsrc/SVProgressHUD.git'
+end
+
+post_install do |i|
+  proc.call i.pods_project.targets.detect { |t| t.name.to_sym.eql? lib }
+end
