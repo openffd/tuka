@@ -5,9 +5,6 @@ module Tuka
     DIR = '.tuka'
     PREVIOUS_DIRNAMES = ['_tuka'].freeze
 
-    extend self
-    attr_reader :generated_library_path, :generated_podfile_path
-
     def tuka_bundle_dir
       @tuka_bundle_dir ||= Dir[DIR].first
     end
@@ -27,8 +24,6 @@ module Tuka
     def receptor_bundle
       @receptor_bundle ||= ReceptorBundle.new(generated_receptor_path) if File.exist? generated_receptor_path.to_s
     end
-
-    private
 
     def generated_library_path
       @generated_library_path ||= File.join(DIR, tukafile.library.name)
