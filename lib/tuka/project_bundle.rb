@@ -4,8 +4,6 @@ module Tuka
   module ProjectBundle
     using CoreExtensions
 
-    MODDER_DIR = '_atemp'
-
     def xcodeproj
       @xcodeproj ||= Dir.xcodeprojs.first
     end
