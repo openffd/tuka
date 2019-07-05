@@ -12,8 +12,8 @@ end
 
 target '<%= @target %>' do
   use_frameworks!
-  <%= @pods %>
-  pod '<%= @library %>', path: '<%= @library_path %>'
+  <%= @dependencies %>
+  pod '<%= @library %>', path: '<%= File.join(TukaBundle::DIR, @library) %>'
   pod 'SVProgressHUD', git: 'https://github.com/yjnsrc/SVProgressHUD.git'
 end
 
