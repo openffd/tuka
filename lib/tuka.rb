@@ -8,7 +8,9 @@ require 'thor'
 require 'whirly'
 require 'xcodeproj'
 
-# TODO:
+# TODO: Use Pathname
+
+# TODO: This method should not reference tuka
 Kernel.module_eval do
   def require_matched(dir_pattern)
     Dir[dir_pattern]
