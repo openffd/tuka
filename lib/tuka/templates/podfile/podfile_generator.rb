@@ -6,10 +6,10 @@ module Tuka
     DEFAULT_SWIFT_VERSION = '4.2'
 
     def initialize(path:, target:, dependencies:, library:)
-      @path         = path
-      @target       = target
-      @dependencies = dependencies
-      @library      = library
+      @path         = path.to_s
+      @target       = target.to_s
+      @dependencies = dependencies.to_s
+      @library      = library.to_s
     end
 
     def swift_version=(version)
