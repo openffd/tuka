@@ -27,6 +27,15 @@ module Tuka
         def dependencies
           @dependencies ||= podfile.dependencies(excluded: tukafile.library.name)
         end
+
+        def podfile_generator
+          @podfile_generator ||= PodfileGenerator.new(
+            path: generated_podfile_path,
+            target: project.name,
+            dependencies: dependencies,
+            library: tukafile.library.name
+          )
+        end
       end
 
       def check_tukafile_existence
@@ -74,15 +83,6 @@ module Tuka
       end
 
       def generate_podfile
-        require 'pry'
-        binding.pry
-
-        podfile_generator = PodfileGenerator.new(
-          path: generated_podfile_path,
-          target: project.name,
-          dependencies: dependencies,
-          library: tukafile.library.name
-        )
         podfile_generator.swift_version = tukafile.project_info.swift_version
         podfile_generator.generate
       end
