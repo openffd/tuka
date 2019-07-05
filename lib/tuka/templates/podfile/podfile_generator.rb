@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module Tuka
-  require 'erb'
-
   class PodfileGenerator
     TEMPLATES = Dir[File.join(__dir__, '*.erb')]
     DEFAULT_SWIFT_VERSION = '4.2'

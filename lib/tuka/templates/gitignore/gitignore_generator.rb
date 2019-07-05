@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module Tuka
-  require 'erb'
-
   class GitignoreGenerator
     TEMPLATE = 'gitignore_template.erb'
 
