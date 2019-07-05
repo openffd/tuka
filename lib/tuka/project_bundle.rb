@@ -25,7 +25,7 @@ module Tuka
     def info_plist
       @info_plist ||= begin
         path = project.info_plist_path unless project.nil?
-        InfoPlist.new(path) if path && File.file?(path)
+        InfoPlist.new(path) if File.file? path.to_s
       end
     end
 
