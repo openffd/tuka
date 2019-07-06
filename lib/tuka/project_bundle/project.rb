@@ -54,7 +54,7 @@ module Tuka
       @configurator.targets.first.build_configurations.each do |configuration|
         configuration.build_settings[ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES] = INHERITED_FLAG
       end
-      @configurator.save
+      save_configuration
     end
 
     def delete_previous_receptor_files
@@ -66,7 +66,7 @@ module Tuka
         ref.remove_from_project
       end
 
-      @configurator.save
+      save_configuration
     end
 
     def add_new_receptor_files(h_file:, m_file:)
@@ -74,7 +74,7 @@ module Tuka
       m_file_ref = new_file_destination_group.add_new_file(File.basename(m_file))
 
       @configurator.targets.first.add_file_references([m_file_ref]) if m_file_ref
-      @configurator.save
+      save_configuration
     end
 
     def bridging_header
@@ -86,7 +86,7 @@ module Tuka
       @configurator.targets.first.build_configurations.each do |config|
         config.build_settings[SWIFT_OBJC_BRIDGING_HEADER] = reference.full_path.to_s
       end
-      @configurator.save
+      save_configuration
     end
 
     def info_plist_path
@@ -168,7 +168,7 @@ module Tuka
       reference = group.new_file(Frameworks.user_notifications_framework_path)
       reference.set_source_tree(Frameworks.source_tree)
       @configurator.targets.first.frameworks_build_phase.add_file_reference(reference)
-      @configurator.save
+      save_configuration
     end
   end
 end
