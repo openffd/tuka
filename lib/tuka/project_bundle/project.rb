@@ -57,10 +57,6 @@ module Tuka
       @configurator.save
     end
 
-    # def receptor_files
-    #   m_file =
-    # end
-
     def delete_previous_receptor_files
       file_references = @configurator.files.select { |file| file.path =~ /AppDelegate\+/ }
       return if file_references.empty?
@@ -114,6 +110,10 @@ module Tuka
     end
 
     private
+
+    def save_configuration
+      @configurator.save
+    end
 
     def detect_type
       if app_delegate_paths.include?(PBXProj::SEARCHABLE_UNITY)
