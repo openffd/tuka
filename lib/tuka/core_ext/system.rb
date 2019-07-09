@@ -10,4 +10,12 @@ module System
       system 'rm', '-rf', path
     end
   end
+
+  module Xcodeproj
+    refine Kernel do
+      def xcproj_show
+        system 'xcodeproj', 'show'
+      end
+    end
+  end
 end
