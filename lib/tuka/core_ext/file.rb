@@ -8,4 +8,12 @@ module CoreExtensions
       File.open(self, 'w') { |file| file.puts content }
     end
   end
+
+  module FileEncoding
+    refine File do
+      def utf_8?
+        external_encoding == Encoding::UTF_8
+      end
+    end
+  end
 end
