@@ -12,9 +12,11 @@ module System
   end
 
   module Xcodeproj
+    COMMAND = 'xcodeproj'
+
     refine Kernel do
       def xcproj_show
-        system 'xcodeproj', 'show'
+        `#{COMMAND} show`
       end
     end
   end
