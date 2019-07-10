@@ -11,6 +11,16 @@ module Tuka
 
     attr_reader :name, :category_prefix
 
+    require "pry"
+    binding.pry
+    TYPE_SEARCH_STRINGS = {
+      ObjC: Tuka::PBXProj::SEARCHABLE_OBJC,
+      Swift: Tuka::PBXProj::SEARCHABLE_SWIFT,
+      Unity: Tuka::PBXProj::SEARCHABLE_UNITY
+    }.freeze
+    RECEPTOR_SEARCH_STRING = '(_, class_getInstanceMethod(AppDelegate.class, @selector(::)))'
+    private_constant :TYPE_SEARCH_STRINGS, :RECEPTOR_SEARCH_STRING
+
     TYPES = { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }.freeze
     TYPES.values.each do |type|
       define_method("#{type}?".to_sym) do
@@ -44,8 +54,7 @@ module Tuka
     end
 
     def new_file_destination_group
-      type_key = TYPES.key(type)
-      reference = @configurator.files.select { |file| file.path =~ /#{type_search_strings[type_key]}/ }.first
+      reference = @configurator.files.select { |file| file.path =~ /#{TYPE_SEARCH_STRINGS[TYPES.key(type)]}/ }.first
       return nil if reference.nil?
 
       reference.parent
@@ -139,9 +148,7 @@ module Tuka
     def receptor_files
       headers = current_receptor_implementation_files.map do |file|
         implementation = File.basename(file.real_path, '.*')
-        @configurator.files.select do |f|
-          implementation.eql? File.basename(f.real_path, '.h')
-        end
+        @configurator.files.select { |f| implementation.eql? File.basename(f.real_path, '.h') }
       end
       current_receptor_implementation_files.to_a + headers.flatten.to_a
     end
@@ -164,9 +171,7 @@ module Tuka
 
     def possible_app_delegate_files
       searchables = PBXProj.constants.grep(/SEARCHABLE_*/).map(&PBXProj.method(:const_get))
-      @configurator.files.select do |file|
-        searchables.include? File.basename(file.real_path)
-      end
+      @configurator.files.select { |file| searchables.include? File.basename(file.real_path) }
     end
 
     def app_delegate_paths
@@ -178,20 +183,12 @@ module Tuka
       end
     end
 
-    def receptor_search_string
-      '(_, class_getInstanceMethod(AppDelegate.class, @selector(::)))'
-    end
-
-    def type_search_strings
-      { ObjC: PBXProj::SEARCHABLE_OBJC, Swift: PBXProj::SEARCHABLE_SWIFT, Unity: PBXProj::SEARCHABLE_UNITY }
-    end
-
     def groups_for_deletion(refs)
       grouped_file_refs(refs).values.select do |group|
         m_file = group.select { |ref| File.extname(ref.path) == '.m' }.first
         return false if m_file.nil?
 
-        File.read(m_file.full_path.to_s).include? receptor_search_string
+        File.read(m_file.full_path.to_s).include? RECEPTOR_SEARCH_STRING
       end
     end
 
