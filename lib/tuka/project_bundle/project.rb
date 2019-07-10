@@ -11,8 +11,6 @@ module Tuka
 
     attr_reader :name, :category_prefix
 
-    require "pry"
-    binding.pry
     TYPE_SEARCH_STRINGS = {
       ObjC: PBXProj::SEARCHABLE_OBJC,
       Swift: PBXProj::SEARCHABLE_SWIFT,
