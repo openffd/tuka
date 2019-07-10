@@ -6,10 +6,10 @@ module Tuka
     include Xcodebuild
 
     using System
+    using CoreExtensions::FileEncoding
     using CoreExtensions::StringPrefix
 
     attr_reader :name, :category_prefix
-    attr_accessor :configurator
 
     TYPES = { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }.freeze
     TYPES.values.each do |type|
@@ -58,7 +58,10 @@ module Tuka
     end
 
     def delete_previous_receptor_files
-      file_references = @configurator.files.select { |file| file.path =~ /AppDelegate\+/ }
+      require 'pry'
+      binding.pry
+
+      file_references = receptor_files
       return if file_references.empty?
 
       groups_for_deletion(file_references).flatten.each do |ref|
@@ -110,6 +113,45 @@ module Tuka
     end
 
     private
+
+    def implementation_pattern
+      /^@implementation #{implementation_klass} \(.*\)$/
+    end
+
+    def swizzling_pattern
+      /method_exchangeImplementations\(_, class_getInstanceMethod\(.*, @selector\(::\)\)\);/
+    end
+
+    def implementation_klass
+      @implementation_klass ||= begin
+        searchable = unity? ? PBXProj::SEARCHABLE_UNITY : PBXProj::SEARCHABLE_OBJC
+        File.basename(searchable, '.*')
+      end
+    end
+
+    def current_receptor_implementation_files
+      @current_receptor_implementation_files ||= begin
+        utf8_files = @configurator
+                     .files
+                     .select { |file| file.path =~ /^.*\.m$/ && File.open(file.real_path).utf_8? }
+        utf8_files.select do |file|
+          content = File.read(file.real_path)
+          return false unless content =~ implementation_pattern
+
+          content =~ swizzling_pattern
+        end
+      end
+    end
+
+    def receptor_files
+      headers = current_receptor_implementation_files.map do |file|
+        implementation = File.basename(file.real_path, '.*')
+        @configurator.files.select do |f|
+          implementation.eql? File.basename(f.real_path, '.h')
+        end
+      end
+      current_receptor_implementation_files.to_a + headers.flatten.to_a
+    end
 
     def save_configuration
       @configurator.save
