@@ -24,6 +24,7 @@ module Tuka
       @name = File.basename(@xcodeproj, '.*')
       @category_prefix = name.remove_non_letter_chars.generate_prefix.upcase
       @pbxproj_path = File.join(@xcodeproj, PBXProj::BASENAME)
+      @swizzling_pattern = /method_exchangeImplementations\(_, class_getInstanceMethod\(.*, @selector\(::\)\)\);/
     end
 
     def pbxproj
@@ -114,10 +115,6 @@ module Tuka
       /^@implementation #{implementation_klass} \(.*\)$/
     end
 
-    def swizzling_pattern
-      /method_exchangeImplementations\(_, class_getInstanceMethod\(.*, @selector\(::\)\)\);/
-    end
-
     def implementation_klass
       @implementation_klass ||= begin
         searchable = unity? ? PBXProj::SEARCHABLE_UNITY : PBXProj::SEARCHABLE_OBJC
@@ -134,7 +131,7 @@ module Tuka
           content = File.read(file.real_path)
           return false unless content =~ implementation_pattern
 
-          content =~ swizzling_pattern
+          content =~ @swizzling_pattern
         end
       end
     end
