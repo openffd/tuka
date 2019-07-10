@@ -58,13 +58,9 @@ module Tuka
     end
 
     def delete_previous_receptor_files
-      require 'pry'
-      binding.pry
+      return if receptor_files.empty?
 
-      file_references = receptor_files
-      return if file_references.empty?
-
-      groups_for_deletion(file_references).flatten.each do |ref|
+      groups_for_deletion(receptor_files).flatten.each do |ref|
         rm(ref.full_path.to_s)
         ref.remove_from_project
       end
