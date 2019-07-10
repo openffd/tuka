@@ -38,6 +38,17 @@ module CoreExtensions
     end
   end
 
+  module StringPrinting
+    refine String do
+      def print_by_line
+        each_char do |char|
+          sleep 0.15 if char == "\n"
+          print char
+        end
+      end
+    end
+  end
+
   module StringPrefix
     refine String do
       def remove_non_letter_chars

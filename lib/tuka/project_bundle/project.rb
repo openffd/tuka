@@ -14,9 +14,9 @@ module Tuka
     require "pry"
     binding.pry
     TYPE_SEARCH_STRINGS = {
-      ObjC: Tuka::PBXProj::SEARCHABLE_OBJC,
-      Swift: Tuka::PBXProj::SEARCHABLE_SWIFT,
-      Unity: Tuka::PBXProj::SEARCHABLE_UNITY
+      ObjC: PBXProj::SEARCHABLE_OBJC,
+      Swift: PBXProj::SEARCHABLE_SWIFT,
+      Unity: PBXProj::SEARCHABLE_UNITY
     }.freeze
     RECEPTOR_SEARCH_STRING = '(_, class_getInstanceMethod(AppDelegate.class, @selector(::)))'
     private_constant :TYPE_SEARCH_STRINGS, :RECEPTOR_SEARCH_STRING
