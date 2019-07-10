@@ -6,9 +6,7 @@ module Tuka
       using System::Xcodeproj
 
       def install
-        xcproj_show
-
-        [GenerateLibrary, GeneratePodfile, GenerateReceptor].each do |klass|
+        [ProjectStatus, GenerateLibrary, GeneratePodfile, GenerateReceptor].each do |klass|
           cmd = klass.new
           cmd.options = { quiet: true, yes: true }
           cmd.invoke_all
