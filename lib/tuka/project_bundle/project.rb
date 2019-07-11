@@ -185,19 +185,6 @@ module Tuka
       end
     end
 
-    def groups_for_deletion(refs)
-      grouped_file_refs(refs).values.select do |group|
-        m_file = group.select { |ref| File.extname(ref.path) == '.m' }.first
-        return false if m_file.nil?
-
-        File.read(m_file.full_path.to_s).include? RECEPTOR_SEARCH_STRING
-      end
-    end
-
-    def grouped_file_refs(refs)
-      refs.group_by { |ref| File.basename(ref.path, '.*') }
-    end
-
     def add_user_notification_framework_to_group(group)
       reference = group.new_file(Frameworks.user_notifications_framework_path)
       reference.set_source_tree(Frameworks.source_tree)
