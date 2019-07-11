@@ -68,7 +68,8 @@ module Tuka
       return if receptor_files.empty?
 
       receptor_files.each do |file|
-        rm(file.full_path.to_s)
+        path = file.full_path.to_s
+        rm(path) if File.file? path
         file.remove_from_project
       end
 
