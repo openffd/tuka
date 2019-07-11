@@ -128,7 +128,7 @@ module Tuka
         gitignore_add("#{TukaBundle::DIR}/")
 
         puts
-        puts "[✓] Excluded from version control: #{(TukaBundle::DIR + '/').yellow}"
+        puts '[✓] Tuka directory excluded from version control'
       end
 
       def open_tukafile
