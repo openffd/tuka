@@ -67,9 +67,9 @@ module Tuka
     def delete_previous_receptor_files
       return if receptor_files.empty?
 
-      groups_for_deletion(receptor_files).flatten.each do |ref|
-        rm(ref.full_path.to_s)
-        ref.remove_from_project
+      receptor_files.each do |file|
+        rm(file.full_path.to_s)
+        file.remove_from_project
       end
 
       save_configuration
