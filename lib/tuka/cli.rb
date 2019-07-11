@@ -13,9 +13,13 @@ module Tuka
     update_receptor_usage = 'update-receptor'
     update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
+    require 'pry'
+    binding.pry
+
     # TODO: Meta this in the future
     register C::Init,             'init',               C::Init::USAGE,             C::Init.desc
     register C::Install,          'install',            C::Install::USAGE,          C::Install.desc
+    register C::ShowConfig,       'show_config',        C::ShowConfig::USAGE,       C::ShowConfig.desc
     register C::GenerateLibrary,  'generate_library',   C::GenerateLibrary::USAGE,  C::GenerateLibrary.desc
     register C::GeneratePodfile,  'generate_podfile',   C::GeneratePodfile::USAGE,  C::GeneratePodfile.desc
     register C::GenerateReceptor, 'generate_receptor',  C::GenerateReceptor::USAGE, C::GenerateReceptor.desc
@@ -64,6 +68,7 @@ module Tuka
       end
     end
 
+    map %w[config] => :show_config
     map %w[gitignore add-gi addg ag] => :add_gitignore
     map %w[generate-lib update-lib gen-lib genlib gl ul] => :generate_library
     map %w[generate-pod update-pod gen-pod genpod gp up] => :generate_podfile
