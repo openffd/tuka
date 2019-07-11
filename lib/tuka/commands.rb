@@ -11,6 +11,7 @@ module Tuka
     require_relative 'commands/install'
     require_relative 'commands/project_status'
     require_relative 'commands/set_credentials'
+    require_relative 'commands/show_config'
     require_relative 'commands/uninstall'
   end
 end
