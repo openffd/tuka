@@ -60,6 +60,13 @@ module Tuka
       desc 'Lets you setup credentials for services needed by Tuka (e.g. Bitbucket)'
     end
 
+    class ShowConfig < Command
+      USAGE = 'config'
+
+      namespace :show_config
+      desc 'Lets you view and edit the current project Tukafile'
+    end
+
     class Uninstall < Command
       USAGE = 'uninstall'
 
