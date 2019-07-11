@@ -2,7 +2,7 @@
 
 module Tuka
   module TukaBundle
-    DIR = '.tuka'
+    DIR = 'Pods.xcworkspace'
     PREVIOUS_DIRNAMES = ['_tuka'].freeze
 
     def tuka_bundle_dir
