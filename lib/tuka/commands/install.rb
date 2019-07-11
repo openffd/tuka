@@ -5,6 +5,14 @@ module Tuka
     class Install < Command
       using System::Xcodeproj
 
+      def check_tukafile_existence
+        raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init::USAGE}'" if tukafile.nil?
+      end
+
+      def check_tukafile_validity
+        raise StandardError, tukafile.error unless tukafile.valid?
+      end
+
       def install
         [ProjectStatus, GenerateLibrary, GeneratePodfile, GenerateReceptor].each do |klass|
           cmd = klass.new
