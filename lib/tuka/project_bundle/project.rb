@@ -156,7 +156,7 @@ module Tuka
     end
 
     def save_configuration
-      @configurator.save
+      @configurator.save if @configurator.dirty?
     end
 
     def detect_type
