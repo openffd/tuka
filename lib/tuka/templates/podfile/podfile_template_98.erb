@@ -9,6 +9,7 @@ proc = Proc.new do |t|
     c.build_settings[:SWIFT_VERSION.to_s] = '<%= @swift_version %>'
   end
 end
+plugin 'cocoapods-repo-update'
 
 target '<%= @target %>' do
   use_frameworks!
