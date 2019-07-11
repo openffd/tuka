@@ -16,8 +16,8 @@ module Tuka
       end
 
       def open_config
-        puts 'Opening Tukafile...'
-        xed(tukafile.path)
+        puts 'Opening the Tukafile...'
+        open_file(generated_tukafile_path)
       end
     end
   end
