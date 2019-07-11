@@ -13,9 +13,6 @@ module Tuka
     update_receptor_usage = 'update-receptor'
     update_receptor_desc  = 'Updates previously generated receptors as per new Tukafile configuration'
 
-    require 'pry'
-    binding.pry
-
     # TODO: Meta this in the future
     register C::Init,             'init',               C::Init::USAGE,             C::Init.desc
     register C::Install,          'install',            C::Install::USAGE,          C::Install.desc
