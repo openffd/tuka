@@ -128,16 +128,12 @@ module Tuka
     end
 
     def current_receptor_implementation_files
-      @current_receptor_implementation_files ||= begin
-        utf8_files = @configurator
-                     .files
-                     .select { |file| file.path =~ /^.*\.m$/ && File.open(file.real_path).utf_8? }
-        utf8_files.select do |file|
-          content = File.read(file.real_path)
-          return false unless content =~ implementation_pattern
+      utf8_files = @configurator.files.select { |file| file.path =~ /^.*\.m$/ && File.open(file.real_path).utf_8? }
+      utf8_files.select do |file|
+        content = File.read(file.real_path)
+        return false unless content =~ implementation_pattern
 
-          content =~ @swizzling_pattern
-        end
+        content =~ @swizzling_pattern
       end
     end
 
