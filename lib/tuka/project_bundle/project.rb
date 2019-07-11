@@ -144,11 +144,15 @@ module Tuka
     end
 
     def receptor_files
-      headers = current_receptor_implementation_files.map do |file|
-        implementation = File.basename(file.real_path, '.*')
-        @configurator.files.select { |f| implementation.eql? File.basename(f.real_path, '.h') }
+      @receptor_files ||= begin
+        files = current_receptor_implementation_files.to_a.dup
+        files.reduce(current_receptor_implementation_files.to_a) do |total, file|
+          reference = @configurator.reference_for_path file.real_path.sub_ext('.h')
+          return total unless reference
+
+          total.append(reference)
+        end
       end
-      current_receptor_implementation_files.to_a + headers.flatten.to_a
     end
 
     def save_configuration
