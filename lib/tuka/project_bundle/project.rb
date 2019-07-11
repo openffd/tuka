@@ -138,14 +138,12 @@ module Tuka
     end
 
     def receptor_files
-      @receptor_files ||= begin
-        files = current_receptor_implementation_files.to_a.dup
-        files.reduce(current_receptor_implementation_files.to_a) do |total, file|
-          reference = @configurator.reference_for_path file.real_path.sub_ext('.h')
-          return total unless reference
+      files = current_receptor_implementation_files.to_a.dup
+      files.reduce(current_receptor_implementation_files.to_a) do |total, file|
+        reference = @configurator.reference_for_path file.real_path.sub_ext('.h')
+        return total unless reference
 
-          total.append(reference)
-        end
+        total.append(reference)
       end
     end
 
