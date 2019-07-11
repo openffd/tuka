@@ -65,8 +65,6 @@ module Tuka
     end
 
     def delete_previous_receptor_files
-      return if receptor_files.empty?
-
       receptor_files.each do |file|
         path = file.full_path.to_s
         rm(path) if File.file? path
