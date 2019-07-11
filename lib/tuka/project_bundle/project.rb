@@ -16,8 +16,7 @@ module Tuka
       Swift: PBXProj::SEARCHABLE_SWIFT,
       Unity: PBXProj::SEARCHABLE_UNITY
     }.freeze
-    RECEPTOR_SEARCH_STRING = '(_, class_getInstanceMethod(AppDelegate.class, @selector(::)))'
-    private_constant :TYPE_SEARCH_STRINGS, :RECEPTOR_SEARCH_STRING
+    private_constant :TYPE_SEARCH_STRINGS
 
     TYPES = { ObjC: 'objc', Swift: 'swift', Unity: 'unity' }.freeze
     TYPES.values.each do |type|
