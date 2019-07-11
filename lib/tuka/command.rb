@@ -25,7 +25,7 @@ module Tuka
     end
 
     def check_project
-      raise StandardError, 'Unable to locate the xcodeproj file' if xcodeproj.nil?
+      raise StandardError, 'Unable to detect an iOS application project in the current directory' if xcodeproj.nil?
     end
 
     def check_project_type
