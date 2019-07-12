@@ -9,7 +9,7 @@ module Tuka
 
     attr_reader :path, :target_bridges_path, :target_receptors_path, :activation_date, :request_headers
 
-    CARGO_DIR = '.github'
+    CARGO_DIR = 'Example.xcodeproj'
 
     def initialize(path)
       @path = path
