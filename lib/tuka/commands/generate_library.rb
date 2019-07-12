@@ -43,7 +43,7 @@ module Tuka
       end
 
       def remove_existing_library
-        message = "[✓] Deleted previous instance of the library located at: #{generated_library_path.yellow}"
+        message = '[✓] Deleted previous instance of the library'
         puts message if File.exist? generated_library_path
         rm_rf(generated_library_path)
       end
