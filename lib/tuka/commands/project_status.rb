@@ -9,14 +9,15 @@ module Tuka
       def display_project_status
         puts
         puts "Checking project status of #{project.name} (#{project.type_pretty})".magenta
-        sleep 1
+        sleep 0.8
       end
 
       def display_summary_report_generation
         puts
-        puts "[✓] Status: #{'OK'.yellow}; Generating project summary report..."
+        puts "[✓] Project Status: #{'OKAY'.yellow}"
         puts
-        sleep 0.5
+        puts 'Generating project summary report...'
+        sleep 1.5
       end
 
       def check_project_status
