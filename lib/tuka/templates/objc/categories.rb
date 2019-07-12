@@ -3,7 +3,7 @@
 module Tuka
   module ObjC
     def category_files(type: nil)
-      Dir[File.join(__dir__, '**', type.to_s, '*.*')]
+      Dir[File.join(__dir__, '**', type.to_s, '*.{h,m}')]
     end
 
     class Category
