@@ -49,7 +49,12 @@ module Tuka
     end
 
     def inject_categories
-      File.open(h_file).gsub_content(/\/\/\+0/, @random_categories[0].header_text)
+      @random_categories.each_with_index do |category, index|
+        require 'pry'
+        binding.pry
+        File.open(h_file).gsub_content(/\/\/\$#{index}/, category.header_text)
+        File.open(m_file).gsub_content(/\/\/\$#{index}/, category.implementation_text)
+      end
 
       require 'pry'
       binding.pry
