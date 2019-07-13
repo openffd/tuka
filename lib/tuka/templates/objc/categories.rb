@@ -11,8 +11,24 @@ module Tuka
       DEFAULT_PREFIX = 'MXBZ'
 
       def initialize(header:, implementation:)
-        @header = header
-        @implementation = implementation
+        @header = File.basename(header)
+        @implementation = File.basename(implementation)
+        @prefix = DEFAULT_PREFIX
+      end
+
+      def filename
+        @filename ||= File.basename(@implementation, '.*')
+      end
+
+      def prefix=(prefix)
+        apply_prefix
+        @prefix = prefix
+      end
+
+      private
+
+      def apply_prefix(prefix)
+
       end
     end
   end
