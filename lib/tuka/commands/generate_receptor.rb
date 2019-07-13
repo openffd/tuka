@@ -92,7 +92,9 @@ module Tuka
       end
 
       def prepare_receptor_content
-        receptor_bundle.inject_categories
+        require 'pry'
+        binding.pry
+        receptor_bundle.inject_categories(tukafile.project_info.prefix)
       end
 
       def update_receptor_name
