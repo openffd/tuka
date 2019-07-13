@@ -23,7 +23,7 @@ module Tuka
       def prefix=(prefix)
         raise StandardError, 'Invalid category prefix' unless prefix =~ /^[[:alpha:]]{3,5}$/
 
-        apply_prefix
+        apply_prefix(prefix)
         @prefix = prefix
       end
 
