@@ -4,6 +4,10 @@ module Tuka
   require 'tuka/templates/objc/categories'
 
   class ReceptorBundle
+    include ObjC
+
+    using CoreExtensions
+
     DIR = 'receptor'
     SEARCH_STRING_FILE_NAME = 'Receptor'
     SEARCH_STRING_TARGET = 'XCODETARGET'
@@ -14,6 +18,7 @@ module Tuka
     def initialize(path)
       @path = path
       @category_name = 'Receptor'
+      @random_categories = categories_sample(5)
     end
 
     def filename
@@ -43,7 +48,11 @@ module Tuka
       File.open(h_file, 'w') { |file| file.puts text }
     end
 
-    def inject_category
+    def inject_categories
+      File.open(h_file).gsub_content(/\/\/\+0/, @random_categories[0].header_text)
+
+      require 'pry'
+      binding.pry
     end
 
     private
