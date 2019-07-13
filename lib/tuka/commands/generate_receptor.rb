@@ -101,8 +101,6 @@ module Tuka
       def inject_random_categories
         require 'pry'
         binding.pry
-
-
       end
 
       def delete_previous_receptor_files

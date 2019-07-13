@@ -44,7 +44,6 @@ module Tuka
     end
 
     def inject_category
-
     end
 
     private
