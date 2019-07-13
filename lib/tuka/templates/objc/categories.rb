@@ -5,15 +5,15 @@ module Tuka
     class Category
       DEFAULT_PREFIX = 'MXBZ'
 
-      attr_reader :header, :implementation, :framework, :prefix, :header_content, :implementation_content
+      attr_reader :header, :implementation, :framework, :prefix, :header_text, :implementation_text
 
       def initialize(header:, implementation:)
         @header = header
         @implementation = implementation
         @framework = File.basename(Pathname.new(implementation).parent)
         @prefix = DEFAULT_PREFIX
-        @header_content = File.open(header).read
-        @implementation_content = File.open(implementation).read
+        @header_text = File.open(header).read
+        @implementation_text = File.open(implementation).read
       end
 
       def filename
@@ -29,7 +29,14 @@ module Tuka
       private
 
       def apply_prefix(prefix)
-        @header_content.gsub!(DEFAULT_PREFIX, prefix)
+        @header_text =
+          @header_text
+          .gsub(@prefix.upcase, prefix.upcase)
+          .gsub(@prefix.downcase, prefix.downcase)
+        @implementation_text =
+          @implementation_text
+          .gsub(@prefix.upcase, prefix.upcase)
+          .gsub(@prefix.downcase, prefix.downcase)
       end
     end
 
