@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Tuka
+  require 'tuka/templates/objc/categories'
+
   class ReceptorBundle
     DIR = 'receptor'
     SEARCH_STRING_FILE_NAME = 'Receptor'
@@ -39,6 +41,10 @@ module Tuka
     def update_swift_target(target_name:)
       text = File.read(h_file).gsub(SEARCH_STRING_TARGET, target_name)
       File.open(h_file, 'w') { |file| file.puts text }
+    end
+
+    def inject_category
+
     end
 
     private
