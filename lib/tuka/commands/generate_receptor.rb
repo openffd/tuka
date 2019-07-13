@@ -91,16 +91,15 @@ module Tuka
         puts '[✓] Set correct Swift project target for receptor files'
       end
 
+      def prepare_receptor_content
+        receptor_bundle.inject_categories
+      end
+
       def update_receptor_name
         return if tukafile.project_info.receptor_name.nil?
 
         receptor_bundle.category_name = tukafile.project_info.receptor_name
         puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
-      end
-
-      def inject_random_categories
-        require 'pry'
-        binding.pry
       end
 
       def delete_previous_receptor_files
