@@ -58,11 +58,11 @@ module Tuka
     private
 
     def target_h_file_path
-      @target_h_file_path ||= File.join(@path, "#{filename}.h")
+      File.join(@path, "#{filename}.h")
     end
 
     def target_m_file_path
-      @target_m_file_path ||= File.join(@path, "#{filename}.m")
+      File.join(@path, "#{filename}.m")
     end
 
     def update_content_receptor_name(receptor_name:)
