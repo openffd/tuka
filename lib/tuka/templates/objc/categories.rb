@@ -12,8 +12,8 @@ module Tuka
         @implementation = implementation
         @framework = File.basename(Pathname.new(implementation).parent)
         @prefix = DEFAULT_PREFIX
-        @header_text = File.open(header).read
-        @implementation_text = File.open(implementation).read
+        @header_text = File.open(header).read.gsub(/^.*(#import|@import) .*$/, '')
+        @implementation_text = File.open(implementation).read.gsub(/^.*(#import|@import) .*$/, '')
       end
 
       def filename
