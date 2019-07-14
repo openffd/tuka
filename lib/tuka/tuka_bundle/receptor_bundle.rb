@@ -7,22 +7,25 @@ module Tuka
     include ObjC
 
     using CoreExtensions
+    using CoreExtensions::ObjcFilenameString
 
     DIR = 'receptor'
     SEARCH_STRING_FILE_NAME = 'Receptor'
     SEARCH_STRING_TARGET = 'XCODETARGET'
     private_constant :SEARCH_STRING_FILE_NAME, :SEARCH_STRING_TARGET
 
-    attr_reader :path, :category_name
+    attr_reader :path, :filename, :category_name
 
     def initialize(path)
       @path = path
+      @filename = 'AppDelegate+Receptor'
       @category_name = 'Receptor'
       @random_categories = categories_sample(5)
     end
 
-    def filename
-      "AppDelegate+#{category_name}"
+    def filename=(new_name)
+      rename_files(new_name)
+      @filename = new_name
     end
 
     def category_name=(new_name)
@@ -57,18 +60,18 @@ module Tuka
     private
 
     def target_h_file_path
-      File.join(@path, "#{filename}.h")
+      File.join(@path, @filename + '.h')
     end
 
     def target_m_file_path
-      File.join(@path, "#{filename}.m")
+      File.join(@path, @filename + '.m')
     end
 
     def update_content_receptor_name(receptor_name:)
       files.each { |file| File.open(file).gsub_content(SEARCH_STRING_FILE_NAME, receptor_name) }
     end
 
-    def update_filename(new_name)
+    def rename_files(new_name)
       files.each { |file| File.rename(file, file.gsub(category_name, new_name)) }
     end
   end
