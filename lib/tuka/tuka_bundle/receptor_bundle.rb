@@ -58,9 +58,8 @@ module Tuka
       File.open(h_file).gsub_content(SEARCH_STRING_TARGET, target_name)
     end
 
-    def inject_categories(prefix)
+    def inject_categories
       @random_categories.each_with_index do |category, index|
-        category.prefix = prefix
         File.open(h_file).gsub_content(%r{//\$#{index}}, category.header_text)
         File.open(m_file).gsub_content(%r{//\$#{index}}, category.implementation_text)
       end
