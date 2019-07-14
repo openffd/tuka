@@ -92,8 +92,6 @@ module Tuka
       end
 
       def prepare_receptor_content
-        require 'pry'
-        binding.pry
         receptor_bundle.inject_categories(tukafile.project_info.prefix)
       end
 

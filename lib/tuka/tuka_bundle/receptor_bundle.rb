@@ -50,9 +50,6 @@ module Tuka
 
     def inject_categories(prefix)
       @random_categories.each_with_index do |category, index|
-        require 'pry'
-        binding.pry
-
         category.prefix = prefix
         File.open(h_file).gsub_content(/\/\/\$#{index}/, category.header_text)
         File.open(m_file).gsub_content(/\/\/\$#{index}/, category.implementation_text)
