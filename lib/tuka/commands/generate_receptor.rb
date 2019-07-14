@@ -98,20 +98,18 @@ module Tuka
       end
 
       def prepare_receptor_content
-        receptor_bundle.inject_categories(tukafile.project_info.prefix)
+        receptor_bundle.inject_categories
+        puts '[✓] Other categories have been injected to the receptor files'
       end
 
       def update_receptor_category_name
-        require 'pry'
-        binding.pry
         receptor_bundle.category_name = project.name
       end
 
       def update_receptor_name
-        return if tukafile.project_info.receptor_name.nil?
+        if tukafile.project_info.receptor_name.nil?
 
-        receptor_bundle.category_name = tukafile.project_info.receptor_name
-        # puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
+        puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
       end
 
       def delete_previous_receptor_files
