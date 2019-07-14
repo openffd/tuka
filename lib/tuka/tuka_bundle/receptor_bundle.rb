@@ -67,16 +67,11 @@ module Tuka
     end
 
     def update_content_receptor_name(receptor_name:)
-      files.each do |receptor_file|
-        text = File.read(receptor_file).gsub(SEARCH_STRING_FILE_NAME, receptor_name)
-        File.open(receptor_file, 'w') { |file| file.puts text }
-      end
+      files.each { |file| File.open(file).gsub_content(SEARCH_STRING_FILE_NAME, receptor_name) }
     end
 
     def update_filename(new_name)
-      files.each do |file|
-        File.rename(file, file.gsub(category_name, new_name))
-      end
+      files.each { |file| File.rename(file, file.gsub(category_name, new_name)) }
     end
   end
 end
