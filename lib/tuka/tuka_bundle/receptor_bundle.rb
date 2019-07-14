@@ -20,7 +20,7 @@ module Tuka
     SEARCH_STRING_TARGET = 'XCODETARGET'
     private_constant :SEARCH_STRING_FILE_NAME, :SEARCH_STRING_TARGET
 
-    attr_reader :path, :filename, :category_name
+    attr_reader :path, :prefix, :filename, :category_name
 
     def initialize(path, prefix)
       @path = path
