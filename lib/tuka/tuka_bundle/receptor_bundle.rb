@@ -31,7 +31,7 @@ module Tuka
     end
 
     def filename=(new_name)
-      raise InvalidCategoryFilenameError.new unless new_name.valid_objc_filename?
+      raise InvalidCategoryFilenameError unless new_name.valid_objc_filename?
 
       rename_files(new_name)
       @filename = new_name
