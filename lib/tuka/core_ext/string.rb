@@ -64,4 +64,14 @@ module CoreExtensions
       end
     end
   end
+
+  module ObjcFilenameString
+    VALID_REGEX = /^[[:alpha:]]+[a-zA-Z0-9_\-\+]*$/.freeze
+
+    refine String do
+      def valid_objc_filename?
+        self =~ VALID_REGEX
+      end
+    end
+  end
 end
