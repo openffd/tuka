@@ -140,7 +140,7 @@ module Tuka
 
     def valid_project_info_prefix?
       prefix = project_info.prefix
-      return true if prefix.nil?
+      return false if prefix.nil?
 
       prefix == prefix[/[a-zA-Z]+/]
     end
