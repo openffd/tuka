@@ -42,7 +42,7 @@ module CoreExtensions
     refine String do
       def print_by_line
         each_char do |char|
-          sleep 0.035 if char == "\n"
+          sleep 0.025 if char == "\n"
           print char
         end
       end
