@@ -27,7 +27,6 @@ module Tuka
 
     def category_name=(new_name)
       update_content_receptor_name(receptor_name: new_name)
-      update_filename(new_name)
       @category_name = new_name
     end
 
@@ -44,8 +43,7 @@ module Tuka
     end
 
     def update_swift_target(target_name:)
-      text = File.read(h_file).gsub(SEARCH_STRING_TARGET, target_name)
-      File.open(h_file, 'w') { |file| file.puts text }
+      File.open(h_file).gsub_content(SEARCH_STRING_TARGET, target_name)
     end
 
     def inject_categories(prefix)
