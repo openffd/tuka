@@ -12,6 +12,10 @@ module Tuka
           FileUtils.cp(bridging_header, project.new_file_destination_group.path)
           project.register_bridging_header(bridging_header)
         end
+
+        def update_receptor_name_from_category
+
+        end
       end
 
       def check_tukafile_existence
@@ -97,11 +101,17 @@ module Tuka
         receptor_bundle.inject_categories(tukafile.project_info.prefix)
       end
 
+      def update_receptor_category_name
+        require 'pry'
+        binding.pry
+        receptor_bundle.category_name = project.name
+      end
+
       def update_receptor_name
         return if tukafile.project_info.receptor_name.nil?
 
         receptor_bundle.category_name = tukafile.project_info.receptor_name
-        puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
+        # puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
       end
 
       def delete_previous_receptor_files
