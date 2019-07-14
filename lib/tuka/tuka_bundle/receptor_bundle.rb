@@ -3,6 +3,12 @@
 module Tuka
   require 'tuka/templates/objc/categories'
 
+  class InvalidCategoryFilenameError < StandardError
+    def initialize(msg = 'Invalid category filename, make sure to not include the extension')
+      super(msg)
+    end
+  end
+
   class ReceptorBundle
     include ObjC
 
@@ -24,6 +30,8 @@ module Tuka
     end
 
     def filename=(new_name)
+      raise InvalidCategoryFilenameError.new unless new_name.valid_objc_filename?
+
       rename_files(new_name)
       @filename = new_name
     end
