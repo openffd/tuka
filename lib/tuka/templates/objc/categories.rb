@@ -50,7 +50,7 @@ module Tuka
 
     def category_files(file_type: nil, framework: nil)
       all = Dir[File.join(__dir__, '**', framework.to_s, "*.#{file_type || '{h,m}'}")]
-      all.group_by { |file| File.basename(file, '.*').itself }.values.map { |group| group.sort }
+      all.group_by { |file| File.basename(file, '.*').itself }.values.map(&:sort)
     end
   end
 end
