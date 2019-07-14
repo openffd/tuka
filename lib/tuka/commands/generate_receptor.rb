@@ -58,6 +58,8 @@ module Tuka
       end
 
       def display_tukafile_receptor
+        return if tukafile.project_info.receptor_name.nil?
+
         puts "[✓] Detected Tukafile receptor name: #{tukafile.project_info.receptor_name.yellow}"
       end
 
