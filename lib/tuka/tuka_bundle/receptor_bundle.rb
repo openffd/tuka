@@ -16,11 +16,17 @@ module Tuka
     using CoreExtensions::ObjcFilenameString
 
     DIR = 'receptor'
+
     INITIAL_RECEPTOR_FILENAME = 'AppDelegate+Receptor'
     INITIAL_RECEPTOR_CATEGORY_NAME = 'Receptor'
     SEARCH_STRING_FILE_NAME = 'Receptor'
+    SEARCH_STRING_HEADER_FILENAME = 'HEADER_FILENAME'
     SEARCH_STRING_TARGET = 'XCODETARGET'
-    private_constant :SEARCH_STRING_FILE_NAME, :SEARCH_STRING_TARGET
+    private_constant :INITIAL_RECEPTOR_FILENAME,
+                     :INITIAL_RECEPTOR_CATEGORY_NAME,
+                     :SEARCH_STRING_FILE_NAME,
+                     :SEARCH_STRING_HEADER_FILENAME,
+                     :SEARCH_STRING_TARGET
 
     attr_reader :path, :prefix, :filename, :category_name
 
