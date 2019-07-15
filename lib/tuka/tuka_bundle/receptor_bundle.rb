@@ -43,6 +43,8 @@ module Tuka
     end
 
     def set_filename_from_category
+      require 'pry'
+      binding.pry
       filename = random_categories.first.filename
     end
 

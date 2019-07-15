@@ -14,8 +14,8 @@ module Tuka
         end
 
         def update_receptor_name_from_category
-          require 'pry'
-          binding.pry
+          receptor_bundle.set_filename_from_category
+
           tukafile.project_info.receptor_name = receptor_bundle.filename
           tukafile.dump
         end
