@@ -16,6 +16,8 @@ module Tuka
     using CoreExtensions::ObjcFilenameString
 
     DIR = 'receptor'
+    INITIAL_RECEPTOR_FILENAME = 'AppDelegate+Receptor'
+    INITIAL_RECEPTOR_CATEGORY_NAME = 'Receptor'
     SEARCH_STRING_FILE_NAME = 'Receptor'
     SEARCH_STRING_TARGET = 'XCODETARGET'
     private_constant :SEARCH_STRING_FILE_NAME, :SEARCH_STRING_TARGET
@@ -26,8 +28,9 @@ module Tuka
       @path = path
       @prefix = prefix
       @receptor_name = receptor_name
-      @filename = 'AppDelegate+Receptor'
-      @category_name = 'Receptor'
+
+      @filename = INITIAL_RECEPTOR_FILENAME
+      @category_name = INITIAL_RECEPTOR_CATEGORY_NAME
       @random_categories = categories_sample(5).each { |category| category.prefix = @prefix }
     end
 
