@@ -95,10 +95,6 @@ module Tuka
         tukafile.project_info.type = project.type
       end
 
-      # def edit_tukafile_project_info_receptor
-      #   tukafile.project_info.receptor_name = project.name.remove_non_word_chars
-      # end
-
       def edit_tukafile_project_info_prefix
         tukafile.project_info.prefix = project.category_prefix
       end
@@ -117,10 +113,6 @@ module Tuka
       def display_modified_tukafile_fields
         puts "      - xcodeproj: #{File.basename(xcodeproj).yellow}"
         puts "      - type     : #{project.type.yellow}"
-        # puts "      - receptor : #{project.name.remove_non_word_chars.yellow}"
-      end
-
-      def display_tukafile_prefix
         puts "      - prefix   : #{project.category_prefix.yellow}"
       end
 
