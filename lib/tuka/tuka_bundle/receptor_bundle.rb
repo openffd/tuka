@@ -44,6 +44,7 @@ module Tuka
       raise InvalidCategoryFilenameError unless new_name.valid_objc_filename?
 
       rename_files(new_name)
+      update_header_importation(new_name)
       @filename = new_name
     end
 
@@ -91,6 +92,10 @@ module Tuka
 
     def rename_files(new_name)
       files.each { |file| File.rename(file, new_name) }
+    end
+
+    def update_header_importation(header_filename)
+      File.open(m_file).gsub_content(SEARCH_STRING_HEADER_FILENAME, header_filename)
     end
   end
 end
