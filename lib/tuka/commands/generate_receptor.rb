@@ -14,13 +14,13 @@ module Tuka
         end
 
         def update_receptor_name_from_category
+          require 'pry'
           binding.pry
           tukafile.project_info.receptor_name = receptor_bundle.filename
           tukafile.dump
         end
 
         def update_receptor_name_from_tukafile
-          binding.pry
           receptor_bundle.filename = tukafile.project_info.receptor_name
         end
       end
@@ -114,15 +114,13 @@ module Tuka
       end
 
       def update_receptor_name
-        require 'pry'
-        binding.pry
-
-        if tukafile.project_info.receptor_name
+        tukafile_receptor_name = tukafile.project_info.receptor_name
+        if tukafile_receptor_name
           update_receptor_name_from_tukafile
-          puts '[✓] Receptor files renamed to: ' + tukafile.project_info.receptor_name.to_s.yellow
+          puts '[✓] Receptor files renamed to: ' + tukafile_receptor_name.yellow
         else
           update_receptor_name_from_category
-          puts '[✓] Receptor files renamed to: ' + receptor_bundle.filename.to_s.yellow
+          puts '[✓] Receptor files renamed to: ' + receptor_bundle.filename.yellow
         end
       end
 
