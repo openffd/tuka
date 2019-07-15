@@ -91,6 +91,14 @@ module Tuka
       File.join(@path, @filename + '.m')
     end
 
+    def random_categories
+      @random_categories ||= begin
+        additional_size = @category_from_receptor_name.empty? ? 5 : 4
+        all = @category_from_receptor_name + categories_sample(additional_size)
+        all.each { |category| category.prefix = @prefix }
+      end
+    end
+
     def update_content_receptor_name(receptor_name:)
       files.each { |file| File.open(file).gsub_content(SEARCH_STRING_FILE_NAME, receptor_name) }
     end
