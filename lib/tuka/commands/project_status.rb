@@ -9,14 +9,7 @@ module Tuka
       def display_project_status
         puts
         puts "Checking project status of #{project.name} (#{project.type_pretty})".magenta
-        sleep 0.8
-      end
-
-      def display_summary_report_generation
         puts
-        puts "[✓] Project Status: #{'OKAY'.yellow}"
-        puts
-        puts 'Generating project summary report...'
         sleep 1.5
       end
 
@@ -24,9 +17,13 @@ module Tuka
         xcproj_show.gsub(/File References.*Targets\s*/m, '').gsub(/\s*- BuildFile/, '').print_by_line
       end
 
-      def display_command_completion
+      def display_summary_report_generation
         puts
-        puts 'End' unless options[:quiet]
+        puts '[✓] Project summary report successfuly generated'
+        sleep 1
+        puts "[✓] Project Status: #{'OKAY'.yellow}"
+        puts
+        sleep 1
       end
     end
   end
