@@ -20,6 +20,10 @@ module Tuka
         @filename ||= File.basename(@implementation, '.*')
       end
 
+      def prefix_subbed_filename
+        filename.sub(DEFAULT_PREFIX, @prefix)
+      end
+
       def prefix=(prefix)
         raise StandardError, 'Invalid category prefix' unless prefix =~ /^[[:alpha:]]{3,5}$/
 
