@@ -43,7 +43,7 @@ module Tuka
     end
 
     def set_filename_from_category
-      @filename = random_categories.first.filename
+      filename = random_categories.first.filename
     end
 
     def filename=(new_name)
@@ -77,7 +77,7 @@ module Tuka
     end
 
     def inject_categories
-      @random_categories.each_with_index do |category, index|
+      random_categories.each_with_index do |category, index|
         File.open(h_file).gsub_content(%r{//\$#{index}}, category.header_text)
         File.open(m_file).gsub_content(%r{//\$#{index}}, category.implementation_text)
       end
