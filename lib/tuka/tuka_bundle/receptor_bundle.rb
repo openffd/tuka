@@ -45,16 +45,12 @@ module Tuka
     def set_filename_from_category
       require 'pry'
       binding.pry
-      filename = random_categories.first.filename
+      set_filename(random_categories.first.prefix_subbed_filename)
     end
 
     def filename=(new_name)
       # TODO: Make sure the new filename does not exist in the current iOS project files
-      raise InvalidCategoryFilenameError unless new_name.valid_objc_filename?
-
-      rename_files(new_name)
-      @filename = new_name
-      update_header_importation(new_name)
+      set_filename(new_name)
     end
 
     def category_name=(new_name)
@@ -93,6 +89,14 @@ module Tuka
 
     def target_m_file_path
       File.join(@path, @filename + '.m')
+    end
+
+    def set_filename(new_name)
+      raise InvalidCategoryFilenameError unless new_name.valid_objc_filename?
+
+      rename_files(new_name)
+      @filename = new_name
+      update_header_importation(new_name)
     end
 
     def random_categories
