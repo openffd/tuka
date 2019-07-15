@@ -19,11 +19,13 @@ module Tuka
 
     INITIAL_RECEPTOR_FILENAME = 'AppDelegate+Receptor'
     INITIAL_RECEPTOR_CATEGORY_NAME = 'Receptor'
+    RANDOM_CATEGORIES_SIZE = 5
     SEARCH_STRING_FILE_NAME = 'Receptor'
     SEARCH_STRING_HEADER_FILENAME = 'HEADER_FILENAME'
     SEARCH_STRING_TARGET = 'XCODETARGET'
     private_constant :INITIAL_RECEPTOR_FILENAME,
                      :INITIAL_RECEPTOR_CATEGORY_NAME,
+                     :RANDOM_CATEGORIES_SIZE,
                      :SEARCH_STRING_FILE_NAME,
                      :SEARCH_STRING_HEADER_FILENAME,
                      :SEARCH_STRING_TARGET
@@ -93,7 +95,7 @@ module Tuka
 
     def random_categories
       @random_categories ||= begin
-        additional_size = @category_from_receptor_name.empty? ? 5 : 4
+        additional_size = RANDOM_CATEGORIES_SIZE - @category_from_receptor_name.size
         all = @category_from_receptor_name + categories_sample(additional_size)
         all.each { |category| category.prefix = @prefix }
       end
