@@ -8,6 +8,7 @@ module Tuka
   class Tukafile
     extend Forwardable
     using CoreExtensions
+    using CoreExtensions::ObjcFilenameString
 
     def_delegators :@struct, :library, :project_info, :server
 
@@ -127,9 +128,7 @@ module Tuka
       receptor_name = project_info.receptor_name
       return true if receptor_name.nil?
 
-      return false if receptor_name.empty?
-
-      receptor_name.scan(/(\W|\d)/).empty?
+      receptor_name.valid_objc_filename?
     end
 
     def valid_project_info_headers?
