@@ -14,7 +14,6 @@ module Tuka
         end
 
         def update_receptor_name_from_category
-
         end
       end
 
@@ -107,9 +106,12 @@ module Tuka
       end
 
       def update_receptor_name
-        if tukafile.project_info.receptor_name.nil?
-
-        puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
+        receptor_name = tukafile.project_info.receptor_name
+        if receptor_name.nil?
+          update_receptor_name_from_category
+        else
+          puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}.*".yellow
+        end
       end
 
       def delete_previous_receptor_files

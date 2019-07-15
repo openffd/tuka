@@ -24,7 +24,11 @@ module Tuka
     def receptor_bundle
       return unless File.exist? generated_receptor_path.to_s
 
-      @receptor_bundle ||= ReceptorBundle.new(generated_receptor_path, tukafile.project_info.prefix)
+      @receptor_bundle ||= ReceptorBundle.new(
+        generated_receptor_path,
+        tukafile.project_info.prefix,
+        tukafile.project_info.receptor_name
+      )
     end
 
     def generated_library_path
