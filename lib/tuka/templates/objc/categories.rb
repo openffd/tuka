@@ -50,9 +50,7 @@ module Tuka
       category_file_group = get_category_file(category_name, prefix)
       return nil if category_file_group.nil?
 
-      category = Category.new(header: category_file_group.first, implementation: category_file_group.last)
-      category.prefix = prefix
-      category
+      Category.new(header: category_file_group.first, implementation: category_file_group.last)
     end
 
     private
