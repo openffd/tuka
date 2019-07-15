@@ -41,6 +41,7 @@ module Tuka
     end
 
     def filename=(new_name)
+      # TODO: Make sure the new filename does not exist in the current iOS project files
       raise InvalidCategoryFilenameError unless new_name.valid_objc_filename?
 
       rename_files(new_name)
