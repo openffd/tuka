@@ -37,7 +37,11 @@ module Tuka
 
       @filename = INITIAL_RECEPTOR_FILENAME
       @category_name = INITIAL_RECEPTOR_CATEGORY_NAME
-      @random_categories = categories_sample(5).each { |category| category.prefix = @prefix }
+      @category_from_receptor_name = [get_category_with_name(@receptor_name, @prefix)].compact
+    end
+
+    def set_filename_from_category
+
     end
 
     def filename=(new_name)
