@@ -22,9 +22,10 @@ module Tuka
 
     attr_reader :path, :prefix, :filename, :category_name
 
-    def initialize(path, prefix)
+    def initialize(path, prefix, receptor_name)
       @path = path
       @prefix = prefix
+      @receptor_name = receptor_name
       @filename = 'AppDelegate+Receptor'
       @category_name = 'Receptor'
       @random_categories = categories_sample(5).each { |category| category.prefix = @prefix }
