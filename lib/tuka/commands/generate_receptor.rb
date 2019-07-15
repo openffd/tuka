@@ -119,10 +119,10 @@ module Tuka
 
         if tukafile.project_info.receptor_name
           update_receptor_name_from_tukafile
-          puts '[✓] Receptor files renamed to: ' + "#{tukafile.project_info.receptor_name}".yellow
+          puts '[✓] Receptor files renamed to: ' + tukafile.project_info.receptor_name.to_s.yellow
         else
           update_receptor_name_from_category
-          puts '[✓] Receptor files renamed to: ' + "#{receptor_bundle.filename}".yellow
+          puts '[✓] Receptor files renamed to: ' + receptor_bundle.filename.to_s.yellow
         end
       end
 
