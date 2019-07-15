@@ -43,7 +43,7 @@ module Tuka
     end
 
     def set_filename_from_category
-
+      @filename = random_categories.first.filename
     end
 
     def filename=(new_name)
