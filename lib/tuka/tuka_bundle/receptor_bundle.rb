@@ -80,7 +80,7 @@ module Tuka
     end
 
     def rename_files(new_name)
-      files.each { |file| File.rename(file, file.gsub(category_name, new_name)) }
+      files.each { |file| File.rename(file, new_name) }
     end
   end
 end
