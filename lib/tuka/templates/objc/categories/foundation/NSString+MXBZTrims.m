@@ -8,7 +8,7 @@
 - (NSString *)mxbz_stringByRemovingScriptsAndStrippingHTML {
     NSMutableString *mString = [self mutableCopy];
     NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<script[^>]*>[\\w\\W]*</script>" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<script[^>]*>[\\\\w\\\\W]*</script>" options:NSRegularExpressionCaseInsensitive error:&error];
     NSArray *matches = [regex matchesInString:mString options:NSMatchingReportProgress range:NSMakeRange(0, [mString length])];
     for (NSTextCheckingResult *match in [matches reverseObjectEnumerator]) {
         [mString replaceCharactersInRange:match.range withString:@""];
