@@ -7,6 +7,10 @@ module Tuka
       using System
 
       no_commands do
+        def receptor_name_from_tukafile
+          @receptor_name ||= tukafile.project_info.receptor_name
+        end
+
         def add_bridging_header
           bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
           FileUtils.cp(bridging_header, project.new_file_destination_group.path)
@@ -21,7 +25,7 @@ module Tuka
         end
 
         def update_receptor_name_from_tukafile
-          receptor_bundle.filename = tukafile.project_info.receptor_name
+          receptor_bundle.filename = receptor_name_from_tukafile
         end
       end
 
@@ -69,9 +73,9 @@ module Tuka
       end
 
       def display_tukafile_receptor
-        return if tukafile.project_info.receptor_name.nil?
+        return if receptor_name_from_tukafile.nil?
 
-        puts "[✓] Detected Tukafile receptor name: #{tukafile.project_info.receptor_name.yellow}"
+        puts "[✓] Detected Tukafile receptor name: #{receptor_name_from_tukafile.yellow}"
       end
 
       def delete_previous_receptor
@@ -114,10 +118,9 @@ module Tuka
       end
 
       def update_receptor_name
-        tukafile_receptor_name = tukafile.project_info.receptor_name
-        if tukafile_receptor_name
+        if receptor_name_from_tukafile
           update_receptor_name_from_tukafile
-          puts '[✓] Receptor files renamed to: ' + tukafile_receptor_name.yellow
+          puts '[✓] Receptor files renamed to: ' + receptor_name_from_tukafile.yellow
         else
           update_receptor_name_from_category
           puts '[✓] Receptor files renamed to: ' + receptor_bundle.filename.yellow
@@ -144,7 +147,7 @@ module Tuka
       end
 
       def display_push_notifications_enabled
-        puts '[✓] Push notifications: ' + 'enabled'.yellow # This was checked earlier
+        puts '[✓] Push notifications: ' + 'enabled'.yellow
       end
 
       def add_user_notifications_framework
