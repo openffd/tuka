@@ -6,6 +6,9 @@ module Tuka
       using System::Xcode
       using System::Xcodeproj
 
+      CMDS = [ProjectStatus, GenerateLibrary, GeneratePodfile, GenerateReceptor].freeze
+      private_constant :CMDS
+
       def check_tukafile_existence
         raise StandardError, "Missing Tukafile, generate one by running 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
@@ -22,7 +25,7 @@ module Tuka
       end
 
       def install
-        [ProjectStatus, GenerateLibrary, GeneratePodfile, GenerateReceptor].each do |klass|
+        CMDS.each do |klass|
           cmd = klass.new
           cmd.options = { quiet: true, yes: true }
           cmd.invoke_all
