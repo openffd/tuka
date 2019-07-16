@@ -43,12 +43,12 @@ module Tuka
     end
 
     def set_filename_from_category
-      set_filename(random_categories.first.prefix_subbed_filename)
+      save_filename(random_categories.first.prefix_subbed_filename)
     end
 
     def filename=(new_name)
       # TODO: Make sure the new filename does not exist in the current iOS project files
-      set_filename(new_name)
+      save_filename(new_name)
     end
 
     def category_name=(new_name)
@@ -89,7 +89,7 @@ module Tuka
       File.join(@path, @filename + '.m')
     end
 
-    def set_filename(new_name)
+    def save_filename(new_name)
       raise InvalidCategoryFilenameError unless new_name.valid_objc_filename?
 
       rename_files(new_name)
