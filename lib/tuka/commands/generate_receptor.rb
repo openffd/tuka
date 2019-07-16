@@ -37,6 +37,13 @@ module Tuka
         raise StandardError, tukafile.error unless tukafile.valid?
       end
 
+      def check_tukafile_receptor_name
+        receptor_name = tukafile.project_info.receptor_name
+        return if receptor_name.nil?
+
+        raise StandardError, 'Invalid Tukafile receptor_name' unless project.validate_receptor_name?(receptor_name)
+      end
+
       def check_library_existence
         message = "Unable to locate a generated #{tukafile.library.name} library. "
         raise StandardError, message + GenerateLibrary::USAGE_HELP if generated_library.nil?

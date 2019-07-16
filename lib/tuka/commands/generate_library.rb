@@ -24,6 +24,13 @@ module Tuka
         raise StandardError, tukafile.error unless tukafile.valid?
       end
 
+      def check_tukafile_receptor_name
+        receptor_name = tukafile.project_info.receptor_name
+        return if receptor_name.nil?
+
+        raise StandardError, 'Invalid Tukafile receptor_name' unless project.validate_receptor_name?(receptor_name)
+      end
+
       def display_library_download
         puts
         puts "Generating '#{tukafile.library.name}' library for #{project.name} (#{project.type_pretty})".magenta
