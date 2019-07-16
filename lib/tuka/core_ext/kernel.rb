@@ -29,11 +29,11 @@ module CoreExtensions
     end
 
     def open_file(path)
-      system 'open', path
+      `open #{path}`
     end
 
     def xed(path)
-      system 'xed', path
+      `xed #{path}`
     end
 
     def merge_appledouble_files
