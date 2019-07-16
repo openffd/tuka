@@ -15,7 +15,8 @@ module Tuka
       end
 
       def kill_xcode_pre_installation
-        puts 'Closing Xcode before beginning the installation...'
+        puts
+        puts 'Making sure Xcode is closed pre-installation...'
         kill_xcode
         sleep 1
       end
@@ -31,6 +32,10 @@ module Tuka
       def display_command_completion
         puts
         puts 'End'
+      end
+
+      def reopen_xcode_post_installation
+        open_file(xcworkspace)
       end
     end
   end
