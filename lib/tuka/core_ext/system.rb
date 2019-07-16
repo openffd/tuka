@@ -11,6 +11,16 @@ module System
     end
   end
 
+  module Xcode
+    APP_NAME = 'Xcode'
+
+    refine Kernel do
+      def kill_xcode
+        system 'pkill', APP_NAME
+      end
+    end
+  end
+
   module Xcodeproj
     COMMAND = 'xcodeproj'
 
