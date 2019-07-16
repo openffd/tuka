@@ -37,9 +37,9 @@ module Tuka
         puts 'End'
       end
 
-      def reopen_xcode_post_installation
-        open_file(xcworkspace)
-      end
+      # def reopen_xcode_post_installation
+      #   open_file(xcworkspace)
+      # end
     end
   end
 end
