@@ -47,7 +47,6 @@ module Tuka
     end
 
     def filename=(new_name)
-      # TODO: Make sure the new filename does not exist in the current iOS project files
       save_filename(new_name)
     end
 
