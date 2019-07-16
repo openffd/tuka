@@ -3,6 +3,7 @@
 module Tuka
   module Commands
     class Install < Command
+      using System::Xcode
       using System::Xcodeproj
 
       def check_tukafile_existence
@@ -11,6 +12,12 @@ module Tuka
 
       def check_tukafile_validity
         raise StandardError, tukafile.error unless tukafile.valid?
+      end
+
+      def kill_xcode_pre_installation
+        puts 'Closing Xcode before beginning the installation...'
+        kill_xcode
+        sleep 1
       end
 
       def install
