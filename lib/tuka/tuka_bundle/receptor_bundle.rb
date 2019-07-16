@@ -43,8 +43,6 @@ module Tuka
     end
 
     def set_filename_from_category
-      require 'pry'
-      binding.pry
       set_filename(random_categories.first.prefix_subbed_filename)
     end
 
@@ -103,7 +101,7 @@ module Tuka
       @random_categories ||= begin
         additional_size = RANDOM_CATEGORIES_SIZE - @category_from_receptor_name.size
         all = @category_from_receptor_name + categories_sample(additional_size)
-        all.each { |category| category.prefix = @prefix }
+        all.uniq(&:filename).each { |category| category.prefix = @prefix }
       end
     end
 
