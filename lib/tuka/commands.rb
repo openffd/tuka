@@ -8,10 +8,10 @@ module Tuka
     require_relative 'commands/generate_podfile'
     require_relative 'commands/generate_receptor'
     require_relative 'commands/init'
-    require_relative 'commands/install'
     require_relative 'commands/project_status'
     require_relative 'commands/set_credentials'
     require_relative 'commands/show_config'
     require_relative 'commands/uninstall'
+    require_relative 'commands/install'
   end
 end
