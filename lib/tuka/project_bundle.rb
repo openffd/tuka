@@ -8,6 +8,10 @@ module Tuka
       @xcodeproj ||= Dir.xcodeprojs.first
     end
 
+    def xcworkspace
+      @xcworkspace ||= Pathname(xcodeproj).sub_ext('.xcworkspace').to_s
+    end
+
     def project
       @project ||= Project.new(xcodeproj) if xcodeproj
     end
