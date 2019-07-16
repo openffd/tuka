@@ -15,12 +15,12 @@ module Tuka
     attr_reader :path
 
     BASENAME = 'Tukafile'
-    USER_AGENT_RANGE = (1..9).freeze
+    # USER_AGENT_RANGE = (1..9).freeze
     DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
-    private_constant :USER_AGENT_RANGE, :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
+    private_constant :PROTOCOLS, :HEADERS_COUNT_RANGE, :SWIFT_VERSIONS
 
     SERVER_URL_TYPES = { Base64: 'base64', IPv4: 'ipv4', URL: 'url' }.freeze
     SERVER_URL_TYPES.values.each do |type|
@@ -100,7 +100,7 @@ module Tuka
     end
 
     def valid_server_user_agent?
-      USER_AGENT_RANGE.cover? server.user_agent.to_i
+      # USER_AGENT_RANGE.cover? server.user_agent.to_i
     end
 
     def valid_server_inactive_days?
