@@ -114,6 +114,12 @@ module Tuka
       add_user_notification_framework_to_group(frameworks_group)
     end
 
+    def valid_tukafile_receptor_name?(name)
+      return true if name.eql? File.basename(receptor_files.first.path, '.*')
+
+      @configurator.files.none? { |file| name.eql? File.basename(file.path, '.*') }
+    end
+
     private
 
     def implementation_pattern
