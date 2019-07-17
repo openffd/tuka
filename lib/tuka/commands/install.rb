@@ -33,7 +33,7 @@ module Tuka
       end
 
       def reopen_xcode_post_installation
-        open_file(xcworkspace)
+        # open_file(xcworkspace)
       end
 
       def display_command_completion
