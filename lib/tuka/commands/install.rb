@@ -32,14 +32,14 @@ module Tuka
         end
       end
 
+      def reopen_xcode_post_installation
+        open_file(xcworkspace)
+      end
+
       def display_command_completion
         puts
         puts 'End'
       end
-
-      # def reopen_xcode_post_installation
-      #   open_file(xcworkspace)
-      # end
     end
   end
 end
