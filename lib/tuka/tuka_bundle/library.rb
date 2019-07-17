@@ -44,6 +44,9 @@ module Tuka
     end
 
     def update_user_agent_in_files(user_agent)
+      require 'pry'
+      binding.pry
+
       @user_agent = user_agent
       user_agent_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
@@ -134,7 +137,7 @@ module Tuka
     end
 
     def user_agent_replacement_strings
-      ["NSString *sender = @\"#{UserAgent.default(value: @user_agent)}\";"]
+      ["NSString *sender = @\"#{@user_agent.to_s}\";"]
     end
 
     def url_path_replacement_strings
