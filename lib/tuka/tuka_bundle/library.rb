@@ -44,9 +44,6 @@ module Tuka
     end
 
     def update_user_agent_in_files(user_agent)
-      require 'pry'
-      binding.pry
-
       @user_agent = user_agent
       user_agent_search_pairs.each { |pattern, str| File.open(@config_file, 'r+').gsub_content(pattern, str) }
       true
