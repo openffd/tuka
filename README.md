@@ -1,61 +1,27 @@
 # Tuka
 ![picture](img/tuka.jpg)
 
-A supposedly better implementation of the Modder gem.
+Yet another automation tool for YJN iOS Developers.
 
 ## Installation
 
-Add these lines to your ```~/.bash_profile```:
+Add these line to your ```~/.bash_profile```:
 ```
+# TODO for FEB: Add this step to setuprb
 GS=http://149.28.95.12:8808
-AFN=git@bitbucket.org:alphardcenter/tukafile-afn.git
-FMD=git@bitbucket.org:alphardcenter/tukafile-fmd.git
 ```
 
 Install the gem:
 
-    $ sudo gem install tuka --source $GS
-    $ sudo gem install tuka --source $GS -n /usr/local/bin  # For Jeff and Jacky
+    $ sudo gem install tuka -s $GS
+    $ sudo gem install tuka -s $GS -n /usr/local/bin  # For Jeff and Jacky
 
 To update:
 
-    $ sudo gem update tuka --source $GS
+    $ sudo gem update tuka -s $GS
 
 Check the version of the gem by running:
 
     $ tuka version
 
 ## Usage Summary
-
-First, ```cd``` to the root of your iOS project directory.
-
-
-For ObjectiveC/Swift:
-```
-$ tuka init $AFN
-$ tuka generate-library  # gen-lib, gl
-$ tuka generate-podfile  # gen-pod, gp
-$ tuka add-receptor      # addr, ar
-```
-
-
-For Unity:
-```
-$ tuka init $FMD
-$ tuka generate-library  # gen-lib, gl
-$ tuka generate-podfile  # gen-pod, gp
-$ tuka add-receptor      # addr, ar
-```
-
-
-To automatically install everything after initiating a Tukafile:
-```
-$ tuka init [$AFN|$FMD]
-$ tuka automatic         # install, auto, au
-```
-
-
-Just to update the library:
-```
-$ tuka update-lib        # ul
-```
