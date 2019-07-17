@@ -100,7 +100,7 @@ module Tuka
     end
 
     def valid_server_user_agent?
-      # USER_AGENT_RANGE.cover? server.user_agent.to_i
+      !server.user_agent.to_s.empty?
     end
 
     def valid_server_inactive_days?
