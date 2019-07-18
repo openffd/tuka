@@ -8,7 +8,7 @@ module Tuka
 
       no_commands do
         def receptor_name_from_tukafile
-          @receptor_name ||= tukafile.project_info.receptor_name
+          @receptor_name_from_tukafile ||= tukafile.project_info.receptor_name
         end
 
         def add_bridging_header
