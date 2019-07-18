@@ -17,6 +17,7 @@ module Tuka
     BASENAME = 'Tukafile'
     DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
     DAYS_RANGE_FORCED = (0..84).freeze
+    DAYS_RANGE_FORCED_SYMBOL = '!'
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
@@ -104,8 +105,9 @@ module Tuka
     end
 
     def valid_server_inactive_days?
-      days = server.inactive_days.to_i || DAYS_RANGE.begin
-      DAYS_RANGE.cover? days
+      range = server.inactive_days.to_s.end_with?(DAYS_RANGE_FORCED_SYMBOL) ? DAYS_RANGE_FORCED : DAYS_RANGE
+      days = server.inactive_days.to_i || range.begin
+      range.cover? days
     end
 
     def valid_project_info_xcodeproj?
