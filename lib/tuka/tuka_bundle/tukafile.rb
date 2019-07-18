@@ -15,7 +15,8 @@ module Tuka
     attr_reader :path
 
     BASENAME = 'Tukafile'
-    DAYS_RANGE = (0..84).freeze # 2 weeks to 3 months range
+    DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
+    DAYS_RANGE_FORCED = (0..84).freeze
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
@@ -147,6 +148,10 @@ module Tuka
       return true if project_info.swift_version.nil?
 
       SWIFT_VERSIONS.include? project_info.swift_version.to_s
+    end
+
+    def valid_project_auth?
+
     end
   end
 end
