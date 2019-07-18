@@ -3,6 +3,7 @@
 require 'json'
 require 'ostruct'
 require 'forwardable'
+require 'base64'
 
 module Tuka
   class Tukafile
@@ -63,6 +64,10 @@ module Tuka
       return Base64.decode64(server.url) if server.url_type.base64?
 
       server.url
+    end
+
+    def decoded_auth
+      Base64.decode64(Base64.decode64(project_info.auth))
     end
 
     private
@@ -153,7 +158,10 @@ module Tuka
     end
 
     def valid_project_info_auth?
-      true
+      auth = project_info.auth
+      return false if auth.to_s.empty?
+
+      auth.valid_base64?
     end
   end
 end
