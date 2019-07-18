@@ -7,6 +7,7 @@ module Tuka
       days_range  = Tuka::Tukafile::DAYS_RANGE
 
       INVALID_LIBRARY                     = filename + " `library.digest' was tampered"
+      INVALID_PROJECT_INFO_AUTH           = filename + " `project_info.auth' is invalid"
       INVALID_PROJECT_INFO_BUNDLE_ID      = filename + " `project_info.bundle_id' is invalid"
       INVALID_PROJECT_INFO_HEADERS        = filename + " `project_info.headers' is invalid"
       INVALID_PROJECT_INFO_PREFIX         = filename + " `project_info.prefix' is invalid"
