@@ -29,6 +29,7 @@ module Tuka
   require 'tuka/bash/bash_profile'
   require 'tuka/bash/tukarc'
   require 'tuka/credentials'
+  require 'tuka/say'
   require 'tuka/git'
   require 'tuka/bundler'
   require 'tuka/request_header'
@@ -48,6 +49,5 @@ module Tuka
   require 'tuka/cli'
   require 'tuka/cli_patch'
   require 'tuka/version'
-  require 'tuka/say'
   require_matched File.join(gem_lib_tuka, 'templates', '*', '*.rb')
 end
