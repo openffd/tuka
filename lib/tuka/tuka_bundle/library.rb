@@ -134,7 +134,7 @@ module Tuka
     end
 
     def user_agent_replacement_strings
-      ["NSString *sender = @\"#{@user_agent.to_s}\";"]
+      ["NSString *sender = @\"#{@user_agent}\";"]
     end
 
     def url_path_replacement_strings
