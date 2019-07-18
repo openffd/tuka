@@ -9,6 +9,7 @@ module Tuka
     include TukaBundle
     include Curl::Shortcuts
     include Xcodebuild
+    include Say
 
     using CoreExtensions
 
