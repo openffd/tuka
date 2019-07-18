@@ -19,6 +19,7 @@ module Tuka
     DAYS_RANGE = (14..84).freeze # 2 weeks to 3 months range
     DAYS_RANGE_FORCED = (0..84).freeze
     DAYS_RANGE_FORCED_SYMBOL = '!'
+    AUTH_SUBBABLE = 'Yeojinet'
     PROTOCOLS = %i[http https].freeze
     HEADERS_COUNT_RANGE = (0..6).freeze
     SWIFT_VERSIONS = %w[4.1 4.2 5.0].freeze
@@ -67,7 +68,7 @@ module Tuka
     end
 
     def decoded_auth
-      Base64.decode64(Base64.decode64(project_info.auth))
+      Base64.decode64(Base64.decode64(project_info.auth)).sub(AUTH_SUBBABLE, '')
     end
 
     private
