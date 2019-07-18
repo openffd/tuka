@@ -152,8 +152,8 @@ module Tuka
       SWIFT_VERSIONS.include? project_info.swift_version.to_s
     end
 
-    def valid_project_auth?
+    # def valid_project_auth?
 
-    end
+    # end
   end
 end
