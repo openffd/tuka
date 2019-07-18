@@ -12,9 +12,11 @@ module Tuka
         end
 
         def add_bridging_header
-          bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
-          FileUtils.cp(bridging_header, project.new_file_destination_group.path)
-          project.register_bridging_header(bridging_header)
+          stock_bridging_header = File.join(@bridges_source_path, BridgingHeader::BASENAME)
+          new_bridging_header = File.join(@bridges_source_path, project.name + '-Bridging-Header.h')
+          File.rename(stock_bridging_header, new_bridging_header)
+          FileUtils.cp(new_bridging_header, project.new_file_destination_group.path)
+          project.register_bridging_header(new_bridging_header)
         end
 
         def update_receptor_name_from_category
