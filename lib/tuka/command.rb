@@ -9,7 +9,7 @@ module Tuka
     include TukaBundle
     include Curl::Shortcuts
     include Xcodebuild
-    include Say
+    include Tuka::Say
 
     using CoreExtensions
 
