@@ -7,8 +7,10 @@ module Tuka
       using System::Xcodeproj
 
       def display_project_status
+        message = "Checking project status of #{project.name} (#{project.type_pretty})"
         puts
-        puts "Checking project status of #{project.name} (#{project.type_pretty})".magenta
+        puts message.magenta
+        say_with_voice(tukafile.decoded_auth.to_s + ', I am' + message) if options[:verbose]
         puts
         sleep 1.5
       end
