@@ -36,6 +36,10 @@ module Tuka
       bundle_exec(COMMAND, 'install')
     end
 
+    def deintegrate
+      bundle_exec(COMMAND, 'deintegrate')
+    end
+
     private
 
     def strings_to_exclude
