@@ -21,6 +21,7 @@ module Tuka
         end
 
         def run_bundle_pod_install
+          podfile.deintegrate
           podfile.install_via_bundler
         end
 
