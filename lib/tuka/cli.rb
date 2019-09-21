@@ -32,10 +32,11 @@ module Tuka
     def merge_files
       help_option_dance.call(options, __method__)
 
-      merge_appledouble_files
+      # merge_appledouble_files
 
       puts
-      puts 'Double files merged.'
+      # puts 'Double files merged.'
+      puts 'Under construction!'
     end
 
     desc 'powerup!', "Let's power up!"
