@@ -22,7 +22,7 @@ module Tuka
     end
 
     def clear_appledouble_files
-      merge_appledouble_files
+      # merge_appledouble_files
     end
 
     def check_project
