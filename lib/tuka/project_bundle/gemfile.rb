@@ -3,6 +3,7 @@
 module Tuka
   class Gemfile
     BASENAME = 'Gemfile'
+    LOCK = "#{BASENAME}.lock"
 
     attr_reader :path
 
