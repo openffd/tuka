@@ -24,6 +24,10 @@ module Tuka
       @gemfile ||= Gemfile.new(target_gemfile_path) if File.file? target_gemfile_path
     end
 
+    def gemfile_lock
+      @gemfile_lock ||= GemfileLock.new(target_gemfile_lock_path) if File.file? target_gemfile_lock_path
+    end
+
     def info_plist
       @info_plist ||= begin
         path = project.info_plist_path unless project.nil?
@@ -39,6 +43,10 @@ module Tuka
 
     def target_gemfile_path
       Gemfile::BASENAME
+    end
+
+    def target_gemfile_lock_path
+      GemfileLock::BASENAME
     end
   end
 end
