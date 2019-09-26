@@ -9,7 +9,7 @@ module Tuka
     end
 
     def get_project_build_setting(key)
-      res = `#{COMMAND} -project "#{@xcodeproj}" -showBuildSettings 2> /dev/null | grep #{key}`
+      res = `#{COMMAND} -project "#{@xcodeproj}" -showBuildSettings 2> /dev/null | grep -E "\s+#{key}"`
       return nil if res.empty?
 
       res.partition("\n").first.partition('= ').last
