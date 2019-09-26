@@ -22,6 +22,7 @@ module Tuka
     end
 
     def clear_appledouble_files
+      rm_appledouble_files
       # merge_appledouble_files
     end
 
