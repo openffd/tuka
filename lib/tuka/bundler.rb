@@ -9,7 +9,7 @@ module Tuka
     end
 
     def bundle_install
-      system COMMAND, 'install'
+      `#{COMMAND} install`
     end
 
     def bundle_exec(*args)
