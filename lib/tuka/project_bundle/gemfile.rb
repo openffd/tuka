@@ -19,5 +19,9 @@ module Tuka
     def initialize(path)
       @path = path
     end
+
+    def delete
+      File.delete(@path) if File.file? @path
+    end
   end
 end

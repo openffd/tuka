@@ -99,6 +99,13 @@ module Tuka
         puts '[✓] New Podfile successfully generated'
       end
 
+      def delete_gemfile_lock
+        require 'pry'
+        binding.pry
+
+
+      end
+
       def create_new_gemfile
         generate_gemfile
         puts '[✓] Generated a new Gemfile'
