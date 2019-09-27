@@ -21,6 +21,8 @@ module Tuka
         end
 
         def run_bundle_pod_install
+          bundle_update('cocoapods')
+
           podfile.deintegrate
           podfile.install_via_bundler
         end
@@ -112,10 +114,18 @@ module Tuka
         puts '[✓] Generated a new Gemfile'
       end
 
-      def execute_bundle_install
+      def display_running_bundle_install
         puts
         puts '[✓] Running bundle install'
-        bundle_install
+      end
+
+      def execute_bundle_install
+        out = bundle_install
+        puts out
+        if out =~ /`#{Bundler::COMMAND} update cocoapods`/
+          puts '[✓] Bundler will update cocoapods'
+          bundle_update('cocoapods')
+        end
         puts
       end
 
