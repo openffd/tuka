@@ -103,6 +103,7 @@ module Tuka
         return unless gemfile_lock
 
         gemfile_lock.delete
+        puts
         puts '[✓] Deleted previously generated Gemfile.lock'
       end
 

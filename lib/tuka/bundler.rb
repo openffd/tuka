@@ -15,5 +15,9 @@ module Tuka
     def bundle_exec(*args)
       system COMMAND, 'exec', *args
     end
+
+    def bundle_update(gem_name)
+      system COMMAND, 'update', gem_name
+    end
   end
 end
