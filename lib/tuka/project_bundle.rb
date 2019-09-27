@@ -25,7 +25,7 @@ module Tuka
     end
 
     def gemfile_lock
-      @gemfile_lock ||= GemfileLock.new(target_gemfile_lock_path) if File.file? target_gemfile_lock_path
+      GemfileLock.new(target_gemfile_lock_path) if File.file? target_gemfile_lock_path
     end
 
     def info_plist
