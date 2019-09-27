@@ -100,10 +100,10 @@ module Tuka
       end
 
       def delete_gemfile_lock
-        require 'pry'
-        binding.pry
+        return unless gemfile_lock
 
-
+        gemfile_lock.delete
+        puts '[✓] Deleted previously generated Gemfile.lock'
       end
 
       def create_new_gemfile
