@@ -23,7 +23,7 @@ module Tuka
     register C::GenerateLibrary,  'update_library',     update_library_usage,       update_library_desc
     register C::GeneratePodfile,  'update_podfile',     update_podfile_usage,       update_podfile_desc
     register C::GenerateReceptor, 'update_receptor',    update_receptor_usage,      update_receptor_desc
-    register C::SetCredentials,   'set_credentials',    C::SetCredentials::USAGE,   C::SetCredentials.desc
+    # register C::SetCredentials,   'set_credentials',    C::SetCredentials::USAGE,   C::SetCredentials.desc
     register C::Uninstall,        'uninstall',          C::Uninstall::USAGE,        C::Uninstall.desc
     register C::AddGitignore,     'add_gitignore',      C::AddGitignore::USAGE,     C::AddGitignore.desc
 
