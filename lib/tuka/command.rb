@@ -12,7 +12,6 @@ module Tuka
     include Tuka::Say
 
     using CoreExtensions
-    using System
 
     class_option :help,     aliases: '-h', type: :boolean, desc: 'Display usage information'
     class_option :quiet,    aliases: '-q', type: :boolean, desc: 'Enable quiet output mode'
@@ -23,7 +22,7 @@ module Tuka
     end
 
     def clear_appledouble_files
-      rm_appledouble_files # merge_appledouble_files
+      rm_appledouble_files
     end
 
     def check_project
