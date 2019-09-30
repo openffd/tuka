@@ -39,5 +39,9 @@ module CoreExtensions
     def merge_appledouble_files
       system 'dot_clean', '.'
     end
+
+    def rm_appledouble_files(path = '.')
+      system "find #{path} -name ._* -exec rm {} \\;"
+    end
   end
 end
