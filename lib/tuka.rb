@@ -35,6 +35,7 @@ module Tuka
   require 'tuka/request_header'
   require 'tuka/curl'
   require 'tuka/xcodebuild'
+  require 'tuka/prlctl'
   require 'tuka/project_bundle/pbxproj'
   require_matched File.join(gem_lib_tuka, 'project_bundle', '*.rb')
   require_matched File.join(gem_lib_tuka, 'tuka_bundle', '*', '*.rb')
