@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module CoreExtensions
-  require 'ostruct'
-
   refine OpenStruct do
     def as_hash(some_hash = {})
       each_pair do |key, value|

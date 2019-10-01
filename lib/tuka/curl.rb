@@ -17,8 +17,6 @@ module Curl
   end
 
   module Shortcuts
-    require 'ostruct'
-
     Response = OpenStruct
     Response.class_eval do
       def successful?
