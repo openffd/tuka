@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module System
+  NULL_DEVICE = '/dev/null'
+
   refine Kernel do
     def rm(path)
       system 'rm', path
