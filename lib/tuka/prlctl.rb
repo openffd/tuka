@@ -16,7 +16,7 @@ module Tuka
     def ls_running_vms
       check_prlctl
 
-      `#{COMMAND} list -j`
+      eval(`#{COMMAND} list -j`).to_a.map { |h| VM.new(h) }
     end
 
     private
