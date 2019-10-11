@@ -10,7 +10,7 @@ module Tuka
         message = "Checking project status of #{project.name} (#{project.type_pretty})"
         puts
         puts message.magenta
-        say_with_voice(tukafile.decoded_auth.to_s + ', I am' + message) if options[:verbose]
+        # say_with_voice(tukafile.decoded_auth.to_s + ', I am' + message) if options[:verbose]
         puts
         sleep 1.5
       end
@@ -23,6 +23,9 @@ module Tuka
         puts
         puts '[✓] Project summary report successfuly generated'
         sleep 1
+      end
+
+      def display_project_status_okay
         puts "[✓] Project Status: #{'OKAY'.yellow}"
         puts
         sleep 1
