@@ -2,6 +2,7 @@
 
 module System
   NULL_DEVICE = '/dev/null'
+  STDERR_TO_FIRST_FILE_DESC = '2>&1'
 
   refine Kernel do
     def rm(path)
@@ -13,7 +14,7 @@ module System
     end
 
     def cmd_not_found?(cmd)
-      !system 'which', cmd, '>', NULL_DEVICE
+      !system "which #{cmd} > #{NULL_DEVICE} #{STDERR_TO_FIRST_FILE_DESC}"
     end
   end
 
