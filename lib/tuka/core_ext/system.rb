@@ -11,6 +11,10 @@ module System
     def rm_rf(path)
       system 'rm', '-rf', path
     end
+
+    def cmd_not_found?(cmd)
+      ! system 'which', cmd, '>', NULL_DEVICE
+    end
   end
 
   module Xcode
