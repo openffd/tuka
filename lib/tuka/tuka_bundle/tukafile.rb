@@ -35,7 +35,7 @@ module Tuka
       @path = path
       begin
         @struct = JSON.parse(IO.read(@path), object_class: OpenStruct)
-      rescue JSON::ParserError => _
+      rescue JSON::ParserError => _e
         raise StandardError, 'Downloaded Tukafile has content with invalid format'
       end
     end

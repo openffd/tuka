@@ -13,7 +13,7 @@ module System
     end
 
     def cmd_not_found?(cmd)
-      ! system 'which', cmd, '>', NULL_DEVICE
+      !system 'which', cmd, '>', NULL_DEVICE
     end
   end
 

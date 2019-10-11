@@ -45,7 +45,7 @@ module Tuka
     end
 
     def accept_language
-      ['en-US', 'fr-CA', 'da', 'de-CH', 'en-GB'].sample(4).join(', ')
+      %w[en-US fr-CA da de-CH en-GB].sample(4).join(', ')
     end
 
     def age
@@ -53,7 +53,7 @@ module Tuka
     end
 
     def cache_control
-      ['must-revalidate', 'no-cache', 'no-store', 'public', 'private', 'no-transform'].sample
+      %w[must-revalidate no-cache no-store public private no-transform].sample
     end
 
     def clear_site_data
@@ -61,7 +61,7 @@ module Tuka
     end
 
     def connection
-      ['keep-alive', 'close'].sample
+      %w[keep-alive close].sample
     end
 
     def dnt
