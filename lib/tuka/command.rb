@@ -17,7 +17,18 @@ module Tuka
     class_option :quiet,    aliases: '-q', type: :boolean, desc: 'Enable quiet output mode'
     class_option :verbose,  aliases: '-v', type: :boolean, desc: 'Enable verbose output mode'
 
+    no_commands do
+      def prlctl
+        @prlctl ||= Prlctl::Command.new
+      rescue StandardError => _e
+        puts
+        puts "The command utility prlctl is not installed in your system".red
+      end
+    end
+
     def check_shell
+      require 'pry'
+      binding.pry
       raise StandardError, 'Current shell is not bash' unless `echo $SHELL`.include? 'bash'
     end
 
