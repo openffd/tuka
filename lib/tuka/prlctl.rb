@@ -6,7 +6,7 @@ module Tuka
 
     VM = OpenStruct
     CMD = 'prlctl'
-    LS_SUBCMD = %w(list exec).as_same_keyval_hash
+    LS_SUBCMD = %w[list exec].as_same_keyval_hash
 
     class CmdNotFoundError < StandardError
       def initialize(msg = 'Command not found: ' + CMD)
@@ -15,7 +15,7 @@ module Tuka
     end
 
     class VM
-      LS_STATUS = %w(running stopped).as_same_keyval_hash
+      LS_STATUS = %w[running stopped].as_same_keyval_hash
 
       def running?
         status.eql?(LS_STATUS[:running])
@@ -34,7 +34,7 @@ module Tuka
       end
 
       def pkill_all_vm_xcode
-        ls_running_vms.each { |vm| vm.pkill_xcode }
+        ls_running_vms.each(&:pkill_xcode)
       end
 
       private

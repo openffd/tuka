@@ -22,7 +22,7 @@ module Tuka
         @prlctl ||= Prlctl::Command.new
       rescue StandardError => _e
         puts
-        puts "The command utility prlctl is not installed in your system".red
+        puts 'The command utility prlctl is not installed in your system'.red
       end
     end
 
