@@ -19,7 +19,7 @@ module Tuka
 
       def kill_xcode_pre_installation
         puts
-        puts 'Making sure Xcode is closed pre-installation...'
+        puts 'Closing any running instances of Xcode (local and Parallels VMs)...'
         kill_xcode
         sleep 1
       end
@@ -30,10 +30,6 @@ module Tuka
           cmd.options = { quiet: true, yes: true }
           cmd.invoke_all
         end
-      end
-
-      def reopen_xcode_post_installation
-        # open_file(xcworkspace)
       end
 
       def display_command_completion

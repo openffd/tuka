@@ -50,5 +50,9 @@ module Tuka
       message = 'Push notifications is not enabled for this project, please go to Capabilities and turn it on'
       raise StandardError, message unless project.push_notifications_enabled?
     end
+
+    def kill_all_vm_xcode
+      prlctl.pkill_all_vm_xcode
+    end
   end
 end
