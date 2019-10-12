@@ -2,27 +2,46 @@
 
 module Tuka
   module Prlctl
-    using System
+    using CoreExtensions::SubCommand
 
-    COMMAND = 'prlctl'
     VM = OpenStruct
+    CMD = 'prlctl'
+    LS_SUBCMD = %w(list exec).as_same_keyval_hash
 
-    class PrlctlCmdNotFoundError < StandardError
-      def initialize(msg = 'Command not found: ' + COMMAND)
+    class CmdNotFoundError < StandardError
+      def initialize(msg = 'Command not found: ' + CMD)
         super(msg)
       end
     end
 
-    def ls_running_vms
-      check_prlctl
+    class VM
+      LS_STATUS = %w(running stopped).as_same_keyval_hash
 
-      eval(`#{COMMAND} list -j`).to_a.map { |h| VM.new(h) }
+      def running?
+        status.eql?(LS_STATUS[:running])
+      end
+
+      def pkill_xcode
+        system("#{CMD} #{LS_SUBCMD[:exec]} #{uuid} pkill Xcode") if running?
+      end
     end
 
-    private
+    class Command
+      using System
 
-    def check_prlctl
-      raise PrlctlCmdNotFoundError if cmd_not_found?(COMMAND)
+      def initialize
+        raise CmdNotFoundError if cmd_not_found?(CMD)
+      end
+
+      def pkill_all_vm_xcode
+        ls_running_vms.each { |vm| vm.pkill_xcode }
+      end
+
+      private
+
+      def ls_running_vms
+        eval(`#{CMD} #{LS_SUBCMD[:list]} -j`).to_a.map(&VM.method(:new))
+      end
     end
   end
 end

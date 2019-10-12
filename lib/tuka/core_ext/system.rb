@@ -14,7 +14,7 @@ module System
     end
 
     def cmd_not_found?(cmd)
-      !system "which #{cmd} > #{NULL_DEVICE} #{STDERR_TO_FIRST_FILE_DESC}"
+      !system("which #{cmd} > #{NULL_DEVICE} #{STDERR_TO_FIRST_FILE_DESC}")
     end
   end
 
