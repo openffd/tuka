@@ -27,8 +27,6 @@ module Tuka
     end
 
     def check_shell
-      require 'pry'
-      binding.pry
       raise StandardError, 'Current shell is not bash' unless `echo $SHELL`.include? 'bash'
     end
 
