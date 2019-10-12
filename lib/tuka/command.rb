@@ -30,12 +30,12 @@ module Tuka
       raise StandardError, 'Current shell is not bash' unless `echo $SHELL`.include? 'bash'
     end
 
-    def clear_appledouble_files
-      rm_appledouble_files
-    end
-
     def check_project
       raise StandardError, 'Unable to detect an iOS application project in the current directory' if xcodeproj.nil?
+    end
+
+    def clear_appledouble_files
+      rm_appledouble_files
     end
 
     def check_project_type
