@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'awesome_print'
+require 'cfpropertylist'
 require 'colored2'
 require 'curb'
 require 'date'
