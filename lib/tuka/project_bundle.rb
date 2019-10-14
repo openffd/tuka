@@ -36,10 +36,8 @@ module Tuka
     end
 
     def entitlements
-      @entitlements ||= begin
-        path = project.entitlements_path unless project.nil?
-        Entitlements.new(path) if File.file? path.to_s
-      end
+      path = project.entitlements_path unless project.nil?
+      Entitlements.new(path) if File.file? path.to_s
     end
 
     private
