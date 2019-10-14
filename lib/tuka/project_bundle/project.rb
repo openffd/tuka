@@ -46,6 +46,10 @@ module Tuka
       @bundle_id ||= get_project_build_setting(PRODUCT_BUNDLE_IDENTIFIER)
     end
 
+    def entitlements
+      @entitlements ||= get_project_build_setting(CODE_SIGN_ENTITLEMENTS)
+    end
+
     def type_pretty
       TYPES.key(type).to_s
     end
