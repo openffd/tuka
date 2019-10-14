@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module Tuka
-  require 'cfpropertylist'
-
   class Entitlements
     attr_reader :path
 
