@@ -22,7 +22,7 @@ module Tuka
         @prlctl ||= Prlctl::Command.new
       rescue StandardError => _e
         puts
-        puts 'The command utility prlctl is not installed in your system'.red
+        puts 'The command utility prlctl is not installed in your system.'.red
       end
     end
 
@@ -47,8 +47,8 @@ module Tuka
     end
 
     def check_push_notification_capabilities
-      message = 'Push notifications is not enabled for this project, please go to Capabilities and turn it on'
-      raise StandardError, message unless project.push_notifications_enabled?
+      message = 'Push notifications not enabled for this project, please go to Capabilities and check the entitlements'
+      raise StandardError, message unless project.push_notifications_enabled? || entitlements.aps_environment_setup?
     end
 
     def kill_all_vm_xcode
