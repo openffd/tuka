@@ -35,6 +35,13 @@ module Tuka
       end
     end
 
+    def entitlements
+      @entitlements ||= begin
+        path = project.entitlements_path unless project.nil?
+        Entitlements.new(path) if File.file? path.to_s
+      end
+    end
+
     private
 
     def target_podfile_path

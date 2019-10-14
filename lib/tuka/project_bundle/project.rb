@@ -46,10 +46,6 @@ module Tuka
       @bundle_id ||= get_project_build_setting(PRODUCT_BUNDLE_IDENTIFIER)
     end
 
-    def entitlements
-      @entitlements ||= get_project_build_setting(CODE_SIGN_ENTITLEMENTS)
-    end
-
     def type_pretty
       TYPES.key(type).to_s
     end
@@ -100,6 +96,10 @@ module Tuka
 
     def info_plist_path
       @info_plist_path ||= get_project_build_setting(INFOPLIST_FILE)
+    end
+
+    def entitlements_path
+      @entitlements_path ||= get_project_build_setting(CODE_SIGN_ENTITLEMENTS)
     end
 
     def push_notifications_enabled?
