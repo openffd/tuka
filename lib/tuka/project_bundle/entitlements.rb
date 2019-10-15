@@ -13,7 +13,7 @@ module Tuka
     end
 
     def aps_environment_setup?
-      @plist.value.value[APS_ENVIRONMENT].to_s.eql? APS_ENVIRONMENT_VALUE
+      @plist.value.value[APS_ENVIRONMENT].value.to_s.eql? APS_ENVIRONMENT_VALUE
     end
   end
 end
