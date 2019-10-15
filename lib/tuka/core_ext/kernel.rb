@@ -41,7 +41,7 @@ module CoreExtensions
     end
 
     def rm_appledouble_files(path = '.')
-      system "find #{path} -name ._* -exec rm {} \\;"
+      system "find #{path} -name '._*' -exec rm {} \\;"
     end
   end
 end
