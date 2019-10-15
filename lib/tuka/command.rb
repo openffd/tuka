@@ -48,7 +48,8 @@ module Tuka
 
     def check_push_notification_capabilities
       message = 'Push notifications not enabled for this project, please go to Capabilities and check the entitlements'
-      raise StandardError, message unless project.push_notifications_enabled? || entitlements.aps_environment_setup?
+      aps_environment_setup = entitlements && entitlements.aps_environment_setup?
+      raise StandardError, message unless project.push_notifications_enabled? || aps_environment_setup
     end
 
     def kill_all_vm_xcode
