@@ -2,6 +2,15 @@
 
 module Tuka
   module Xcodebuild
+    using CoreExtensions::SubCommand
+
+    CMD = 'xcodebuild'
+    LS_SUBCMD = %w[list exec].as_same_keyval_hash
+
+    class Command
+
+    end
+
     COMMAND = 'xcodebuild'
 
     def xcode_info
