@@ -8,5 +8,6 @@ module Xcodeproj
     SWIFT_OBJC_BRIDGING_HEADER            = 'SWIFT_OBJC_BRIDGING_HEADER'
     INFOPLIST_FILE                        = 'INFOPLIST_FILE'
     CODE_SIGN_ENTITLEMENTS                = 'CODE_SIGN_ENTITLEMENTS'
+    PRODUCT_NAME                          = 'PRODUCT_NAME'
   end
 end
