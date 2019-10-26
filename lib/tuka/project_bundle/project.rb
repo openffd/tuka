@@ -42,6 +42,10 @@ module Tuka
       @type ||= detect_type
     end
 
+    def product_name
+      @product_name ||= get_project_build_setting(PRODUCT_NAME)
+    end
+
     def bundle_id
       @bundle_id ||= get_project_build_setting(PRODUCT_BUNDLE_IDENTIFIER)
     end
