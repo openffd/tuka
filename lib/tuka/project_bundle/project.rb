@@ -31,7 +31,7 @@ module Tuka
       @name = File.basename(@xcodeproj, '.*')
       @category_prefix = name.remove_non_letter_chars.generate_prefix.upcase
       @pbxproj_path = File.join(@xcodeproj, PBXProj::BASENAME)
-      @swizzling_pattern = /method_exchangeImplementations\(_, class_getInstanceMethod\(.*, @selector\(::\)\)\);/
+      @swizzling_pattern = /method_exchangeImplementations\(.*, class_getInstanceMethod\(.*, @selector\(::\)\)\);/
     end
 
     def pbxproj
