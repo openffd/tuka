@@ -51,8 +51,8 @@ module Tuka
     #   raise StandardError, message unless project.push_notifications_enabled? || entitlements&.aps_environment_setup?
     # end
 
-    def kill_all_vm_xcode
-      prlctl.pkill_all_vm_xcode
-    end
+    # def kill_all_vm_xcode
+    #   prlctl.pkill_all_vm_xcode
+    # end
   end
 end

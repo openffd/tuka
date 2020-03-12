@@ -31,6 +31,10 @@ module Tuka
         end
       end
 
+      def kill_all_vm_xcode
+        prlctl.pkill_all_vm_xcode
+      end
+
       def check_tukafile_existence
         raise StandardError, "No Tukafile found in project directory. Run 'tuka #{Init::USAGE}'" if tukafile.nil?
       end
