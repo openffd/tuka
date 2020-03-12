@@ -65,6 +65,8 @@ module Tuka
 
       namespace :show_config
       desc 'Lets you view and edit the current project Tukafile'
+
+      class_option :vi, aliases: ['-e'], desc: 'Edits the config file using vi editor'
     end
 
     class Uninstall < Command

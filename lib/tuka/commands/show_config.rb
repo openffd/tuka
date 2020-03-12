@@ -17,7 +17,11 @@ module Tuka
 
       def open_config
         puts 'Opening the Tukafile...'
-        open_file(generated_tukafile_path)
+        if options[:vi]
+          system("vi -n #{generated_tukafile_path} >/dev/tty")
+        else
+          open_file(generated_tukafile_path)
+        end
       end
     end
   end
