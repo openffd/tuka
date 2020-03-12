@@ -46,10 +46,10 @@ module Tuka
       raise StandardError, 'Unable to detect the project bundle identifier' if project.bundle_id.nil?
     end
 
-    def check_push_notification_capabilities
-      message = 'Push notifications not enabled for this project, please go to Capabilities and check the entitlements'
-      raise StandardError, message unless project.push_notifications_enabled? || entitlements&.aps_environment_setup?
-    end
+    # def check_push_notification_capabilities
+    #   message = 'Push notifications not enabled for this project, please go to Capabilities and check the entitlements'
+    #   raise StandardError, message unless project.push_notifications_enabled? || entitlements&.aps_environment_setup?
+    # end
 
     def kill_all_vm_xcode
       prlctl.pkill_all_vm_xcode
