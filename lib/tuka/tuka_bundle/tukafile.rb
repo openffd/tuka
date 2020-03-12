@@ -144,12 +144,12 @@ module Tuka
       HEADERS_COUNT_RANGE.cover? project_info.headers
     end
 
-    def valid_project_info_prefix?
-      prefix = project_info.prefix
-      return false if prefix.nil?
+    # def valid_project_info_prefix?
+    #   prefix = project_info.prefix
+    #   return false if prefix.nil?
 
-      prefix == prefix[/[a-zA-Z]+/]
-    end
+    #   prefix == prefix[/[a-zA-Z]+/]
+    # end
 
     def valid_project_info_swift_version?
       return true if project_info.swift_version.nil?

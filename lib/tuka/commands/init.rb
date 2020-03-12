@@ -94,9 +94,9 @@ module Tuka
         tukafile.project_info.type = project.type
       end
 
-      def edit_tukafile_project_info_prefix
-        tukafile.project_info.prefix = project.category_prefix
-      end
+      # def edit_tukafile_project_info_prefix
+      #   tukafile.project_info.prefix = project.category_prefix
+      # end
 
       def check_tukafile_validity
         raise StandardError, tukafile.error unless tukafile.valid?
@@ -112,7 +112,7 @@ module Tuka
       def display_modified_tukafile_fields
         puts "      - xcodeproj: #{File.basename(xcodeproj).yellow}"
         puts "      - type     : #{project.type.yellow}"
-        puts "      - prefix   : #{project.category_prefix.yellow}"
+        # puts "      - prefix   : #{project.category_prefix.yellow}"
       end
 
       def add_tuka_bundle_to_gitignore
