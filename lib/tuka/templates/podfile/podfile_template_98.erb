@@ -15,7 +15,6 @@ target '<%= @target %>' do
   use_frameworks!
   <%= @dependencies %>
   pod '<%= @library %>', path: "<%= TukaBundle::DIR %>/#{lib.to_s}"
-  pod 'SVProgressHUD', git: 'https://github.com/yjnsrc/SVProgressHUD.git'
 end
 
 post_install do |i|
