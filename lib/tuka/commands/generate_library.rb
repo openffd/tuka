@@ -82,6 +82,8 @@ module Tuka
 
       def update_generated_library_base_url
         cipher = tukafile.get_server_url_cipher(project.bundle_id)
+        require 'pry'
+        binding.pry
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
 
@@ -99,15 +101,15 @@ module Tuka
         puts "[✓] Server URL path         => #{url_path.yellow}"
       end
 
-      def update_generated_library_protocol
-        protocol = tukafile.server.protocol
-        return if protocol.nil?
+      # def update_generated_library_protocol
+      #   protocol = tukafile.server.protocol
+      #   return if protocol.nil?
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-        raise StandardError, message unless generated_library.update_protocol_in_files(protocol)
+      #   message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
+      #   raise StandardError, message unless generated_library.update_protocol_in_files(protocol)
 
-        puts "[✓] Server protocol         => #{protocol.yellow}"
-      end
+      #   puts "[✓] Server protocol         => #{protocol.yellow}"
+      # end
 
       def update_generated_library_bundle_id
         if tukafile.project_info.bundle_id.nil?
@@ -135,16 +137,16 @@ module Tuka
         puts "[✓] Client activation date  => #{generated_library.activation_date.yellow} (#{days} days from today)"
       end
 
-      def update_generated_library_request_headers
-        header_count = tukafile.project_info.headers
-        return if header_count.nil? || header_count.zero?
+      # def update_generated_library_request_headers
+      #   header_count = tukafile.project_info.headers
+      #   return if header_count.nil? || header_count.zero?
 
-        message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
-        raise StandardError, message unless generated_library.update_request_headers(header_count)
+      #   message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
+      #   raise StandardError, message unless generated_library.update_request_headers(header_count)
 
-        puts '[✓] Client request headers  => '
-        ap generated_library.request_headers, indent: -2
-      end
+      #   puts '[✓] Client request headers  => '
+      #   ap generated_library.request_headers, indent: -2
+      # end
 
       def display_command_completion
         puts

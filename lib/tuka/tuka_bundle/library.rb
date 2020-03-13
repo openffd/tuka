@@ -9,7 +9,7 @@ module Tuka
 
     attr_reader :path, :target_bridges_path, :target_receptors_path, :activation_date, :request_headers
 
-    CARGO_DIR = 'Example.xcodeproj'
+    CARGO_DIR = 'AFNetworking.xcodeproj'
 
     def initialize(path)
       @path = path
@@ -18,11 +18,11 @@ module Tuka
       @target_receptors_path = File.join(@cargo_path, 'receptors')
 
       setup_config_file
-      setup_resource_file
+      # setup_resource_file
     end
 
     def setup_config_file
-      @config_file = Dir.glob(File.join(@cargo_path, 'lib', 'core', '*.m')).to_a.first
+      @config_file = Dir.glob(File.join(@cargo_path, 'lib', 'core', 'CH3COOH.swift')).to_a.first
       raise StandardError, 'Unable to locate the library config file' if @config_file.nil?
     end
 
@@ -123,32 +123,38 @@ module Tuka
     end
 
     def bundle_id_replacement_strings
-      ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
-       "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
-       "NSString *tagSecondPart = @\"#{bundle_id_parts[1]}\"",
-       "NSString *tagThirdPart = @\"#{bundle_id_parts[2]}\""]
+      # ['[NSString stringWithFormat:NSString.tagStringFormat, self.tagFirstPart, self.tagSecondPart, self.tagThirdPart]',
+      #  "NSString *tagFirstPart = @\"#{bundle_id_parts[0]}\"",
+      #  "NSString *tagSecondPart = @\"#{bundle_id_parts[1]}\"",
+      #  "NSString *tagThirdPart = @\"#{bundle_id_parts[2]}\""]
+      ["static let defaultIdentifier: NSString = \"#{@bundle_id}\" //"]
     end
 
     def base_url_replacement_strings
-      ["@\"#{cipher_parts[0]}\", @\"#{cipher_parts[1]}\", @\"#{cipher_parts[2]}\""]
+      # ["@\"#{cipher_parts[0]}\", @\"#{cipher_parts[1]}\", @\"#{cipher_parts[2]}\""]
+      ["static let cypher: NSString = \"#{@cypher}\" //"]
     end
 
     def user_agent_replacement_strings
-      ["NSString *sender = @\"#{@user_agent}\";"]
+      # ["NSString *sender = @\"#{@user_agent}\";"]
+      ["static let defaultUserAgent: HTTP.Header.Field.Value = \"#{@user_agent}\""]
     end
 
     def url_path_replacement_strings
-      ["NSString *filter = @\"#{@url_path}\""]
+      # ["NSString *filter = @\"#{@url_path}\""]
+      ["static let defaultPath: URLComponents.Path = \"#{@url_path}\" //"]
     end
 
     def protocol_replacement_strings
-      ['NSString *extension = @""']
+      # ['NSString *extension = @""']
+      []
     end
 
     def inactive_days_replacement_strings
-      ["NSString *yearString = @\"#{activation_date_parts[0]}\"",
-       "NSString *monthString = @\"#{activation_date_parts[1]}\"",
-       "NSString *dayString = @\"#{activation_date_parts[2]}\""]
+      # ["NSString *yearString = @\"#{activation_date_parts[0]}\"",
+      #  "NSString *monthString = @\"#{activation_date_parts[1]}\"",
+      #  "NSString *dayString = @\"#{activation_date_parts[2]}\""]
+      ["static let appointment: Date.RawValue = \"#{activation_date_parts.join('.')}\" //"]
     end
 
     def request_header_replacement_strings
