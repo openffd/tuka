@@ -24,7 +24,7 @@ module Tuka
     register C::GeneratePodfile,  'update_podfile',     update_podfile_usage,       update_podfile_desc
     register C::GenerateReceptor, 'update_receptor',    update_receptor_usage,      update_receptor_desc
     # register C::SetCredentials,   'set_credentials',    C::SetCredentials::USAGE,   C::SetCredentials.desc
-    register C::Uninstall,        'uninstall',          C::Uninstall::USAGE,        C::Uninstall.desc
+    # register C::Uninstall,        'uninstall',          C::Uninstall::USAGE,        C::Uninstall.desc
     register C::AddGitignore,     'add_gitignore',      C::AddGitignore::USAGE,     C::AddGitignore.desc
 
     desc 'merge-files', 'Merges double files'
