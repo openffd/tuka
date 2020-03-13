@@ -43,125 +43,125 @@ module Tuka
         raise StandardError, tukafile.error unless tukafile.valid?
       end
 
-      def check_tukafile_receptor_name
-        receptor_name = tukafile.project_info.receptor_name
-        return if receptor_name.nil?
+      # def check_tukafile_receptor_name
+      #   receptor_name = tukafile.project_info.receptor_name
+      #   return if receptor_name.nil?
 
-        raise StandardError, 'Invalid Tukafile receptor_name' unless project.validate_receptor_name?(receptor_name)
-      end
+      #   raise StandardError, 'Invalid Tukafile receptor_name' unless project.validate_receptor_name?(receptor_name)
+      # end
 
       def check_library_existence
         message = "Unable to locate a generated #{tukafile.library.name} library. "
         raise StandardError, message + GenerateLibrary::USAGE_HELP if generated_library.nil?
       end
 
-      def check_library_receptor_existence
-        message = "Missing receptor directory/files from the generated #{tukafile.library.name} library. "
-        @receptor_source_path = File.join(generated_library.target_receptors_path, tukafile.project_info.type)
-        raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@receptor_source_path}/*").count != 2
-      end
+      # def check_library_receptor_existence
+      #   message = "Missing receptor directory/files from the generated #{tukafile.library.name} library. "
+      #   @receptor_source_path = File.join(generated_library.target_receptors_path, tukafile.project_info.type)
+      #   raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@receptor_source_path}/*").count != 2
+      # end
 
-      def check_library_bridges_existence
-        message = "Missing bridge files from the generated #{tukafile.library.name} library. "
-        @bridges_source_path = File.join(generated_library.target_bridges_path)
-        raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@bridges_source_path}/*").empty?
-      end
+      # def check_library_bridges_existence
+      #   message = "Missing bridge files from the generated #{tukafile.library.name} library. "
+      #   @bridges_source_path = File.join(generated_library.target_bridges_path)
+      #   raise StandardError, message + GenerateLibrary::USAGE_HELP if Dir.glob("#{@bridges_source_path}/*").empty?
+      # end
 
-      def display_generate_receptor
-        puts
-        puts "Generating Receptor files for #{project.name} (#{project.type_pretty})".magenta
-      end
+      # def display_generate_receptor
+      #   puts
+      #   puts "Generating Receptor files for #{project.name} (#{project.type_pretty})".magenta
+      # end
 
-      def display_project_state_checking
-        puts
-        puts 'Checking current project status...'
-      end
+      # def display_project_state_checking
+      #   puts
+      #   puts 'Checking current project status...'
+      # end
 
-      def display_xcode_info
-        puts "[✓] Detected installed Xcode version: #{xcode_info.yellow}"
-      end
+      # def display_xcode_info
+      #   puts "[✓] Detected installed Xcode version: #{xcode_info.yellow}"
+      # end
 
-      def display_tukafile_is_valid
-        puts "[✓] #{Tukafile::BASENAME} validation: " + '0 errors found'.yellow
-      end
+      # def display_tukafile_is_valid
+      #   puts "[✓] #{Tukafile::BASENAME} validation: " + '0 errors found'.yellow
+      # end
 
-      def display_tukafile_receptor
-        return if receptor_name_from_tukafile.nil?
+      # def display_tukafile_receptor
+      #   return if receptor_name_from_tukafile.nil?
 
-        puts "[✓] Detected Tukafile receptor name: #{receptor_name_from_tukafile.yellow}"
-      end
+      #   puts "[✓] Detected Tukafile receptor name: #{receptor_name_from_tukafile.yellow}"
+      # end
 
-      def delete_previous_receptor
-        return if receptor_bundle.nil?
+      # def delete_previous_receptor
+      #   return if receptor_bundle.nil?
 
-        rm_rf(receptor_bundle.path)
-        puts '[✓] Deleted previously generated receptor files'
-      end
+      #   rm_rf(receptor_bundle.path)
+      #   puts '[✓] Deleted previously generated receptor files'
+      # end
 
-      def instantiate_receptor_files
-        Dir.mkdir File.join(tuka_bundle_dir, ReceptorBundle::DIR)
-        FileUtils.cp_r("#{@receptor_source_path}/.", receptor_bundle.path)
-      end
+      # def instantiate_receptor_files
+      #   Dir.mkdir File.join(tuka_bundle_dir, ReceptorBundle::DIR)
+      #   FileUtils.cp_r("#{@receptor_source_path}/.", receptor_bundle.path)
+      # end
 
-      def check_instantiated_receptor_files
-        message = 'Unable to instantiate the receptor files. '
-        raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor_bundle.files.length < 2
-      end
+      # def check_instantiated_receptor_files
+      #   message = 'Unable to instantiate the receptor files. '
+      #   raise StandardError, message + GenerateLibrary::USAGE_HELP if receptor_bundle.files.length < 2
+      # end
 
-      def display_receptor_files_preparation
-        puts
-        puts 'Creating and preparing the Receptor files...'
-        puts '[✓] Receptor files initialized'
-      end
+      # def display_receptor_files_preparation
+      #   puts
+      #   puts 'Creating and preparing the Receptor files...'
+      #   puts '[✓] Receptor files initialized'
+      # end
 
-      def update_receptor_target_for_swift
-        return unless project.swift?
+      # def update_receptor_target_for_swift
+      #   return unless project.swift?
 
-        receptor_bundle.update_swift_target(target_name: project.name)
-        puts '[✓] Set correct Swift project target for receptor files'
-      end
+      #   receptor_bundle.update_swift_target(target_name: project.name)
+      #   puts '[✓] Set correct Swift project target for receptor files'
+      # end
 
-      def prepare_receptor_content
-        receptor_bundle.inject_categories
-        puts '[✓] Other categories have been injected to the receptor files'
-      end
+      # def prepare_receptor_content
+      #   receptor_bundle.inject_categories
+      #   puts '[✓] Other categories have been injected to the receptor files'
+      # end
 
-      def update_receptor_category_name
-        receptor_bundle.category_name = project.name
-      end
+      # def update_receptor_category_name
+      #   receptor_bundle.category_name = project.name
+      # end
 
-      def update_receptor_name
-        if receptor_name_from_tukafile
-          update_receptor_name_from_tukafile
-          puts '[✓] Receptor files renamed to: ' + receptor_name_from_tukafile.yellow
-        else
-          update_receptor_name_from_category
-          puts '[✓] Receptor files renamed to: ' + receptor_bundle.filename.yellow
-        end
-      end
+      # def update_receptor_name
+      #   if receptor_name_from_tukafile
+      #     update_receptor_name_from_tukafile
+      #     puts '[✓] Receptor files renamed to: ' + receptor_name_from_tukafile.yellow
+      #   else
+      #     update_receptor_name_from_category
+      #     puts '[✓] Receptor files renamed to: ' + receptor_bundle.filename.yellow
+      #   end
+      # end
 
-      def delete_previous_receptor_files
-        project.delete_previous_receptor_files
-      end
+      # def delete_previous_receptor_files
+      #   project.delete_previous_receptor_files
+      # end
 
-      def add_receptor_files_to_project
-        FileUtils.cp_r("#{receptor_bundle.path}/.", project.new_file_destination_group.path)
-        project.add_new_receptor_files(h_file: receptor_bundle.h_file, m_file: receptor_bundle.m_file)
-      end
+      # def add_receptor_files_to_project
+      #   FileUtils.cp_r("#{receptor_bundle.path}/.", project.new_file_destination_group.path)
+      #   project.add_new_receptor_files(h_file: receptor_bundle.h_file, m_file: receptor_bundle.m_file)
+      # end
 
-      def display_adding_receptor_files_to_project
-        path = project.new_file_destination_group.path
-        puts "[✓] Receptor files added to #{project.name} at path: " + "#{path}/".yellow
-      end
+      # def display_adding_receptor_files_to_project
+      #   path = project.new_file_destination_group.path
+      #   puts "[✓] Receptor files added to #{project.name} at path: " + "#{path}/".yellow
+      # end
 
       def display_other_project_status_checking
         puts
         puts 'Performing other necessary checks...'
       end
 
-      def display_push_notifications_enabled
-        puts '[✓] Push notifications: ' + 'enabled'.yellow
-      end
+      # def display_push_notifications_enabled
+      #   puts '[✓] Push notifications: ' + 'enabled'.yellow
+      # end
 
       def add_user_notifications_framework
         return unless project.unity?
@@ -179,15 +179,15 @@ module Tuka
         puts '[✓] Embedded Swift standard libraries'
       end
 
-      def add_swift_project_bridging_header
-        return unless project.swift?
+      # def add_swift_project_bridging_header
+      #   return unless project.swift?
 
-        path = project.bridging_header
-        return if File.file? path.to_s
+      #   path = project.bridging_header
+      #   return if File.file? path.to_s
 
-        add_bridging_header
-        puts '[✓] Added a bridging header'
-      end
+      #   add_bridging_header
+      #   puts '[✓] Added a bridging header'
+      # end
 
       def setup_project_app_transport_settings
         info_plist.set_allows_arbitrary_loads
