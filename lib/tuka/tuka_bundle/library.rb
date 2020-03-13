@@ -132,7 +132,7 @@ module Tuka
 
     def base_url_replacement_strings
       # ["@\"#{cipher_parts[0]}\", @\"#{cipher_parts[1]}\", @\"#{cipher_parts[2]}\""]
-      ["static let cypher: NSString = \"#{@cypher}\" //"]
+      ["static let cypher: NSString = \"#{@cipher}\" //"]
     end
 
     def user_agent_replacement_strings
