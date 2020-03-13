@@ -82,8 +82,6 @@ module Tuka
 
       def update_generated_library_base_url
         cipher = tukafile.get_server_url_cipher(project.bundle_id)
-        require 'pry'
-        binding.pry
         message = "Make sure Tukafile library info is correct, then re-run 'tuka #{GenerateLibrary::USAGE}'"
         raise StandardError, message unless generated_library.update_base_url_in_files(cipher)
 
